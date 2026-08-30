@@ -1,0 +1,424 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 16 1466 975" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#1e1e1c">
+<rect x="16" y="16" width="1466" height="975" fill="#1e1e1c"/>
+<rect x="680.0" y="40.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="749.0" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">会议话筒(有线)</text>
+<circle cx="818.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="822.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT</text>
+<rect x="680.0" y="107.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="749.0" y="120.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">会议话筒(有线)</text>
+<circle cx="818.0" cy="132.5" r="2.4" fill="#5dcaa5"/>
+<text x="822.0" y="135.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT</text>
+<rect x="680.0" y="174.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="749.0" y="187.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">会议话筒(有线)</text>
+<circle cx="818.0" cy="199.5" r="2.4" fill="#5dcaa5"/>
+<text x="822.0" y="202.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT</text>
+<rect x="680.0" y="241.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="749.0" y="254.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">会议话筒(有线)</text>
+<circle cx="818.0" cy="266.5" r="2.4" fill="#5dcaa5"/>
+<text x="822.0" y="269.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT</text>
+<rect x="40.0" y="40.0" width="125.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="102.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">无线话筒发射端</text>
+<circle cx="102.5" cy="40.0" r="2.4" fill="#e8923c"/>
+<rect x="40.0" y="107.0" width="125.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="102.5" y="120.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">无线话筒发射端</text>
+<circle cx="102.5" cy="107.0" r="2.4" fill="#e8923c"/>
+<rect x="200.0" y="40.0" width="112.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="256.0" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">有源指向天线</text>
+<circle cx="256.0" cy="40.0" r="2.4" fill="#e8923c"/>
+<circle cx="312.0" cy="65.5" r="2.4" fill="#e8923c"/>
+<text x="316.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">RF</text>
+<rect x="200.0" y="107.0" width="112.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="256.0" y="120.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">有源指向天线</text>
+<circle cx="256.0" cy="107.0" r="2.4" fill="#e8923c"/>
+<circle cx="312.0" cy="132.5" r="2.4" fill="#e8923c"/>
+<text x="316.0" y="135.5" fill="#cfcdc2" font-size="7" text-anchor="start">RF</text>
+<rect x="520.0" y="40.0" width="99.0" height="63.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="569.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">无线接收机 ULXD4D</text>
+<circle cx="520.0" cy="65.5" r="2.4" fill="#e8923c"/>
+<text x="516.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">ANT1</text>
+<circle cx="520.0" cy="76.5" r="2.4" fill="#e8923c"/>
+<text x="516.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="end">ANT2</text>
+<circle cx="619.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="623.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT1</text>
+<circle cx="619.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="623.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT2</text>
+<circle cx="619.0" cy="87.5" r="2.4" fill="#378add"/>
+<text x="623.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
+<circle cx="569.5" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="569.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<rect x="840.0" y="40.0" width="99.0" height="382.0" fill="#26261f" stroke="#378add" stroke-width="1.4" rx="3"/>
+<text x="889.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">数字调音台 TF5</text>
+<circle cx="840.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN1</text>
+<circle cx="840.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN2</text>
+<circle cx="840.0" cy="87.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN3</text>
+<circle cx="840.0" cy="98.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN4</text>
+<circle cx="840.0" cy="109.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN5</text>
+<circle cx="840.0" cy="120.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="123.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN6</text>
+<circle cx="840.0" cy="131.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="134.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN7</text>
+<circle cx="840.0" cy="142.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="145.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN8</text>
+<circle cx="840.0" cy="153.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="156.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN9</text>
+<circle cx="840.0" cy="164.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="167.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN10</text>
+<circle cx="840.0" cy="175.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="178.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN11</text>
+<circle cx="840.0" cy="186.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="189.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN12</text>
+<circle cx="840.0" cy="197.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="200.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN13</text>
+<circle cx="840.0" cy="208.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="211.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN14</text>
+<circle cx="840.0" cy="219.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="222.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN15</text>
+<circle cx="840.0" cy="230.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="233.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN16</text>
+<circle cx="840.0" cy="241.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="244.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN17</text>
+<circle cx="840.0" cy="252.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="255.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN18</text>
+<circle cx="840.0" cy="263.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="266.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN19</text>
+<circle cx="840.0" cy="274.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="277.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN20</text>
+<circle cx="840.0" cy="285.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="288.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN21</text>
+<circle cx="840.0" cy="296.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="299.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN22</text>
+<circle cx="840.0" cy="307.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="310.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN23</text>
+<circle cx="840.0" cy="318.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="321.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN24</text>
+<circle cx="840.0" cy="329.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="332.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN25</text>
+<circle cx="840.0" cy="340.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="343.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN26</text>
+<circle cx="840.0" cy="351.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="354.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN27</text>
+<circle cx="840.0" cy="362.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="365.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN28</text>
+<circle cx="840.0" cy="373.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="376.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN29</text>
+<circle cx="840.0" cy="384.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="387.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN30</text>
+<circle cx="840.0" cy="395.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="398.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN31</text>
+<circle cx="840.0" cy="406.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="409.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN32</text>
+<circle cx="939.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT1</text>
+<circle cx="939.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT2</text>
+<circle cx="939.0" cy="87.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT3</text>
+<circle cx="939.0" cy="98.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT4</text>
+<circle cx="939.0" cy="109.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT5</text>
+<circle cx="939.0" cy="120.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="123.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT6</text>
+<circle cx="939.0" cy="131.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="134.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT7</text>
+<circle cx="939.0" cy="142.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="145.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT8</text>
+<circle cx="939.0" cy="153.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="156.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT9</text>
+<circle cx="939.0" cy="164.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="167.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT10</text>
+<circle cx="939.0" cy="175.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="178.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT11</text>
+<circle cx="939.0" cy="186.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="189.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT12</text>
+<circle cx="939.0" cy="197.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="200.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT13</text>
+<circle cx="939.0" cy="208.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="211.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT14</text>
+<circle cx="939.0" cy="219.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="222.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT15</text>
+<circle cx="939.0" cy="230.5" r="2.4" fill="#5dcaa5"/>
+<text x="943.0" y="233.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT16</text>
+<circle cx="939.0" cy="241.5" r="2.4" fill="#378add"/>
+<text x="943.0" y="244.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
+<circle cx="889.5" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="889.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<rect x="840.0" y="448.0" width="138.0" height="382.0" fill="#26261f" stroke="#5dcaa5" stroke-width="1.4" rx="3"/>
+<text x="909.0" y="461.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">数字调音台(备) TF5</text>
+<circle cx="840.0" cy="473.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="476.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN1</text>
+<circle cx="840.0" cy="484.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="487.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN2</text>
+<circle cx="840.0" cy="495.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="498.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN3</text>
+<circle cx="840.0" cy="506.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="509.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN4</text>
+<circle cx="840.0" cy="517.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="520.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN5</text>
+<circle cx="840.0" cy="528.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="531.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN6</text>
+<circle cx="840.0" cy="539.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="542.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN7</text>
+<circle cx="840.0" cy="550.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="553.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN8</text>
+<circle cx="840.0" cy="561.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="564.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN9</text>
+<circle cx="840.0" cy="572.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="575.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN10</text>
+<circle cx="840.0" cy="583.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="586.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN11</text>
+<circle cx="840.0" cy="594.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="597.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN12</text>
+<circle cx="840.0" cy="605.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="608.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN13</text>
+<circle cx="840.0" cy="616.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="619.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN14</text>
+<circle cx="840.0" cy="627.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="630.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN15</text>
+<circle cx="840.0" cy="638.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="641.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN16</text>
+<circle cx="840.0" cy="649.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="652.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN17</text>
+<circle cx="840.0" cy="660.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="663.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN18</text>
+<circle cx="840.0" cy="671.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="674.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN19</text>
+<circle cx="840.0" cy="682.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="685.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN20</text>
+<circle cx="840.0" cy="693.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="696.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN21</text>
+<circle cx="840.0" cy="704.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="707.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN22</text>
+<circle cx="840.0" cy="715.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="718.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN23</text>
+<circle cx="840.0" cy="726.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="729.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN24</text>
+<circle cx="840.0" cy="737.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="740.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN25</text>
+<circle cx="840.0" cy="748.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="751.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN26</text>
+<circle cx="840.0" cy="759.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="762.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN27</text>
+<circle cx="840.0" cy="770.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="773.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN28</text>
+<circle cx="840.0" cy="781.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="784.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN29</text>
+<circle cx="840.0" cy="792.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="795.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN30</text>
+<circle cx="840.0" cy="803.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="806.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN31</text>
+<circle cx="840.0" cy="814.5" r="2.4" fill="#5dcaa5"/>
+<text x="836.0" y="817.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN32</text>
+<circle cx="978.0" cy="473.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="476.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT1</text>
+<circle cx="978.0" cy="484.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="487.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT2</text>
+<circle cx="978.0" cy="495.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="498.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT3</text>
+<circle cx="978.0" cy="506.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="509.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT4</text>
+<circle cx="978.0" cy="517.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="520.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT5</text>
+<circle cx="978.0" cy="528.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="531.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT6</text>
+<circle cx="978.0" cy="539.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="542.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT7</text>
+<circle cx="978.0" cy="550.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="553.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT8</text>
+<circle cx="978.0" cy="561.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="564.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT9</text>
+<circle cx="978.0" cy="572.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="575.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT10</text>
+<circle cx="978.0" cy="583.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="586.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT11</text>
+<circle cx="978.0" cy="594.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="597.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT12</text>
+<circle cx="978.0" cy="605.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="608.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT13</text>
+<circle cx="978.0" cy="616.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="619.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT14</text>
+<circle cx="978.0" cy="627.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="630.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT15</text>
+<circle cx="978.0" cy="638.5" r="2.4" fill="#5dcaa5"/>
+<text x="982.0" y="641.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT16</text>
+<circle cx="978.0" cy="649.5" r="2.4" fill="#378add"/>
+<text x="982.0" y="652.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
+<circle cx="909.0" cy="448.0" r="2.4" fill="#b07cd9"/>
+<text x="909.0" y="459.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<rect x="1000.0" y="40.0" width="99.0" height="129.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1049.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">音频处理器 BLU-806</text>
+<circle cx="1000.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN1</text>
+<circle cx="1000.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN2</text>
+<circle cx="1000.0" cy="87.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN3</text>
+<circle cx="1000.0" cy="98.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN4</text>
+<circle cx="1000.0" cy="109.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN5</text>
+<circle cx="1000.0" cy="120.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="123.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN6</text>
+<circle cx="1000.0" cy="131.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="134.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN7</text>
+<circle cx="1000.0" cy="142.5" r="2.4" fill="#5dcaa5"/>
+<text x="996.0" y="145.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN8</text>
+<circle cx="1000.0" cy="153.5" r="2.4" fill="#378add"/>
+<text x="996.0" y="156.5" fill="#cfcdc2" font-size="7" text-anchor="end">DANTE</text>
+<circle cx="1099.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT1</text>
+<circle cx="1099.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT2</text>
+<circle cx="1099.0" cy="87.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT3</text>
+<circle cx="1099.0" cy="98.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT4</text>
+<circle cx="1099.0" cy="109.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT5</text>
+<circle cx="1099.0" cy="120.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="123.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT6</text>
+<circle cx="1099.0" cy="131.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="134.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT7</text>
+<circle cx="1099.0" cy="142.5" r="2.4" fill="#5dcaa5"/>
+<text x="1103.0" y="145.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT8</text>
+<circle cx="1099.0" cy="153.5" r="2.4" fill="#378add"/>
+<text x="1103.0" y="156.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
+<circle cx="1049.5" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="1049.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<rect x="1160.0" y="40.0" width="99.0" height="85.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1209.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">功率放大器 Quattrocanali 48</text>
+<circle cx="1160.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
+<text x="1156.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN1</text>
+<circle cx="1160.0" cy="76.5" r="2.4" fill="#5dcaa5"/>
+<text x="1156.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN2</text>
+<circle cx="1160.0" cy="87.5" r="2.4" fill="#5dcaa5"/>
+<text x="1156.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN3</text>
+<circle cx="1160.0" cy="98.5" r="2.4" fill="#5dcaa5"/>
+<text x="1156.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN4</text>
+<circle cx="1160.0" cy="109.5" r="2.4" fill="#378add"/>
+<text x="1156.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="end">DANTE</text>
+<circle cx="1209.5" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="1209.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<circle cx="1259.0" cy="65.5" r="2.4" fill="#e8655a"/>
+<text x="1263.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">SPK1</text>
+<circle cx="1259.0" cy="76.5" r="2.4" fill="#e8655a"/>
+<text x="1263.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="start">SPK2</text>
+<circle cx="1259.0" cy="87.5" r="2.4" fill="#e8655a"/>
+<text x="1263.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">SPK3</text>
+<circle cx="1259.0" cy="98.5" r="2.4" fill="#e8655a"/>
+<text x="1263.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="start">SPK4</text>
+<rect x="1320.0" y="40.0" width="99.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1369.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">主扩扬声器 KARA</text>
+<circle cx="1320.0" cy="65.5" r="2.4" fill="#e8655a"/>
+<text x="1316.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">SPK</text>
+<rect x="1320.0" y="107.0" width="99.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1369.5" y="120.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">主扩扬声器 KARA</text>
+<circle cx="1320.0" cy="132.5" r="2.4" fill="#e8655a"/>
+<text x="1316.0" y="135.5" fill="#cfcdc2" font-size="7" text-anchor="end">SPK</text>
+<rect x="1320.0" y="174.0" width="99.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1369.5" y="187.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">主扩扬声器 KARA</text>
+<circle cx="1320.0" cy="199.5" r="2.4" fill="#e8655a"/>
+<text x="1316.0" y="202.5" fill="#cfcdc2" font-size="7" text-anchor="end">SPK</text>
+<rect x="1320.0" y="241.0" width="99.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1369.5" y="254.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">主扩扬声器 KARA</text>
+<circle cx="1320.0" cy="266.5" r="2.4" fill="#e8655a"/>
+<text x="1316.0" y="269.5" fill="#cfcdc2" font-size="7" text-anchor="end">SPK</text>
+<rect x="1320.0" y="308.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1389.0" y="321.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">舞台返听(有源)</text>
+<circle cx="1320.0" cy="333.5" r="2.4" fill="#5dcaa5"/>
+<text x="1316.0" y="336.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN</text>
+<rect x="1320.0" y="375.0" width="138.0" height="41.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="1389.0" y="388.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">舞台返听(有源)</text>
+<circle cx="1320.0" cy="400.5" r="2.4" fill="#5dcaa5"/>
+<text x="1316.0" y="403.5" fill="#cfcdc2" font-size="7" text-anchor="end">IN</text>
+<rect x="360.0" y="40.0" width="125.0" height="74.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="422.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">天线信号分配器</text>
+<circle cx="360.0" cy="65.5" r="2.4" fill="#e8923c"/>
+<text x="356.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="end">ANT1</text>
+<circle cx="360.0" cy="76.5" r="2.4" fill="#e8923c"/>
+<text x="356.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="end">ANT2</text>
+<circle cx="485.0" cy="65.5" r="2.4" fill="#e8923c"/>
+<text x="489.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT1</text>
+<circle cx="485.0" cy="76.5" r="2.4" fill="#e8923c"/>
+<text x="489.0" y="79.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT2</text>
+<circle cx="485.0" cy="87.5" r="2.4" fill="#e8923c"/>
+<text x="489.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT3</text>
+<circle cx="485.0" cy="98.5" r="2.4" fill="#e8923c"/>
+<text x="489.0" y="101.5" fill="#cfcdc2" font-size="7" text-anchor="start">OUT4</text>
+<rect x="376.7" y="926.0" width="151.0" height="41.0" fill="#26261f" stroke="#378add" stroke-width="1.4" rx="3"/>
+<text x="452.2" y="939.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">Dante 交换机</text>
+<circle cx="393.4" cy="926.0" r="2.4" fill="#378add"/>
+<text x="393.4" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE1</text>
+<circle cx="410.2" cy="926.0" r="2.4" fill="#378add"/>
+<text x="410.2" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE2</text>
+<circle cx="427.0" cy="926.0" r="2.4" fill="#378add"/>
+<text x="427.0" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE3</text>
+<circle cx="443.8" cy="926.0" r="2.4" fill="#378add"/>
+<text x="443.8" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE4</text>
+<circle cx="460.6" cy="926.0" r="2.4" fill="#378add"/>
+<text x="460.6" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE5</text>
+<circle cx="477.3" cy="926.0" r="2.4" fill="#378add"/>
+<text x="477.3" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE6</text>
+<circle cx="494.1" cy="926.0" r="2.4" fill="#378add"/>
+<text x="494.1" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE7</text>
+<circle cx="510.9" cy="926.0" r="2.4" fill="#378add"/>
+<text x="510.9" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE8</text>
+<rect x="933.3" y="926.0" width="156.0" height="41.0" fill="#26261f" stroke="#5dcaa5" stroke-width="1.4" rx="3"/>
+<text x="1011.3" y="939.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">Dante 交换机(备)</text>
+<circle cx="950.7" cy="926.0" r="2.4" fill="#378add"/>
+<text x="950.7" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE1</text>
+<circle cx="968.0" cy="926.0" r="2.4" fill="#378add"/>
+<text x="968.0" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE2</text>
+<circle cx="985.3" cy="926.0" r="2.4" fill="#378add"/>
+<text x="985.3" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE3</text>
+<circle cx="1002.7" cy="926.0" r="2.4" fill="#378add"/>
+<text x="1002.7" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE4</text>
+<circle cx="1020.0" cy="926.0" r="2.4" fill="#378add"/>
+<text x="1020.0" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE5</text>
+<circle cx="1037.3" cy="926.0" r="2.4" fill="#378add"/>
+<text x="1037.3" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE6</text>
+<circle cx="1054.7" cy="926.0" r="2.4" fill="#378add"/>
+<text x="1054.7" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE7</text>
+<circle cx="1072.0" cy="926.0" r="2.4" fill="#378add"/>
+<text x="1072.0" y="937.0" fill="#cfcdc2" font-size="7" text-anchor="middle">DANTE8</text>
+<polyline points="312.0,65.5 336.0,65.5 336.0,65.5 360.0,65.5" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="312.0,132.5 336.0,132.5 336.0,76.5 360.0,76.5" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="485.0,65.5 502.5,65.5 502.5,65.5 520.0,65.5" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="485.0,76.5 502.5,76.5 502.5,76.5 520.0,76.5" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="818.0,65.5 829.0,65.5 829.0,65.5 840.0,65.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="818.0,132.5 829.0,132.5 829.0,76.5 840.0,76.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="818.0,199.5 829.0,199.5 829.0,87.5 840.0,87.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="818.0,266.5 829.0,266.5 829.0,98.5 840.0,98.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,65.5 969.5,65.5 969.5,65.5 1000.0,65.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,76.5 969.5,76.5 969.5,76.5 1000.0,76.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,87.5 969.5,87.5 969.5,87.5 1000.0,87.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,98.5 969.5,98.5 969.5,98.5 1000.0,98.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,109.5 969.5,109.5 969.5,109.5 1000.0,109.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,120.5 969.5,120.5 969.5,120.5 1000.0,120.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,131.5 969.5,131.5 969.5,131.5 1000.0,131.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,142.5 969.5,142.5 969.5,142.5 1000.0,142.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,65.5 1129.5,65.5 1129.5,65.5 1160.0,65.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,76.5 1129.5,76.5 1129.5,76.5 1160.0,76.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,87.5 1129.5,87.5 1129.5,87.5 1160.0,87.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,98.5 1129.5,98.5 1129.5,98.5 1160.0,98.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1259.0,65.5 1289.5,65.5 1289.5,65.5 1320.0,65.5" fill="none" stroke="#e8655a" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1259.0,65.5 1289.5,65.5 1289.5,132.5 1320.0,132.5" fill="none" stroke="#e8655a" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1259.0,76.5 1289.5,76.5 1289.5,199.5 1320.0,199.5" fill="none" stroke="#e8655a" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1259.0,76.5 1289.5,76.5 1289.5,266.5 1320.0,266.5" fill="none" stroke="#e8655a" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,65.5 1209.5,65.5 1209.5,333.5 1320.0,333.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,76.5 1209.5,76.5 1209.5,400.5 1320.0,400.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="619.0,65.5 729.5,65.5 729.5,65.5 840.0,65.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="619.0,76.5 729.5,76.5 729.5,76.5 840.0,76.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="619.0,87.5 619.0,506.8 452.2,506.8 452.2,926.0" fill="none" stroke="#378add" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,241.5 939.0,583.8 452.2,583.8 452.2,926.0" fill="none" stroke="#378add" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="978.0,649.5 978.0,787.8 1011.3,787.8 1011.3,926.0" fill="none" stroke="#5dcaa5" stroke-width="1.1" stroke-dasharray="6 4" stroke-linejoin="round"/>
+<polyline points="452.2,926.0 452.2,539.8 1000.0,539.8 1000.0,153.5" fill="none" stroke="#378add" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="1099.0,153.5 1099.0,539.8 452.2,539.8 452.2,926.0" fill="none" stroke="#378add" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="452.2,926.0 452.2,517.8 1160.0,517.8 1160.0,109.5" fill="none" stroke="#378add" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline points="939.0,65.5 889.5,65.5 889.5,473.5 840.0,473.5" fill="none" stroke="#5dcaa5" stroke-width="1.1" stroke-dasharray="6 4" stroke-linejoin="round"/>
+</svg>

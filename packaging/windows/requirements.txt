@@ -1,0 +1,2 @@
+# Windows 打包依赖：直接复用仓库根 requirements.txt（版本保持与 macOS 构建一致）
+-r ../../requirements.txt

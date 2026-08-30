@@ -1,0 +1,20 @@
+category: PROCESSOR
+name: 音频处理器(DSP)
+redundancy_allowed: true
+features_available: [dante, control]
+# 处理器相对调音台位置（阳哥规则 2026-08-29）：默认前置。
+#   - 显式 position 参数：position=前置(调音台前) / position=后置(调音台后)
+#   - 退化 proc_func 语义：automix=前置(会议) / system=后置(现场)
+#   - 强制前置：功放带DSP 或 处理器参与主备冗余
+# 此处不设默认 proc_func，使未指定时落到「默认前置」。
+params:
+  inputs:
+    {min: 1, default: 8, label: 输入路数, unit: "路"}
+  outputs:
+    {min: 1, default: 8, label: 输出路数, unit: "路"}
+ports_template:
+  - {name: IN, side: left, signal: XLR, role: in, count_from: inputs, label: IN}
+  - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: OUT}
+  - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

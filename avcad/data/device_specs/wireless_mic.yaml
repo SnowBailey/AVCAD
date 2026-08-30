@@ -1,0 +1,7 @@
+category: WIRELESS_MIC
+name: 无线话筒(发射端)
+redundancy_allowed: false
+features_available: []
+params: {}
+ports_template:
+  - {name: RF, side: top, signal: RF, role: out, count: 1, label: RF, air: true}

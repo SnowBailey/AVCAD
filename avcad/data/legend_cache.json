@@ -1,0 +1,644 @@
+{
+  "legends": [
+    {
+      "brand": "IPS",
+      "model": "ML210",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "ML18B",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "MP120",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "MP18B",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "MP60",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "W12M",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "MP80",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "EM30D",
+      "category": "AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        },
+        {
+          "signal": "RS232",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "ETHERNET",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "EM20D",
+      "category": "AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        },
+        {
+          "signal": "RS232",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "ETHERNET",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "EM50Q",
+      "category": "AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 4,
+          "label": "SPK",
+          "air": false
+        },
+        {
+          "signal": "RS232",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "ETHERNET",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "GMN1208D",
+      "category": "PROCESSOR",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 12,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 8,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "out",
+          "side": "right",
+          "count": 2,
+          "label": "DANTE",
+          "air": false
+        },
+        {
+          "signal": "RS232",
+          "role": "io",
+          "side": "right",
+          "count": 2,
+          "label": "ETHERNET",
+          "air": false
+        },
+        {
+          "signal": "OPTICAL",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "USB",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "ALLEN&HEATH",
+      "model": "QU-16",
+      "category": "MIXER",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 16,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 12,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "OPTICAL",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "dSNAKE ",
+          "air": false
+        },
+        {
+          "signal": "OPTICAL",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "AES",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "IPS",
+      "model": "CF2123",
+      "category": "SOURCE",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "OUT",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "",
+      "model": "",
+      "category": "SOURCE",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "OUT",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "",
+      "model": "",
+      "category": "WIRELESS_MIC",
+      "ports": [
+        {
+          "signal": "RF",
+          "role": "out",
+          "side": "top",
+          "count": 1,
+          "label": "RF",
+          "air": true
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "",
+      "model": "",
+      "category": "ANTENNA",
+      "ports": [
+        {
+          "signal": "RF",
+          "role": "in",
+          "side": "top",
+          "count": 1,
+          "label": "RF",
+          "air": true
+        },
+        {
+          "signal": "RF",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "RF",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "Shure",
+      "model": "ULXD4D",
+      "category": "WIRELESS_RX",
+      "ports": [
+        {
+          "signal": "RF",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "ANT",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 2,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        },
+        {
+          "signal": "IP",
+          "role": "in",
+          "side": "right",
+          "count": 1,
+          "label": "CTRL",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "Yamaha",
+      "model": "TF5",
+      "category": "MIXER",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 7,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 3,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "BSS",
+      "model": "BLU-806",
+      "category": "PROCESSOR",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 8,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 8,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        },
+        {
+          "signal": "IP",
+          "role": "in",
+          "side": "right",
+          "count": 1,
+          "label": "CTRL",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "Powersoft",
+      "model": "Quattrocanali 4804",
+      "category": "AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        },
+        {
+          "signal": "IP",
+          "role": "in",
+          "side": "right",
+          "count": 1,
+          "label": "CTRL",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 4,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "L-Acoustics",
+      "model": "KARA",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "",
+      "model": "",
+      "category": "SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "",
+      "model": "",
+      "category": "ANT_DIST",
+      "ports": [
+        {
+          "signal": "RF",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "ANT",
+          "air": false
+        },
+        {
+          "signal": "RF",
+          "role": "out",
+          "side": "right",
+          "count": 4,
+          "label": "OUT",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    },
+    {
+      "brand": "Yamaha",
+      "model": "TF5",
+      "category": "MIXER",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 7,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 3,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "DANTE",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "DANTE",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": ""
+    }
+  ]
+}

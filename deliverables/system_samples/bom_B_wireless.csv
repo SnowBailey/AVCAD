@@ -1,0 +1,6 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+WIRELESS_MIC,,,无线话筒发射端,8,,,,
+ANTENNA,,,有源指向天线,4,,,,
+ANT_DIST,,,天线信号分配器,2,,inputs=2;outputs=8,,
+WIRELESS_RX,Shure,ULXD4D,无线接收机,4,dante;control,channels=2,,,
+MIXER,,,数字调音台,1,dante;control,inputs=16;outputs=8,,

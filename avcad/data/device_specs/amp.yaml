@@ -1,0 +1,15 @@
+category: AMP
+name: 功率放大器(数模一体)
+redundancy_allowed: false
+features_available: [dante, control, analog, dsp]
+params:
+  channels:
+    {min: 1, default: 4, label: 功放通道数, unit: "Ch"}
+electrical:
+  min_load_ohm: 4
+  power_w_per_ch: 1200
+ports_template:
+  - {name: IN_A, side: left, signal: XLR, role: in, count_from: channels, if_feature: analog, label: IN}
+  - {name: IN_D, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: OUT, side: right, signal: SPEAKER, role: out, count_from: channels, label: SPK}

@@ -1,0 +1,10 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+SOURCE,,,舞台话筒(有线),8,,,,
+IO,,,舞台接口箱,2,dante;analog;control,,,
+MIXER,,,数字调音台(FOH),1,dante;control,inputs=32;outputs=16,,
+PROCESSOR,BSS,BLU-806,音频处理器,1,dante;control,inputs=8;outputs=8,,system
+SPEAKER_MGR,,,音箱管理器,1,dante;control,zones=4,,
+AMP,Powersoft,Quattrocanali 4804,功率放大器,4,dante;control;analog,channels=4,,
+SPEAKER,L-Acoustics,KARA,主扩扬声器,8,,impedance_ohm=8;power_w=400,,
+SPEAKER,,,超低扬声器,4,,impedance_ohm=4;power_w=1200,,
+SPEAKER,,,舞台返听(有源),4,,,,是

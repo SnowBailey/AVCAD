@@ -1,0 +1,8 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+SOURCE,,,录音话筒,6,,,,
+IO,,,音频接口箱,2,dante;analog;control,,,
+MIXER,,,调音台(控制台),1,dante;control,inputs=24;outputs=12,,
+SPEAKER_MGR,,,监听管理器,1,dante;control,zones=2,,
+AMP,Powersoft,Quattrocanali 4804,监听功放,2,dante;control;analog,channels=2,,
+SPEAKER,,,主监听音箱,2,,impedance_ohm=8;power_w=300,,
+SPEAKER,,,近场监听(有源),2,,,,是

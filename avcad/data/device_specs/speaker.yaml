@@ -1,0 +1,16 @@
+category: SPEAKER
+name: 扬声器
+redundancy_allowed: false
+features_available: [dante, control]
+params:
+  impedance_ohm:
+    {min: 2, default: 8, label: 额定阻抗, unit: "Ω"}
+  power_w:
+    {min: 1, default: 400, label: 额定功率, unit: "W"}
+electrical:
+  active: false
+ports_template:
+  - {name: IN_SP, side: left, signal: SPEAKER, role: in, count: 1, if_active: false, label: SPK}
+  - {name: IN_L, side: left, signal: XLR, role: in, count: 1, if_active: true, label: IN}
+  - {name: DANTE, side: left, signal: DANTE, role: in, count: 1, if_active: true, if_feature: dante, label: DANTE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_active: true, if_feature: control, label: CTRL}

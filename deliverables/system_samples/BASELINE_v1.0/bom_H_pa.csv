@@ -1,0 +1,8 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+SOURCE,,,寻呼话筒,4,,,,
+MIXER,,,分区矩阵调音台,1,dante;control,inputs=16;outputs=8,,
+PROCESSOR,BSS,BLU-806,广播处理器,1,dante;control,inputs=8;outputs=8,,system
+SPEAKER_MGR,,,分区音箱管理,6,dante;control,zones=4,,
+AMP,Powersoft,Quattrocanali 4804,分区功率放大器,6,dante;control;analog,channels=4,,
+SPEAKER,,,吸顶扬声器,16,,impedance_ohm=8;power_w=60,,
+SPEAKER,,,壁挂扬声器,8,,impedance_ohm=8;power_w=120,,

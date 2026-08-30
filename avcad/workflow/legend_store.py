@@ -1,0 +1,305 @@
+"""图例库（**永久文档**）持久化层。
+
+定位：这不是缓存，是一份可长期维护的**永久文档**。
+每次用户在第③步确认 / 修改某个型号的端口定义，都会**立即原子写入磁盘**，
+revision 递增并保留维护历史；下次遇到相同 (品牌, 型号, 类别) 时，
+读到的就是**最后一次维护**的结果。
+
+★ 优先级（重要）
+    永久图例库  >  引擎推断值
+即 build_project() 在实例建成（引擎推断端口）之后，立即用图例库里的定义
+**整体覆盖** inst.ports —— 只要库里有这条记录，就以库为准，引擎推断仅作兜底。
+
+★ 键
+    brand::model::category
+必须带 category：否则「无品牌型号的不同类别设备」（会议话筒 / 无线话筒发射端 /
+天线 / 扬声器 …）会互相覆盖，造成图例丢失。
+"""
+from __future__ import annotations
+import json
+import os
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import List, Optional
+
+from avcad.model.schema import ConcretePort, Signal
+
+# 永久图例库文件（旧名字 legend_cache.json 仅作为迁移来源，不再写入）
+# 环境变量 AVCAD_LEGEND_LIBRARY 可覆盖路径：打包成 .app 后写入用户目录，避免只读 / 数据隔离问题
+DEFAULT_CACHE = Path(
+    os.environ.get("AVCAD_LEGEND_LIBRARY")
+    or (Path(__file__).resolve().parents[1] / "data" / "legend_library.json")
+)
+LEGACY_CACHE = Path(
+    os.environ.get("AVCAD_LEGEND_CACHE")
+    or (Path(__file__).resolve().parents[1] / "data" / "legend_cache.json")
+)
+
+SCHEMA = "avcad.legend-library/1"
+_HISTORY_KEEP = 5          # 每条图例保留最近几次维护记录
+
+
+def _now() -> str:
+    return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+@dataclass
+class LegendPort:
+    signal: str           # Signal 枚举名，如 "XLR"
+    role: str = "io"      # in / out / io
+    side: str = "right"   # left / right / top / bottom
+    count: int = 1        # 该类端口的数量（一类 N 口 → 图上展开为 LABEL1…LABELn）
+    label: str = ""       # 主标签；为空时用 signal 名
+    air: bool = False     # 空中/非线缆接口（如天线 RF）
+
+    def to_dict(self) -> dict:
+        return {
+            "signal": self.signal, "role": self.role, "side": self.side,
+            "count": self.count, "label": self.label, "air": self.air,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "LegendPort":
+        return cls(
+            signal=d["signal"], role=d.get("role", "io"), side=d.get("side", "right"),
+            count=int(d.get("count", 1)), label=d.get("label", ""),
+            air=bool(d.get("air", False)),
+        )
+
+
+@dataclass
+class Legend:
+    brand: str
+    model: str
+    category: str = ""
+    ports: List[LegendPort] = field(default_factory=list)
+    slots: List[dict] = field(default_factory=list)   # 卡槽条可视化，如 [{type,count,label}]
+    note: str = ""
+    # ---- 永久文档的维护元数据 ----
+    source: str = "user"        # user=用户确认 / engine=引擎推断回填 / migrated=迁移
+    revision: int = 1           # 第几次维护
+    created_at: str = ""
+    updated_at: str = ""
+    history: List[dict] = field(default_factory=list)  # 最近若干次维护快照
+
+    def to_dict(self) -> dict:
+        return {
+            "brand": self.brand, "model": self.model, "category": self.category,
+            "key": LegendStore.key(self.brand, self.model, self.category),
+            "ports": [p.to_dict() for p in self.ports],
+            "slots": list(self.slots), "note": self.note,
+            "source": self.source, "revision": self.revision,
+            "created_at": self.created_at, "updated_at": self.updated_at,
+            "history": list(self.history),
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Legend":
+        return cls(
+            brand=d.get("brand", ""), model=d.get("model", ""),
+            category=d.get("category", ""),
+            ports=[LegendPort.from_dict(x) for x in d.get("ports", [])],
+            slots=list(d.get("slots", [])), note=d.get("note", ""),
+            source=d.get("source", "user"),
+            revision=int(d.get("revision", 1) or 1),
+            created_at=d.get("created_at", ""), updated_at=d.get("updated_at", ""),
+            history=list(d.get("history", []) or []),
+        )
+
+
+class LegendStore:
+    def __init__(self, path: Optional[str] = None):
+        self.path = Path(path or DEFAULT_CACHE)
+        self._mem: dict = {}
+        self._load_file()
+
+    # ---- 键：brand::model::category（category 必带，避免不同类别互相覆盖） ----
+    @staticmethod
+    def key(brand: str, model: str, category: str = "") -> str:
+        b = (brand or "").strip() or "_generic"
+        m = (model or "").strip() or "_"
+        c = (category or "").strip()
+        return f"{b}::{m}::{c}" if c else f"{b}::{m}"
+
+    # ---- 读写内存 ----
+    def get(self, brand: str, model: str, category: str = "") -> Optional[Legend]:
+        k = self.key(brand, model, category)
+        if k in self._mem:
+            return self._mem[k]
+        # 回退：按 brand/model 匹配任意类别的第一条（兼容旧数据 / 类别不同的图例）
+        prefix = self.key(brand, model)
+        for kk, v in self._mem.items():
+            if kk == prefix or kk.startswith(prefix + "::"):
+                return v
+        return None
+
+    def has(self, brand: str, model: str, category: str = "") -> bool:
+        return self.get(brand, model, category) is not None
+
+    def put(self, legend: Legend, source: str = "user") -> Legend:
+        """写入一条图例（内存）。键含 category，并维护 revision / 历史。"""
+        k = self.key(legend.brand, legend.model, legend.category)
+        old = self._mem.get(k)
+        now = _now()
+        if old is not None:
+            legend.created_at = old.created_at or old.updated_at or now
+            legend.revision = int(old.revision or 0) + 1
+            hist = list(old.history or [])
+            hist.append({
+                "revision": int(old.revision or 0),
+                "updated_at": old.updated_at or now,
+                "ports": [p.to_dict() for p in old.ports],
+                "slots": list(old.slots or []),
+                "note": old.note or "",
+                "source": old.source or "user",
+            })
+            legend.history = hist[-_HISTORY_KEEP:]
+        else:
+            legend.created_at = now
+            legend.revision = 1
+            legend.history = list(legend.history or [])[-_HISTORY_KEEP:]
+        legend.updated_at = now
+        legend.source = source
+        self._mem[k] = legend
+        return legend
+
+    def all(self) -> List[Legend]:
+        return list(self._mem.values())
+
+    def info(self) -> dict:
+        """图例库概览（给 UI 展示「这是一份永久文档，不是缓存」）。"""
+        return {
+            "path": str(self.path),
+            "schema": SCHEMA,
+            "count": len(self._mem),
+            "updated_at": max([lg.updated_at for lg in self._mem.values()] or [""]),
+        }
+
+    # ---- 文件持久化（永久文档） ----
+    def _load_file(self) -> None:
+        if not self.path.exists():
+            return
+        try:
+            data = json.loads(self.path.read_text(encoding="utf-8"))
+        except Exception:
+            return
+        dirty = False
+        for rec in data.get("legends", []):
+            try:
+                lg = Legend.from_dict(rec)
+                if not lg.updated_at:
+                    lg.updated_at = _now()
+                    lg.created_at = lg.created_at or lg.updated_at
+                    dirty = True
+                k = self.key(lg.brand, lg.model, lg.category)
+                prev = self._mem.get(k)
+                # 同键重复（旧版本 bug 导致）→ 保留 revision 更大 / 更新时间更晚的那条
+                if prev is None or int(lg.revision or 0) >= int(prev.revision or 0):
+                    self._mem[k] = lg
+            except Exception:
+                continue
+        if dirty and self._mem:
+            try:
+                self.save()
+            except Exception:
+                pass
+
+    def save(self) -> None:
+        """原子写：先写临时文件再 os.replace，避免半截文件。"""
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        # 去重：同一个 key 只保留一条（防止历史数据里的重复记录）
+        dedup: dict = {}
+        for lg in self._mem.values():
+            k = self.key(lg.brand, lg.model, lg.category)
+            prev = dedup.get(k)
+            if prev is None or int(lg.revision or 0) >= int(prev.revision or 0):
+                dedup[k] = lg
+        self._mem = dedup
+        data = {
+            "schema": SCHEMA,
+            "kind": "永久图例库（非缓存；图例库优先级高于引擎推断）",
+            "updated_at": _now(),
+            "count": len(dedup),
+            "legends": [lg.to_dict() for lg in dedup.values()],
+        }
+        tmp = self.path.with_suffix(self.path.suffix + ".tmp")
+        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        os.replace(tmp, self.path)
+
+    # ---- 回填到实例（图例库 > 引擎推断） ----
+    def apply(self, inst, legend: Optional[Legend] = None,
+              source: str = "user") -> object:
+        """把图例展开为 ConcretePort **覆盖** inst.ports。
+
+        调用时机：build_project() 在引擎推断出端口之后调用本方法，
+        因此只要图例库里有这条记录，就以库为准（永久文档优先）。
+        """
+        lg = legend or self.get(inst.brand, inst.model, getattr(inst, "category", ""))
+        if lg is None:
+            return inst
+        if lg.category:
+            inst.category = lg.category
+        if lg.slots:
+            inst.slots = list(lg.slots)
+        ports = []
+        for t in lg.ports:
+            sig = Signal(t.signal)
+            base = t.label or sig.value
+            n = max(1, int(t.count or 1))
+            for i in range(n):
+                plabel = base + (str(i + 1) if n > 1 else "")
+                ports.append(ConcretePort(
+                    id=f"{inst.uid}:{base}_{i+1}",
+                    uid=inst.uid, side=t.side, signal=sig, label=plabel,
+                    index=i, role=t.role, air=t.air,
+                ))
+        inst.ports = ports
+        try:
+            setattr(inst, "legend_source", lg.source or source)
+            setattr(inst, "legend_revision", lg.revision)
+            setattr(inst, "legend_updated_at", lg.updated_at)
+        except Exception:
+            pass
+        return inst
+
+
+def migrate_legacy_library() -> bool:
+    """一次性迁移：旧 legend_cache.json → 永久图例库 legend_library.json。
+
+    只在默认库文件尚不存在时执行；旧文件自此不再被写入。
+    """
+    try:
+        if DEFAULT_CACHE.exists() or not LEGACY_CACHE.exists():
+            return False
+        data = json.loads(LEGACY_CACHE.read_text(encoding="utf-8"))
+        st = LegendStore.__new__(LegendStore)      # 绕过 __init__，避免递归
+        st.path = DEFAULT_CACHE
+        st._mem = {}
+        for rec in data.get("legends", []):
+            try:
+                lg = Legend.from_dict(rec)
+                lg.source = lg.source or "migrated"
+                if not lg.updated_at:
+                    lg.updated_at = _now()
+                lg.created_at = lg.created_at or lg.updated_at
+                k = st.key(lg.brand, lg.model, lg.category)
+                prev = st._mem.get(k)
+                if prev is None or int(lg.revision or 0) >= int(prev.revision or 0):
+                    st._mem[k] = lg
+            except Exception:
+                continue
+        if st._mem:
+            st.save()
+        return True
+    except Exception:
+        return False
+
+
+# 导入时执行一次迁移（此后图例库就是唯一的永久文档）
+migrate_legacy_library()
+
+
+def apply_legend(inst, store: LegendStore) -> object:
+    """便捷函数：用图例库自动回填单个实例（命中才改，未命中保留引擎推断值）。"""
+    return store.apply(inst)

@@ -1,0 +1,12 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+WIRELESS_MIC,,,无线话筒发射端,12,,,,
+ANTENNA,,,有源指向天线,6,,,,
+ANT_DIST,,,天线信号分配器,3,,inputs=2;outputs=8,,
+WIRELESS_RX,Shure,ULXD4D,无线接收机,6,dante;control,channels=2,,
+MIXER,,,数字调音台(主),1,dante;control,inputs=32;outputs=16,FULL_CHAIN,,
+MIXER,,,数字调音台(备),1,dante;control,inputs=32;outputs=16,FULL_CHAIN,,
+PROCESSOR,BSS,BLU-806,音频处理器,1,dante;control,inputs=8;outputs=8,FULL_CHAIN,system
+SPEAKER_MGR,,,音箱管理器,2,dante;control,zones=4,,
+AMP,Powersoft,Quattrocanali 4804,功率放大器,4,dante;control;analog,channels=4,,
+SPEAKER,L-Acoustics,KARA,主扩扬声器,8,,impedance_ohm=8;power_w=400,,
+SPEAKER,,,舞台返听(有源),6,,,,是

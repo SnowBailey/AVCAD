@@ -1,0 +1,152 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8">
+<title>易科型号库 · 设备出图样本</title>
+<style>
+ body{background:#16161a;color:#e8e6df;font-family:PingFang SC,Microsoft YaHei,sans-serif;margin:0;padding:24px}
+ h1{font-size:20px} .sub{color:#9a978d;margin-bottom:18px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px}
+ .card{background:#1f1f24;border:1px solid #2c2c33;border-radius:10px;padding:14px}
+ .card h3{margin:2px 0 10px;font-size:14px}
+ .glyph{width:100%;height:200px;background:#16161a;border-radius:6px}
+ table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+ th,td{border:1px solid #2c2c33;padding:4px 6px;text-align:left;vertical-align:top}
+ th{color:#9a978d;width:64px;font-weight:600}
+ .sys{margin-top:26px} .sys object{width:100%;height:620px;background:#16161a;border:1px solid #2c2c33;border-radius:8px}
+</style></head><body>
+<h1>易科国际型号库 · 设备出图样本（音频 V1）</h1>
+<div class="sub">左：各音频类别代表性产品（名称/品牌/型号三行标题；卡槽设备以槽位可视化；特殊接口已人工覆盖）；下：完整 BOM（仅品牌+型号+数量）自动生成的集成系统图（模块在下、连线在中、端口在上）。</div>
+<div class="grid">
+  <section class="card">
+    <h3>SOURCE ·  DT22-M/X</h3>
+    <object data="single_source.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>48kHz/96kHz 双通道模拟输入/输出转Dante转换盒</td></tr>
+      <tr><th>特性</th><td>analog, control, dante, phantom</td></tr>
+      <tr><th>参数</th><td>null</td></tr>
+      <tr><th>端口数</th><td>1</td></tr>
+      <tr><th>命中源</th><td>eko:1200002245</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>WIRELESS_MIC · IPS UM2002</h3>
+    <object data="single_wireless_mic.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>无线双手持麦克风</td></tr>
+      <tr><th>特性</th><td>analog, control, wireless</td></tr>
+      <tr><th>参数</th><td>{"impedance_ohm": 440, "channels_hint": 1, "bnc": 1}</td></tr>
+      <tr><th>端口数</th><td>1</td></tr>
+      <tr><th>命中源</th><td>eko:1100001025</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>ANTENNA · IPS CF6800WB</h3>
+    <object data="single_antenna.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>无线数字会议天线盒</td></tr>
+      <tr><th>特性</th><td>control, wireless</td></tr>
+      <tr><th>参数</th><td>{"channels_hint": 5}</td></tr>
+      <tr><th>端口数</th><td>2</td></tr>
+      <tr><th>命中源</th><td>eko:1100000635</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>ANT_DIST · AUDIX ADS48</h3>
+    <object data="single_ant_dist.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>天线分配器</td></tr>
+      <tr><th>特性</th><td>wireless</td></tr>
+      <tr><th>参数</th><td>{"channels_hint": 8, "bnc": 1}</td></tr>
+      <tr><th>端口数</th><td>6</td></tr>
+      <tr><th>命中源</th><td>eko:1200002521</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>WIRELESS_RX · IPS CF6804</h3>
+    <object data="single_wireless_rx.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>四通道无线会议系统</td></tr>
+      <tr><th>特性</th><td>analog, wireless</td></tr>
+      <tr><th>参数</th><td>{"ports_override": [{"name": "MIX", "side": "right", "signal": "XLR", "role": "out", "label": "MIX", "count": 1}, {"name": "OUT", "side": "right", "signal": "XLR", "role": "out", "label": "OUT", "count": 4}], "note": "四通道无线会议系统；1×XLR MIX out + 4×XLR OUT"}</td></tr>
+      <tr><th>端口数</th><td>5</td></tr>
+      <tr><th>命中源</th><td>eko:1100000851</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>MIXER · YAMAHA CS-R10</h3>
+    <object data="single_mixer.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>数字调音台台面</td></tr>
+      <tr><th>特性</th><td>analog, control, dante, wireless</td></tr>
+      <tr><th>参数</th><td>{"slots": [{"type": "HY", "count": 4, "label": "HY"}, {"type": "MY", "count": 2, "label": "MY"}], "note": "台面；DSP 引擎=DSP-RX；HY/MY 卡槽未插卡时不对外", "feature_ports": false, "inputs": 8, "outputs": 8}</td></tr>
+      <tr><th>端口数</th><td>16</td></tr>
+      <tr><th>命中源</th><td>eko:1200003080</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>PROCESSOR · YAMAHA RMio64-D</h3>
+    <object data="single_processor.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>Dante/MADI 64路转换器</td></tr>
+      <tr><th>特性</th><td>control, dante</td></tr>
+      <tr><th>参数</th><td>{"ports_override": [{"name": "DANTE_PRI", "side": "left", "signal": "DANTE", "role": "in", "label": "DANTE-P"}, {"name": "DANTE_SEC", "side": "left", "signal": "DANTE", "role": "in", "label": "DANTE-S"}, {"name": "MADI_IN_BNC", "side": "right", "signal": "AES", "role": "in", "label": "MADI-IN-BNC"}, {"name": "MADI_OUT_BNC", "side": "right", "signal": "AES", "role": "out", "label": "MADI-OUT-BNC"}, {"name": "MADI_IN_OPT", "side": "right", "signal": "OPTICAL", "role": "in", "label": "MADI-IN-OPT"}, {"name": "MADI_OUT_OPT", "side": "right", "signal": "OPTICAL", "role": "out", "label": "MADI-OUT-OPT"}, {"name": "WCLK", "side": "top", "signal": "IP", "role": "in", "label": "WCLK"}], "note": "Dante/MADI 格式转换器；64×64 通道"}</td></tr>
+      <tr><th>端口数</th><td>7</td></tr>
+      <tr><th>命中源</th><td>eko:1200003059</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>SPEAKER_MGR · EAW UX3600</h3>
+    <object data="single_speaker_mgr.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>专用音箱管理器</td></tr>
+      <tr><th>特性</th><td>analog, control</td></tr>
+      <tr><th>参数</th><td>{"ports_override": [{"name": "IN", "side": "left", "signal": "XLR", "role": "in", "label": "IN", "count": 3}, {"name": "OUT", "side": "right", "signal": "XLR", "role": "out", "label": "OUT", "count": 6}], "note": "3×XLR 输入 / 6×XLR 输出 扬声器处理器"}</td></tr>
+      <tr><th>端口数</th><td>9</td></tr>
+      <tr><th>命中源</th><td>eko:1200000122</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>AMP · EAW UXA4401</h3>
+    <object data="single_amp.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>4通道多用途固定安装功放</td></tr>
+      <tr><th>特性</th><td>analog</td></tr>
+      <tr><th>参数</th><td>{"impedance_ohm": 8, "channels_hint": 4}</td></tr>
+      <tr><th>端口数</th><td>8</td></tr>
+      <tr><th>命中源</th><td>eko:1200002970</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>SPEAKER · EAW ANYA V2 Black</h3>
+    <object data="single_speaker.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>三分频有源自适应全频扬声器</td></tr>
+      <tr><th>特性</th><td>aes, analog, dante</td></tr>
+      <tr><th>参数</th><td>null</td></tr>
+      <tr><th>端口数</th><td>2</td></tr>
+      <tr><th>命中源</th><td>eko:1200000226</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>SWITCH · YAMAHA SWP2-10MMF</h3>
+    <object data="single_switch.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>交换机（多模光口）</td></tr>
+      <tr><th>特性</th><td>control</td></tr>
+      <tr><th>参数</th><td>null</td></tr>
+      <tr><th>端口数</th><td>8</td></tr>
+      <tr><th>命中源</th><td>eko:1200003081</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>IO · YAMAHA RPio622</h3>
+    <object data="single_io.svg" type="image/svg+xml" class="glyph"></object>
+    <table>
+      <tr><th>名称</th><td>扩展接口箱</td></tr>
+      <tr><th>特性</th><td>analog</td></tr>
+      <tr><th>参数</th><td>{"slots": [{"type": "RY", "count": 6, "label": "RY"}, {"type": "HY", "count": 2, "label": "HY"}, {"type": "MY", "count": 2, "label": "MY"}], "note": "扩展 I/O 机架；RY/HY/MY 卡槽未插卡时不对外", "ports_override": []}</td></tr>
+      <tr><th>端口数</th><td>0</td></tr>
+      <tr><th>命中源</th><td>eko:1200003073</td></tr>
+    </table>
+  </section></div>
+<div class="sys"><h2>集成系统图（BOM 仅含 品牌+型号+数量；覆盖 EAW / YAMAHA / ezacoustics / IPS / Powersoft / Symetrix / AUDIX）</h2>
+<object data="system.svg" type="image/svg+xml"></object></div>
+</body></html>

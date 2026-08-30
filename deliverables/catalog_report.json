@@ -1,0 +1,47 @@
+{
+  "total": 2298,
+  "audio_recognized": 1529,
+  "drawable": 1349,
+  "excluded_brand_recognized": 180,
+  "io_pending_template": 0,
+  "deferred": 769,
+  "audio_unknown_needs_backfill": 573,
+  "out_of_scope_deferred": 196,
+  "by_category": {
+    "MIXER": 127,
+    "IO": 40,
+    "PROCESSOR": 105,
+    "SWITCH": 19,
+    "SOURCE": 266,
+    "SPEAKER": 557,
+    "SPEAKER_MGR": 30,
+    "AMP": 116,
+    "WIRELESS_MIC": 58,
+    "ANTENNA": 15,
+    "WIRELESS_RX": 14,
+    "ANT_DIST": 2
+  },
+  "by_defer_reason": {
+    "音频配件(需人工)": 214,
+    "电源/PDU(非信号)": 44,
+    "音频未识别": 359,
+    "视频(V3)": 96,
+    "通讯(V2)": 28,
+    "中控(V2)": 26,
+    "灯光(V3)": 2
+  },
+  "drawable_categories": [
+    "AMP",
+    "ANTENNA",
+    "ANT_DIST",
+    "IO",
+    "MIXER",
+    "PROCESSOR",
+    "SOURCE",
+    "SPEAKER",
+    "SPEAKER_MGR",
+    "SWITCH",
+    "WIRELESS_MIC",
+    "WIRELESS_RX"
+  ]
+}

@@ -1,0 +1,11 @@
+category: SWITCH
+name: Dante 网络交换机
+redundancy_allowed: false
+features_available: [redundant]
+params:
+  ports:
+    {min: 1, default: 8, label: 端口数, unit: "口"}
+electrical:
+  managed: true
+ports_template:
+  - {name: DANTE, side: top, signal: DANTE, role: in, count_from: ports, label: DANTE}

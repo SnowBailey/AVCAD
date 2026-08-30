@@ -1,0 +1,84 @@
+name: 构建 Windows 安装程序
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: 读取版本号
+        id: ver
+        shell: bash
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: PyInstaller 打包
+        shell: pwsh
+        run: |
+          python -m PyInstaller --noconfirm --clean --windowed `
+            --name AVCAD `
+            --icon packaging/AVCAD.ico `
+            --paths "${{ github.workspace }}" `
+            --add-data "avcad\ui\static;avcad\ui\static" `
+            --add-data "avcad\data;avcad\data" `
+            --add-data "avcad\config;avcad\config" `
+            --hidden-import scripts.check_overlap `
+            --hidden-import openpyxl `
+            --hidden-import yaml `
+            --hidden-import ezdxf `
+            --collect-submodules encodings `
+            --exclude-module pytest `
+            packaging/avcad_app.py
+          if (-not (Test-Path "dist/AVCAD/AVCAD.exe")) {
+            throw "打包失败：未找到 dist/AVCAD/AVCAD.exe"
+          }
+
+      - name: 安装 Inno Setup
+        run: choco install innosetup -y --no-progress
+
+      - name: 编译安装程序
+        shell: pwsh
+        run: |
+          $iscc = Get-ChildItem "C:\Program Files*\Inno Setup *\ISCC.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $iscc) { throw "未找到 ISCC.exe" }
+          & $iscc.FullName "/DMyAppVersion=${{ steps.ver.outputs.version }}" "packaging\windows\AVCAD.iss"
+          if (-not (Test-Path "dist/AVCAD-Setup-${{ steps.ver.outputs.version }}.exe")) {
+            throw "安装程序未生成"
+          }
+
+      - name: 打绿色版 ZIP
+        shell: pwsh
+        run: Compress-Archive -Path "dist\AVCAD\*" -DestinationPath "dist\AVCAD-${{ steps.ver.outputs.version }}-Windows-Portable.zip"
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVCAD-Windows-${{ steps.ver.outputs.version }}
+          path: |
+            dist/AVCAD-Setup-*.exe
+            dist/AVCAD-*-Windows-Portable.zip
+
+      - name: 发布到 Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/AVCAD-Setup-*.exe
+            dist/AVCAD-*-Windows-Portable.zip

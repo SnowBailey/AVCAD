@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 0 248 208" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#16161a">
+<rect x="6" y="0" width="248" height="208" fill="#16161a"/>
+<rect x="30.0" y="24.0" width="150.0" height="56.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="105.0" y="34.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">交换机（多模光口）</text>
+<text x="105.0" y="44.0" fill="#c4c2b8" font-size="8" text-anchor="middle">YAMAHA</text>
+<text x="105.0" y="53.0" fill="#9a978d" font-size="7" text-anchor="middle">SWP2-10MMF</text>
+<circle cx="46.4" cy="24.0" r="2.4" fill="#378add"/>
+<text x="46.4" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE1</text>
+<circle cx="63.1" cy="24.0" r="2.4" fill="#378add"/>
+<text x="63.1" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE2</text>
+<circle cx="79.9" cy="24.0" r="2.4" fill="#378add"/>
+<text x="79.9" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE3</text>
+<circle cx="96.6" cy="24.0" r="2.4" fill="#378add"/>
+<text x="96.6" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE4</text>
+<circle cx="113.4" cy="24.0" r="2.4" fill="#378add"/>
+<text x="113.4" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE5</text>
+<circle cx="130.1" cy="24.0" r="2.4" fill="#378add"/>
+<text x="130.1" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE6</text>
+<circle cx="146.9" cy="24.0" r="2.4" fill="#378add"/>
+<text x="146.9" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE7</text>
+<circle cx="163.6" cy="24.0" r="2.4" fill="#378add"/>
+<text x="163.6" y="63.0" fill="#f5f5ec" font-size="8" text-anchor="middle" font-weight="bold">DANTE8</text>
+</svg>

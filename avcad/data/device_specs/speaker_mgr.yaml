@@ -1,0 +1,12 @@
+category: SPEAKER_MGR
+name: 音箱管理器
+redundancy_allowed: false
+features_available: [dante, control]
+params:
+  zones:
+    {min: 1, default: 4, label: 管理分区数, unit: "区"}
+ports_template:
+  - {name: IN, side: left, signal: XLR, role: in, count: 1, label: IN}
+  - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: OUT, side: right, signal: XLR, role: out, count_from: zones, label: ZONE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

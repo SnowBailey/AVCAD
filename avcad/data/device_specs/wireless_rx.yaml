@@ -1,0 +1,13 @@
+category: WIRELESS_RX
+name: 无线接收机
+redundancy_allowed: false
+features_available: [dante, control, aes]
+params:
+  channels:
+    {min: 1, default: 2, label: 接收通道数, unit: "Ch"}
+ports_template:
+  - {name: RF, side: left, signal: RF, role: in, count: 2, label: ANT}   # A/B 真分集
+  - {name: XLR, side: right, signal: XLR, role: out, count_from: channels, label: OUT}   # 模拟输出(恒有)
+  - {name: AES, side: right, signal: AES, role: out, count_from: channels, if_feature: aes, label: AES}
+  - {name: DANTE, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

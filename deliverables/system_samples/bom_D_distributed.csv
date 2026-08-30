@@ -1,0 +1,6 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+MIXER,,,中央数字调音台,1,dante;control,inputs=16;outputs=8,,
+PROCESSOR,BSS,BLU-806,核心处理器,1,dante;control,inputs=8;outputs=8,,system,
+SPEAKER_MGR,,,分区音箱管理,3,dante;control,zones=4,,
+AMP,Powersoft,Quattrocanali 4804,功率放大器,3,dante;control;analog,channels=4,,
+SPEAKER,L-Acoustics,KARA,区域扬声器,12,,impedance_ohm=8;power_w=400,,

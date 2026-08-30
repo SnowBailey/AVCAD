@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 0 248 208" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#16161a">
+<rect x="6" y="0" width="248" height="208" fill="#16161a"/>
+<rect x="30.0" y="24.0" width="138.0" height="71.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="99.0" y="34.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">扩展接口箱</text>
+<text x="99.0" y="44.0" fill="#c4c2b8" font-size="8" text-anchor="middle">YAMAHA</text>
+<text x="99.0" y="53.0" fill="#9a978d" font-size="7" text-anchor="middle">RPio622</text>
+<rect x="34.0" y="79.0" width="130.0" height="14.0" fill="#1e1e1a" stroke="#4a4a42" stroke-width="1.0" rx="3"/>
+<rect x="37.0" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="41.9" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY1</text>
+<rect x="49.7" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="54.6" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY2</text>
+<rect x="62.4" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="67.2" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY3</text>
+<rect x="75.1" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="79.9" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY4</text>
+<rect x="87.8" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="92.6" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY5</text>
+<rect x="100.5" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="105.3" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">RY6</text>
+<rect x="113.2" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="118.0" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">HY1</text>
+<rect x="125.9" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="130.8" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">HY2</text>
+<rect x="138.6" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="143.4" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">MY1</text>
+<rect x="151.3" y="81.0" width="9.7" height="10.0" fill="#2a2a24" stroke="#6a6a60" stroke-width="0.8" rx="3"/>
+<text x="156.2" y="88.0" fill="#a4a29a" font-size="6" text-anchor="middle">MY2</text>
+</svg>

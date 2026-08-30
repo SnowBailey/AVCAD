@@ -1,0 +1,7 @@
+category: SOURCE
+name: 话筒(有线)
+redundancy_allowed: false
+features_available: []
+params: {}
+ports_template:
+  - {name: OUT, side: right, signal: XLR, role: out, count: 1, label: OUT}

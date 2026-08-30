@@ -1,0 +1,7 @@
+﻿设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源
+SOURCE,,,会议话筒(有线),2,,,,,
+PROCESSOR,BSS,BLU-806,核心处理器,1,dante;control,inputs=8;outputs=8,FULL_CHAIN,system,
+MIXER,,,数字调音台(主),1,dante;control,inputs=16;outputs=8,FULL_CHAIN,,
+MIXER,,,数字调音台(备),1,dante;control,inputs=16;outputs=8,FULL_CHAIN,,
+AMP,Powersoft,Quattrocanali 4804,功率放大器,2,dante;control;analog,channels=4,,,
+SPEAKER,L-Acoustics,KARA,主扩扬声器,4,,impedance_ohm=8;power_w=400,,,

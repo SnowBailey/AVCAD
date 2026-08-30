@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 0 248 208" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#16161a">
+<rect x="6" y="0" width="248" height="208" fill="#16161a"/>
+<rect x="30.0" y="24.0" width="180.0" height="86.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="120.0" y="34.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">4通道多用途固定安装功放</text>
+<text x="120.0" y="44.0" fill="#c4c2b8" font-size="8" text-anchor="middle">EAW</text>
+<text x="120.0" y="53.0" fill="#9a978d" font-size="7" text-anchor="middle">UXA4401</text>
+<circle cx="30.0" cy="61.5" r="2.4" fill="#5dcaa5"/>
+<text x="37.0" y="64.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">IN1</text>
+<circle cx="30.0" cy="72.5" r="2.4" fill="#5dcaa5"/>
+<text x="37.0" y="75.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">IN2</text>
+<circle cx="30.0" cy="83.5" r="2.4" fill="#5dcaa5"/>
+<text x="37.0" y="86.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">IN3</text>
+<circle cx="30.0" cy="94.5" r="2.4" fill="#5dcaa5"/>
+<text x="37.0" y="97.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">IN4</text>
+<circle cx="210.0" cy="61.5" r="2.4" fill="#e8655a"/>
+<text x="203.0" y="64.5" fill="#f5f5ec" font-size="8" text-anchor="end" font-weight="bold">SPK1</text>
+<circle cx="210.0" cy="72.5" r="2.4" fill="#e8655a"/>
+<text x="203.0" y="75.5" fill="#f5f5ec" font-size="8" text-anchor="end" font-weight="bold">SPK2</text>
+<circle cx="210.0" cy="83.5" r="2.4" fill="#e8655a"/>
+<text x="203.0" y="86.5" fill="#f5f5ec" font-size="8" text-anchor="end" font-weight="bold">SPK3</text>
+<circle cx="210.0" cy="94.5" r="2.4" fill="#e8655a"/>
+<text x="203.0" y="97.5" fill="#f5f5ec" font-size="8" text-anchor="end" font-weight="bold">SPK4</text>
+</svg>

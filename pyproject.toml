@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "avcad"
+version = "0.1.0"
+description = "AVCAD - 音视频系统图自动生成引擎（清单→参数化块→拓扑→连线→DXF）"
+requires-python = ">=3.10"
+dependencies = [
+    "ezdxf>=1.1",
+    "openpyxl>=3.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+ui = []
+
+[project.scripts]
+avcad = "avcad.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["avcad*"]
+
+[tool.pytest.ini_options]
+testpaths = ["avcad/tests"]
+pythonpath = ["."]

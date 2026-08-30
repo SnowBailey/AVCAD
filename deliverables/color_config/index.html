@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVCAD · 线颜色配置（拓扑 / CAD 共用）</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--line:#262b36;--txt:#e6e9ef;--muted:#9aa3b2;--accent:#4f9dff;--ok:#37d67a;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding:24px;}
+  h1{font-size:20px;margin:0 0 6px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 18px;line-height:1.7;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);}
+  th{color:var(--muted);font-weight:600;font-size:12px;}
+  tr:last-child td{border-bottom:none;}
+  .sig-name{font-weight:600;}
+  .sig-use{color:var(--muted);font-size:12px;}
+  .swatch{display:flex;align-items:center;gap:10px;}
+  .chip{width:54px;height:26px;border-radius:6px;border:1px solid rgba(255,255,255,.15);}
+  input[type=color]{width:46px;height:30px;border:1px solid var(--line);border-radius:6px;background:transparent;cursor:pointer;padding:2px;}
+  .role-tag{font-size:11px;padding:2px 7px;border-radius:5px;background:#1b3a5c;color:#7cc0ff;margin-left:6px;}
+  .role-tag.bk{background:#3a2f1c;color:#ffce85;}
+  .preview{width:70px;height:0;border-top-width:3px;border-top-style:solid;margin-top:2px;}
+  .toolbar{display:flex;gap:12px;margin:18px 0;}
+  button{background:var(--accent);color:#04122b;font-weight:700;border:none;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;}
+  button.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);font-weight:500;}
+  button:active{transform:translateY(1px);}
+  .status{font-size:13px;color:var(--ok);margin-left:12px;align-self:center;min-height:18px;}
+  .legend{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.7;}
+  .legend code{background:#0b0d12;padding:1px 6px;border-radius:4px;color:#cdd3de;}
+</style>
+</head>
+<body>
+<h1>线颜色配置</h1>
+<p class="sub">
+  在「导入清单 → 确认模块」环节一并确认各类信号的线缆颜色。点击色块即可更改，
+  <b>保存后下次生成自动生效</b>，且<b>拓扑图（SVG）与 CAD（DXF）共用同一份配置</b>。
+  配置持久化于 <code>avcad/config/signal_colors.json</code>，全局共享、跨项目复用。
+</p>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>信号</th><th>主路径 (实线)</th><th>备路径 (虚线/点线)</th><th>线型预览</th></tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<div class="toolbar">
+  <button id="save">保存全部</button>
+  <button id="revert" class="ghost">放弃改动</button>
+  <button id="reset" class="ghost">恢复出厂</button>
+  <span class="status" id="status"></span>
+</div>
+
+<div class="legend">
+  图例：<span class="role-tag">主</span> 主用信号路径（实线）&nbsp;·&nbsp;
+  <span class="role-tag bk">备</span> 备份/冗余路径（虚线，GB/T 50786 约定）。
+  备份 Dante 默认用<b>紫色</b>，以与模拟音频(XLR 青色)区分；Dante 链路一律经交换机，不设备直连。
+</div>
+
+<script>
+const rows = document.getElementById('rows');
+const status = document.getElementById('status');
+let DATA = {};
+
+function render(data){
+  rows.innerHTML = '';
+  for (const [sig, entry] of Object.entries(data)){
+    const label = (entry.label || sig);
+    const p = entry.primary || {}, b = entry.backup || {};
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><div class="sig-name">${sig}</div><div class="sig-use">${label}</div></td>
+      <td><div class="swatch"><input type="color" data-sig="${sig}" data-role="primary" value="${p.color||'#000000'}"><span class="chip" id="${sig}-primary-chip" style="background:${p.color}"></span></div></td>
+      <td><div class="swatch"><input type="color" data-sig="${sig}" data-role="backup" value="${b.color||'#000000'}"><span class="chip" id="${sig}-backup-chip" style="background:${b.color}"></span></div></td>
+      <td><div class="preview" style="border-top-color:${p.color};border-top-style:${p.ltype==='dashed'?'dashed':p.ltype==='dotted'?'dotted':'solid'}"></div>
+          <div class="preview" style="border-top-color:${b.color};border-top-style:${b.ltype==='dashed'?'dashed':b.ltype==='dotted'?'dotted':'solid'}"></div></td>`;
+    rows.appendChild(tr);
+  }
+  rows.querySelectorAll('input[type=color]').forEach(inp=>{
+    inp.addEventListener('input', ()=>{
+      const chip = document.getElementById(`${inp.dataset.sig}-${inp.dataset.role}-chip`);
+      if (chip) chip.style.background = inp.value;
+      DATA[inp.dataset.sig][inp.dataset.role].color = inp.value;
+    });
+  });
+}
+
+async function load(){
+  const r = await fetch('/api/colors');
+  DATA = await r.json();
+  render(DATA);
+  status.textContent = '';
+}
+
+document.getElementById('save').onclick = async ()=>{
+  status.textContent = '保存中…';
+  const r = await fetch('/api/colors', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(DATA)});
+  const j = await r.json();
+  status.textContent = j.ok ? '✅ 已保存，下次生成自动生效' : ('❌ '+ (j.error||'失败'));
+};
+document.getElementById('revert').onclick = async ()=>{ await load(); status.textContent='已放弃未保存改动'; };
+document.getElementById('reset').onclick = async ()=>{
+  const r = await fetch('/api/defaults'); DATA = await r.json(); render(DATA);
+  status.textContent='已载入出厂默认（点「保存全部」才会写入）';
+};
+
+load();
+</script>
+</body>
+</html>

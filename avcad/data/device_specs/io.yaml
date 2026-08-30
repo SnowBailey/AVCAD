@@ -1,0 +1,14 @@
+category: IO
+name: 音频 I/O 接口箱/扩展卡
+redundancy_allowed: false
+features_available: [dante, aes, analog, control, phantom]
+params: {}
+ports_template:
+  # 所有音频 I/O 设备均含模拟输入输出；数字/控制接口按特性条件出现
+  # 舞台接口箱/地插属「辅材」，一律左右结构出线：舞台侧(IN)在左，
+  # FOH 侧(OUT+网络/控制)在右，不向顶部竖向出线。
+  - {name: IN, side: left, signal: XLR, role: in, count: 1, label: IN}
+  - {name: OUT, side: right, signal: XLR, role: out, count: 1, label: OUT}
+  - {name: DANTE, side: right, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: AES, side: right, signal: AES, role: in, count: 1, if_feature: aes, label: AES}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

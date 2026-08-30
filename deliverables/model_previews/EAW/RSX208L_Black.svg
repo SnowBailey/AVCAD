@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 0 248 208" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#16161a">
+<rect x="6" y="0" width="248" height="208" fill="#16161a"/>
+<rect x="30.0" y="24.0" width="180.0" height="64.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="120.0" y="34.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">8"三分频有源阵列扬声器</text>
+<text x="120.0" y="44.0" fill="#c4c2b8" font-size="8" text-anchor="middle">EAW</text>
+<text x="120.0" y="53.0" fill="#9a978d" font-size="7" text-anchor="middle">RSX208L Black</text>
+<circle cx="30.0" cy="61.5" r="2.4" fill="#5dcaa5"/>
+<text x="37.0" y="64.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">IN</text>
+<circle cx="30.0" cy="72.5" r="2.4" fill="#378add"/>
+<text x="37.0" y="75.5" fill="#f5f5ec" font-size="8" text-anchor="start" font-weight="bold">DANTE</text>
+</svg>

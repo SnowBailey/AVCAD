@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AVCAD@Bailey@EZPRO · 音视频系统图自动生成</title>
+<style>
+  /* ============ 设计令牌（NEXAVERSE 风格：深空 / 霓虹 / 影院感） ============ */
+  :root{
+    --bg:#03050b;
+    --panel:rgba(255,255,255,.028);
+    --panel2:rgba(255,255,255,.045);
+    --line:rgba(255,255,255,.075);
+    --line-strong:rgba(255,255,255,.14);
+    --txt:#f3f6ff;
+    --mut:#6f7e9a;
+    --acc:#00e5ff;        /* 霓虹青 */
+    --acc2:#a855f7;       /* 星云紫 */
+    --acc3:#f472b6;       /* 品红 */
+    --warn:#f0b45f;
+    --err:#ff5a6e;
+    --ok:#2ee8a0;
+    --glow-acc:0 0 0 1px rgba(0,229,255,.18), 0 0 42px -12px rgba(0,229,255,.45);
+    --glow-purple:0 0 0 1px rgba(168,85,247,.18), 0 0 42px -12px rgba(168,85,247,.42);
+    --shadow-card:0 34px 80px -46px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.035),
+                  inset 0 1px 0 rgba(255,255,255,.045);
+    --stars:
+      radial-gradient(1.3px 1.3px at 24px 30px, rgba(255,255,255,.45), transparent 100%),
+      radial-gradient(1px 1px at 132px 92px, rgba(160,230,255,.40), transparent 100%),
+      radial-gradient(1.5px 1.5px at 68px 162px, rgba(255,255,255,.26), transparent 100%),
+      radial-gradient(1px 1px at 196px 200px, rgba(210,190,255,.34), transparent 100%),
+      radial-gradient(1.1px 1.1px at 240px 44px, rgba(255,180,225,.30), transparent 100%);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--txt);
+    font-family:"SF Pro Display","PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    font-size:14px;height:100vh;display:flex;flex-direction:column;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    letter-spacing:.014em;overflow:hidden;
+  }
+  /* 星空底：纯装饰，不影响布局与交互 */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:var(--stars);background-size:264px 264px;
+    opacity:.5;animation:twinkle 9s ease-in-out infinite alternate;
+  }
+  /* 星云辉光：左青 / 右紫 / 下品红 */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(880px 520px at 8% -14%, rgba(0,229,255,.13), transparent 68%),
+      radial-gradient(780px 460px at 96% 2%, rgba(168,85,247,.13), transparent 68%),
+      radial-gradient(900px 520px at 58% 116%, rgba(244,114,182,.09), transparent 68%);
+  }
+  body>*{position:relative;z-index:1}
+
+  /* ============ 顶栏 ============ */
+  header{
+    padding:16px 30px;display:flex;align-items:center;gap:14px;flex:0 0 auto;
+    background:linear-gradient(180deg,rgba(6,9,18,.72),rgba(3,5,11,.10));
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(12px);
+  }
+  header .logo{
+    width:28px;height:28px;border-radius:50%;
+    background:conic-gradient(from 200deg,var(--acc),var(--acc2),var(--acc3),var(--acc));
+    box-shadow:0 0 20px -2px rgba(0,229,255,.7), inset 0 0 0 1px rgba(255,255,255,.22);
+    animation:logoGlow 6s ease-in-out infinite alternate;
+  }
+  header h1{
+    margin:0;font-size:17px;font-weight:700;letter-spacing:.14em;
+    background:linear-gradient(92deg,#ffffff 8%,#9beeff 42%,#d9b6ff 72%,#ffc2e2 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header .sub{color:var(--mut);font-size:11.5px;letter-spacing:.06em;margin-top:3px}
+  header .hint{margin-left:auto;color:var(--mut);font-size:11.5px;letter-spacing:.05em}
+
+  /* ============ 步骤条 ============ */
+  .stepper{display:flex;gap:10px;padding:16px 30px 2px;flex:0 0 auto}
+  .step{
+    flex:1;position:relative;overflow:hidden;cursor:not-allowed;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:11px 14px;opacity:.55;backdrop-filter:blur(10px);
+    transition:opacity .3s ease, border-color .3s ease, box-shadow .35s ease, transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .step::after{
+    content:"";position:absolute;left:14%;right:14%;top:0;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--acc),transparent);
+    opacity:0;transition:opacity .3s ease;
+  }
+  .step.active{
+    opacity:1;cursor:pointer;transform:translateY(-1px);
+    border-color:rgba(0,229,255,.5);box-shadow:var(--glow-acc);
+  }
+  .step.done{opacity:.9;cursor:pointer;border-color:rgba(46,232,160,.34)}
+  .step.active::after,.step.done::after{opacity:1}
+  .step.done::after{background:linear-gradient(90deg,transparent,var(--ok),transparent)}
+  .step b{color:var(--acc);font-size:12px;letter-spacing:.12em}
+  .step.done b{color:var(--ok)}
+  .step .t{font-size:13px;font-weight:600;letter-spacing:.06em;margin-top:2px}
+  .step .d{font-size:11px;color:var(--mut);margin-top:3px;letter-spacing:.04em}
+
+  /* ============ 主布局 ============ */
+  .layout{
+    flex:1;display:grid;grid-template-columns:380px 1fr;gap:18px;
+    padding:16px 30px 24px;min-height:0;
+  }
+  /* 第 1~3 步：隐藏右侧面板，把空间留给左侧（模块列表 / 图例编辑器） */
+  .layout.wide{grid-template-columns:minmax(0,1fr)}
+  .layout.wide .right{display:none}
+  .layout.wide .left{max-width:960px;width:100%;margin:0 auto;padding-right:0}
+  .left{overflow:auto;display:flex;flex-direction:column;gap:16px;padding-right:4px}
+  .right{
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;
+    display:flex;flex-direction:column;min-height:0;overflow:hidden;
+    box-shadow:var(--shadow-card);backdrop-filter:blur(14px);
+  }
+  .right .rtitle{
+    padding:13px 18px;border-bottom:1px solid var(--line);
+    font-size:11.5px;color:var(--mut);display:flex;justify-content:space-between;align-items:center;
+    letter-spacing:.16em;
+  }
+  .preview{
+    flex:1;overflow:auto;padding:18px;position:relative;
+    background:
+      radial-gradient(1200px 620px at 50% -12%, rgba(0,229,255,.06), transparent 72%),
+      linear-gradient(180deg,#060911,#03050b);
+  }
+  .preview svg{width:100%;height:auto;display:block}
+  .ph{color:var(--mut);font-size:12.5px;line-height:1.85;letter-spacing:.03em}
+
+  /* ============ 卡片 ============ */
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;
+    box-shadow:var(--shadow-card);backdrop-filter:blur(14px);
+    transition:border-color .3s ease, box-shadow .35s ease;
+  }
+  .card:hover{border-color:var(--line-strong)}
+  .card h3{
+    margin:0 0 10px;font-size:14px;font-weight:700;letter-spacing:.12em;
+    position:relative;padding-left:13px;
+  }
+  .card h3::before{
+    content:"";position:absolute;left:0;top:1px;bottom:1px;width:3px;border-radius:2px;
+    background:linear-gradient(180deg,var(--acc),var(--acc2));
+    box-shadow:0 0 12px rgba(0,229,255,.7);
+  }
+
+  /* ============ 表单 ============ */
+  textarea,input[type=text]{
+    width:100%;background:rgba(6,9,18,.8);color:var(--txt);
+    border:1px solid var(--line);border-radius:10px;padding:11px;font-size:12.5px;
+    transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  textarea{height:150px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;resize:vertical;line-height:1.65}
+  textarea:focus,input[type=text]:focus{
+    outline:none;border-color:rgba(0,229,255,.5);
+    box-shadow:0 0 0 3px rgba(0,229,255,.10);
+    background:rgba(8,12,24,.9);
+  }
+  input[type=text]{min-width:0}
+  select{
+    background:rgba(6,9,18,.85);color:var(--txt);border:1px solid var(--line);
+    border-radius:7px;font-size:11px;padding:3px 5px;
+  }
+  input[type=radio]{accent-color:var(--acc);margin-right:4px}
+  ::placeholder{color:rgba(111,126,154,.6)}
+
+  /* ============ 按钮（NEXAVERSE 胶囊） ============ */
+  button{
+    background:linear-gradient(96deg,rgba(0,229,255,.95),rgba(120,120,255,.92));
+    color:#02121a;border:1px solid rgba(160,240,255,.4);border-radius:999px;
+    padding:10px 18px;font-size:13px;font-weight:700;letter-spacing:.05em;cursor:pointer;
+    margin-top:8px;font-family:inherit;
+    box-shadow:0 14px 30px -16px rgba(0,229,255,.9), inset 0 1px 0 rgba(255,255,255,.35);
+    transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, filter .22s ease, border-color .25s ease;
+  }
+  button:hover{transform:translateY(-1px);filter:brightness(1.07);box-shadow:0 18px 36px -14px rgba(0,229,255,1)}
+  button:active{transform:translateY(0);filter:brightness(.97)}
+  button.ghost{
+    background:rgba(255,255,255,.035);border:1px solid var(--line-strong);color:var(--txt);
+    box-shadow:none;font-weight:500;
+  }
+  button.ghost:hover{
+    background:rgba(0,229,255,.10);border-color:rgba(0,229,255,.45);
+    color:#fff;box-shadow:0 10px 26px -16px rgba(0,229,255,.8);
+  }
+  button.sec{
+    background:linear-gradient(96deg,rgba(46,232,160,.95),rgba(0,190,190,.92));
+    color:#02150f;border:1px solid rgba(160,255,230,.45);font-weight:700;
+    box-shadow:0 14px 30px -16px rgba(46,232,160,.85), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  button.sec:hover{filter:brightness(1.07);box-shadow:0 18px 36px -14px rgba(46,232,160,1)}
+  button.primary{
+    background:linear-gradient(96deg,#22e6ff,#7b7bff 55%,#b06bff);
+    color:#04141c;font-size:14px;font-weight:800;letter-spacing:.07em;padding:13px 30px;
+    border:1px solid rgba(190,245,255,.55);margin-top:0;
+    box-shadow:0 18px 44px -14px rgba(0,229,255,.75), inset 0 1px 0 rgba(255,255,255,.4),
+               0 0 0 1px rgba(0,229,255,.16);
+  }
+  button.primary:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  button:disabled{opacity:.34;cursor:not-allowed;transform:none!important;filter:none!important;box-shadow:none}
+  label{color:var(--mut);font-size:11.5px;display:block;margin:12px 0 5px;letter-spacing:.09em}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .grow{flex:1}
+
+  /* ============ 拖拽区 ============ */
+  .drop{
+    border:1.5px dashed var(--line-strong);border-radius:16px;padding:22px;text-align:center;
+    color:var(--mut);cursor:pointer;
+    background:radial-gradient(460px 170px at 50% 0%, rgba(0,229,255,.08), transparent 70%);
+    transition:.28s cubic-bezier(.2,.8,.2,1);
+  }
+  .drop:hover{border-color:rgba(0,229,255,.6);color:var(--txt);transform:translateY(-1px);box-shadow:var(--glow-acc)}
+  .drop.drag{border-color:var(--acc2);background:rgba(168,85,247,.10);color:#fff}
+
+  /* ============ 列表项 ============ */
+  .dev{
+    border:1px solid var(--line);border-radius:13px;padding:11px 12px;margin-bottom:8px;
+    background:var(--panel2);
+    transition:border-color .25s ease, box-shadow .3s ease, transform .2s ease;
+  }
+  .dev:hover{border-color:var(--line-strong);box-shadow:0 12px 28px -20px rgba(0,0,0,.95)}
+  .dev .t{font-weight:600;display:flex;justify-content:space-between;gap:8px;letter-spacing:.03em}
+  .dev .meta{color:var(--mut);font-size:11px;margin-top:4px;letter-spacing:.03em}
+
+  .chip{display:inline-block;background:rgba(0,229,255,.12);color:var(--acc);border-radius:6px;padding:1px 7px;font-size:10px;margin-right:5px}
+  .tag{font-size:11px;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.05);color:var(--mut);letter-spacing:.05em}
+  .tag.s{color:var(--ok)} .tag.w{color:var(--warn)} .tag.e{color:var(--err)} .tag.c{color:var(--acc)}
+
+  .iss{font-size:12px;padding:6px 10px;border-radius:8px;margin-bottom:5px;letter-spacing:.02em;line-height:1.55}
+  .iss.ERROR{background:rgba(255,90,110,.13);color:var(--err);box-shadow:inset 0 0 0 1px rgba(255,90,110,.22)}
+  .iss.WARN{background:rgba(240,180,95,.13);color:var(--warn);box-shadow:inset 0 0 0 1px rgba(240,180,95,.22)}
+  .iss.INFO{background:rgba(111,126,154,.12);color:var(--mut)}
+
+  /* ============ 分段按钮 ============ */
+  .redbtns{display:flex;gap:7px;flex-wrap:wrap}
+  .redbtns button{
+    margin-top:0;padding:8px 14px;font-size:12px;font-weight:600;border-radius:999px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mut);box-shadow:none;
+  }
+  .redbtns button:hover{color:var(--txt);border-color:var(--line-strong);transform:none;filter:none;box-shadow:none}
+  .redbtns button.on{
+    background:linear-gradient(96deg,rgba(0,229,255,.95),rgba(120,120,255,.9));
+    color:#02121a;border-color:rgba(170,245,255,.5);
+    box-shadow:0 10px 26px -14px rgba(0,229,255,.9), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+
+  /* ============ 图例卡片 ============ */
+  .legend{
+    border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:10px;
+    background:var(--panel2);transition:border-color .25s ease, box-shadow .3s ease;
+  }
+  .legend:hover{border-color:var(--line-strong);box-shadow:0 16px 38px -26px rgba(0,0,0,.95)}
+  .legend .th{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .legend .cache{font-size:11px;letter-spacing:.05em}
+  .legend .cache.hit{color:var(--ok)}
+  .legend .cache.miss{color:var(--warn)}
+  .legend textarea{height:66px;margin-top:7px;font-size:11px}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;
+    font-size:12px;border:1px solid var(--line-strong);letter-spacing:.04em;
+    background:rgba(255,255,255,.03);
+  }
+  .badge.ok{color:var(--ok);border-color:rgba(46,232,160,.5);background:rgba(46,232,160,.09)}
+  .badge.bad{color:var(--err);border-color:rgba(255,90,110,.5);background:rgba(255,90,110,.09)}
+  .badge.mut{color:var(--mut)}
+
+  .summary{
+    white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px;line-height:1.75;color:#aab8d0;
+    background:rgba(6,9,18,.6);border:1px solid var(--line);
+    border-radius:12px;padding:12px;margin-top:10px;
+  }
+  .summary.okbox{border-color:rgba(46,232,160,.42);background:rgba(46,232,160,.07);color:#d3f5e8}
+  .summary.errbox{border-color:rgba(255,90,110,.42);background:rgba(255,90,110,.08);color:#ffd6db}
+
+  /* ============ 提示 / 杂项 ============ */
+  .toast{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(8px);
+    background:rgba(12,17,32,.96);border:1px solid var(--line-strong);
+    padding:11px 20px;border-radius:999px;font-size:13px;opacity:0;
+    transition:opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;z-index:90;letter-spacing:.03em;
+    box-shadow:0 24px 60px -26px rgba(0,0,0,.95), 0 0 0 1px rgba(0,229,255,.14);
+    backdrop-filter:blur(10px);
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .muted{color:var(--mut);font-size:12px;line-height:1.7;letter-spacing:.02em}
+  .kv{font-size:12px;color:var(--mut);margin:2px 0}
+  .spinner{
+    display:inline-block;width:13px;height:13px;border:2px solid rgba(111,126,154,.35);
+    border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;
+  }
+  @keyframes sp{to{transform:rotate(360deg)}}
+  @keyframes twinkle{from{opacity:.32}to{opacity:.66}}
+  @keyframes logoGlow{
+    from{box-shadow:0 0 16px -6px rgba(0,229,255,.6), inset 0 0 0 1px rgba(255,255,255,.2)}
+    to{box-shadow:0 0 28px -2px rgba(168,85,247,.7), inset 0 0 0 1px rgba(255,255,255,.28)}
+  }
+
+  /* ============ 图例端口行编辑器 ============ */
+  .lg-preview svg{width:100%;height:auto;display:block;border-radius:10px}
+  .lg-rows .prow{display:flex;align-items:center;gap:5px;margin:5px 0;flex-wrap:wrap}
+  .lg-rows .prow select,.lg-rows .prow input[type=text]{
+    height:27px;font-size:11px;padding:0 6px;border-radius:7px;
+    background:rgba(6,9,18,.85);color:var(--txt);border:1px solid var(--line);
+  }
+  .lg-rows .prow select{min-width:60px}
+  .lg-rows .prow input[type=text]{flex:1;min-width:66px}
+  .lg-rows .prow button.mini{
+    padding:2px 9px;margin:0;font-size:12px;font-weight:700;border-radius:999px;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--txt);
+    cursor:pointer;box-shadow:none;
+  }
+  .lg-rows .prow button.mini:hover{border-color:rgba(0,229,255,.6);color:#fff;transform:none;filter:none}
+  .lg-rows .prow button.mini.del{color:var(--err)}
+  .lg-rows .prow span.n{min-width:20px;text-align:center;font-size:12px;display:inline-block}
+  .lg-rows .prow span.idx{min-width:14px;text-align:center;font-size:10.5px;display:inline-block;color:var(--mut)}
+  .lg-status{font-size:12px;margin-left:auto;letter-spacing:.03em}
+  .lg-status.ok{color:var(--ok)} .lg-status.err{color:var(--err)}
+
+  /* ============ 预览区工具条（第5步） ============ */
+  .rbar{
+    display:flex;align-items:center;gap:9px;padding:9px 16px;
+    border-bottom:1px solid var(--line);background:rgba(6,9,18,.5);flex:0 0 auto;
+  }
+  .rbar .rl{font-size:11.5px;color:var(--mut);letter-spacing:.12em}
+  .rbar .rsp{flex:1}
+  .rbar button{margin-top:0;padding:6px 14px;font-size:12px}
+  .rbar .redbtns button{
+    padding:6px 15px;font-size:12px;border-radius:999px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mut);
+  }
+  .rbar .redbtns button.on{
+    background:linear-gradient(96deg,rgba(0,229,255,.95),rgba(120,120,255,.9));
+    color:#02121a;border-color:rgba(170,245,255,.5);
+  }
+  .rbar .cur{font-size:11px;color:var(--acc);letter-spacing:.05em}
+
+  /* ============ 出图前确认 ============ */
+  .gate{
+    border:1px solid rgba(240,180,95,.36);border-radius:16px;padding:14px;
+    background:linear-gradient(180deg,rgba(240,180,95,.08),rgba(240,180,95,.02));
+    margin-bottom:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .gate .gh{font-size:13px;font-weight:700;color:var(--warn);margin-bottom:2px;letter-spacing:.10em}
+  .gate label{color:var(--txt);font-weight:600;letter-spacing:.08em}
+  .gate .opt{
+    display:block;width:100%;text-align:left;background:rgba(255,255,255,.035);
+    border:1px solid var(--line);color:var(--txt);border-radius:13px;
+    padding:11px 12px;margin:6px 0;font-size:12.5px;line-height:1.6;cursor:pointer;
+    transition:border-color .25s ease, background .25s ease, box-shadow .3s ease, transform .2s ease;
+  }
+  .gate .opt:hover{border-color:rgba(0,229,255,.5);transform:translateY(-1px)}
+  .gate .opt.on{
+    border-color:rgba(0,229,255,.6);background:rgba(0,229,255,.12);color:#fff;
+    box-shadow:0 12px 32px -18px rgba(0,229,255,.85);
+  }
+  .gate .opt b{display:block;font-size:13px;margin-bottom:3px;letter-spacing:.04em}
+  .gate .opt.on b{color:#8ef0ff}
+  .gate .opt span{color:var(--mut);font-size:11.5px}
+  .gate .opt.on span{color:#c3d3e8}
+  .gate .opt::before{content:"○ ";color:var(--mut)}
+  .gate .opt.on::before{content:"● ";color:var(--acc)}
+
+  /* ============ 导出 CAD 弹窗 ============ */
+  .modal{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center}
+  .modal-mask{
+    position:absolute;inset:0;
+    background:radial-gradient(65% 65% at 50% 45%,rgba(4,7,15,.72),rgba(1,3,8,.94));
+    backdrop-filter:blur(7px);animation:fadeIn .22s ease;
+  }
+  .modal-panel{
+    position:relative;width:min(580px,92vw);max-height:86vh;overflow:auto;
+    background:linear-gradient(180deg,rgba(15,20,38,.98),rgba(7,10,20,.99));
+    border:1px solid rgba(255,255,255,.13);border-radius:22px;
+    box-shadow:0 60px 140px -50px rgba(0,0,0,.98), 0 0 0 1px rgba(0,229,255,.10),
+               inset 0 1px 0 rgba(255,255,255,.07);
+    animation:modalIn .30s cubic-bezier(.2,.9,.25,1);
+  }
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 4px}
+  .modal-head h3{margin:0;font-size:16px;letter-spacing:.14em;font-weight:700}
+  .modal-x{background:transparent;border:0;color:var(--mut);font-size:15px;padding:4px 9px;box-shadow:none;margin-top:0;border-radius:8px}
+  .modal-x:hover{color:var(--txt);background:rgba(255,255,255,.06);transform:none;filter:none;box-shadow:none}
+  .modal-body{padding:6px 22px 4px}
+  .modal-body label{margin:14px 0 6px}
+  .modal-foot{display:flex;gap:9px;align-items:center;padding:16px 22px 20px;border-top:1px solid var(--line);margin-top:14px}
+  .pbar{height:6px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+  .pbar-fill{
+    height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--acc),var(--acc2));
+    box-shadow:0 0 16px rgba(0,229,255,.7);
+    transition:width .38s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+
+  /* ============ 滚动条 ============ */
+  .left::-webkit-scrollbar,#modules::-webkit-scrollbar,#legends::-webkit-scrollbar,
+  #archList::-webkit-scrollbar,.preview::-webkit-scrollbar,.modal-panel::-webkit-scrollbar{width:9px;height:9px}
+  .left::-webkit-scrollbar-thumb,#modules::-webkit-scrollbar-thumb,#legends::-webkit-scrollbar-thumb,
+  #archList::-webkit-scrollbar-thumb,.preview::-webkit-scrollbar-thumb,.modal-panel::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.16);border-radius:99px;border:2px solid transparent;background-clip:content-box;
+  }
+  .left::-webkit-scrollbar-thumb:hover,#modules::-webkit-scrollbar-thumb:hover,#legends::-webkit-scrollbar-thumb:hover,
+  #archList::-webkit-scrollbar-thumb:hover,.preview::-webkit-scrollbar-thumb:hover,.modal-panel::-webkit-scrollbar-thumb:hover{
+    background:rgba(255,255,255,.34);background-clip:content-box;
+  }
+  .left::-webkit-scrollbar-track,.preview::-webkit-scrollbar-track,.modal-panel::-webkit-scrollbar-track{background:transparent}
+
+  /* 确保 .hidden 永远隐藏（覆盖 .modal 等可能覆盖它的选择器） */
+  .hidden,.modal.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"></div>
+  <div>
+    <h1>AVCAD@Bailey@EZPRO</h1>
+    <div class="sub">音视频系统图自动生成 · 清单驱动 · 确定性出图</div>
+  </div>
+  <div class="hint">DXF(R2010) + SVG 双格式 · 图例库永久留存</div>
+</header>
+
+<div class="stepper" id="stepper">
+  <div class="step active" data-n="1"><b>STEP 01</b><div class="t">导入清单</div><div class="d">Excel / CSV / 粘贴</div></div>
+  <div class="step" data-n="2"><b>STEP 02</b><div class="t">模块确认</div><div class="d">保留 / 不需要</div></div>
+  <div class="step" data-n="3"><b>STEP 03</b><div class="t">图例确认</div><div class="d">端口定义落盘</div></div>
+  <div class="step" data-n="4"><b>STEP 04</b><div class="t">参考架构</div><div class="d">评分与冗余</div></div>
+  <div class="step" data-n="5"><b>STEP 05</b><div class="t">生成导出</div><div class="d">出图 / CAD</div></div>
+</div>
+
+<div class="layout" id="layout">
+  <div class="left">
+
+    <!-- ① 导入清单 -->
+    <section class="card" id="panel1">
+      <h3>① 导入设备清单</h3>
+      <div id="step1Actions">
+        <div class="drop" id="drop">拖拽 Excel / CSV 到此处，或点击选择文件</div>
+        <input type="file" id="file" accept=".xlsx,.xls,.csv,.txt" class="hidden"/>
+        <div class="row" style="margin-top:12px">
+          <button id="btnParse" class="primary">解析清单</button>
+          <button id="btnSample" class="ghost">载入样例清单</button>
+          <button id="btnClear" class="ghost">清空</button>
+        </div>
+        <label>清单内容（CSV 文本，可直接编辑）</label>
+        <textarea id="bom" placeholder="设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源"></textarea>
+        <div class="muted" style="margin-top:8px">
+          表头支持：设备类型 / 品牌 / 型号 / 名称 / 数量 / 特性 / 参数 / 冗余。
+        </div>
+      </div>
+      <div id="step1Summary" class="hidden">
+        <div class="summary okbox" id="step1SummaryText"></div>
+        <div class="row"><button id="btnReimport" class="ghost">重新导入</button></div>
+      </div>
+    </section>
+
+    <!-- ② 模块确认 -->
+    <section class="card hidden" id="panel2">
+      <h3>② 模块确认</h3>
+      <div class="muted">系统按「类别 + 品牌 + 型号」去重汇总。确认无误后进入图例定义。</div>
+      <div id="modules" style="margin-top:12px"></div>
+      <div class="row"><span class="grow"></span><button id="btnToStep3" class="primary">下一步：定义图例</button></div>
+    </section>
+
+    <!-- ③ 图例确认 -->
+    <section class="card hidden" id="panel3">
+      <h3>③ 图例确认（永久文档）</h3>
+      <div class="muted" id="legendLibInfo">正在读取图例库…</div>
+      <div id="legends" style="margin-top:12px"></div>
+      <div class="row">
+        <button id="btnLegSaveAll" class="sec">全部确认并落盘</button>
+        <span class="grow"></span>
+        <button id="btnToStep4" class="primary">下一步：选择架构</button>
+      </div>
+    </section>
+
+    <!-- ④ 参考架构 -->
+    <section class="card hidden" id="panel4">
+      <h3>④ 参考架构</h3>
+      <div class="muted">按清单特征对内置参考架构评分排序，选中后进入出图。</div>
+      <div id="archList" style="margin-top:12px"></div>
+      <div class="row"><span class="grow"></span><button id="btnToStep5" class="primary">下一步：出图设置</button></div>
+    </section>
+
+    <!-- ⑤ 生成导出 -->
+    <section class="card hidden" id="panel5">
+      <h3>⑤ 生成与导出</h3>
+
+      <div id="genGate">
+        <div class="gate">
+          <div class="gh">出图前确认</div>
+          <label>品牌型号显示方式</label>
+          <div class="redbtns" id="anonBtns">
+            <button class="opt on" data-anon="0"><b>显示真实厂商与型号</b><span>模块标题三行：名称 / 厂商 / 型号</span></button>
+            <button class="opt" data-anon="1"><b>隐藏厂商与型号</b><span>仅显示类别代号（如 MIX-01，备用机 -B）</span></button>
+          </div>
+          <div class="muted" id="anonHint">显示：模块标题为 名称 / 厂商 / 型号 三行。</div>
+          <label>图例一致性</label>
+          <div class="summary" id="legendCheck">检查中…</div>
+        </div>
+        <div class="row">
+          <button id="btnGenGo" class="primary">开始出图</button>
+          <button id="btnFixLegend" class="ghost hidden">按当前定义一键确认剩余图例</button>
+          <span class="grow"></span>
+          <button id="btnBack4" class="ghost">回第④步</button>
+        </div>
+      </div>
+
+      <div id="genDone" class="hidden">
+        <div id="svg"></div>
+        <div class="summary" id="genReport"></div>
+        <div class="row">
+          <button id="btnExportCAD" class="primary">⤓ 导出 CAD</button>
+          <button id="btnRegen" class="sec">重新出图</button>
+          <button id="btnExport" class="ghost">快速下载 DXF</button>
+          <span class="grow"></span>
+          <button id="btnEditGate" class="ghost">修改出图设置</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="right">
+    <div class="rtitle"><span id="rtitleTxt">步骤指引</span><span id="rsub"></span></div>
+    <div class="rbar hidden" id="genBar">
+      <span class="rl">显示方式</span>
+      <div class="redbtns" id="anonBtns2">
+        <button class="on" data-anon="0">显示品牌型号</button>
+        <button data-anon="1">隐藏品牌型号</button>
+      </div>
+      <span class="cur" id="anonCur">当前：显示真实厂商与型号</span>
+      <span class="rsp"></span>
+    </div>
+    <div class="preview" id="preview"></div>
+  </div>
+</div>
+
+<!-- 导出 CAD 弹窗 -->
+<div class="modal hidden" id="exportModal">
+  <div class="modal-mask" id="exportMask"></div>
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3>导出 CAD（DXF R2010）</h3>
+      <button class="modal-x" id="btnExportClose" title="关闭">✕</button>
+    </div>
+    <div class="modal-body">
+      <label>文件名</label>
+      <input type="text" id="exportName" value="AVCAD.dxf"/>
+      <label>保存到</label>
+      <div class="row">
+        <input type="text" id="exportDir" class="grow" placeholder="点击右侧按钮选择文件夹"/>
+        <button id="btnPickDir" class="ghost" style="margin-top:0">选择文件夹…</button>
+      </div>
+      <div class="muted" id="exportHint">
+        导出内容与当前预览完全一致（含端口、线标、线型说明）。
+      </div>
+      <div id="exportProgressWrap" class="hidden" style="margin-top:14px">
+        <div class="pbar"><div class="pbar-fill" id="exportBar"></div></div>
+        <div class="muted" id="exportPhase" style="margin-top:6px">准备中…</div>
+      </div>
+      <div id="exportResult" class="hidden summary" style="margin-top:14px"></div>
+    </div>
+    <div class="modal-foot">
+      <button id="btnExportStart" class="primary" disabled>开始导出</button>
+      <button id="btnExportOpenFolder" class="ghost hidden">打开所在文件夹</button>
+      <span class="grow"></span>
+      <button id="btnExportCancel" class="ghost">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================== 基础工具 ==================== */
+function $(id){ return document.getElementById(id); }
+async function api(path, body){
+  const r = await fetch(path, {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(body || {})});
+  return await r.json();
+}
+let toastTimer = null;
+function toast(msg){
+  const t = $("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+/* jsdom 未实现 scrollIntoView，必须包一层，否则异常会打断后续流程 */
+function scrollToEl(el){
+  try{ if(el && el.scrollIntoView) el.scrollIntoView({behavior:"smooth", block:"start"}); }
+  catch(e){ /* 忽略：jsdom / 老浏览器 */ }
+}
+
+/* ==================== 全局状态 ==================== */
+let STATE = {
+  step: 1, csv: "", name: "工作流系统",
+  modules: [], decisions: {}, dropped: [], notes: [],
+  legendItems: [], library: null,
+  redundancy: "NONE", architectures: [], arch: null,
+  anon: false, generated: false, svg: "", report: "", genData: null,
+};
+
+/* ==================== 步骤导航 ==================== */
+function goto(n){
+  STATE.step = n;
+  document.querySelectorAll("#stepper .step").forEach(el=>{
+    const k = parseInt(el.dataset.n, 10);
+    el.classList.toggle("active", k === n);
+    el.classList.toggle("done", k < n);
+  });
+  for(let i=1;i<=5;i++) $("panel"+i).classList.toggle("hidden", i !== n);
+  updateRightPanel(n);
+  if(n === 3) initLegends();
+  if(n === 4) loadArchitectures();
+  if(n === 5) runLegendCheck();
+}
+function updateRightPanel(n){
+  document.querySelector(".layout").classList.toggle("wide", n <= 3);
+  $("genBar").classList.toggle("hidden", n !== 5);
+  if(n <= 3){ $("preview").innerHTML = ""; $("rtitleTxt").textContent = "步骤指引"; return; }
+  if(n === 4){
+    $("rtitleTxt").textContent = "参考架构";
+    if(!STATE.architectures.length){
+      $("preview").innerHTML = '<div class="ph">左侧选择一个参考架构后，这里会显示架构说明与评分依据。</div>';
+    }else{
+      renderArchPreview();
+    }
+    return;
+  }
+  $("rtitleTxt").textContent = "系统拓扑预览";
+  if(STATE.generated){ $("preview").innerHTML = STATE.svg; }
+  else{
+    $("preview").innerHTML = '<div class="ph">完成左侧「出图前确认」后点「开始出图」。<br/>图纸将在此处实时预览，可随时切换显示 / 隐藏品牌型号。</div>';
+  }
+}
+document.querySelectorAll("#stepper .step").forEach(el=>{
+  el.addEventListener("click", ()=>goto(parseInt(el.dataset.n, 10)));
+});
+
+/* ==================== ① 导入清单 ==================== */
+const SAMPLE_BOM = [
+  "设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源",
+  "MIXER,Yamaha,TF5,数字调音台,1,dante;control,inputs=32;outputs=16,,",
+  "PROCESSOR,,Xilica,音频处理器,1,dante,inputs=8;outputs=8,,",
+  "SOURCE,,,,会议话筒,4,,,",
+  "WIRELESS_MIC,Shure,QLXD1,无线话筒发射端,2,,,",
+  "WIRELESS_RX,Shure,QLXD4,无线接收机,2,dante,channels=2,,",
+  "ANT_DIST,Shure,UA844,天线分配器,1,",
+  "ANTENNA,Shure,UA874,有源指向天线,2,,,",
+  "AMP,Powersoft,Q,功放,2,,channels=2,,",
+  "SPEAKER,L-Acoustics,KARA,主扩扬声器,4,,impedance_ohm=8;power_w=400,,",
+  "NETWORK,Cisco,SG350,控制交换机,1,,ports=24,,",
+].join("\n");
+
+function updateStep1Summary(){
+  const has = !!STATE.csv && !STATE.reimport;
+  $("step1Actions").classList.toggle("hidden", has);
+  $("step1Summary").classList.toggle("hidden", !has);
+  if(has){
+    $("step1SummaryText").textContent =
+      "已解析 " + STATE.modules.length + " 个模块（" + (STATE.csv.split(/\r?\n/).length - 1) + " 行清单）。\n" +
+      (STATE.notes || []).join("\n");
+  }
+}
+function parseRes(res){
+  if(res.error){ toast("解析失败：" + res.error); return false; }
+  STATE.csv = res.csv || "";
+  STATE.modules = res.modules || [];
+  STATE.notes = res.notes || [];
+  STATE.dropped = res.dropped || [];
+  STATE.decisions = {};
+  STATE.reimport = false;
+  STATE.generated = false; STATE.svg = ""; STATE.genData = null;
+  $("genDone").classList.add("hidden");
+  $("genGate").classList.remove("hidden");
+  renderModules();
+  updateStep1Summary();
+  goto(2);
+  return true;
+}
+async function doParse(){
+  const txt = ($("bom").value || "").trim();
+  if(!txt){ toast("请先粘贴清单或载入样例"); return; }
+  const res = await api("/api/parse", {bom: txt});
+  parseRes(res);
+}
+$("btnParse").addEventListener("click", doParse);
+$("btnSample").addEventListener("click", ()=>{ $("bom").value = SAMPLE_BOM; toast("已载入样例清单"); });
+$("btnClear").addEventListener("click", ()=>{ $("bom").value = ""; });
+$("btnReimport").addEventListener("click", ()=>{
+  /* 仅切回导入操作区，已解析的数据保留（第②步之后的流程不受影响） */
+  STATE.reimport = true; updateStep1Summary();
+});
+/* 文件选择 / 拖拽（xlsx 走后端解析） */
+$("drop").addEventListener("click", ()=>$("file").click());
+$("file").addEventListener("change", async ()=>{
+  const f = $("file").files[0]; if(!f) return;
+  await uploadFile(f);
+});
+["dragenter","dragover"].forEach(ev=>
+  $("drop").addEventListener(ev, e=>{ e.preventDefault(); $("drop").classList.add("drag"); }));
+["dragleave","drop"].forEach(ev=>
+  $("drop").addEventListener(ev, e=>{ e.preventDefault(); $("drop").classList.remove("drag"); }));
+$("drop").addEventListener("drop", async e=>{
+  const f = e.dataTransfer.files[0]; if(f) await uploadFile(f);
+});
+async function uploadFile(f){
+  const buf = await f.arrayBuffer();
+  let bin = ""; const bytes = new Uint8Array(buf);
+  for(let i=0;i<bytes.length;i++) bin += String.fromCharCode(bytes[i]);
+  const res = await api("/api/parse", {b64: btoa(bin), filename: f.name});
+  parseRes(res);
+}
+
+/* ==================== ② 模块确认 ==================== */
+function renderModules(){
+  const box = $("modules"); box.innerHTML = "";
+  STATE.modules.forEach((m, i)=>{
+    const d = document.createElement("div");
+    d.className = "dev";
+    d.innerHTML =
+      '<div class="t"><span>' + (m.name || m.model || m.category) + '</span>' +
+      '<span class="tag c">×' + (m.quantity || 1) + '</span></div>' +
+      '<div class="meta">' + [m.category, m.brand, m.model].filter(Boolean).join(" · ") +
+      ' <span class="chip">' + (m.decision || "include") + '</span></div>' +
+      '<div class="row" style="margin-top:6px">' +
+      '<button class="ghost mini-ex" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">不需要（移出本图）</button>' +
+      '<button class="ghost mini-in hidden" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">恢复出图</button>' +
+      '</div>';
+    box.appendChild(d);
+    const k = (m.brand || "") + "::" + (m.model || "");
+    d.querySelector(".mini-ex").addEventListener("click", ()=>{
+      STATE.decisions[k] = "exclude";
+      d.querySelector(".mini-ex").classList.add("hidden");
+      d.querySelector(".mini-in").classList.remove("hidden");
+    });
+    d.querySelector(".mini-in").addEventListener("click", ()=>{
+      STATE.decisions[k] = "include";
+      d.querySelector(".mini-in").classList.add("hidden");
+      d.querySelector(".mini-ex").classList.remove("hidden");
+    });
+  });
+}
+$("btnToStep3").addEventListener("click", ()=>goto(3));
+
+/* ==================== ③ 图例确认（永久文档） ==================== */
+const SIGNALS = ["XLR","AES","DANTE","RF","SPEAKER","IP","GPIO","POWER","OPTICAL"];
+const ROLES = ["in","out","io"];
+const SIDES = ["left","right","top","bottom"];
+
+function defaultPorts(m){
+  const c = (m.category || "").toUpperCase();
+  switch(c){
+    case "MIXER": return [
+      {signal:"XLR",role:"in",side:"left",count:8,label:"IN",air:false},
+      {signal:"XLR",role:"out",side:"right",count:4,label:"OUT",air:false},
+      {signal:"DANTE",role:"io",side:"right",count:1,label:"DANTE",air:false},
+      {signal:"IP",role:"io",side:"right",count:1,label:"CTRL",air:false}];
+    case "PROCESSOR": case "SPEAKER_MGR": return [
+      {signal:"XLR",role:"in",side:"left",count:4,label:"IN",air:false},
+      {signal:"XLR",role:"out",side:"right",count:8,label:"OUT",air:false},
+      {signal:"DANTE",role:"io",side:"right",count:1,label:"DANTE",air:false}];
+    case "AMP": return [
+      {signal:"XLR",role:"in",side:"left",count:2,label:"IN",air:false},
+      {signal:"SPEAKER",role:"out",side:"right",count:2,label:"SPK",air:false}];
+    case "SPEAKER": return [
+      {signal:"SPEAKER",role:"in",side:"left",count:1,label:"IN",air:false}];
+    case "SOURCE": return [
+      {signal:"XLR",role:"out",side:"right",count:1,label:"OUT",air:false}];
+    case "WIRELESS_MIC": return [
+      {signal:"RF",role:"out",side:"top",count:1,label:"RF",air:true}];
+    case "WIRELESS_RX": return [
+      {signal:"RF",role:"in",side:"top",count:2,label:"ANT",air:true},
+      {signal:"XLR",role:"out",side:"right",count:1,label:"OUT",air:false}];
+    case "ANTENNA": return [
+      {signal:"RF",role:"in",side:"left",count:1,label:"IN",air:true},
+      {signal:"RF",role:"out",side:"right",count:1,label:"OUT",air:true}];
+    case "ANT_DIST": case "ANT_SPLIT": return [
+      {signal:"RF",role:"in",side:"left",count:1,label:"IN",air:true},
+      {signal:"RF",role:"out",side:"right",count:4,label:"OUT",air:true}];
+    case "NETWORK": case "SWITCH": return [
+      {signal:"DANTE",role:"io",side:"left",count:8,label:"IN",air:false},
+      {signal:"DANTE",role:"io",side:"right",count:8,label:"OUT",air:false}];
+    default: return [
+      {signal:"XLR",role:"in",side:"left",count:4,label:"IN",air:false},
+      {signal:"XLR",role:"out",side:"right",count:4,label:"OUT",air:false}];
+  }
+}
+function legendKey(b, m, c){
+  return ((b || "").trim() || "_generic") + "::" + ((m || "").trim() || "_") + "::" + ((c || "").trim());
+}
+/* 尊重条目自带的 count：图例库里是「类」（带 count），不能一律 +1 */
+function aggregatePorts(ports){
+  const m = {};
+  (ports || []).forEach(p=>{
+    const key = p.label || p.signal;
+    if(!m[key]) m[key] = {label:key, signal:p.signal, count:0};
+    const c = parseInt(p.count, 10);
+    m[key].count += (isFinite(c) && c > 0) ? c : 1;
+  });
+  return Object.values(m);
+}
+async function initLegends(){
+  const list = await api("/api/legend", {action: "list"});
+  STATE.library = list.library || null;
+  const saved = {};
+  (list.legends || []).forEach(lg=>{ saved[lg.key] = lg; });
+  STATE.legendItems = STATE.modules.map(m=>{
+    const b = m.brand || "", mo = m.model || "", c = m.category || "";
+    const sv = saved[legendKey(b, mo, c)];
+    return {
+      brand: b, model: mo, category: c, name: m.name || "", quantity: m.quantity || 1,
+      ports: sv ? sv.ports : defaultPorts(m),
+      saved: !!sv, revision: sv ? (sv.revision || 1) : 0,
+      hist: sv ? ((sv.history || []).length) : 0, source: sv ? (sv.source || "user") : "",
+    };
+  });
+  renderLegendLibInfo();
+  renderLegends();
+}
+function renderLegendLibInfo(){
+  const lib = STATE.library || {};
+  $("legendLibInfo").innerHTML =
+    '图例库（永久文档）：<b>' + (lib.path || "avcad/data/legend_library.json") + '</b><br/>' +
+    '共 ' + (lib.count || 0) + ' 条已确认图例 · 出图时优先级 <b>高于</b> 引擎推断值。';
+}
+function renderLegends(){
+  const box = $("legends"); box.innerHTML = "";
+  STATE.legendItems.forEach((it, i)=>box.appendChild(renderLegendCard(i)));
+}
+function renderLegendCard(i){
+  const it = STATE.legendItems[i];
+  const d = document.createElement("div");
+  d.className = "legend"; d.id = "lg_" + i;
+  const badge = it.saved
+    ? '<span class="cache hit" id="lgcache_' + i + '">● 图例库 v' + it.revision + '</span>'
+    : '<span class="cache miss" id="lgcache_' + i + '">○ 待确认</span>';
+  const agg = aggregatePorts(it.ports);
+  d.innerHTML =
+    '<div class="th"><div><b>' + (it.model || it.name || it.category) + '</b>' +
+      '<span class="muted"> · ' + [it.category, it.brand].filter(Boolean).join(" / ") + '</span></div>' +
+      badge + '</div>' +
+    '<div class="kv" id="lgmeta_' + i + '">' +
+      (it.saved
+        ? '已确认 · 第 ' + it.revision + ' 次维护 · 端口 ' + agg.length + ' 类 / ' +
+          agg.reduce((s,x)=>s+x.count,0) + ' 口'
+        : '引擎推断（未确认）· 端口 ' + agg.length + ' 类 / ' + agg.reduce((s,x)=>s+x.count,0) + ' 口') +
+    '</div>' +
+    '<div class="lg-rows" id="lgrows_' + i + '"></div>' +
+    '<div class="row"><button class="ghost" id="lgadd_' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">+ 增加一类端口</button>' +
+      '<span class="grow"></span><span class="lg-status" id="lgst_' + i + '"></span>' +
+      '<button class="sec" id="lgok_' + i + '" style="margin-top:0;padding:5px 16px;font-size:12px">确认并落盘</button></div>' +
+    '<textarea id="lgjson_' + i + '"></textarea>';
+
+  renderPortRows(i, d);
+  const ta = d.querySelector("#lgjson_" + i);
+  ta.value = JSON.stringify(it.ports, null, 1);
+  ta.addEventListener("input", ()=>{
+    try{
+      const v = JSON.parse(ta.value);
+      if(Array.isArray(v)){ it.ports = v; renderPortRows(i); ta.style.borderColor = ""; }
+    }catch(e){ ta.style.borderColor = "rgba(255,90,110,.6)"; }
+  });
+  d.querySelector("#lgadd_" + i).addEventListener("click", ()=>{
+    it.ports.push({signal:"XLR", role:"io", side:"right", count:1, label:"P" + (it.ports.length + 1), air:false});
+    ta.value = JSON.stringify(it.ports, null, 1);
+    renderPortRows(i);
+  });
+  d.querySelector("#lgok_" + i).addEventListener("click", ()=>saveLegend(i));
+  return d;
+}
+function renderPortRows(i, scope){
+  const it = STATE.legendItems[i];
+  const box = (scope ? scope.querySelector("#lgrows_" + i) : null) || $("lgrows_" + i);
+  if(!box) return;
+  box.innerHTML = "";
+  it.ports.forEach((p, k)=>{
+    const r = document.createElement("div"); r.className = "prow";
+    const sel = (arr, val)=>arr.map(o=>'<option' + (o === val ? " selected" : "") + '>' + o + '</option>').join("");
+    r.innerHTML =
+      '<span class="idx">' + (k + 1) + '</span>' +
+      '<select class="sg">' + sel(SIGNALS, p.signal) + '</select>' +
+      '<select class="ro">' + sel(ROLES, p.role) + '</select>' +
+      '<select class="sd">' + sel(SIDES, p.side) + '</select>' +
+      '<input type="text" class="lb" value="' + (p.label || "") + '"/>' +
+      '<button class="mini" title="减少">−</button><span class="n">' + (p.count || 1) + '</span>' +
+      '<button class="mini" title="增加">＋</button>' +
+      '<button class="mini del" title="删除">✕</button>';
+    const sync = ()=>{
+      p.signal = r.querySelector(".sg").value;
+      p.role = r.querySelector(".ro").value;
+      p.side = r.querySelector(".sd").value;
+      p.label = r.querySelector(".lb").value;
+      const ta = $("lgjson_" + i);
+      if(ta) ta.value = JSON.stringify(it.ports, null, 1);
+      const meta = $("lgmeta_" + i);
+      if(meta){
+        const agg = aggregatePorts(it.ports);
+        meta.textContent = (it.saved ? "已确认 · 第 " + it.revision + " 次维护" : "引擎推断（未确认）") +
+          " · 端口 " + agg.length + " 类 / " + agg.reduce((s,x)=>s+x.count,0) + " 口";
+      }
+    };
+    r.querySelectorAll("select").forEach(s=>s.addEventListener("change", sync));
+    r.querySelector(".lb").addEventListener("input", sync);
+    r.querySelectorAll("button.mini")[0].addEventListener("click", ()=>{
+      p.count = Math.max(1, (p.count || 1) - 1); renderPortRows(i); sync();
+    });
+    r.querySelectorAll("button.mini")[1].addEventListener("click", ()=>{
+      p.count = (p.count || 1) + 1; renderPortRows(i); sync();
+    });
+    r.querySelector("button.mini.del").addEventListener("click", ()=>{
+      it.ports.splice(k, 1); renderPortRows(i); sync();
+    });
+    box.appendChild(r);
+  });
+}
+function setLgStatus(i, msg, kind){
+  const el = $("lgst_" + i); if(!el) return;
+  el.textContent = msg; el.className = "lg-status " + (kind || "");
+}
+async function saveLegend(i){
+  const it = STATE.legendItems[i];
+  const ta = $("lgjson_" + i);
+  let ports = it.ports;
+  if(ta && ta.value.trim()){
+    try{ ports = JSON.parse(ta.value); }catch(e){ setLgStatus(i, "JSON 格式错误", "err"); return false; }
+    if(!Array.isArray(ports)){ setLgStatus(i, "应为端口数组", "err"); return false; }
+  }
+  const res = await api("/api/legend", {
+    brand: it.brand, model: it.model, category: it.category,
+    ports: ports, slots: [], note: "",
+  });
+  if(res.error){ setLgStatus(i, "保存失败：" + res.error, "err"); return false; }
+  it.ports = ports;
+  it.saved = true; it.source = "user";
+  it.revision = res.revision || 1;
+  it.hist = (it.hist || 0) + 1;
+  STATE.library = res.library || STATE.library;
+  renderLegendLibInfo();
+  const card = $("lg_" + i);
+  if(card) card.parentNode.replaceChild(renderLegendCard(i), card);
+  setLgStatus(i, "已保存 · 第 " + it.revision + " 次维护", "ok");
+  return true;
+}
+/* 全部确认：覆盖「改动过的 ∪ 尚未落盘的」，只保存 dirty 会让推断值永不落盘 */
+async function saveAllLegends(){
+  for(let i=0;i<STATE.legendItems.length;i++) await saveLegend(i);
+  toast("已确认并落盘 " + STATE.legendItems.length + " 条图例");
+  if(STATE.step === 5) await runLegendCheck();
+}
+$("btnLegSaveAll").addEventListener("click", saveAllLegends);
+$("btnToStep4").addEventListener("click", async ()=>{
+  await saveAllLegends();
+  goto(4);
+});
+
+/* ==================== ④ 参考架构 ==================== */
+async function loadArchitectures(){
+  if(!STATE.csv) return;
+  const res = await api("/api/architectures", {bom: STATE.csv, redundancy: STATE.redundancy});
+  STATE.architectures = res.architectures || [];
+  if(!STATE.arch && STATE.architectures.length) STATE.arch = STATE.architectures[0].id;
+  const box = $("archList"); box.innerHTML = "";
+  STATE.architectures.forEach((a, i)=>{
+    const d = document.createElement("div");
+    d.className = "dev";
+    d.innerHTML =
+      '<div class="t"><span>' + a.title + '</span><span class="tag c">' + a.score + ' 分</span></div>' +
+      '<div class="meta">' + (a.desc || "") + '</div>' +
+      '<div class="row" style="margin-top:6px"><button class="' +
+        (STATE.arch === a.id ? "sec" : "ghost") + '" data-id="' + a.id +
+        '" style="margin-top:0;padding:5px 14px;font-size:12px">' +
+        (STATE.arch === a.id ? "✓ 已选用" : "选用此架构") + '</button></div>';
+    d.querySelector("button").addEventListener("click", ()=>{
+      STATE.arch = a.id; loadArchitectures();
+    });
+    box.appendChild(d);
+  });
+  if(STATE.step === 4) renderArchPreview();
+}
+function renderArchPreview(){
+  const a = STATE.architectures.find(x=>x.id === STATE.arch) || STATE.architectures[0];
+  if(!a) return;
+  $("preview").innerHTML =
+    '<div class="ph" style="font-size:13px">' +
+    '<div style="font-size:15px;font-weight:700;color:#eaf6ff;margin-bottom:8px">' + a.title + '</div>' +
+    '<div style="margin-bottom:10px">' + (a.desc || "") + '</div>' +
+    '<div style="color:#00e5ff;margin-bottom:8px">评分：' + a.score + ' 分</div>' +
+    '<div>' + ((a.notes || []).map(n=>"· " + n).join("<br/>") || "（无附加说明）") + '</div>' +
+    '</div>';
+}
+$("btnToStep5").addEventListener("click", ()=>goto(5));
+
+/* ==================== ⑤ 出图前确认 / 生成 ==================== */
+function setAnon(v){
+  STATE.anon = !!v;
+  document.querySelectorAll("#anonBtns button.opt").forEach(b=>
+    b.classList.toggle("on", (b.dataset.anon === "1") === STATE.anon));
+  document.querySelectorAll("#anonBtns2 button").forEach(b=>
+    b.classList.toggle("on", (b.dataset.anon === "1") === STATE.anon));
+  $("anonCur").textContent = STATE.anon ? "当前：隐藏厂商与型号" : "当前：显示真实厂商与型号";
+  $("anonHint") && ($("anonHint").textContent = STATE.anon
+    ? "隐藏：模块仅显示类别代号与序号（备用机 -B）。"
+    : "显示：模块标题为 名称 / 厂商 / 型号 三行。");
+  if(STATE.generated) doGenerate();
+}
+document.querySelectorAll("#anonBtns button.opt").forEach(b=>
+  b.addEventListener("click", ()=>setAnon(b.dataset.anon === "1")));
+document.querySelectorAll("#anonBtns2 button").forEach(b=>
+  b.addEventListener("click", ()=>setAnon(b.dataset.anon === "1")));
+
+async function runLegendCheck(){
+  $("legendCheck").textContent = "检查中…";
+  const res = await api("/api/legend-check", {bom: STATE.csv, decisions: STATE.decisions});
+  STATE.legendCheck = res;
+  const lines = [];
+  lines.push("已确认 " + (res.confirmed || 0) + " / " + (res.total || 0) + " 个型号。");
+  if(res.ok){
+    lines.push("图例一致，可以出图。");
+    $("legendCheck").className = "summary okbox";
+  }else{
+    lines.push("以下型号尚未确认，出图时会被引擎推断值顶替：");
+    (res.missing || []).forEach(m=>lines.push("· " + [m.category, m.brand, m.model].filter(Boolean).join(" / ")));
+    $("legendCheck").className = "summary errbox";
+  }
+  $("legendCheck").textContent = lines.join("\n");
+  $("btnGenGo").disabled = !res.ok;
+  $("btnFixLegend").classList.toggle("hidden", !!res.ok);
+}
+$("btnFixLegend").addEventListener("click", saveAllLegends);
+$("btnGenGo").addEventListener("click", doGenerate);
+$("btnRegen").addEventListener("click", doGenerate);
+$("btnEditGate").addEventListener("click", ()=>{
+  $("genGate").classList.remove("hidden");
+  $("genDone").classList.add("hidden");
+  scrollToEl($("genGate"));
+});
+$("btnBack4").addEventListener("click", ()=>goto(4));
+
+async function doGenerate(){
+  if(!STATE.csv){ toast("请先导入清单"); return; }
+  $("btnGenGo").disabled = true;
+  const res = await api("/api/run", {
+    bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
+    name: STATE.name, anon: STATE.anon, require_legend: true,
+  });
+  $("btnGenGo").disabled = false;
+  if(res.error){
+    toast(res.error);
+    $("legendCheck").className = "summary errbox";
+    $("legendCheck").textContent = res.error +
+      "\n" + ((res.legend && res.legend.missing || []).map(m=>"· " + m.model).join("\n") || "");
+    $("btnFixLegend").classList.remove("hidden");
+    return;
+  }
+  STATE.generated = true;
+  STATE.svg = res.svg || "";
+  STATE.genData = res;
+  STATE.report = renderGenReport(res);
+  $("svg").innerHTML = STATE.svg;
+  $("genReport").textContent = STATE.report;
+  $("genGate").classList.add("hidden");
+  $("genDone").classList.remove("hidden");
+  updateRightPanel(5);
+  scrollToEl($("genDone"));
+}
+function renderGenReport(res){
+  const lines = [];
+  lines.push("出图说明");
+  lines.push("· 品牌型号：" + (STATE.anon ? "隐藏厂商与型号（仅类别代号）" : "显示真实厂商与型号"));
+  lines.push("· 线标规则：统一贴在源模块右侧出线段正上方，贴着线（多通道写 N×类型）。");
+  lines.push("· 参考架构：" + ((res.architecture || {}).title || "-") + "（" + ((res.architecture || {}).score || "-") + " 分）");
+  const used = (res.legend || {}).used || [];
+  if(used.length){
+    lines.push("· 图例引用（永久图例库，优先级高于引擎推断）：");
+    used.forEach(u=>lines.push("   - " + [u.brand, u.model].filter(Boolean).join(" ") + "：" + u.ports + " 端口"));
+  }
+  const v = res.validation || {};
+  lines.push("· 自检：模块重叠 " + (v.overlap || 0) + " 处，斜线段 " + (v.diagonal || 0) + " 条。");
+  if(res.build_ms) lines.push("· 用时：" + res.build_ms + " ms");
+  return lines.join("\n");
+}
+
+/* ==================== 导出 CAD ==================== */
+let EXPORT_STATE = {dir: "", path: "", running: false};
+function defaultExportName(){
+  const d = new Date();
+  const p = n => String(n).padStart(2, "0");
+  return "AVCAD_" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + ".dxf";
+}
+function setExportProgress(pct, phase){
+  $("exportBar").style.width = pct + "%";
+  if(phase) $("exportPhase").textContent = phase;
+}
+function showExportResult(text, ok){
+  const el = $("exportResult");
+  el.className = "summary " + (ok ? "okbox" : "errbox");
+  el.textContent = text;
+  el.classList.remove("hidden");
+}
+function openExportModal(){
+  $("exportName").value = defaultExportName();
+  $("exportDir").value = EXPORT_STATE.dir || "";
+  $("exportResult").classList.add("hidden");
+  $("exportProgressWrap").classList.add("hidden");
+  $("btnExportOpenFolder").classList.add("hidden");
+  setExportProgress(0, "准备中…");
+  $("btnExportStart").disabled = !EXPORT_STATE.dir;
+  $("btnExportStart").textContent = "开始导出";
+  $("exportModal").classList.remove("hidden");
+}
+function closeExportModal(){
+  if(EXPORT_STATE.running) return;
+  $("exportModal").classList.add("hidden");
+}
+$("btnExportCAD").addEventListener("click", openExportModal);
+$("btnExportClose").addEventListener("click", closeExportModal);
+$("btnExportCancel").addEventListener("click", closeExportModal);
+$("exportMask").addEventListener("click", closeExportModal);
+document.addEventListener("keydown", e=>{ if(e.key === "Escape") closeExportModal(); });
+
+$("btnPickDir").addEventListener("click", async ()=>{
+  const res = await api("/api/pick-folder", {prompt: "选择 CAD 文件保存位置"});
+  if(res.canceled) return;
+  if(res.error){ showExportResult("导出失败\n" + res.error, false); return; }
+  EXPORT_STATE.dir = res.path;
+  $("exportDir").value = res.path;
+  $("btnExportStart").disabled = false;
+});
+$("btnExportOpenFolder").addEventListener("click", async ()=>{
+  await api("/api/open-folder", {path: EXPORT_STATE.path || EXPORT_STATE.dir});
+});
+$("btnExportStart").addEventListener("click", async ()=>{
+  if(EXPORT_STATE.running) return;
+  const dir = ($("exportDir").value || "").trim();
+  if(!dir){ showExportResult("导出失败\n请先选择保存文件夹", false); return; }
+  EXPORT_STATE.running = true;
+  $("exportResult").classList.add("hidden");
+  $("exportProgressWrap").classList.remove("hidden");
+  $("btnExportStart").disabled = true;
+  setExportProgress(12, "正在构建图纸（与预览一致）…");
+  await new Promise(r=>setTimeout(r, 120));
+  setExportProgress(45, "正在写入 DXF（R2010，含线型说明）…");
+  const res = await api("/api/export-save", {
+    dir: dir, filename: $("exportName").value,
+    bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
+    anon: STATE.anon, name: STATE.name,
+  });
+  EXPORT_STATE.running = false;
+  $("btnExportStart").disabled = false;
+  if(res.error){
+    setExportProgress(100, "导出中断");
+    showExportResult("导出失败\n" + res.error, false);
+    $("btnExportOpenFolder").classList.add("hidden");
+    return;
+  }
+  setExportProgress(100, "导出完成");
+  EXPORT_STATE.path = res.path;
+  showExportResult("已保存\n" + res.path + "\n大小：" + res.bytes + " 字节", true);
+  $("btnExportOpenFolder").classList.remove("hidden");
+});
+/* 快速下载 DXF（浏览器直接下载） */
+$("btnExport").addEventListener("click", async ()=>{
+  const res = await api("/api/export", {
+    bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
+    anon: STATE.anon, name: STATE.name,
+  });
+  if(res.error){ toast("导出失败：" + res.error); return; }
+  const bin = atob(res.dxf_b64);
+  const bytes = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+  const url = URL.createObjectURL(new Blob([bytes], {type:"application/dxf"}));
+  const a = document.createElement("a");
+  a.href = url; a.download = (res.name || "AVCAD") + ".dxf";
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  toast("DXF 已下载");
+});
+
+/* ==================== 初始化 ==================== */
+$("bom").value = SAMPLE_BOM;      // 打开即带样例，可直接点「解析清单」
+updateStep1Summary();
+goto(1);
+</script>
+</body>
+</html>

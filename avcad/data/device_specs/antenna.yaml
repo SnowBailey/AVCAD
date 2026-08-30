@@ -1,0 +1,8 @@
+category: ANTENNA
+name: 有源指向天线
+redundancy_allowed: false
+features_available: []
+params: {}
+ports_template:
+  - {name: RF_IN, side: top, signal: RF, role: in, count: 1, label: RF, air: true}
+  - {name: RF_OUT, side: right, signal: RF, role: out, count: 1, label: RF}
