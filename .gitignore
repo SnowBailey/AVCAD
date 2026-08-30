@@ -19,3 +19,4 @@ node_modules/
 launch.log
 avcad/data/legend_cache.json.bak.*
 avcad/avcad/ui/static/index.html.bak.*
+avcad/data/eko_catalog.json.bak.*
