@@ -5861,8 +5861,8 @@
    "name": "支柱安装支架套件",
    "group": "MASK支架套件",
    "section": "MASK系列",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -5871,7 +5871,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "已停售，消化库存，售完即止；\n小于12寸的Mask系列都自带安装支架而且够用",
-   "sheet": "Apart"
+   "sheet": "Apart",
+   "no_draw": true
   },
   {
    "code": "36.31.002",
@@ -6380,8 +6381,8 @@
    "name": "CLUMN扬声器柱安装支架套件",
    "group": "CLUMN安装套件",
    "section": "CLUMN柱状扬声器系列",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -6390,7 +6391,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "音柱都自带有安装支架了，特定要求才要配",
-   "sheet": "Apart"
+   "sheet": "Apart",
+   "no_draw": true
   },
   {
    "code": "L36.33.001",
@@ -6399,8 +6401,8 @@
    "name": "CLUMN扬声器柱安装支架套件",
    "group": "CLUMN安装套件",
    "section": "CLUMN柱状扬声器系列",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -6409,7 +6411,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "音柱都自带有安装支架了，特定要求才要配",
-   "sheet": "Apart"
+   "sheet": "Apart",
+   "no_draw": true
   },
   {
    "code": "36.35.001",
@@ -8119,8 +8122,8 @@
    "name": "ENTASYS平直支架",
    "group": "E系列",
    "section": "ENTASYS系列 配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8129,7 +8132,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.18.004",
@@ -8138,8 +8142,8 @@
    "name": "ENTASYS平直支架套装",
    "group": "E系列",
    "section": "ENTASYS系列 配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8148,7 +8152,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.18.005",
@@ -8427,8 +8432,8 @@
    "name": "V2-12的可选轭式支架",
    "group": "V系列",
    "section": "VERIS2配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8437,7 +8442,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "注：用于VERIS 2 12/15/32/35的轭式支架需单独购买， VERIS2 6/26/8/28附带有轭式支架。",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.41.001",
@@ -8446,8 +8452,8 @@
    "name": "多用途支架套件",
    "group": "V系列",
    "section": "VERIS2配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8456,7 +8462,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.19.013",
@@ -8484,8 +8491,8 @@
    "name": "VLF U型支架",
    "group": "V系列",
    "section": "VLF系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8494,7 +8501,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.19.009",
@@ -8503,8 +8511,8 @@
    "name": "VLF 转向阵列支架",
    "group": "V系列",
    "section": "VLF系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -8513,7 +8521,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.06.047",
@@ -8564,8 +8573,8 @@
    "name": "水平吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8574,7 +8583,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.002",
@@ -8583,8 +8593,8 @@
    "name": "垂直吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8593,7 +8603,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.004",
@@ -8602,8 +8613,8 @@
    "name": "等距阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8612,7 +8623,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.005",
@@ -8621,8 +8633,8 @@
    "name": "等距阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8631,7 +8643,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.006",
@@ -8640,8 +8653,8 @@
    "name": "水平阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8650,7 +8663,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.007",
@@ -8659,8 +8673,8 @@
    "name": "水平阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8669,7 +8683,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.009",
@@ -8678,8 +8693,8 @@
    "name": "水平扩展吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8688,7 +8703,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.008",
@@ -8697,8 +8713,8 @@
    "name": "水平扩展吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8707,7 +8723,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.010",
@@ -8716,8 +8733,8 @@
    "name": "水平扩展加低频音箱吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8726,7 +8743,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.011",
@@ -8735,8 +8753,8 @@
    "name": "水平扩展加低频音箱吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8745,7 +8763,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.012",
@@ -8754,8 +8773,8 @@
    "name": "垂直阵列吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8764,7 +8783,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.013",
@@ -8773,8 +8793,8 @@
    "name": "垂直阵列吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8783,7 +8803,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.014",
@@ -8792,8 +8813,8 @@
    "name": "垂直阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8802,7 +8823,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.015",
@@ -8811,8 +8833,8 @@
    "name": "垂直阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8821,7 +8843,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.016",
@@ -8830,8 +8853,8 @@
    "name": "垂直阵列吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8840,7 +8863,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.017",
@@ -8849,8 +8873,8 @@
    "name": "下补声垂直吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -8859,7 +8883,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.06.053",
@@ -8887,8 +8912,8 @@
    "name": "全频音箱U型水平吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [
     "control"
    ],
@@ -8899,7 +8924,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.020",
@@ -8908,8 +8934,8 @@
    "name": "全频音箱U型水平吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [
     "control"
    ],
@@ -8920,7 +8946,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.023",
@@ -8929,8 +8956,8 @@
    "name": "全频音箱垂直吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [
     "control"
    ],
@@ -8941,7 +8968,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.024",
@@ -8950,8 +8978,8 @@
    "name": "全频音箱垂直吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [
     "control"
    ],
@@ -8962,7 +8990,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.026",
@@ -9028,8 +9057,8 @@
    "name": "低音音箱吊挂套件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -9038,7 +9067,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.025",
@@ -9047,8 +9077,8 @@
    "name": "下补声吊挂件",
    "group": "I系列",
    "section": "I系列配件",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -9057,7 +9087,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Community"
+   "sheet": "Community",
+   "no_draw": true
   },
   {
    "code": "09.49.028",
@@ -9404,8 +9435,8 @@
    "name": "带旋钮的立柱支架",
    "group": "带摇柄的立柱支架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -9414,7 +9445,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000902",
@@ -11415,8 +11447,8 @@
    "name": "MKD500 U型安装架",
    "group": "MKD系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11425,7 +11457,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002818",
@@ -11434,8 +11467,8 @@
    "name": "MKD500 U型安装架",
    "group": "MKD500 U型安装架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11444,7 +11477,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002819",
@@ -11453,8 +11487,8 @@
    "name": "MKD500 U型安装架",
    "group": "MKD500 U型安装架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11463,7 +11497,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002259",
@@ -11472,8 +11507,8 @@
    "name": "MKD800 U型安装架，黑色",
    "group": "MKD500 U型安装架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11482,7 +11517,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003128",
@@ -11491,8 +11527,8 @@
    "name": "MKD1000 U型安装架，黑色",
    "group": "MKD800 U型安装架，白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11501,7 +11537,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003006",
@@ -11510,8 +11547,8 @@
    "name": "MKD1000 U型安装架，黑色",
    "group": "MKD800 U型安装架，白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11520,7 +11557,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1300002797",
@@ -11567,8 +11605,8 @@
    "name": "组合安装架",
    "group": "吊环螺栓",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11577,7 +11615,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1300002448",
@@ -11586,8 +11625,8 @@
    "name": "组合安装架",
    "group": "吊环螺栓",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -11596,7 +11635,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1300003019",
@@ -12523,8 +12563,8 @@
    "name": "Anya吊挂件",
    "group": "Anya",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -12533,7 +12573,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000928",
@@ -12622,8 +12663,8 @@
    "name": "Anna简易吊挂件",
    "group": "Anna",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -12632,7 +12673,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000239",
@@ -12816,8 +12858,8 @@
    "name": "Otto吊挂件",
    "group": "Otto",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -12826,7 +12868,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000938",
@@ -13185,8 +13228,8 @@
    "name": "墙面壁挂安装架",
    "group": "AC6",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -13195,7 +13238,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002821",
@@ -13204,8 +13248,8 @@
    "name": "墙面壁挂安装架",
    "group": "AC6",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -13214,7 +13258,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002825",
@@ -13280,8 +13325,8 @@
    "name": "扬声器顶部吊挂组件",
    "group": "AC6",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13290,7 +13335,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002823",
@@ -13584,8 +13630,8 @@
    "name": "音箱吊挂架",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13594,7 +13640,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格/ 常备小量",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002956",
@@ -13603,8 +13650,8 @@
    "name": "音箱吊挂架",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13613,7 +13660,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002118",
@@ -13641,8 +13689,8 @@
    "name": "音箱防雨罩",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -13651,7 +13699,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002122",
@@ -13660,8 +13709,8 @@
    "name": "音箱运输车",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13670,7 +13719,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002123",
@@ -13679,8 +13729,8 @@
    "name": "音箱运输顶盖",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13689,7 +13739,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002124",
@@ -13698,8 +13749,8 @@
    "name": "音箱运输车",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13708,7 +13759,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002125",
@@ -13717,8 +13769,8 @@
    "name": "音箱运输车",
    "group": "NTX系列",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13727,7 +13779,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售价格",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002957",
@@ -13812,8 +13865,8 @@
    "name": "音箱吊挂架",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13822,7 +13875,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003016",
@@ -13831,8 +13885,8 @@
    "name": "音箱运输车",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13841,7 +13895,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003017",
@@ -13850,8 +13905,8 @@
    "name": "音箱运输顶盖",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -13860,7 +13915,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003018",
@@ -13888,8 +13944,8 @@
    "name": "音箱防雨罩",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -13898,7 +13954,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "3000008311",
@@ -13907,8 +13964,8 @@
    "name": "音箱航空箱",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(航空箱)",
    "features": [],
    "active": false,
    "params": {},
@@ -13917,7 +13974,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003222",
@@ -13926,8 +13984,8 @@
    "name": "吊挂升级套件",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13936,7 +13994,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003221",
@@ -13945,8 +14004,8 @@
    "name": "吊挂架",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -13955,7 +14014,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003223",
@@ -14021,8 +14081,8 @@
    "name": "防雨罩",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -14031,7 +14091,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003227",
@@ -14040,8 +14101,8 @@
    "name": "吊挂架",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14050,7 +14111,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003229",
@@ -14059,8 +14121,8 @@
    "name": "音箱运输车",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -14069,7 +14131,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003230",
@@ -14078,8 +14141,8 @@
    "name": "音箱运输顶盖",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -14088,7 +14151,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200003231",
@@ -14116,8 +14180,8 @@
    "name": "防雨罩",
    "group": "NT系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -14126,7 +14190,8 @@
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000245",
@@ -14673,8 +14738,8 @@
    "name": "U型可调节安装架S1",
    "group": "KF系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -14683,7 +14748,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000751",
@@ -14692,8 +14758,8 @@
    "name": "KF810P吊挂架黑色",
    "group": "吊装轨",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14702,7 +14768,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "公司常备库存型号",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000752",
@@ -14730,8 +14797,8 @@
    "name": "KF810P重型吊挂架黑色",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14740,7 +14807,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002211",
@@ -14749,8 +14817,8 @@
    "name": "KF810P重型吊挂架白色",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14759,7 +14827,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002117",
@@ -14768,8 +14837,8 @@
    "name": "音箱吊挂架",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14778,7 +14847,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "公司常备库存型号",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002956",
@@ -14787,8 +14857,8 @@
    "name": "音箱吊挂架",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -14797,7 +14867,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002118",
@@ -14825,8 +14896,8 @@
    "name": "音箱运输车",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -14835,7 +14906,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002123",
@@ -14844,8 +14916,8 @@
    "name": "音箱运输顶盖",
    "group": "KF810P适配架白色",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(运输)",
    "features": [],
    "active": false,
    "params": {},
@@ -14854,7 +14926,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200002957",
@@ -15294,8 +15367,8 @@
    "name": "SB1002吊挂架",
    "group": "SB2001吊挂件（2个）",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -15304,7 +15377,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000222",
@@ -15313,8 +15387,8 @@
    "name": "KF730/KF737/SB730吊挂架",
    "group": "SB2001吊挂架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -15323,7 +15397,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000163",
@@ -15332,8 +15407,8 @@
    "name": "KF730P/KF737P/SB730P吊挂架",
    "group": "SB2001吊挂架",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(吊挂)",
    "features": [],
    "active": false,
    "params": {},
@@ -15342,7 +15417,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200001466",
@@ -17475,8 +17551,8 @@
    "name": "电子返声罩音箱支架",
    "group": "音箱",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -17485,7 +17561,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "E-Coustic"
+   "sheet": "E-Coustic",
+   "no_draw": true
   },
   {
    "code": "1200000972",
@@ -17709,8 +17786,8 @@
    "name": "25针互连电缆",
    "group": "音箱频处理器",
    "section": null,
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "线缆(25针互连电缆)",
    "features": [],
    "active": false,
    "params": {},
@@ -17719,7 +17796,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "专订",
-   "sheet": "E-Coustic"
+   "sheet": "E-Coustic",
+   "no_draw": true
   },
   {
    "code": "1200001183",
@@ -38451,8 +38529,8 @@
    "name": "桌面固定安装架",
    "group": "配件",
    "section": null,
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(安装架)",
    "features": [],
    "active": false,
    "params": {},
@@ -38461,7 +38539,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "Televic"
+   "sheet": "Televic",
+   "no_draw": true
   },
   {
    "code": "71.98.2900",
@@ -49168,8 +49247,8 @@
    "name": "天花安装支架",
    "group": "转接线",
    "section": null,
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -49178,7 +49257,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "备少量/查库存配单",
-   "sheet": "AUDIX固定安装及无线 "
+   "sheet": "AUDIX固定安装及无线 ",
+   "no_draw": true
   },
   {
    "code": "1200002512",
@@ -49810,8 +49890,8 @@
    "name": "BNC线缆",
    "group": "无线话筒天线系统",
    "section": null,
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(线缆)",
    "features": [],
    "active": false,
    "params": {
@@ -49823,7 +49903,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "备少量",
-   "sheet": "AUDIX固定安装及无线 "
+   "sheet": "AUDIX固定安装及无线 ",
+   "no_draw": true
   },
   {
    "code": "1200002646",
@@ -49832,8 +49913,8 @@
    "name": "BNC线缆",
    "group": "无线话筒天线系统",
    "section": null,
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(线缆)",
    "features": [],
    "active": false,
    "params": {
@@ -49845,7 +49926,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "备少量",
-   "sheet": "AUDIX固定安装及无线 "
+   "sheet": "AUDIX固定安装及无线 ",
+   "no_draw": true
   },
   {
    "code": "1200002606",
@@ -50208,8 +50290,8 @@
    "name": "吉他连接无线腰包接适配线",
    "group": "无线头戴领夹微型乐器话筒适配器",
    "section": null,
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "线缆(吉他腰包适配线)",
    "features": [
     "analog",
     "wireless"
@@ -50221,7 +50303,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "AUDIX固定安装及无线 "
+   "sheet": "AUDIX固定安装及无线 ",
+   "no_draw": true
   },
   {
    "code": "1200002658",
@@ -50356,8 +50439,8 @@
    "name": "天花安装支架",
    "group": "转接线",
    "section": null,
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "音响配件(支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -50366,7 +50449,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "备少量/查库存配单",
-   "sheet": "AUDIX固定安装及无线 "
+   "sheet": "AUDIX固定安装及无线 ",
+   "no_draw": true
   },
   {
    "code": "1200002658",
