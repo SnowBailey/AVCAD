@@ -581,8 +581,8 @@
    "name": "镜像控制器",
    "group": "RIVAGE PM系列",
    "section": "DM7系列",
-   "category": "MIXER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "调音台镜像控制器(不传音频)",
    "features": [
     "control"
    ],
@@ -595,7 +595,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "为YAMAHA DM7系列调音台拓展备份功能；适用于DM7/DM7-C\n支持不少于32路信号的镜像备份\n手动切换主备信号输出",
-   "sheet": "YAMAHA"
+   "sheet": "YAMAHA",
+   "no_draw": true
   },
   {
    "code": "1200003052",
@@ -19947,7 +19948,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -19956,7 +19957,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000945",
@@ -19966,7 +19968,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -19975,7 +19977,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000947",
@@ -19985,7 +19988,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -19994,7 +19997,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000949",
@@ -20004,7 +20008,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20013,7 +20017,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000951",
@@ -20023,7 +20028,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20032,7 +20037,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000953",
@@ -20042,7 +20048,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20051,7 +20057,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000955",
@@ -20061,7 +20068,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20070,7 +20077,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000957",
@@ -20080,7 +20088,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20089,7 +20097,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001147",
@@ -20099,7 +20108,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20108,7 +20117,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001148",
@@ -20118,7 +20128,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20127,7 +20137,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000876",
@@ -20137,7 +20148,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20146,7 +20157,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000946",
@@ -20156,7 +20168,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20165,7 +20177,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000948",
@@ -20175,7 +20188,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20184,7 +20197,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000950",
@@ -20194,7 +20208,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20203,7 +20217,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000952",
@@ -20213,7 +20228,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20222,7 +20237,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000954",
@@ -20232,7 +20248,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20241,7 +20257,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000956",
@@ -20251,7 +20268,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20260,7 +20277,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000958",
@@ -20270,7 +20288,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20279,7 +20297,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001161",
@@ -20289,7 +20308,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20298,7 +20317,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001164",
@@ -20308,7 +20328,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20317,7 +20337,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001117",
@@ -20327,7 +20348,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20336,7 +20357,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001130",
@@ -20346,7 +20368,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20355,7 +20377,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001237",
@@ -20365,7 +20388,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20374,7 +20397,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001200",
@@ -20384,7 +20408,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20393,7 +20417,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001215",
@@ -20403,7 +20428,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20412,7 +20437,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001216",
@@ -20422,7 +20448,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20431,7 +20457,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001217",
@@ -20441,7 +20468,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20450,7 +20477,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001218",
@@ -20460,7 +20488,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20469,7 +20497,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001162",
@@ -20479,7 +20508,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20488,7 +20517,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001165",
@@ -20498,7 +20528,7 @@
    "group": "FIS V2系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20507,7 +20537,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001437",
@@ -20653,7 +20684,7 @@
    "group": "IMC系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20662,7 +20693,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000261",
@@ -20672,7 +20704,7 @@
    "group": "IMC系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20681,7 +20713,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000467",
@@ -20691,7 +20724,7 @@
    "group": "IMC系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20700,7 +20733,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000262",
@@ -20710,7 +20744,7 @@
    "group": "IMC系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20719,7 +20753,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000649",
@@ -20773,7 +20808,7 @@
    "group": "WM系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "配件(监听扬声器配件，名称含“扬声器/音箱”会被兜底误判)",
    "features": [],
    "active": false,
    "params": {},
@@ -20782,7 +20817,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000668",
@@ -20792,7 +20828,7 @@
    "group": "WM系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "配件(监听扬声器配件，名称含“扬声器/音箱”会被兜底误判)",
    "features": [],
    "active": false,
    "params": {},
@@ -20801,7 +20837,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000893",
@@ -20929,7 +20966,7 @@
    "group": "AQUA系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -20938,7 +20975,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000390",
@@ -20948,7 +20986,7 @@
    "group": "AQUA系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "配件(音箱支架适配件，名称含“扬声器/音箱”会被兜底误判)",
    "features": [],
    "active": false,
    "params": {},
@@ -20957,7 +20995,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000391",
@@ -20966,8 +21005,8 @@
    "name": "音箱支架连接杆",
    "group": "AQUA系列安装配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(音箱支架连接杆)",
    "features": [],
    "active": false,
    "params": {},
@@ -20976,7 +21015,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "用于AQUA-ADAP适配器与AQUA-S28连接使用\n注：不支持AQUA-S28WP",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001062",
@@ -21354,7 +21394,7 @@
    "group": "VH系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21363,7 +21403,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "1、用于VHL611堆叠使用\n2、用于VHB115S或VHL611吊挂使用\n3、用于VHL611与VHB115S连接使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000690",
@@ -21373,7 +21414,7 @@
    "group": "VH系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21382,7 +21423,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "1、用于VHL811堆叠使用\n2、用于VHB115或VHL811吊挂使用\n3、用于VHL811与VHB115连接使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000691",
@@ -21392,7 +21434,7 @@
    "group": "VH系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21401,7 +21443,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "1、用于VHL1010堆叠使用\n2、用于VHB118或VHL1010吊挂使用\n3、用于VHL1010与VHB118连接使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001179",
@@ -21411,7 +21454,7 @@
    "group": "VH系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21420,7 +21463,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "1、用于VHL1210堆叠使用\n2、用于VHB118L或VHL1210吊挂使用\n3、用于VHL1210与VHB118L连接使用\n4、用于VHL1210下方吊挂VHL811连接使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000726",
@@ -21568,7 +21612,7 @@
    "group": "SL系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21577,7 +21621,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "1、用于阵列吊挂使用\n2、落地堆叠无需此架",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001506",
@@ -21787,7 +21832,7 @@
    "group": "THL系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21796,7 +21841,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "不适用于旧型号\n1、用于THL812或THB115吊挂/堆叠使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000683",
@@ -21806,7 +21852,7 @@
    "group": "THL系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21815,7 +21861,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "不适用于旧型号\n1、用于THL1012堆叠使用\n2、用于THL1012或THB118吊挂使用\n3、用于THL1012与THB118连接使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000652",
@@ -21825,7 +21872,7 @@
    "group": "THL系列吊装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -21834,7 +21881,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "不适用于旧型号\n1、用于THL1210吊挂/堆叠使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001452",
@@ -22112,7 +22160,7 @@
    "group": "THP系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22121,7 +22169,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000425",
@@ -22169,7 +22218,7 @@
    "group": "THP系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22178,7 +22227,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000499",
@@ -22188,7 +22238,7 @@
    "group": "THP系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22197,7 +22247,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001464",
@@ -22527,7 +22578,7 @@
    "group": "THX系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22536,7 +22587,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "THX12与THX15的吊挂配件均为此型号，一套包含两个适配连接片，供一只扬声器吊挂使用",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000422",
@@ -22546,7 +22598,7 @@
    "group": "THX系列安装配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22555,7 +22607,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅限THX12使用的吊挂配件，一只扬声器吊挂需要两个配件",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001522",
@@ -22644,8 +22697,8 @@
    "name": "线阵列扬声器吊挂架",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(扬声器吊挂架)",
    "features": [],
    "active": false,
    "params": {},
@@ -22654,7 +22707,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "全频不可与超低组合堆叠",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001362",
@@ -22663,8 +22717,8 @@
    "name": "线阵列扬声器防雨罩",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -22673,7 +22727,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001363",
@@ -22682,8 +22737,8 @@
    "name": "线阵列扬声器防撞罩",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(防撞罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -22692,7 +22747,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001355",
@@ -22701,8 +22757,8 @@
    "name": "线阵列扬声器运输轮板车",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(运输轮板车)",
    "features": [],
    "active": false,
    "params": {},
@@ -22711,7 +22767,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001356",
@@ -22720,8 +22777,8 @@
    "name": "线阵列扬声器板车盖板",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(板车盖板)",
    "features": [],
    "active": false,
    "params": {},
@@ -22730,7 +22787,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001359",
@@ -22739,8 +22797,8 @@
    "name": "超低音扬声器吊挂架",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(扬声器吊挂架)",
    "features": [],
    "active": false,
    "params": {},
@@ -22749,7 +22807,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001357",
@@ -22758,8 +22817,8 @@
    "name": "超低音扬声器防雨罩",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -22768,7 +22827,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001358",
@@ -22777,8 +22837,8 @@
    "name": "超低音扬声器防撞罩",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(防撞罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -22787,7 +22847,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001360",
@@ -22796,8 +22857,8 @@
    "name": "超低音扬声器运输轮板车",
    "group": "T系列吊挂架及配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(运输轮板车)",
    "features": [],
    "active": false,
    "params": {},
@@ -22806,7 +22867,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001352",
@@ -22837,8 +22899,8 @@
    "name": "返听35°支架",
    "group": "C系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(返听支架)",
    "features": [],
    "active": false,
    "params": {},
@@ -22847,7 +22909,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001367",
@@ -22875,8 +22938,8 @@
    "name": "监听扬声器防雨罩",
    "group": "C系列配件",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(防雨罩)",
    "features": [],
    "active": false,
    "params": {},
@@ -22885,7 +22948,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001428",
@@ -22895,7 +22959,7 @@
    "group": "巡演系列功放机柜及辅材",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22904,7 +22968,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001365",
@@ -22914,7 +22979,7 @@
    "group": "巡演系列功放机柜及辅材",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22923,7 +22988,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001373",
@@ -22954,7 +23020,7 @@
    "group": "巡演系列功放机柜及辅材",
    "section": null,
    "category": null,
-   "defer_reason": "电源/PDU(非信号)",
+   "defer_reason": "安装/机柜配件",
    "features": [],
    "active": false,
    "params": {},
@@ -22963,7 +23029,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001368",
@@ -22972,8 +23039,8 @@
    "name": "25米4芯音箱连接线",
    "group": "巡演系列功放机柜及辅材",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(音箱连接线)",
    "features": [],
    "active": false,
    "params": {
@@ -22984,7 +23051,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "带NEUTRIK接头",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001370",
@@ -22993,8 +23061,8 @@
    "name": "1米4芯音箱连接线",
    "group": "巡演系列功放机柜及辅材",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(音箱连接线)",
    "features": [],
    "active": false,
    "params": {
@@ -23005,7 +23073,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "带NEUTRIK接头",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001369",
@@ -23014,8 +23083,8 @@
    "name": "6米4芯Y型音箱连接线",
    "group": "巡演系列功放机柜及辅材",
    "section": null,
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "扬声器配件(音箱连接线)",
    "features": [],
    "active": false,
    "params": {
@@ -23026,7 +23095,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "带NEUTRIK接头",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001366",
@@ -23035,8 +23105,8 @@
    "name": "线箱",
    "group": "巡演系列功放机柜及辅材",
    "section": null,
-   "category": "AMP",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "线箱(配件)",
    "features": [],
    "active": false,
    "params": {},
@@ -23045,7 +23115,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100001374",
@@ -23054,8 +23125,8 @@
    "name": "巡演100m控制网线缆车",
    "group": "巡演系列功放机柜及辅材",
    "section": null,
-   "category": "AMP",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制网线缆车(配件)",
    "features": [
     "control"
    ],
@@ -23066,7 +23137,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000275",
@@ -23445,7 +23517,7 @@
    "name": "沉浸声音频渲染服务器",
    "group": "X-Core S系列",
    "section": null,
-   "category": "SPEAKER_MGR",
+   "category": "PROCESSOR",
    "defer_reason": null,
    "features": [
     "control",
@@ -23460,7 +23532,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": false
   },
   {
    "code": "1100000468",
@@ -23469,8 +23542,8 @@
    "name": "数字音频接入盒",
    "group": "五、其它设备",
    "section": null,
-   "category": null,
-   "defer_reason": "音频未识别",
+   "category": "IO",
+   "defer_reason": null,
    "features": [
     "analog",
     "control",
@@ -23485,7 +23558,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "常备货",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": false
   },
   {
    "code": "1100001471",
@@ -23494,8 +23568,8 @@
    "name": "镜像控制器",
    "group": "五、其它设备",
    "section": null,
-   "category": "MIXER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "调音台镜像控制器(不传音频)",
    "features": [
     "control"
    ],
@@ -23508,7 +23582,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "eza艺科声"
+   "sheet": "eza艺科声",
+   "no_draw": true
   },
   {
    "code": "1100000589",

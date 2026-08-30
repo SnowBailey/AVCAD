@@ -267,3 +267,33 @@ def test_ips_catalog_round3_nodraw_and_reclass(tmp_path):
     assert got["AM860"]["category"] == "PROCESSOR"
     assert got["SI Box"]["category"] == "IO"
     assert got["DI Box"]["category"] == "IO"
+
+
+def test_ezacoustics_accessories_nodraw(tmp_path):
+    """ezacoustics 配件不再混进设备类。
+
+    特别关注名称含「扬声器 / 音箱」的配件——它们会被 CATEGORY_KW 兜底成
+    SPEAKER，必须靠主库 no_draw 压住，光靠关键词排除不干净。
+    """
+    path = _xlsx(tmp_path, [
+        ("监听扬声器配件", "ezacoustics", "W12MU", 4),      # 名称含"扬声器"
+        ("音箱支架连接适配件", "ezacoustics", "AQUA-ADAP", 2),  # 名称含"音箱"
+        ("线阵列扬声器吊挂架", "ezacoustics", "T12FB", 2),
+        ("25米4芯音箱连接线", "ezacoustics", "TS音箱连接线", 6),
+        ("线箱", "ezacoustics", "TS线箱", 1),               # 现归 AMP
+        ("Console-Link DM7 镜像控制器", "ezacoustics", "Console-Link DM7", 1),
+        # —— 应保留 ——
+        ("12\"两分频同轴舞台监听扬声器", "ezacoustics", "W12M", 4),
+        ("沉浸声音频渲染服务器", "ezacoustics", "X-CORE S", 1),
+        ("数字音频接入盒", "ezacoustics", "RDD12", 1),
+    ])
+    entries, _ = build_entries(path)
+    got = {str(e.get("model")): e for e in entries}
+
+    for m in ("W12MU", "AQUA-ADAP", "T12FB", "TS音箱连接线",
+              "TS线箱", "Console-Link DM7"):
+        assert m not in got, f"{m} 应被 no_draw 排除"
+
+    assert got["W12M"]["category"] == "SPEAKER"
+    assert got["X-CORE S"]["category"] == "PROCESSOR"
+    assert got["RDD12"]["category"] == "IO"
