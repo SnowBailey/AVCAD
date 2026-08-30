@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461283.937303241
+2461283.956412037
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461283.937303241
+2461283.956412037
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{5D351924-98B5-4F14-B8E3-9861E05AFF93}
+{8F9C6A79-EB7F-4151-93A7-0FD436A8D340}
   9
 $VERSIONGUID
   2
-{474EAD06-44A5-435A-83A0-182083E87ABC}
+{8E153589-7B3C-4E10-8B0A-76BD2874FBA4}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -8551,7 +8551,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8625,7 +8625,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8699,7 +8699,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8773,7 +8773,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8847,7 +8847,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8921,7 +8921,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -8995,7 +8995,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9069,7 +9069,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9143,7 +9143,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9217,7 +9217,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9291,7 +9291,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9365,7 +9365,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9439,7 +9439,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9513,7 +9513,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9587,7 +9587,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -9661,7 +9661,7 @@ AcDbMText
  71
 7
   1
-SPEAKER
+SPK
   7
 CJK
   0
@@ -12369,7 +12369,7 @@ AcDbMText
  71
 8
   1
-DANTE1
+1
   7
 CJK
   0
@@ -12421,7 +12421,7 @@ AcDbMText
  71
 8
   1
-DANTE2
+2
   7
 CJK
   0
@@ -12473,7 +12473,7 @@ AcDbMText
  71
 8
   1
-DANTE3
+3
   7
 CJK
   0
@@ -12525,7 +12525,7 @@ AcDbMText
  71
 8
   1
-DANTE4
+4
   7
 CJK
   0
@@ -12577,7 +12577,7 @@ AcDbMText
  71
 8
   1
-DANTE5
+5
   7
 CJK
   0
@@ -12629,7 +12629,7 @@ AcDbMText
  71
 8
   1
-DANTE6
+6
   7
 CJK
   0
@@ -12681,7 +12681,7 @@ AcDbMText
  71
 8
   1
-DANTE7
+7
   7
 CJK
   0
@@ -12733,7 +12733,7 @@ AcDbMText
  71
 8
   1
-DANTE8
+8
   7
 CJK
   0
@@ -12785,7 +12785,7 @@ AcDbMText
  71
 8
   1
-DANTE9
+9
   7
 CJK
   0
@@ -12837,7 +12837,7 @@ AcDbMText
  71
 8
   1
-DANTE10
+10
   7
 CJK
   0
@@ -12889,7 +12889,7 @@ AcDbMText
  71
 8
   1
-DANTE11
+11
   7
 CJK
   0
@@ -12941,7 +12941,7 @@ AcDbMText
  71
 8
   1
-DANTE12
+12
   7
 CJK
   0
@@ -12993,7 +12993,7 @@ AcDbMText
  71
 8
   1
-DANTE13
+13
   7
 CJK
   0
@@ -13045,7 +13045,7 @@ AcDbMText
  71
 8
   1
-DANTE14
+14
   7
 CJK
   0
@@ -13097,7 +13097,7 @@ AcDbMText
  71
 8
   1
-DANTE15
+15
   7
 CJK
   0
@@ -13149,7 +13149,7 @@ AcDbMText
  71
 8
   1
-DANTE16
+16
   7
 CJK
   0
@@ -13201,7 +13201,7 @@ AcDbMText
  71
 8
   1
-DANTE17
+17
   7
 CJK
   0
@@ -13253,7 +13253,7 @@ AcDbMText
  71
 8
   1
-DANTE18
+18
   7
 CJK
   0
@@ -13305,7 +13305,7 @@ AcDbMText
  71
 8
   1
-DANTE19
+19
   7
 CJK
   0
@@ -13357,7 +13357,7 @@ AcDbMText
  71
 8
   1
-DANTE20
+20
   7
 CJK
   0
@@ -13409,7 +13409,7 @@ AcDbMText
  71
 8
   1
-DANTE21
+21
   7
 CJK
   0
@@ -13461,7 +13461,7 @@ AcDbMText
  71
 8
   1
-DANTE22
+22
   7
 CJK
   0
@@ -13513,7 +13513,7 @@ AcDbMText
  71
 8
   1
-DANTE23
+23
   7
 CJK
   0
@@ -13565,7 +13565,7 @@ AcDbMText
  71
 8
   1
-DANTE24
+24
   7
 CJK
   0
@@ -13617,7 +13617,7 @@ AcDbMText
  71
 8
   1
-DANTE1
+1
   7
 CJK
   0
@@ -13669,7 +13669,7 @@ AcDbMText
  71
 8
   1
-DANTE2
+2
   7
 CJK
   0
@@ -13721,7 +13721,7 @@ AcDbMText
  71
 8
   1
-DANTE3
+3
   7
 CJK
   0
@@ -13773,7 +13773,7 @@ AcDbMText
  71
 8
   1
-DANTE4
+4
   7
 CJK
   0
@@ -13825,7 +13825,7 @@ AcDbMText
  71
 8
   1
-DANTE5
+5
   7
 CJK
   0
@@ -13877,7 +13877,7 @@ AcDbMText
  71
 8
   1
-DANTE6
+6
   7
 CJK
   0
@@ -13929,7 +13929,7 @@ AcDbMText
  71
 8
   1
-DANTE7
+7
   7
 CJK
   0
@@ -13981,7 +13981,7 @@ AcDbMText
  71
 8
   1
-DANTE8
+8
   7
 CJK
   0
@@ -14033,7 +14033,7 @@ AcDbMText
  71
 8
   1
-DANTE9
+9
   7
 CJK
   0
@@ -14085,7 +14085,7 @@ AcDbMText
  71
 8
   1
-DANTE10
+10
   7
 CJK
   0
@@ -14137,7 +14137,7 @@ AcDbMText
  71
 8
   1
-DANTE11
+11
   7
 CJK
   0
@@ -14189,7 +14189,7 @@ AcDbMText
  71
 8
   1
-DANTE12
+12
   7
 CJK
   0
@@ -14241,7 +14241,7 @@ AcDbMText
  71
 8
   1
-DANTE13
+13
   7
 CJK
   0
@@ -14293,7 +14293,7 @@ AcDbMText
  71
 8
   1
-DANTE14
+14
   7
 CJK
   0
@@ -14345,7 +14345,7 @@ AcDbMText
  71
 8
   1
-DANTE15
+15
   7
 CJK
   0
@@ -14397,7 +14397,7 @@ AcDbMText
  71
 8
   1
-DANTE16
+16
   7
 CJK
   0
@@ -14449,7 +14449,7 @@ AcDbMText
  71
 8
   1
-DANTE17
+17
   7
 CJK
   0
@@ -14501,7 +14501,7 @@ AcDbMText
  71
 8
   1
-DANTE18
+18
   7
 CJK
   0
@@ -14553,7 +14553,7 @@ AcDbMText
  71
 8
   1
-DANTE19
+19
   7
 CJK
   0
@@ -14605,7 +14605,7 @@ AcDbMText
  71
 8
   1
-DANTE20
+20
   7
 CJK
   0
@@ -14657,7 +14657,7 @@ AcDbMText
  71
 8
   1
-DANTE21
+21
   7
 CJK
   0
@@ -14709,7 +14709,7 @@ AcDbMText
  71
 8
   1
-DANTE22
+22
   7
 CJK
   0
@@ -14761,7 +14761,7 @@ AcDbMText
  71
 8
   1
-DANTE23
+23
   7
 CJK
   0
@@ -14813,7 +14813,7 @@ AcDbMText
  71
 8
   1
-DANTE24
+24
   7
 CJK
   0
@@ -17553,7 +17553,7 @@ AcDbMText
  71
 8
   1
-DANTE1
+1
   7
 CJK
   0
@@ -17605,7 +17605,7 @@ AcDbMText
  71
 8
   1
-DANTE2
+2
   7
 CJK
   0
@@ -17657,7 +17657,7 @@ AcDbMText
  71
 8
   1
-DANTE3
+3
   7
 CJK
   0
@@ -17709,7 +17709,7 @@ AcDbMText
  71
 8
   1
-DANTE4
+4
   7
 CJK
   0
@@ -17761,7 +17761,7 @@ AcDbMText
  71
 8
   1
-DANTE5
+5
   7
 CJK
   0
@@ -17813,7 +17813,7 @@ AcDbMText
  71
 8
   1
-DANTE6
+6
   7
 CJK
   0
@@ -17865,7 +17865,7 @@ AcDbMText
  71
 8
   1
-DANTE7
+7
   7
 CJK
   0
@@ -17917,7 +17917,7 @@ AcDbMText
  71
 8
   1
-DANTE8
+8
   7
 CJK
   0
@@ -17969,7 +17969,7 @@ AcDbMText
  71
 8
   1
-DANTE9
+9
   7
 CJK
   0
@@ -18021,7 +18021,7 @@ AcDbMText
  71
 8
   1
-DANTE10
+10
   7
 CJK
   0
@@ -18073,7 +18073,7 @@ AcDbMText
  71
 8
   1
-DANTE11
+11
   7
 CJK
   0
@@ -18125,7 +18125,7 @@ AcDbMText
  71
 8
   1
-DANTE12
+12
   7
 CJK
   0
@@ -18177,7 +18177,7 @@ AcDbMText
  71
 8
   1
-DANTE13
+13
   7
 CJK
   0
@@ -18229,7 +18229,7 @@ AcDbMText
  71
 8
   1
-DANTE14
+14
   7
 CJK
   0
@@ -18281,7 +18281,7 @@ AcDbMText
  71
 8
   1
-DANTE15
+15
   7
 CJK
   0
@@ -18333,7 +18333,7 @@ AcDbMText
  71
 8
   1
-DANTE16
+16
   7
 CJK
   0
@@ -18385,7 +18385,7 @@ AcDbMText
  71
 8
   1
-DANTE17
+17
   7
 CJK
   0
@@ -18437,7 +18437,7 @@ AcDbMText
  71
 8
   1
-DANTE18
+18
   7
 CJK
   0
@@ -18489,7 +18489,7 @@ AcDbMText
  71
 8
   1
-DANTE19
+19
   7
 CJK
   0
@@ -18541,7 +18541,7 @@ AcDbMText
  71
 8
   1
-DANTE20
+20
   7
 CJK
   0
@@ -18593,7 +18593,7 @@ AcDbMText
  71
 8
   1
-DANTE21
+21
   7
 CJK
   0
@@ -18645,7 +18645,7 @@ AcDbMText
  71
 8
   1
-DANTE22
+22
   7
 CJK
   0
@@ -18697,7 +18697,7 @@ AcDbMText
  71
 8
   1
-DANTE23
+23
   7
 CJK
   0
@@ -18749,7 +18749,7 @@ AcDbMText
  71
 8
   1
-DANTE24
+24
   7
 CJK
   0
@@ -18801,7 +18801,7 @@ AcDbMText
  71
 8
   1
-DANTE1
+1
   7
 CJK
   0
@@ -18853,7 +18853,7 @@ AcDbMText
  71
 8
   1
-DANTE2
+2
   7
 CJK
   0
@@ -18905,7 +18905,7 @@ AcDbMText
  71
 8
   1
-DANTE3
+3
   7
 CJK
   0
@@ -18957,7 +18957,7 @@ AcDbMText
  71
 8
   1
-DANTE4
+4
   7
 CJK
   0
@@ -19009,7 +19009,7 @@ AcDbMText
  71
 8
   1
-DANTE5
+5
   7
 CJK
   0
@@ -19061,7 +19061,7 @@ AcDbMText
  71
 8
   1
-DANTE6
+6
   7
 CJK
   0
@@ -19113,7 +19113,7 @@ AcDbMText
  71
 8
   1
-DANTE7
+7
   7
 CJK
   0
@@ -19165,7 +19165,7 @@ AcDbMText
  71
 8
   1
-DANTE8
+8
   7
 CJK
   0
@@ -19217,7 +19217,7 @@ AcDbMText
  71
 8
   1
-DANTE9
+9
   7
 CJK
   0
@@ -19269,7 +19269,7 @@ AcDbMText
  71
 8
   1
-DANTE10
+10
   7
 CJK
   0
@@ -19321,7 +19321,7 @@ AcDbMText
  71
 8
   1
-DANTE11
+11
   7
 CJK
   0
@@ -19373,7 +19373,7 @@ AcDbMText
  71
 8
   1
-DANTE12
+12
   7
 CJK
   0
@@ -19425,7 +19425,7 @@ AcDbMText
  71
 8
   1
-DANTE13
+13
   7
 CJK
   0
@@ -19477,7 +19477,7 @@ AcDbMText
  71
 8
   1
-DANTE14
+14
   7
 CJK
   0
@@ -19529,7 +19529,7 @@ AcDbMText
  71
 8
   1
-DANTE15
+15
   7
 CJK
   0
@@ -19581,7 +19581,7 @@ AcDbMText
  71
 8
   1
-DANTE16
+16
   7
 CJK
   0
@@ -19633,7 +19633,7 @@ AcDbMText
  71
 8
   1
-DANTE17
+17
   7
 CJK
   0
@@ -19685,7 +19685,7 @@ AcDbMText
  71
 8
   1
-DANTE18
+18
   7
 CJK
   0
@@ -19737,7 +19737,7 @@ AcDbMText
  71
 8
   1
-DANTE19
+19
   7
 CJK
   0
@@ -19789,7 +19789,7 @@ AcDbMText
  71
 8
   1
-DANTE20
+20
   7
 CJK
   0
@@ -19841,7 +19841,7 @@ AcDbMText
  71
 8
   1
-DANTE21
+21
   7
 CJK
   0
@@ -19893,7 +19893,7 @@ AcDbMText
  71
 8
   1
-DANTE22
+22
   7
 CJK
   0
@@ -19945,7 +19945,7 @@ AcDbMText
  71
 8
   1
-DANTE23
+23
   7
 CJK
   0
@@ -19997,7 +19997,7 @@ AcDbMText
  71
 8
   1
-DANTE24
+24
   7
 CJK
   0
@@ -21307,7 +21307,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-08-30T14:29:43.598675+00:00
+1.4.4 @ 2026-08-30T14:57:14.655709+00:00
   0
 DICTIONARYVAR
   5
@@ -21319,7 +21319,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-08-30T14:29:43.604723+00:00
+1.4.4 @ 2026-08-30T14:57:14.661953+00:00
   0
 ENDSEC
   0

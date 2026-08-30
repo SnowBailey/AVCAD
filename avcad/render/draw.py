@@ -2,7 +2,7 @@
 from __future__ import annotations
 from avcad.model.schema import Signal, Redundancy, signal_color, signal_layer, signal_ltype
 from avcad.wires.router import _port
-from avcad.render.primitives import Rect, Line, Text, Port, Polyline
+from avcad.render.primitives import Rect, Line, Text, Port, Polyline, Circle
 
 FRAME = {"primary": "#378add", "backup": "#5dcaa5", "single": "#b4b2a9"}
 
@@ -250,6 +250,9 @@ _BUS_ROLE_SPACING = 12.0    # 主/备纵向 drop 线水平间距
 _BUS_DROP_LEAD = 4.0        # 备份 drop 超出 stub 的最小水平延伸
 _BUS_TRUNK_EXT = 12.0      # 主线两端超出最远 drop 的长度
 _BUS_TRUNK_WIDTH = 2.4      # 主线线宽
+# 分列主干线（单列超 20 个模块拆多列时用）：中性灰蓝，避免与信号线配色混淆
+TRUNK_COLOR = "#8b9bb4"
+TRUNK_WIDTH = _BUS_TRUNK_WIDTH
 _BUS_DROP_WIDTH = 1.6      # drop 线线宽
 
 
@@ -783,13 +786,42 @@ def _pick_label_pos(text, pts, rects, placed, size=7, hug=3.0):
     return (cx, cy, "start", _text_box(text, cx, cy, size, "start"))
 
 
+# 线标显示名：枚举值偏长时在此缩短（阳哥规则 2026-08-30：SPEAKER -> SPK）
+WIRE_LABEL_ALIAS = {"SPEAKER": "SPK"}
+
+
 def _wire_label(c):
     """线标文本：多通道写 `NxSIGNAL`，单通道写 `SIGNAL`，与图例信号类型一致。"""
     sig = c.signal.value if hasattr(c.signal, "value") else str(c.signal)
+    sig = WIRE_LABEL_ALIAS.get(sig, sig)
     return f"{c.bundle}x{sig}" if getattr(c, "bundle", 1) > 1 else sig
 
 
+def draw_trunks(canvas, project):
+    """主干线：同一级（stage）拆成多列时，在列顶用一条横线串起来。
+
+    阳哥规则 2026-08-30：单列纵向模块不超过 20 个，超出分多列，
+    列间用主线链接。这里的主线是**图面表达**——表示这些子列同属一级、
+    共享上游信号；实际信号线仍由 draw_wires 逐条画出。
+    """
+    trunks = (project.meta or {}).get("trunks") or []
+    for t in trunks:
+        y, top = t["y"], t["top"]
+        # 横向主干（画在连线之下，避免压住线标）
+        canvas.add(Line(t["x1"], y, t["x2"], y,
+                        color=TRUNK_COLOR, width=TRUNK_WIDTH, layer="TRUNK"))
+        # 每个子列顶部引下一根短竖线接入主干
+        for cx in t["drops"]:
+            canvas.add(Line(cx, y, cx, top,
+                            color=TRUNK_COLOR, width=TRUNK_WIDTH, layer="TRUNK"))
+        # 端点小圆点，便于识别分接位置
+        for cx in t["drops"]:
+            canvas.add(Circle(cx, y, 3.0, fill=TRUNK_COLOR,
+                              color=TRUNK_COLOR, width=0, layer="TRUNK"))
+
+
 def draw_wires(canvas, project, label_all=True):
+    draw_trunks(canvas, project)
     lut = _lut(project)
     wires = []
     dante_conns = []

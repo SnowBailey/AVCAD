@@ -319,14 +319,23 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
                     if not ok:
                         project.meta.setdefault("amp_warnings", []).append(
                             f"功放{amp.name}通道{ci+1}: {note}")
-    # 有源：从前一线路级（最后一个 前置/后置处理器 > 调音台 > 扬声器管理）接入
+    # 有源：从前一线路级接入。
+    # ★ 阳哥规则 2026-08-30：**有源音箱不经过音响管理器**——
+    #   自带功放的音箱直接从调音台/处理器取信号，SPEAKER_MGR 只服务
+    #   「处理器 -> 管理器 -> 功放 -> 无源音箱」这条链。
     prev = None
-    line_stages = (PROC_PRE, PROC_POST, "MIXER", "SPEAKER_MGR")
+    line_stages = (PROC_PRE, PROC_POST, "MIXER", "SWITCH", "SPEAKER_MGR")
     for c in project.chain:
         if c == "SPEAKER":
             break
         if c in line_stages:
             prev = c
+    # 若只剩音响管理器（常见于纯有源系统），改从调音台/处理器直接取
+    if prev == "SPEAKER_MGR":
+        for c in ("MIXER", PROC_POST, PROC_PRE):
+            if c in project.chain and by_stage.get(c):
+                prev = c
+                break
     if active and prev:
         prev_devs = by_stage[prev]
         pins = []

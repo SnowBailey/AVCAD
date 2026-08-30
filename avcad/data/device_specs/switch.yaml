@@ -8,4 +8,6 @@ params:
 electrical:
   managed: true
 ports_template:
-  - {name: DANTE, side: top, signal: DANTE, role: in, count_from: ports, label: DANTE}
+  # 交换机端口按阳哥规则只标数字（1/2/3…），不写「DANTE1」——
+  # 端口本就画在交换机上，信号类型由交换机名称体现，重复标注反而占位。
+  - {name: DANTE, side: top, signal: DANTE, role: in, count_from: ports, label: ""}
