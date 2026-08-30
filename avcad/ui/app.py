@@ -510,6 +510,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             self._send(200, _dispatch(urlparse(self.path).path, body))
         except Exception as ex:
+            import traceback, sys
+            print(f"[AVCAD] POST {self.path} 异常: {ex}\n{traceback.format_exc()}", file=sys.stderr)
             self._send(500, {"error": str(ex)})
 
     def log_message(self, *a):
