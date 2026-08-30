@@ -23565,8 +23565,8 @@
    "name": "数字会议扩展机",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "会议扩展机(供电扩展)",
    "features": [
     "control"
    ],
@@ -23579,7 +23579,8 @@
    "qty": 0,
    "price": null,
    "remark": "传输距离超过50米时或有扩展单元数量需求时需配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000823",
@@ -23672,7 +23673,7 @@
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "会议系统管理软件",
    "features": [
     "wireless"
    ],
@@ -23683,7 +23684,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000590",
@@ -23775,8 +23777,8 @@
    "name": "公－母5米屏蔽主缆",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -23785,7 +23787,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000608",
@@ -23794,8 +23797,8 @@
    "name": "公－母20米屏蔽主缆",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -23804,7 +23807,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000609",
@@ -23814,7 +23818,7 @@
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -23823,7 +23827,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000645",
@@ -23832,8 +23837,8 @@
    "name": "CF系列6芯屏蔽主缆散线",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF系列配套线材『注：下单必须备注长度*数量+线序版本』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -23842,7 +23847,8 @@
    "qty": 0,
    "price": null,
    "remark": "下单时备注清楚具体所需的”长度*数量+线序版本（注：V1版-CF6800/CF6800L/CF6100使用、V2版-CF6800W/CF6300/CF6200V2版使用）“，无需提定制流程，切勿私自更改产品型号！！！\n举例：型号：CF-C1151-01；数量：30；单位：米；备注：15m*2（V2版）",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "-",
@@ -24126,7 +24132,7 @@
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
    "category": null,
-   "defer_reason": null,
+   "defer_reason": "充电箱(不传音频)",
    "features": [
     "wireless"
    ],
@@ -24140,7 +24146,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000964",
@@ -24150,7 +24157,7 @@
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "中继器(远距离供电补偿)",
    "features": [],
    "active": false,
    "params": {
@@ -24161,7 +24168,8 @@
    "qty": 0,
    "price": null,
    "remark": "仅适用于CF63系列有线单元、CF62系列V2版单元远距离传输供电及RS485信号补偿",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000654",
@@ -24171,7 +24179,7 @@
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "会议系统管理软件",
    "features": [
     "wireless"
    ],
@@ -24182,7 +24190,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63、CF62、CF61系列均可配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000857",
@@ -24296,8 +24305,8 @@
    "name": "公－母5米屏蔽主缆",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24306,7 +24315,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000886",
@@ -24315,8 +24325,8 @@
    "name": "公－母20米屏蔽主缆",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24325,7 +24335,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000885",
@@ -24335,7 +24346,7 @@
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24344,7 +24355,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000645",
@@ -24353,8 +24365,8 @@
    "name": "CF系列6芯屏蔽主缆散线",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF系列配套线材『注：下单必须备注长度*数量+线序版本』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24363,7 +24375,8 @@
    "qty": 0,
    "price": null,
    "remark": "下单时备注清楚具体所需的”长度*数量+线序版本（注：V1版-CF6800/CF6800L/CF6100使用、V2版-CF6800W/CF6300/CF6200V2版使用）“，无需提定制流程，切勿私自更改产品型号！！！\n举例：型号：CF-C1151-01；数量：30；单位：米；备注：15m*2（V2版）",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "-",
@@ -24508,8 +24521,8 @@
    "name": "无线会讨充电箱",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF68W系列无线数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "充电箱(不传音频)",
    "features": [
     "wireless"
    ],
@@ -24523,7 +24536,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000891",
@@ -24687,7 +24701,7 @@
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "会议系统管理软件",
    "features": [
     "wireless"
    ],
@@ -24698,7 +24712,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63、CF62、CF61系列均可配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000887",
@@ -24707,8 +24722,8 @@
    "name": "公－母5米屏蔽主缆",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24717,7 +24732,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000886",
@@ -24726,8 +24742,8 @@
    "name": "公－母20米屏蔽主缆",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24736,7 +24752,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000885",
@@ -24746,7 +24763,7 @@
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF63系列、CF68W系列、CF62系列V2版配备主缆（V2版）』",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24755,7 +24772,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF63系列、CF68W系列、CF62系列V2版主机与单元/天线盒之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000645",
@@ -24764,8 +24782,8 @@
    "name": "CF系列6芯屏蔽主缆散线",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：下单必须备注长度*数量+线序版本』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24774,7 +24792,8 @@
    "qty": 0,
    "price": null,
    "remark": "下单时备注清楚具体所需的”长度*数量+线序版本（注：V1版-CF6800/CF6800L/CF6100使用、V2版-CF6800W/CF6300/CF6200V2版使用）“，无需提定制流程，切勿私自更改产品型号！！！\n举例：型号：CF-C1151-01；数量：30；单位：米；备注：15m*2（V2版）",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000617",
@@ -24856,8 +24875,8 @@
    "name": "公－母5米屏蔽主缆",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24866,7 +24885,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000608",
@@ -24875,8 +24895,8 @@
    "name": "公－母20米屏蔽主缆",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24885,7 +24905,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000609",
@@ -24895,7 +24916,7 @@
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：CF68系列、CF61系列配备主缆（V1版）』",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24904,7 +24925,8 @@
    "qty": 0,
    "price": null,
    "remark": "CF68系列、CF61系列主机与单元之间的延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000645",
@@ -24913,8 +24935,8 @@
    "name": "CF系列6芯屏蔽主缆散线",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF系列配套线材『注：下单必须备注长度*数量+线序版本』",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频/主缆线材(非设备)",
    "features": [],
    "active": false,
    "params": {},
@@ -24923,7 +24945,8 @@
    "qty": 0,
    "price": null,
    "remark": "下单时备注清楚具体所需的”长度*数量+线序版本（注：V1版-CF6800/CF6800L/CF6100使用、V2版-CF6800W/CF6300/CF6200V2版使用）“，无需提定制流程，切勿私自更改产品型号！！！\n举例：型号：CF-C1151-01；数量：30；单位：米；备注：15m*2（V2版）",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "-",
@@ -25163,8 +25186,8 @@
    "name": "鹅颈麦克风咪杆",
    "group": "铁思配套（模拟话筒）",
    "section": "ATS系列底座+CF22系列咪杆组合",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "麦克风咪杆(配件)",
    "features": [
     "phantom"
    ],
@@ -25175,7 +25198,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001288",
@@ -25184,8 +25208,8 @@
    "name": "鹅颈麦克风咪杆",
    "group": "铁思配套（模拟话筒）",
    "section": "ATS系列底座+CF22系列咪杆组合",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "麦克风咪杆(配件)",
    "features": [
     "phantom"
    ],
@@ -25196,7 +25220,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000851",
@@ -25441,8 +25466,8 @@
    "name": "天线信号中继器",
    "group": "其他会议系统（前级）",
    "section": "天线分配系统",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频线路放大器(串接,不参与分配拓扑)",
    "features": [],
    "active": true,
    "params": {
@@ -25454,7 +25479,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001251",
@@ -25463,20 +25489,23 @@
    "name": "天线信号分线器",
    "group": "其他会议系统（前级）",
    "section": "天线分配系统",
-   "category": "ANTENNA",
+   "category": "ANT_DIST",
    "defer_reason": null,
    "features": [],
    "active": false,
    "params": {
     "impedance_ohm": 50,
-    "bnc": 1
+    "inputs": 1,
+    "outputs": 2,
+    "cascade_outs": 0
    },
    "country": "中国",
    "unit": "台",
    "qty": 0,
    "price": null,
-   "remark": "",
-   "sheet": "IPS爱普思"
+   "remark": "端口数官网未给，按分线器暂定 1进/2出，待现场确认",
+   "sheet": "IPS爱普思",
+   "no_draw": false
   },
   {
    "code": "1100001140",
@@ -25555,7 +25584,8 @@
    "qty": 0,
    "price": null,
    "remark": "需配备路由器使用",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001483",
@@ -25574,7 +25604,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001209",
@@ -25596,7 +25627,8 @@
    "qty": 0,
    "price": null,
    "remark": "项目专定",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001210",
@@ -25618,7 +25650,8 @@
    "qty": 0,
    "price": null,
    "remark": "项目专定",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001211",
@@ -25639,7 +25672,8 @@
    "qty": 0,
    "price": null,
    "remark": "项目专定",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001212",
@@ -25658,7 +25692,8 @@
    "qty": 0,
    "price": null,
    "remark": "项目专定",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000686",
@@ -25811,8 +25846,8 @@
    "name": "Aries 控制面板（白色）",
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25825,7 +25860,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "2000001058",
@@ -25834,8 +25870,8 @@
    "name": "Aries 控制面板（灰色）",
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25848,7 +25884,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000164",
@@ -25857,8 +25894,8 @@
    "name": "Aries 控制面板（白色）",
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25871,7 +25908,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000098",
@@ -25880,8 +25918,8 @@
    "name": "Aries 控制面板（灰色）",
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25894,7 +25932,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000023",
@@ -25904,7 +25943,7 @@
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25915,7 +25954,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000086",
@@ -25925,7 +25965,7 @@
    "group": "音频处理器",
    "section": "Aries系列数字音频处理器",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -25936,7 +25976,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000993",
@@ -26122,8 +26163,8 @@
    "name": "网络控制面板",
    "group": "音频处理器",
    "section": "Libra系列数字音频处理器",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -26134,7 +26175,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001038",
@@ -26144,7 +26186,7 @@
    "group": "音频处理器",
    "section": "Libra系列数字音频处理器",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "控制面板(不传音频)",
    "features": [
     "control"
    ],
@@ -26155,7 +26197,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001324",
@@ -26241,7 +26284,7 @@
    "name": "智能自动混音器",
    "group": "音频处理器",
    "section": "智能自动混音器",
-   "category": "SOURCE",
+   "category": "PROCESSOR",
    "defer_reason": null,
    "features": [
     "control",
@@ -26256,7 +26299,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": false
   },
   {
    "code": "1100000969",
@@ -26567,8 +26611,8 @@
    "name": "飞行架",
    "group": "扬声器",
    "section": "线阵列扬声器配套架",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -26577,7 +26621,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001072",
@@ -26586,8 +26631,8 @@
    "name": "飞行架",
    "group": "扬声器",
    "section": "线阵列扬声器配套架",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -26596,7 +26641,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001075",
@@ -26605,8 +26651,8 @@
    "name": "飞行架",
    "group": "扬声器",
    "section": "线阵列扬声器配套架",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -26615,7 +26661,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000916",
@@ -27124,7 +27171,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27133,7 +27180,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001133",
@@ -27143,7 +27191,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27152,7 +27200,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001171",
@@ -27162,7 +27211,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27171,7 +27220,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001173",
@@ -27181,7 +27231,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27190,7 +27240,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001172",
@@ -27200,7 +27251,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27209,7 +27260,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001174",
@@ -27219,7 +27271,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27228,7 +27280,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001134",
@@ -27238,7 +27291,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27247,7 +27300,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001175",
@@ -27257,7 +27311,7 @@
    "group": "扬声器",
    "section": "点声源扬声器配套架",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27266,7 +27320,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000988",
@@ -27445,8 +27500,8 @@
    "name": "柱式扬声器墙壁安装架",
    "group": "扬声器",
    "section": "柱式扬声器配套架",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27455,7 +27510,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001364",
@@ -27489,8 +27545,8 @@
    "name": "BF12飞行架",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27499,7 +27555,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001398",
@@ -27508,8 +27565,8 @@
    "name": "BF12支杆安装架",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27518,7 +27575,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001397",
@@ -27527,8 +27585,8 @@
    "name": "BF12墙面安装支架选配款",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27537,7 +27595,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "扬声器顶部及底部分体式安装设计，单只扬声器使用，水平旋转最大180°，不支持级联组合使用",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001517",
@@ -27546,8 +27605,8 @@
    "name": "BF12航空箱",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27556,7 +27615,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001508",
@@ -27565,8 +27625,8 @@
    "name": "BF租赁流动安装支架 套装（含左右两组支架组件和航空箱）",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27575,7 +27635,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001512",
@@ -27584,8 +27645,8 @@
    "name": "BF流动安装支架延长模块",
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
-   "category": "SPEAKER",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27594,7 +27655,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001531",
@@ -27604,7 +27666,7 @@
    "group": "扬声器",
    "section": "BF系列自适应可调指向柱体扬声器",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "安装/吊挂配件",
    "features": [],
    "active": false,
    "params": {},
@@ -27613,7 +27675,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000029",
@@ -27671,7 +27734,7 @@
    "name": "单电脑DI盒",
    "group": "音频接口盒",
    "section": "音频接口盒",
-   "category": "SOURCE",
+   "category": "IO",
    "defer_reason": null,
    "features": [],
    "active": false,
@@ -27681,7 +27744,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": false
   },
   {
    "code": "1100000027",
@@ -27690,7 +27754,7 @@
    "name": "双电脑DI盒",
    "group": "音频接口盒",
    "section": "音频接口盒",
-   "category": "SOURCE",
+   "category": "IO",
    "defer_reason": null,
    "features": [],
    "active": false,
@@ -27700,7 +27764,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": false
   },
   {
    "code": "1100000121",
@@ -27724,7 +27789,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "需先确定是否需要控制卡和音频卡",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000124",
@@ -27748,7 +27814,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "芯片原因，型号变更",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000494",
@@ -27772,7 +27839,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000362",
@@ -27796,7 +27864,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000365",
@@ -27820,7 +27889,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000363",
@@ -27844,7 +27914,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000366",
@@ -27868,7 +27939,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000564",
@@ -27889,7 +27961,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000126",
@@ -27908,7 +27981,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000288",
@@ -27929,7 +28003,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "如接收信号为4K信号则无法发送信号给1080P板卡",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000289",
@@ -27951,7 +28026,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000122",
@@ -27972,7 +28048,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000123",
@@ -27993,7 +28070,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000549",
@@ -28014,7 +28092,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000550",
@@ -28035,7 +28114,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000283",
@@ -28058,7 +28138,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000367",
@@ -28081,7 +28162,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000364",
@@ -28102,7 +28184,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000368",
@@ -28123,7 +28206,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000137",
@@ -28132,8 +28216,8 @@
    "name": "音频交换板",
    "group": "视频产品",
    "section": "XP100系列视频矩阵",
-   "category": "IO",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频矩阵音频板卡(非独立设备)",
    "features": [],
    "active": false,
    "params": {
@@ -28148,7 +28232,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅嵌入音频路由，无EQ等处理功能",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000369",
@@ -28171,7 +28256,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000118",
@@ -28234,7 +28320,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP实际传输距离70m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000552",
@@ -28253,7 +28340,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP实际传输距离70m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000120",
@@ -28274,7 +28362,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP实际传输距离70m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000554",
@@ -28283,8 +28372,8 @@
    "name": "多格式光纤发送器",
    "group": "视频产品",
    "section": "XP100系列视频矩阵",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "非音频设备(XP100系列视频矩阵)",
    "features": [],
    "active": false,
    "params": {},
@@ -28293,7 +28382,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "默认单模连接\n单模(SM波长：1310nm)：可达1.4km\n多模（mm波长：850nm）：可达300m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000553",
@@ -28302,8 +28392,8 @@
    "name": "多格式光纤接收器",
    "group": "视频产品",
    "section": "XP100系列视频矩阵",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "非音频设备(XP100系列视频矩阵)",
    "features": [],
    "active": false,
    "params": {},
@@ -28312,7 +28402,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "默认单模连接\n单模(SM波长：1310nm)：可达1.4km\n多模（mm波长：850nm）：可达300m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001044",
@@ -28335,7 +28426,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001235",
@@ -28356,7 +28448,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001236",
@@ -28377,7 +28470,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001045",
@@ -28398,7 +28492,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001046",
@@ -28419,7 +28514,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001047",
@@ -28440,7 +28536,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001048",
@@ -28461,7 +28558,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001053",
@@ -28578,7 +28676,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001050",
@@ -28599,7 +28698,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001055",
@@ -28620,7 +28720,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001056",
@@ -28641,7 +28742,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001058",
@@ -28662,7 +28764,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP线缆2K传输70m，4K@30传输35m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001059",
@@ -28683,7 +28786,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP线缆2K传输70m，4K@30传输35m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001039",
@@ -28707,7 +28811,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001040",
@@ -28731,7 +28836,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001041",
@@ -28754,7 +28860,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001042",
@@ -28778,7 +28885,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001043",
@@ -28799,7 +28907,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000809",
@@ -28820,7 +28929,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000810",
@@ -28841,7 +28951,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000546",
@@ -28864,7 +28975,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000545",
@@ -28887,7 +28999,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000965",
@@ -28908,7 +29021,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000469",
@@ -28927,7 +29041,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "确认中",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000470",
@@ -28946,7 +29061,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "确认中",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001502",
@@ -28968,7 +29084,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001503",
@@ -28990,7 +29107,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001504",
@@ -29012,7 +29130,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001505",
@@ -29034,7 +29153,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001514",
@@ -29053,7 +29173,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "按需独立配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001515",
@@ -29072,7 +29193,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "按需独立配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001516",
@@ -29091,7 +29213,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "按需独立配置",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000474",
@@ -29114,7 +29237,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000472",
@@ -29137,7 +29261,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000574",
@@ -29158,7 +29283,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000475",
@@ -29181,7 +29307,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000473",
@@ -29204,7 +29331,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000476",
@@ -29228,7 +29356,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000471",
@@ -29249,7 +29378,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "必配，可支持300个节点",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000573",
@@ -29270,7 +29400,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000556",
@@ -29293,7 +29424,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000557",
@@ -29316,7 +29448,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001231",
@@ -29339,7 +29472,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "不支持KVM功能",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001232",
@@ -29362,7 +29496,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "不支持KVM功能",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001485",
@@ -29385,7 +29520,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "支持KVM功能\n输入分辨率4K@30，色度抽样4:2;0\n编码输出支持分辨率4K@60，色度抽样4:2:0",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001486",
@@ -29408,7 +29544,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "支持KVM功能\n输出分辨率4K@60，色度抽样4:2:0\n默认固件不支持KVM，如需要，请在合同备注，出厂会刷KVM固件",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000560",
@@ -29431,7 +29568,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "需要涉及到分布式节点的运维管理时，可以配置，根据分布式节点数量不同，选择合适的数量",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000586",
@@ -29454,7 +29592,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "需要涉及到分布式节点的运维管理时，可以配置，根据分布式节点数量不同，选择合适的数量",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000587",
@@ -29477,7 +29616,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "需要涉及到分布式节点的运维管理时，可以配置，根据分布式节点数量不同，选择合适的数量",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000565",
@@ -29501,7 +29641,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000572",
@@ -29525,7 +29666,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000479",
@@ -29549,7 +29691,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000478",
@@ -29573,7 +29716,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000471",
@@ -29594,7 +29738,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "必配，可支持300个节点",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000573",
@@ -29615,7 +29760,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001511",
@@ -29638,7 +29784,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001291",
@@ -29703,7 +29850,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000343",
@@ -29726,7 +29874,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "7000000059",
@@ -29756,8 +29905,8 @@
    "name": "10.1寸智慧信息屏（基础款）",
    "group": "CTS智慧屏产品系列",
    "section": "智慧信息屏&控制屏",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "非音频设备(智慧信息屏&控制屏)",
    "features": [
     "control"
    ],
@@ -29768,7 +29917,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000712",
@@ -29829,7 +29979,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001346",
@@ -29851,7 +30002,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000671",
@@ -29872,7 +30024,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000710",
@@ -30106,7 +30259,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000361",
@@ -30129,7 +30283,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000985",
@@ -30152,7 +30307,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000003",
@@ -30171,7 +30327,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000006",
@@ -30194,7 +30351,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001022",
@@ -30217,7 +30375,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000744",
@@ -30258,7 +30417,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1200003087",

@@ -19,6 +19,11 @@ from avcad.parse.product_resolver import enrich as resolve_products
 
 # 非信号设备：机械/结构件，不出系统图
 RIGGING = ["吊架", "飞行架", "桁架"]
+# 占位项：造价清单里的「甲方自配 / 按需保留 / 待定」等，无品牌无型号，
+# 无法建模，也不该让用户每次在第②步手动点「不需要」。
+# ★ 只在 brand 与 model 同时为空时才排除，避免误杀真实设备。
+PLACEHOLDER = ["按需保留", "自配", "甲方自配", "甲供", "待定", "暂定",
+               "按实结算", "详见图纸", "另计", "不含", "见清单"]
 # 成对销售：清单「单位=对/副/pair」时按 2 台/支展开
 # （IPS UM2000AP 全指向天线、UM2000AT 有源指向天线：主库 remark「1 对 = 2 支」）
 PAIR_UNITS = {"对", "副", "pair", "pairs"}
@@ -51,6 +56,19 @@ _OUT = re.compile(r"模拟输出\s*(\d+)\s*路")
 
 def is_rigging(name: str) -> bool:
     return any(k in (name or "") for k in RIGGING)
+
+
+def is_placeholder(name: str, row=None) -> bool:
+    """占位项判定：无品牌 + 无型号 + 名称是「自配 / 按需保留」之类。
+
+    仅在品牌与型号同时为空时生效，否则「定制机柜」这类真实设备会被误杀。
+    """
+    if not any(k in (name or "") for k in PLACEHOLDER):
+        return False
+    row = row or {}
+    brand = str(row.get("品牌") or row.get("brand") or "").strip()
+    model = str(row.get("型号") or row.get("model") or "").strip()
+    return not brand and not model
 
 
 def classify_category(name: str):
@@ -184,6 +202,10 @@ def build_entries(path: str):
     for r in raw:
         name = r.get("设备名称") or r.get("名称") or r.get("name") or ""
         if is_rigging(name):
+            dropped.append(r)
+            continue
+        # 占位项（无品牌无型号的「自配 / 按需保留」等）：直接排除，不进第②步
+        if is_placeholder(name, r):
             dropped.append(r)
             continue
         # 造价/计价清单里大量「项目特征描述」续行、小计行、空行：设备名称为空

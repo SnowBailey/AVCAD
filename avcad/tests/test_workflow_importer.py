@@ -3,11 +3,26 @@ from __future__ import annotations
 import os
 
 from avcad.workflow.importers import (
-    classify_category, is_rigging, extract_params, extract_features,
+    classify_category, is_rigging, is_placeholder,
+    extract_params, extract_features,
     build_entries, to_bom_csv,
 )
 
 REAL_XLSX = "/Users/mac/Desktop/测试.xlsx"
+
+
+def test_is_placeholder_needs_empty_brand_and_model():
+    """占位词命中还不够——必须 brand 与 model 同时为空才排除。
+
+    否则「自配机柜」这类带型号的真实设备会被误杀。
+    """
+    assert is_placeholder("按需保留", {"品牌": "", "型号": ""})
+    assert is_placeholder("自配", {"品牌": "", "型号": ""})
+    # 有品牌或型号 -> 不排除
+    assert not is_placeholder("自配", {"品牌": "IPS", "型号": ""})
+    assert not is_placeholder("自配", {"品牌": "", "型号": "XX-1"})
+    # 非占位词
+    assert not is_placeholder("数字调音台", {"品牌": "", "型号": ""})
 
 
 def test_classify_category_basic():
@@ -206,3 +221,49 @@ def test_build_entries_real_xlsx():
     assert spk == 28
     # ML210FB 不在条目内
     assert "ML210FB" not in by_model
+
+
+def _xlsx(tmp_path, rows):
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(["设备名称", "品牌", "型号", "数量"])
+    for r in rows:
+        ws.append(list(r))
+    path = tmp_path / "ips_catalog.xlsx"
+    wb.save(path)
+    return str(path)
+
+
+def test_ips_catalog_round3_nodraw_and_reclass(tmp_path):
+    """主库矫正第三轮：非设备/配件不出图，误分类设备归位。"""
+    path = _xlsx(tmp_path, [
+        # —— 应排除（no_draw）——
+        ("公－母5米屏蔽主缆", "IPS", "CF-C1132-05", 4),   # 线缆
+        ("无线单元充电箱", "IPS", "CF6300WCB", 1),        # 充电箱
+        ("Aries 控制面板（白色）", "IPS", "CP-1PW", 2),    # 控制面板
+        ("线阵列扬声器飞行架", "IPS", "ML210FB", 2),       # 安装架
+        ("鹅颈麦克风咪杆", "IPS", "CF2223", 10),         # 咪杆（配件）
+        # —— 应保留且分类纠正 ——
+        ("智能自动混音器", "IPS", "AM860", 1),            # SOURCE -> PROCESSOR
+        ("单电脑DI盒", "IPS", "SI Box", 1),              # SOURCE -> IO
+        ("双电脑DI盒", "IPS", "DI Box", 1),              # SOURCE -> IO
+        # —— 占位项（无品牌无型号）——
+        ("按需保留", "", "", 1),
+        ("自配", "", "", 1),
+    ])
+    entries, dropped = build_entries(path)
+    got = {str(e.get("model")): e for e in entries}
+    dropped_names = [str(d.get("设备名称") or d.get("名称")) for d in dropped]
+
+    # 排除
+    for m in ("CF-C1132-05", "CF6300WCB", "CP-1PW", "ML210FB", "CF2223"):
+        assert m not in got, f"{m} 应被 no_draw 排除"
+    # 占位项也排除，且不用用户手动点「不需要」
+    assert any("按需保留" in n for n in dropped_names)
+    assert any("自配" in n for n in dropped_names)
+
+    # 分类纠正
+    assert got["AM860"]["category"] == "PROCESSOR"
+    assert got["SI Box"]["category"] == "IO"
+    assert got["DI Box"]["category"] == "IO"
