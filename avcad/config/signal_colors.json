@@ -48,5 +48,10 @@
     "label": "光纤",
     "primary": {"color": "#7fd1e8", "layer": "WIRES_DIGITAL", "ltype": "solid"},
     "backup":  {"color": "#5fb8d0", "layer": "WIRES_DIGITAL", "ltype": "dashed"}
+  },
+  "TRS": {
+    "label": "模拟音频 (6.35 混合)",
+    "primary": {"color": "#7fbf9a", "layer": "WIRES_ANALOG", "ltype": "solid"},
+    "backup":  {"color": "#6aa684", "layer": "WIRES_ANALOG", "ltype": "dashed"}
   }
 }

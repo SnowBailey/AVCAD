@@ -79,6 +79,28 @@ def _connect_sources_to_core(project, by_stage):
 CASCADE_OUTS = 2
 
 
+def required_dist_count(n_rx, antennas_per_rx=4, outputs=10, cascade=CASCADE_OUTS):
+    """带 n_rx 台接收机所需的最少天线分配器台数。
+
+    容量模型与 _antenna_distribution 一致：
+      非末台可用出口 = outputs − cascade；末台可用出口 = outputs；
+      每台接收机占 antennas_per_rx 个出口。
+    """
+    if n_rx <= 0:
+        return 0
+    per_rx = max(1, int(antennas_per_rx or 1))
+    n = 1
+    while n <= 200:
+        cap = 0
+        for i in range(n):
+            usable = outputs if i == n - 1 else max(0, outputs - cascade)
+            cap += usable // per_rx
+        if cap >= n_rx:
+            return n
+        n += 1
+    return n
+
+
 def _rf_ports(devs, role):
     """取设备列表中指定方向的 RF 有线端口（排除 air 空中口），返回 [(dev, port)]。"""
     out = []
@@ -159,6 +181,24 @@ def _antenna_distribution(project, by_stage):
         project.meta.setdefault("wireless_warnings", []).append(
             f"天线分配器出口不足：{len(pending)} 台无线接收机未分配到天线口"
             f"（尚缺 {need} 口，建议增加 UM2000ATD）")
+
+    # 容量测算：给出「带这些接收机实际需要几台分配器」的提示
+    if rxs:
+        per_rx = max(len(_rf_ports([r], "in")) or 1 for r in rxs)
+        outs = max((len(_rf_ports([d], "out")) for d in dists), default=0)
+        req = required_dist_count(len(rxs), per_rx, outs)
+        project.meta["wireless_plan"] = {
+            "receivers": len(rxs),
+            "antennas_per_receiver": per_rx,
+            "dists": len(dists),
+            "dists_required": req,
+            "outputs_per_dist": outs,
+            "ok": len(dists) >= req,
+        }
+        if len(dists) < req:
+            project.meta.setdefault("wireless_warnings", []).append(
+                f"天线分配器数量不足：{len(rxs)} 台接收机至少需要 {req} 台"
+                f"（当前 {len(dists)} 台）")
 
 
 def _dedup(project):

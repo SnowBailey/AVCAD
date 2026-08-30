@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from avcad.core.build import build_project
 from avcad.parse.product_resolver import resolve
+from avcad.wires.router import required_dist_count
 
 
 def _rx(uid_extra=0, **over):
@@ -154,6 +155,68 @@ def test_last_dist_uses_all_outs():
                  if c.from_uid == last.uid and c.note == "天线分配"]
     # 4 台接收机：首台吃 2 台（8 口），末台吃 2 台（8 口），故末台发出 8 条
     assert len(from_last) == 8, f"末台分配线 {len(from_last)} 条"
+
+
+def test_required_dist_count_matches_rule():
+    """容量模型：非末台留 2 出口，每 4 口 1 台 -> 每台分配器带 2 台接收机。"""
+    assert required_dist_count(1) == 1
+    assert required_dist_count(2) == 1      # 末台 10 出即可带 2 台
+    assert required_dist_count(3) == 2
+    assert required_dist_count(7) == 4      # 智慧剧场实测：7 台 -> 4 台
+    assert required_dist_count(8) == 4
+
+
+def test_wireless_plan_ok_when_enough_dists():
+    entries = [
+        {"category": "ANTENNA", "brand": "IPS", "model": "UM2000AP",
+         "name": "全指向天线", "quantity": 2},
+        _dist(), _dist(),
+        _rx(quantity=4),
+        _mixer(),
+    ]
+    p = build_project(entries, name="T")
+    plan = p.meta.get("wireless_plan") or {}
+    assert plan.get("receivers") == 4
+    assert plan.get("dists_required") == 2
+    assert plan.get("ok") is True
+
+
+# ---------------- 6.35 混合输出 ----------------
+def test_mix_out_port_present_when_feature_set():
+    """UM2002 带 mix_out 特性时应多出 1 路 TRS 混合输出。"""
+    from avcad.model.specs import build_instances
+    insts = build_instances([{
+        "category": "WIRELESS_RX", "brand": "IPS", "model": "UM2002",
+        "name": "无线双手持麦克风", "quantity": 1,
+        "features": ["analog", "control", "mix_out"],
+        "params": {"channels": 2, "antennas": 4},
+    }])
+    rx = insts[0]
+    trs = [x for x in rx.ports if x.signal.value == "TRS"]
+    xlr = [x for x in rx.ports if x.signal.value == "XLR" and x.role == "out"]
+    assert len(trs) == 1, f"TRS 口 {len(trs)}"
+    assert len(xlr) == 2
+    assert len([x for x in rx.ports if x.signal.value == "RF"]) == 4
+
+
+# ---------------- 套装拆分 ----------------
+def test_set_expand_splits_receiver_and_transmitters(tmp_path):
+    """UM2002「1 台接收机 + 2 支话筒」应拆成 1×WIRELESS_RX + 2×WIRELESS_MIC。"""
+    import openpyxl
+    from avcad.workflow.importers import build_entries
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(["设备名称", "品牌", "型号", "数量"])
+    ws.append(["无线双手持麦克风", "IPS", "UM2002", 4])
+    path = tmp_path / "um2002.xlsx"
+    wb.save(path)
+    entries, _ = build_entries(str(path))
+    by_cat = {}
+    for e in entries:
+        by_cat.setdefault(e["category"], 0)
+        by_cat[e["category"]] += int(e.get("quantity", 1) or 1)
+    assert by_cat.get("WIRELESS_RX") == 4, by_cat   # 4 套 -> 4 台接收机
+    assert by_cat.get("WIRELESS_MIC") == 8, by_cat  # 4 套 -> 8 支话筒
 
 
 def test_insufficient_outs_warns():

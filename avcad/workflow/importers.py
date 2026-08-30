@@ -129,6 +129,50 @@ def read_xlsx_rows(path: str) -> list:
     return out
 
 
+def _expand_sets(av: list) -> list:
+    """把「套装」条目拆成图上应有的独立设备。
+
+    触发条件：主库 params 含 ``set_expand``，形如 ``{"rx": 1, "tx": 2}``
+    （1 台接收机 + 2 支发射端）。数量按套数成倍展开：
+    清单 4 套 UM2002 → 4 台 WIRELESS_RX + 8 支 WIRELESS_MIC。
+
+    发射端是无线设备，图上只画本体与空中 RF 口，不产生线缆连接。
+    """
+    out = []
+    for e in av:
+        se = (e.get("params") or {}).get("set_expand")
+        if not isinstance(se, dict):
+            out.append(e)
+            continue
+        qty = int(e.get("quantity", 1) or 1)
+        n_rx = int(se.get("rx", 0) or 0)
+        n_tx = int(se.get("tx", 0) or 0)
+        if not (n_rx or n_tx):
+            out.append(e)
+            continue
+        params = {k: v for k, v in (e.get("params") or {}).items()
+                  if k != "set_expand"}
+        common = {k: v for k, v in e.items()
+                  if k not in ("category", "quantity", "params", "features", "name")}
+        if n_rx:
+            r = dict(common)
+            r["category"] = "WIRELESS_RX"
+            r["name"] = e.get("name") or ""
+            r["quantity"] = qty * n_rx
+            r["params"] = dict(params)
+            r["features"] = list(e.get("features") or [])
+            out.append(r)
+        if n_tx:
+            t = dict(common)
+            t["category"] = "WIRELESS_MIC"
+            t["name"] = (e.get("name") or "") + "·话筒"
+            t["quantity"] = qty * n_tx
+            t["params"] = {}
+            t["features"] = []
+            out.append(t)
+    return out
+
+
 def build_entries(path: str):
     """读 xlsx -> 规范化条目（已排除吊架）。返回 (entries, dropped_rows)。
 
@@ -162,6 +206,9 @@ def build_entries(path: str):
     for e in av:
         if str(e.get("_unit", "")).strip().lower() in PAIR_UNITS:
             e["quantity"] = int(e.get("quantity", 1) or 1) * PAIR_UNIT_FACTOR
+    # 套装拆分：清单按「套」计价，图上要分别画出接收机与发射端
+    # （IPS UM2002 系列 remark：「套装型号，里面包含 1 台接收机和 2 台麦克风」）
+    av = _expand_sets(av)
     kept = []
     for e in av:
         cat = e.get("category")

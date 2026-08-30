@@ -445,6 +445,8 @@ def _dispatch(path, body):
             "cache_miss": result["cache_miss"],
             "devices": devices,
             "legend": legend,
+            "wireless": proj.meta.get("wireless_plan"),
+            "wireless_warnings": proj.meta.get("wireless_warnings", []),
             "anon": anon,
             "summary": summarize(result),
             "issues": [{"level": i.level, "code": i.code, "msg": i.msg}

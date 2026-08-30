@@ -25273,13 +25273,18 @@
    "features": [
     "analog",
     "control",
+    "mix_out",
     "wireless"
    ],
    "active": false,
    "params": {
     "impedance_ohm": 440,
     "channels": 2,
-    "antennas": 4
+    "antennas": 4,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
    },
    "country": "中国",
    "unit": "套",
@@ -25300,13 +25305,18 @@
    "features": [
     "analog",
     "control",
+    "mix_out",
     "wireless"
    ],
    "active": false,
    "params": {
     "impedance_ohm": 440,
     "channels": 2,
-    "antennas": 4
+    "antennas": 4,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
    },
    "country": "中国",
    "unit": "套",
@@ -25327,13 +25337,18 @@
    "features": [
     "analog",
     "control",
+    "mix_out",
     "wireless"
    ],
    "active": false,
    "params": {
     "impedance_ohm": 440,
     "channels": 2,
-    "antennas": 4
+    "antennas": 4,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
    },
    "country": "中国",
    "unit": "套",
