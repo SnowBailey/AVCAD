@@ -297,3 +297,31 @@ def test_ezacoustics_accessories_nodraw(tmp_path):
     assert got["W12M"]["category"] == "SPEAKER"
     assert got["X-CORE S"]["category"] == "PROCESSOR"
     assert got["RDD12"]["category"] == "IO"
+
+
+def test_ips_discontinued_units_nodraw_and_cf6300wb_antenna(tmp_path):
+    """阳哥裁定：停产主机的配套单元一并停产；CF6300WB 归 ANTENNA。
+
+    CF63 系列主机 CF6300 在产，其单元必须保留；CF68/CF68W/CF62/CF61 的
+    主机均已停产，配套单元同停。
+    """
+    path = _xlsx(tmp_path, [
+        ("数字会议单元", "IPS", "CF6821", 4),        # CF68  主机停产
+        ("无线数字会议单元", "IPS", "CF6850", 4),     # CF68W 主机停产
+        ("数字会议单元", "IPS", "CF6211", 4),        # CF62  主机停产
+        ("数字会议单元", "IPS", "CF6110L", 2),       # CF61  主机停产
+        ("数字会议单元", "IPS", "CF6310", 4),        # CF63  在产 -> 保留
+        ("鹅颈数字会议单元", "IPS", "CF6319L", 4),    # CF63  在产 -> 保留
+        ("无线会讨天线盒", "IPS", "CF6300WB", 1),     # -> ANTENNA
+        ("有线无线融合会议主机", "IPS", "CF6300", 1),  # -> MIC_HOST
+    ])
+    entries, _ = build_entries(path)
+    got = {str(e.get("model")): e for e in entries}
+
+    for m in ("CF6821", "CF6850", "CF6211", "CF6110L"):
+        assert m not in got, f"{m} 主机已停产，单元应一并排除"
+
+    assert got["CF6310"]["category"] == "SOURCE"
+    assert got["CF6319L"]["category"] == "SOURCE"
+    assert got["CF6300"]["category"] == "MIC_HOST"
+    assert got["CF6300WB"]["category"] == "ANTENNA"

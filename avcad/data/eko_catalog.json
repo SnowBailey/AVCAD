@@ -23742,8 +23742,8 @@
    "name": "数模双备会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "analog",
     "control",
@@ -23762,7 +23762,8 @@
    "qty": 0,
    "price": null,
    "remark": "黑色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000824",
@@ -23771,8 +23772,8 @@
    "name": "数字会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "control"
    ],
@@ -23789,7 +23790,8 @@
    "qty": 0,
    "price": null,
    "remark": "黑色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000825",
@@ -23798,8 +23800,8 @@
    "name": "数字会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -23816,7 +23818,8 @@
    "qty": 0,
    "price": null,
    "remark": "黑色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000653",
@@ -23847,8 +23850,8 @@
    "name": "数模双备会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "analog",
     "control",
@@ -23867,7 +23870,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存、灰色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000591",
@@ -23876,8 +23880,8 @@
    "name": "数字会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "control"
    ],
@@ -23894,7 +23898,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存、灰色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000592",
@@ -23903,8 +23908,8 @@
    "name": "数字会议单元",
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -23921,7 +23926,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存、灰色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000762",
@@ -24090,7 +24096,7 @@
    "name": "无线会讨天线盒",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
-   "category": "IO",
+   "category": "ANTENNA",
    "defer_reason": null,
    "features": [
     "control",
@@ -24155,7 +24161,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": false
   },
   {
    "code": "1100001404",
@@ -24626,8 +24633,8 @@
    "name": "无线数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF68W系列无线数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "control",
     "wireless"
@@ -24641,7 +24648,8 @@
    "qty": 0,
    "price": null,
    "remark": "灰色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000827",
@@ -24650,8 +24658,8 @@
    "name": "无线数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF68W系列无线数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "control",
     "wireless"
@@ -24665,7 +24673,8 @@
    "qty": 0,
    "price": null,
    "remark": "黑色外观",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000915",
@@ -24724,8 +24733,8 @@
    "name": "数模双备会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "analog",
     "phantom",
@@ -24741,7 +24750,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000889",
@@ -24750,8 +24760,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -24765,7 +24775,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000888",
@@ -24774,8 +24785,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -24789,7 +24800,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001127",
@@ -24798,8 +24810,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "control",
     "wireless"
@@ -24817,7 +24829,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001126",
@@ -24826,8 +24839,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -24844,7 +24857,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000654",
@@ -24980,8 +24994,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF61系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -24995,7 +25009,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000616",
@@ -25004,8 +25019,8 @@
    "name": "数字会议单元",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF61系列数字会议系统",
-   "category": "SOURCE",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号(配套主机已停产)",
    "features": [
     "wireless"
    ],
@@ -25019,7 +25034,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000762",
@@ -25656,7 +25672,7 @@
    "unit": "台",
    "qty": 0,
    "price": null,
-   "remark": "端口数官网未给，按分线器暂定 1进/2出，待现场确认",
+   "remark": "官网：射频信号分割 / 射频信号合成 / 偏置电压供电（端口数由阳哥确认 2026-08-30）",
    "sheet": "IPS爱普思",
    "no_draw": false
   },
