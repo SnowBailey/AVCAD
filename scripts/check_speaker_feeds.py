@@ -1,7 +1,7 @@
 """全局复查：所有方案里有源/无源扬声器的取信号情况。
 
-检查项：
-  1. 每台有源音箱是否恰好 1 路音频进线（XLR/AES 或 DANTE，不得两者兼有）
+检查项（阳哥 2026-08-30 修正版）：
+  1. 每台有源音箱模拟与 Dante 都要接（两条独立链路），但每种信号最多 1 路
   2. 进线的信号类型是否与它落的那个端口一致
   3. 前级设备的出口是否被重复占用（同一 from_port 出现两次以上）
   4. 有源音箱是否误接 Dante 直连线（Dante 必须经交换机）
@@ -62,11 +62,12 @@ def main():
             fs = feeds.get(s.uid, [])
             if len(fs) == 0:
                 issues.append(f"{s.model} 无音频进线")
-            elif len(fs) > 1:
-                sigs = "/".join(f.signal.value for f in fs)
-                issues.append(f"{s.model} 取了 {len(fs)} 路（{sigs}）")
-            else:
-                f = fs[0]
+                continue
+            sigs = collections.Counter(f.signal.value for f in fs)
+            for sig, n in sigs.items():
+                if n > 1:
+                    issues.append(f"{s.model} 取了 {n} 路 {sig}")
+            for f in fs:
                 tgt = next((p for p in s.ports if p.id == f.to_port), None)
                 if tgt is None or tgt.signal != f.signal:
                     issues.append(

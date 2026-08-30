@@ -34,6 +34,7 @@ def connect(project):
     # 0) 会讨手拉手优先：会议单元串到主机后，由主机统一汇出，
     #    不再走 SOURCE 的星型配对（否则会画成「每台话筒直连处理器」）。
     conf_units = _conference_link(project, by_stage)
+    _conference_box_link(project, by_stage, conf_units)
     if conf_units:
         by_stage["SOURCE"] = [i for i in by_stage.get("SOURCE", [])
                               if i.uid not in conf_units]
@@ -351,49 +352,32 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
     if active and prev:
         prev_devs = by_stage[prev]
         # 前级出口可能已被相邻级配对占用（如调音台 OUT1~4 已给音响管理器）。
-        # 有源音箱只能接**空闲**出口，否则同一端口被复用：图上看着线数没变，
+        # 有源音箱只接**空闲**出口，否则同一端口被复用：图上看着线数没变，
         # 实际是两根线压在同一个口上（阳哥 2026-08-30：「调音台并没有增加输出的线」）。
         used_out = {(c.from_uid, c.from_port) for c in project.connections
                     if c.signal in (Signal.XLR, Signal.AES)}
-        # Dante 一律禁止设备间直连，统一由 _dante_pass 经交换机承载，
-        # 所以这里只取模拟/数字音频出口（XLR / AES）。
+        # 模拟/数字音频出口（XLR / AES），只接空闲口。Dante 一律经交换机承载
+        # （_dante_pass），所以有源音箱同时拿到「模拟 + Dante」两条独立链路，互不冲突
+        # （阳哥 2026-08-30：BF12 既要模拟又要 Dante）。
         pins = []
         for d in prev_devs:
             for p in d.ports:
                 if (p.role == "out" and p.signal in (Signal.XLR, Signal.AES)
                         and not p.air and (d.uid, p.id) not in used_out):
                     pins.append((d, p))
-        # 每台有源音箱只取**一路**信号。
-        analog_spk, dante_spk = [], []
+        # 每台有源音箱各接一路模拟/数字音频（与落点端口类型一致），Dante 交给 _dante_pass。
         for s in active:
             ap = next((p for p in s.ports
                        if p.role == "in" and p.signal in (Signal.XLR, Signal.AES)
                        and not p.air), None)
-            dp = next((p for p in s.ports
-                       if p.role == "in" and p.signal == Signal.DANTE
-                       and not p.air), None)
-            if ap:
-                analog_spk.append((s, ap))
-            if dp:
-                dante_spk.append((s, dp))
-
-        # ★ 同一方案里有源音箱的取信号方式要**统一**，不要一半模拟一半 Dante：
-        #   空闲模拟出口够喂全部有源音箱 → 全走模拟；
-        #   不够、但每台都能走 Dante 且有交换机 → 全部交给 _dante_pass 走 Dante；
-        #   否则能走多少模拟走多少，剩下的由 _dante_pass 补 Dante。
-        if (len(pins) < len(analog_spk) and project.switches
-                and len(dante_spk) == len(active)):
-            return
-
-        for s, sp in analog_spk:
-            if not pins:
-                break
+            if ap is None or not pins:
+                continue
             # 优先同信号类型的出口（XLR→XLR、AES→AES）
             k = next((i for i, (_d, _p) in enumerate(pins)
-                      if _p.signal == sp.signal), 0)
+                      if _p.signal == ap.signal), 0)
             d, p = pins.pop(k)
             project.connections.append(
-                Connection(d.uid, p.id, s.uid, sp.id, sp.signal, _role(d, s)))
+                Connection(d.uid, p.id, s.uid, ap.id, ap.signal, _role(d, s)))
 
 
 def _orphan_sources_rescue(project, by_stage):
@@ -439,59 +423,185 @@ def _orphan_sources_rescue(project, by_stage):
             break
 
 
+def _conf_signal():
+    """会议专用线（六芯主缆 / T 型线）。取不到 CONF 时退回 XLR。"""
+    return getattr(Signal, "CONF", Signal.XLR)
+
+
+def _conf_buses(host):
+    """会议主机上用于接手拉手链的六芯主缆进口（CH）。
+
+    排除 BOX——那是留给天线盒的专用口，不能被会议单元链占用
+    （曾导致 10 只 CF6320 被拆成 5 条短链，其中一条还错接在 BOX 上）。
+    """
+    sig = _conf_signal()
+    ports = [p for p in host.ports
+             if p.role == "in" and p.signal == sig and not p.air]
+    named = [p for p in ports if p.id.rsplit(":", 1)[-1].startswith("CH")]
+    return named or ports
+
+
+def _conf_box_port(host):
+    """会议主机上接天线盒的专用口（BOX）。"""
+    sig = _conf_signal()
+    return next((p for p in host.ports
+                 if p.role == "in" and p.signal == sig
+                 and p.id.rsplit(":", 1)[-1].startswith("BOX")), None)
+
+
 def _conference_link(project, by_stage):
-    """会讨手拉手：有线会议单元用六芯 T 型线串联后接入会议主机。
+    """会讨手拉手：有线会议单元用 T 型线串成链后，由六芯主缆接入会议主机。
 
     官方（ezpro CF63 系列）：「会议主机与有线会议单元、天线盒均采用专用六芯
-    主缆连接」「有线系统单元间采用 T 型线连接」「支持有线单元环形手拉手连接，
-    某台单元故障不影响整套系统工作」。
+    主缆连接，传输距离达 100 米」「有线系统单元间采用 T 型线连接」「支持有线
+    单元环形手拉手连接，某台单元故障不影响整套系统工作」。
+
+    ★ 每只单元就是**一进一出**：上一只的 DIN_OUT → 本只的 DIN_IN；
+      链上最后一只（最靠近主机）的 DIN_OUT → 主机的一个 CH 六芯主缆口。
 
     主库侧约定：会议单元 ``params.host`` 指向主机型号（如 CF6300），
-    且带一对 DIN in/out（T 型线）。本函数按主机进口数把单元分成若干条链，
-    链内首尾相接，链尾接主机的一路输入。
+    带一对 DIN_IN / DIN_OUT。链数按单链容量 ``params.conf_chain_max``
+    （默认 20）与主机 CH 口数取小，避免把 10 只单元拆成 5 条两单元的碎链。
 
     返回已接线的单元 uid 集合——这些单元不应再参与 SOURCE 的星型配对。
     """
+    sig = _conf_signal()
     hosts = [i for i in project.instances if i.category == "MIC_HOST"]
     if not hosts:
         return set()
-    units = [i for i in project.instances
-             if (getattr(i, "params", None) or {}).get("host")]
-    if not units:
-        return set()
 
-    host = hosts[0]
-    ins = [p for p in host.ports if p.role == "in"]
-    if not ins:
-        return set()
-
-    chains = [[] for _ in ins]
-    for idx, u in enumerate(units):
-        chains[idx % len(chains)].append(u)
+    # 单元按 params.host 归属到对应主机；没写 host 的挂到第一台主机
+    buckets = defaultdict(list)
+    for i in project.instances:
+        pr = getattr(i, "params", None) or {}
+        if not pr.get("host") or pr.get("conf_wireless"):
+            continue
+        if not any(p.role == "in" and p.signal == sig for p in i.ports):
+            continue
+        buckets[pr.get("host")].append(i)
 
     wired = set()
-    for k, ch in enumerate(chains):
-        if not ch:
+    for host in hosts:
+        units = buckets.get(host.model) or buckets.get(None) or []
+        if not units:
             continue
-        prev = None
-        for u in ch:
-            u_in = next((p for p in u.ports if p.role == "in"), None)
-            if prev is not None and u_in is not None:
-                p_out = next((p for p in prev.ports if p.role == "out"), None)
-                if p_out:
-                    project.connections.append(Connection(
-                        prev.uid, p_out.id, u.uid, u_in.id, Signal.XLR,
-                        "primary", note="手拉手"))
-                    wired.add(prev.uid)
-            prev = u
-        # 链尾 -> 主机
-        last_out = next((p for p in prev.ports if p.role == "out"), None)
-        if last_out:
-            project.connections.append(Connection(
-                prev.uid, last_out.id, host.uid, ins[k].id, Signal.XLR,
-                "primary", note="手拉手→主机"))
-            wired.add(prev.uid)
+        buses = _conf_buses(host)
+        if not buses:
+            continue
+        cap = max(1, int((getattr(host, "params", None) or {})
+                         .get("conf_chain_max", 20) or 20))
+        # 链数：够串就少分链，链条数不超过主机总线口数
+        n_chain = min(len(buses), max(1, -(-len(units) // cap)))
+        chains = [[] for _ in range(n_chain)]
+        for idx, u in enumerate(units):
+            chains[idx % n_chain].append(u)
+
+        for k, ch in enumerate(chains):
+            if not ch:
+                continue
+            prev = None
+            for u in ch:
+                u_in = next((p for p in u.ports
+                             if p.role == "in" and p.signal == sig), None)
+                if prev is not None and u_in is not None:
+                    p_out = next((p for p in prev.ports
+                                  if p.role == "out" and p.signal == sig), None)
+                    if p_out:
+                        project.connections.append(Connection(
+                            prev.uid, p_out.id, u.uid, u_in.id, sig,
+                            "primary", note="手拉手 T 型线"))
+                        wired.add(prev.uid)
+                prev = u
+            # 链上最靠近主机的一只 → 主机六芯主缆口
+            last_out = next((p for p in prev.ports
+                             if p.role == "out" and p.signal == sig), None)
+            if last_out:
+                project.connections.append(Connection(
+                    prev.uid, last_out.id, host.uid, buses[k].id, sig,
+                    "primary", note="六芯主缆→主机"))
+                wired.add(prev.uid)
     return wired
+
+
+def _conference_box_link(project, by_stage, conf_units):
+    """会讨天线盒链路：天线盒 → 主机 BOX 口（六芯主缆）；无线单元 → 天线盒（RF）。
+
+    CF6300WB 是「无线会讨天线盒」：无线会议单元（CF6360/CF6350）的 UHF 信号
+    由它接收，再通过专用六芯主缆送回 CF6300 主机的 BOX 口。
+    官方：「会议主机与有线会议单元、天线盒均采用专用六芯主缆连接」。
+    """
+    sig = _conf_signal()
+    hosts = [i for i in project.instances if i.category == "MIC_HOST"]
+    if not hosts:
+        return set()
+    boxes = [i for i in project.instances
+             if (getattr(i, "params", None) or {}).get("conf_box")]
+    if not boxes:
+        return set()
+
+    linked = set()
+    for bi, box in enumerate(boxes):
+        host = next((h for h in hosts if h.model ==
+                     ((getattr(box, "params", None) or {}).get("host") or hosts[0].model)),
+                    hosts[0])
+        bport = _conf_box_port(host)
+        # 主机只有一个 BOX 口时，第二台起的天线盒串到前一台的 CONF 出口
+        if bport is None or any(c.to_port == bport.id and c.to_uid == host.uid
+                                for c in project.connections):
+            prev = boxes[bi - 1] if bi else None
+            hp = None
+            if prev is not None:
+                hp = next((p for p in prev.ports
+                           if p.role == "in" and p.signal == sig
+                           and not any(c.to_uid == prev.uid and c.to_port == p.id
+                                       for c in project.connections)), None)
+            if hp is None:
+                continue
+            op = next((p for p in box.ports
+                       if p.role == "out" and p.signal == sig), None)
+            if op is None:
+                continue
+            project.connections.append(Connection(
+                box.uid, op.id, prev.uid, hp.id, sig, "primary",
+                note="天线盒级联"))
+            linked.add(box.uid)
+            continue
+        op = next((p for p in box.ports
+                   if p.role == "out" and p.signal == sig), None)
+        if op is None:
+            continue
+        project.connections.append(Connection(
+            box.uid, op.id, host.uid, bport.id, sig, "primary",
+            note="六芯主缆→主机"))
+        linked.add(box.uid)
+
+    # 无线会议单元：无物理端口，用 UHF 打到天线盒
+    wl = [i for i in project.instances
+          if (getattr(i, "params", None) or {}).get("conf_wireless")]
+    if not wl or not boxes:
+        return linked
+    for idx, u in enumerate(wl):
+        box = boxes[0]
+        rp = next((p for p in box.ports
+                   if p.role == "in" and p.signal == Signal.RF), None)
+        if rp is None:
+            rp = next((p for p in box.ports if p.role == "in"), None)
+        if rp is None:
+            continue
+        up = next((p for p in u.ports
+                   if p.role == "out" and p.signal == Signal.RF), None)
+        if up is None:
+            # 无线单元本身没有 RF 端口（主库 ports_override=[]），
+            # 直接以单元本体为起点画一条无线链路
+            up = next((p for p in u.ports if p.role == "out"), None)
+        if up is None:
+            continue
+        project.connections.append(Connection(
+            u.uid, up.id, box.uid, rp.id, Signal.RF, "primary",
+            note="无线会议单元"))
+        linked.add(u.uid)
+        conf_units.add(u.uid)
+    return linked
 
 
 def _dante_pass(project):
@@ -540,12 +650,9 @@ def _dante_pass(project):
     for d in project.instances:
         if d.category == "SWITCH":
             continue
-        # ★ 终端扬声器只取一路信号：模拟已经喂上了（调音台/处理器直供有源音箱），
-        #   就不再画 Dante 线。否则每台有源音箱会多出一条横向的 Dante 线
-        #   （阳哥 2026-08-30：太阳纸业 1F「横向的线多了两根」）。
-        #   注意只针对 SPEAKER——处理器/调音台跨模拟与 Dante 两个域是正常设计。
-        if d.category == "SPEAKER" and _has_analog_in(project, d):
-            continue
+        # ★ 有源音箱允许「模拟 + Dante」同时接入（阳哥 2026-08-30：BF12 两者
+        #   都要，互不冲突）。模拟由 _handle_speakers 从空闲出口接，Dante 由本
+        #   函数经交换机接，是两条独立链路，故这里不做 SPEAKER 排除。
         backup = d.is_backup and sec is not None
         prefer = sec if backup else prim
         for p in d.ports:

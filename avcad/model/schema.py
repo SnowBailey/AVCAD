@@ -19,6 +19,7 @@ class Signal(str, Enum):
     POWER = "POWER"      # 电源
     OPTICAL = "OPTICAL"  # 光纤
     TRS = "TRS"          # 模拟音频 6.35mm（非平衡/混合输出）
+    CONF = "CONF"        # 会议专用线（六芯主缆 / T 型线，手拉手）
 
 
 class Domain(str, Enum):
@@ -32,8 +33,9 @@ SIGNAL_DOMAIN = {
     Signal.XLR: Domain.AUDIO, Signal.AES: Domain.AUDIO, Signal.DANTE: Domain.AUDIO,
     Signal.RS232: Domain.CONTROL, Signal.IP: Domain.CONTROL, Signal.GPIO: Domain.CONTROL,
     Signal.RF: Domain.RF, Signal.SPEAKER: Domain.AUDIO,
-    Signal.POWER: Domain.POWER, Signal.OPTICAL: Domain.AUDIO,
+    Signal.POWER: Domain.POWER,     Signal.OPTICAL: Domain.AUDIO,
     Signal.TRS: Domain.AUDIO,
+    Signal.CONF: Domain.AUDIO,
 }
 
 # 信号配色（SVG hex）与 DXF 图层/线型映射；role 决定主/备线型。
@@ -52,6 +54,7 @@ SIGNAL_META = {
     Signal.POWER:   dict(color="#cfcfcf", dxf_color=7,  layer="WIRES_POWER",   ltype="solid"),
     Signal.OPTICAL: dict(color="#7fd1e8", dxf_color=4,  layer="WIRES_DIGITAL", ltype="solid"),
     Signal.TRS:     dict(color="#7fbf9a", dxf_color=4,  layer="WIRES_ANALOG",  ltype="solid"),
+    Signal.CONF:    dict(color="#c9a227", dxf_color=2,  layer="WIRES_CONF",    ltype="solid"),
 }
 
 # 配色配置文件路径（全局共享，跨项目复用；用户可在清单确认环节点击更改）

@@ -3,14 +3,15 @@
 缺陷复现：BF12 有源音箱出现两个问题——
   1. 信号取自调音台，但调音台**没有多出输出线**（前级出口被音响管理器占着，
      有源分支复用了同一批端口，两根线压在一个口上）；
-  2. 图上**多出两根横向线**（_dante_pass 又给每台有源音箱补了一条 Dante）。
+  2. 图上**多出两根横向线**（当时 _dante_pass 给每台有源音箱又补了一条 Dante，
+     而且模拟线还错落在 DANTE 口上）。
 
-定下来的规则：
-  A. 有源音箱只取**一路**信号，且线的信号类型必须与它落的端口一致；
-  B. 只能接前级**空闲**的模拟出口，绝不复用已占用的端口；
-  C. 同一方案里有源音箱的取信号方式要统一：模拟出口够喂全部 → 全模拟；
-     不够但都能走 Dante 且有交换机 → 全 Dante（经交换机承载）；
-  D. 已走模拟的有源音箱，_dante_pass 不再给它补 Dante。
+定下来的规则（2026-08-30 修正版）：
+  A. 有源音箱**模拟与 Dante 都要接**（两者不冲突，是两条独立链路）：
+     模拟由 _handle_speakers 从**空闲**出口接，Dante 由 _dante_pass 经交换机接；
+  B. 线的信号类型必须与它落的端口一致（不允许 XLR 线落到 DANTE 口）；
+  C. 模拟出口绝不复用已占用的端口（这是「调音台没多出线」的根因）；
+  D. Dante 一律经交换机承载，禁止设备间直连。
 """
 from __future__ import annotations
 
@@ -74,14 +75,14 @@ def test_active_speaker_takes_exactly_one_analog_feed():
     assert len(actives) == 2
 
     feeds = _feeds(p)
-    # A. 每台有源音箱恰好一路
+    # A. 每台有源音箱各一路模拟（Dante 由 _dante_pass 另接，这里无交换机故不产生）
     for s in actives:
-        assert len(feeds[s.uid]) == 1, f"{s.model} 取了 {len(feeds[s.uid])} 路"
+        analog = [c for c in feeds[s.uid] if c.signal in ANALOG]
+        assert len(analog) == 1, f"{s.model} 模拟进线 {len(analog)} 路"
         # 信号类型与落点端口一致
-        c = feeds[s.uid][0]
+        c = analog[0]
         port = next(x for x in s.ports if x.id == c.to_port)
         assert port.signal == c.signal
-        assert c.signal in ANALOG  # 模拟优先
 
     mixer = next(i for i in p.instances if i.category == "MIXER")
     used = [c.from_port for c in p.connections if c.from_uid == mixer.uid]
@@ -93,8 +94,11 @@ def test_active_speaker_takes_exactly_one_analog_feed():
         assert feeds[s.uid][0].from_port not in {"%s:OUT_1" % mixer.uid}
 
 
-def test_active_speaker_never_gets_both_analog_and_dante():
-    """有 Dante 交换机时，已走模拟的有源音箱不能再补 Dante 线。"""
+def test_active_speaker_gets_both_analog_and_dante():
+    """阳哥 2026-08-30：BF12 模拟与 Dante 都要接，两者不冲突。
+
+    模拟从前级**空闲**出口取，Dante 由交换机承载，是两条独立链路。
+    """
     entries = [{"category": "SWITCH", "brand": "HUAWEI", "model": "千兆交换机",
                 "name": "交换机", "quantity": 1,
                 "params": {"ports": 24}, "features": []},
@@ -103,24 +107,32 @@ def test_active_speaker_never_gets_both_analog_and_dante():
     assert p.switches
     feeds = _feeds(p)
     for s in (i for i in p.instances if i.category == "SPEAKER"):
-        assert len(feeds[s.uid]) <= 1, \
-            f"{s.model} 同时取了 {[c.signal.value for c in feeds[s.uid]]}"
+        sigs = {c.signal for c in feeds[s.uid]}
+        assert Signal.XLR in sigs, f"{s.model} 缺模拟进线：{sigs}"
+        assert Signal.DANTE in sigs, f"{s.model} 缺 Dante 进线：{sigs}"
+        # 每条线的信号类型必须与落点端口一致
+        for c in feeds[s.uid]:
+            port = next(x for x in s.ports if x.id == c.to_port)
+            assert port.signal == c.signal, f"线标 {c.signal} 落到 {port.id}"
 
 
-def test_all_dante_when_analog_outs_insufficient():
-    """模拟出口不够喂全部有源音箱 → 统一走 Dante，不要一半模拟一半 Dante。"""
+def test_analog_outs_insufficient_then_dante_only():
+    """模拟出口不够喂全部有源音箱时，剩余音箱只走 Dante（不再挤占模拟口）。"""
     entries = [{"category": "SWITCH", "brand": "HUAWEI", "model": "千兆交换机",
                 "name": "交换机", "quantity": 1,
                 "params": {"ports": 24}, "features": []},
                _mixer(outputs=2), *_active_spk(8, dante=True)]
     p = build_project(entries, name="T")
     feeds = _feeds(p)
-    sigs = collections.Counter()
+    analog = dante = 0
     for s in (i for i in p.instances if i.category == "SPEAKER"):
-        assert len(feeds[s.uid]) == 1
-        sigs[feeds[s.uid][0].signal] += 1
-    assert set(sigs) == {Signal.DANTE}, f"信号类型不统一：{sigs}"
-    assert sigs[Signal.DANTE] == 8
+        sigs = {c.signal for c in feeds[s.uid]}
+        assert Signal.DANTE in sigs, f"{s.model} 没有 Dante 兜底"
+        analog += Signal.XLR in sigs
+        dante += Signal.DANTE in sigs
+    assert dante == 8, f"Dante 应覆盖全部 8 台，实为 {dante}"
+    # 调音台只有 2 个出口，模拟最多喂 2 台
+    assert analog <= 2, f"模拟出口超额占用：{analog}"
 
 
 def test_dante_feed_always_comes_from_switch():

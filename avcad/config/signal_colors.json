@@ -1,57 +1,158 @@
 {
-  "XLR": {
-    "label": "模拟音频 (XLR)",
-    "primary": {"color": "#5dcaa5", "layer": "WIRES_ANALOG", "ltype": "solid"},
-    "backup":  {"color": "#4fb38f", "layer": "WIRES_ANALOG", "ltype": "dashed"}
+ "XLR": {
+  "label": "模拟音频 (XLR)",
+  "primary": {
+   "color": "#5dcaa5",
+   "layer": "WIRES_ANALOG",
+   "ltype": "solid"
   },
-  "AES": {
-    "label": "数字音频 (AES3)",
-    "primary": {"color": "#3aa6a0", "layer": "WIRES_DIGITAL", "ltype": "solid"},
-    "backup":  {"color": "#2f8c86", "layer": "WIRES_DIGITAL", "ltype": "dashed"}
-  },
-  "DANTE": {
-    "label": "网络音频 (Dante)",
-    "primary": {"color": "#378add", "layer": "WIRES_DANTE", "ltype": "solid"},
-    "backup":  {"color": "#8a6bd4", "layer": "WIRES_DANTE", "ltype": "dashed"}
-  },
-  "RS232": {
-    "label": "控制 (RS-232)",
-    "primary": {"color": "#b07cd9", "layer": "WIRES_CONTROL", "ltype": "dotted"},
-    "backup":  {"color": "#9a5fc4", "layer": "WIRES_CONTROL", "ltype": "dotted"}
-  },
-  "IP": {
-    "label": "控制/网络 (IP)",
-    "primary": {"color": "#b07cd9", "layer": "WIRES_CONTROL", "ltype": "dotted"},
-    "backup":  {"color": "#9a5fc4", "layer": "WIRES_CONTROL", "ltype": "dotted"}
-  },
-  "GPIO": {
-    "label": "控制 (GPIO)",
-    "primary": {"color": "#b07cd9", "layer": "WIRES_CONTROL", "ltype": "dotted"},
-    "backup":  {"color": "#9a5fc4", "layer": "WIRES_CONTROL", "ltype": "dotted"}
-  },
-  "RF": {
-    "label": "天线射频 (RF)",
-    "primary": {"color": "#e8923c", "layer": "WIRES_RF", "ltype": "solid"},
-    "backup":  {"color": "#cf7a2a", "layer": "WIRES_RF", "ltype": "dashed"}
-  },
-  "SPEAKER": {
-    "label": "扬声器线缆",
-    "primary": {"color": "#e8655a", "layer": "WIRES_SPEAKER", "ltype": "solid"},
-    "backup":  {"color": "#cf5046", "layer": "WIRES_SPEAKER", "ltype": "dashed"}
-  },
-  "POWER": {
-    "label": "电源",
-    "primary": {"color": "#cfcfcf", "layer": "WIRES_POWER", "ltype": "solid"},
-    "backup":  {"color": "#b0b0b0", "layer": "WIRES_POWER", "ltype": "dashed"}
-  },
-  "OPTICAL": {
-    "label": "光纤",
-    "primary": {"color": "#7fd1e8", "layer": "WIRES_DIGITAL", "ltype": "solid"},
-    "backup":  {"color": "#5fb8d0", "layer": "WIRES_DIGITAL", "ltype": "dashed"}
-  },
-  "TRS": {
-    "label": "模拟音频 (6.35 混合)",
-    "primary": {"color": "#7fbf9a", "layer": "WIRES_ANALOG", "ltype": "solid"},
-    "backup":  {"color": "#6aa684", "layer": "WIRES_ANALOG", "ltype": "dashed"}
+  "backup": {
+   "color": "#4fb38f",
+   "layer": "WIRES_ANALOG",
+   "ltype": "dashed"
   }
+ },
+ "AES": {
+  "label": "数字音频 (AES3)",
+  "primary": {
+   "color": "#3aa6a0",
+   "layer": "WIRES_DIGITAL",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#2f8c86",
+   "layer": "WIRES_DIGITAL",
+   "ltype": "dashed"
+  }
+ },
+ "DANTE": {
+  "label": "网络音频 (Dante)",
+  "primary": {
+   "color": "#378add",
+   "layer": "WIRES_DANTE",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#8a6bd4",
+   "layer": "WIRES_DANTE",
+   "ltype": "dashed"
+  }
+ },
+ "RS232": {
+  "label": "控制 (RS-232)",
+  "primary": {
+   "color": "#b07cd9",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  },
+  "backup": {
+   "color": "#9a5fc4",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  }
+ },
+ "IP": {
+  "label": "控制/网络 (IP)",
+  "primary": {
+   "color": "#b07cd9",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  },
+  "backup": {
+   "color": "#9a5fc4",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  }
+ },
+ "GPIO": {
+  "label": "控制 (GPIO)",
+  "primary": {
+   "color": "#b07cd9",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  },
+  "backup": {
+   "color": "#9a5fc4",
+   "layer": "WIRES_CONTROL",
+   "ltype": "dotted"
+  }
+ },
+ "RF": {
+  "label": "天线射频 (RF)",
+  "primary": {
+   "color": "#e8923c",
+   "layer": "WIRES_RF",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#cf7a2a",
+   "layer": "WIRES_RF",
+   "ltype": "dashed"
+  }
+ },
+ "SPEAKER": {
+  "label": "扬声器线缆",
+  "primary": {
+   "color": "#e8655a",
+   "layer": "WIRES_SPEAKER",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#cf5046",
+   "layer": "WIRES_SPEAKER",
+   "ltype": "dashed"
+  }
+ },
+ "POWER": {
+  "label": "电源",
+  "primary": {
+   "color": "#cfcfcf",
+   "layer": "WIRES_POWER",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#b0b0b0",
+   "layer": "WIRES_POWER",
+   "ltype": "dashed"
+  }
+ },
+ "OPTICAL": {
+  "label": "光纤",
+  "primary": {
+   "color": "#7fd1e8",
+   "layer": "WIRES_DIGITAL",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#5fb8d0",
+   "layer": "WIRES_DIGITAL",
+   "ltype": "dashed"
+  }
+ },
+ "TRS": {
+  "label": "模拟音频 (6.35 混合)",
+  "primary": {
+   "color": "#7fbf9a",
+   "layer": "WIRES_ANALOG",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#6aa684",
+   "layer": "WIRES_ANALOG",
+   "ltype": "dashed"
+  }
+ },
+ "CONF": {
+  "label": "会议专用线 (六芯主缆/T型线)",
+  "primary": {
+   "color": "#c9a227",
+   "layer": "WIRES_CONF",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#a8851d",
+   "layer": "WIRES_CONF",
+   "ltype": "dashed"
+  }
+ }
 }
