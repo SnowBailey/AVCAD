@@ -25268,7 +25268,7 @@
    "name": "无线双手持麦克风",
    "group": "铁思配套（模拟话筒）",
    "section": "UM系列一拖二无线会议系统",
-   "category": "WIRELESS_RX",
+   "category": "WIRELESS_MIC",
    "defer_reason": null,
    "features": [
     "analog",
@@ -25278,8 +25278,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 440,
-    "channels": 2,
-    "antennas": 4
+    "channels_hint": 1,
+    "bnc": 1
    },
    "country": "中国",
    "unit": "套",
@@ -25295,7 +25295,7 @@
    "name": "无线双领夹麦克风",
    "group": "铁思配套（模拟话筒）",
    "section": "UM系列一拖二无线会议系统",
-   "category": "WIRELESS_RX",
+   "category": "WIRELESS_MIC",
    "defer_reason": null,
    "features": [
     "analog",
@@ -25305,8 +25305,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 440,
-    "channels": 2,
-    "antennas": 4
+    "channels_hint": 1,
+    "bnc": 1
    },
    "country": "中国",
    "unit": "套",
@@ -25322,7 +25322,7 @@
    "name": "无线双头戴麦克风",
    "group": "铁思配套（模拟话筒）",
    "section": "UM系列一拖二无线会议系统",
-   "category": "WIRELESS_RX",
+   "category": "WIRELESS_MIC",
    "defer_reason": null,
    "features": [
     "analog",
@@ -25332,8 +25332,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 440,
-    "channels": 2,
-    "antennas": 4
+    "channels_hint": 1,
+    "bnc": 1
    },
    "country": "中国",
    "unit": "套",
@@ -25355,8 +25355,7 @@
    "active": false,
    "params": {
     "impedance_ohm": 50,
-    "inputs": 2,
-    "outputs": 10
+    "bnc": 3
    },
    "country": "中国",
    "unit": "台",

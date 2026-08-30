@@ -36,6 +36,13 @@ def connect(project):
         if a == "AMP" and b == "SPEAKER":
             _handle_speakers(project, by_stage, a, b)
             continue
+        # 无线天线链路走专用规则（级联 + 每台接收机占满天线口），不用星型配对
+        if a == "ANT_DIST":
+            _antenna_distribution(project, by_stage)
+            continue
+        if b == "ANT_DIST":
+            _antennas_to_first_dist(project, by_stage)
+            continue
         _generic_pair(project, by_stage.get(a, []), by_stage.get(b, []))
 
     # 2) 音源级（SOURCE / WIRELESS_RX）显式接入首个核心级（调音台或处理器）
@@ -65,6 +72,93 @@ def _connect_sources_to_core(project, by_stage):
     for src in ("SOURCE", "WIRELESS_RX"):
         if by_stage.get(src):
             _generic_pair(project, by_stage[src], tdevs)
+
+
+# ---- 无线天线链路（真分集 + 天线分配器级联） ----
+# 每台分配器预留末尾 2 个出口用于级联下一台（IPS UM2000ATD：2 进 / 10 出）
+CASCADE_OUTS = 2
+
+
+def _rf_ports(devs, role):
+    """取设备列表中指定方向的 RF 有线端口（排除 air 空中口），返回 [(dev, port)]。"""
+    out = []
+    for d in devs:
+        for p in d.ports:
+            if p.signal == Signal.RF and p.role == role and not p.air:
+                out.append((d, p))
+    return out
+
+
+def _antennas_to_first_dist(project, by_stage):
+    """外置天线 → **首台**天线分配器的输入。
+
+    不能星型分发到所有分配器：第 2 台起的进口由上一台的级联出口供信号。
+    """
+    dists = by_stage.get("ANT_DIST", [])
+    if not dists:
+        return
+    ins = _rf_ports([dists[0]], "in")
+    outs = _rf_ports(by_stage.get("ANTENNA", []), "out")
+    for (ad, ap), (dd, dp) in zip(outs, ins):
+        project.connections.append(Connection(
+            ad.uid, ap.id, dd.uid, dp.id, Signal.RF, "primary", note="天线→分配器"))
+
+
+def _antenna_distribution(project, by_stage):
+    """天线分配器级联 + 出口分配（阳哥 2026-08-30 确认，IPS UM2000ATD 十通道）。
+
+    规则：
+      1. 分配器按顺序串成链（BOM 顺序即链路顺序）；
+      2. 非末台取**末尾 2 个出口**级联到下一台的进口；
+      3. 剩余可用出口，按「每台接收机的天线口数」依次切分
+         —— 真分集双通道接收机（如 UM2002）固定占 **4 口**；
+      4. 末台无需级联，全部出口可用。
+    """
+    dists = by_stage.get("ANT_DIST", [])
+    if not dists:
+        return
+    rxs = [d for d in project.instances if d.category == "WIRELESS_RX"]
+    pending = list(rxs)
+
+    for idx, dist in enumerate(dists):
+        outs = _rf_ports([dist], "out")
+        if not outs:
+            continue
+        is_last = (idx == len(dists) - 1)
+        n_cas = 0 if is_last else min(CASCADE_OUTS, len(outs))
+        # 末尾口留给级联，前面的口给接收机，读图时顺序更直观
+        cascade_outs = outs[len(outs) - n_cas:] if n_cas else []
+        usable = outs[: len(outs) - n_cas] if n_cas else outs
+
+        # 级联：本台末尾出口 -> 下一台进口
+        if cascade_outs and idx + 1 < len(dists):
+            nxt_ins = _rf_ports([dists[idx + 1]], "in")
+            for (sd, sp), (td, tp) in zip(cascade_outs, nxt_ins):
+                project.connections.append(Connection(
+                    sd.uid, sp.id, td.uid, tp.id, Signal.RF, "primary",
+                    note="分配器级联"))
+
+        # 接收机分配：按每台接收机实际天线口数切分可用出口
+        i = 0
+        while pending and i < len(usable):
+            rx = pending[0]
+            rins = _rf_ports([rx], "in")
+            need = len(rins) or 1
+            if i + need > len(usable):
+                break          # 本台剩余出口不够，交给下一台分配器
+            pending.pop(0)
+            for k, (sd, sp) in enumerate(usable[i:i + need]):
+                td, tp = rins[k]
+                project.connections.append(Connection(
+                    sd.uid, sp.id, td.uid, tp.id, Signal.RF, "primary",
+                    note="天线分配"))
+            i += need
+
+    if pending:
+        need = sum(len(_rf_ports([r], "in")) or 1 for r in pending)
+        project.meta.setdefault("wireless_warnings", []).append(
+            f"天线分配器出口不足：{len(pending)} 台无线接收机未分配到天线口"
+            f"（尚缺 {need} 口，建议增加 UM2000ATD）")
 
 
 def _dedup(project):

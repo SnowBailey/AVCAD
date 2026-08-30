@@ -19,6 +19,10 @@ from avcad.parse.product_resolver import enrich as resolve_products
 
 # 非信号设备：机械/结构件，不出系统图
 RIGGING = ["吊架", "飞行架", "桁架"]
+# 成对销售：清单「单位=对/副/pair」时按 2 台/支展开
+# （IPS UM2000AP 全指向天线、UM2000AT 有源指向天线：主库 remark「1 对 = 2 支」）
+PAIR_UNITS = {"对", "副", "pair", "pairs"}
+PAIR_UNIT_FACTOR = 2
 # 设备名关键词 -> 类别（兜底分类，顺序即优先级）
 CATEGORY_KW = [
     ("SOURCE", ["话筒", "麦克风", "传声器", "音源"]),
@@ -147,10 +151,17 @@ def build_entries(path: str):
             "model": r.get("型号") or r.get("model") or "",
             "name": name,
             "quantity": _qty(r.get("数量") or r.get("qty")),
+            # 计量单位：用于「成对销售」设备的数量展开（如 UM2000AP 单位=对 → 2 支）
+            "_unit": str(r.get("单位") or r.get("unit") or "").strip(),
             "spec": r.get("指标参数") or r.get("参数") or r.get("spec") or "",
         })
     # 主库补全（品牌+型号）
     resolve_products(av)
+    # 成对销售设备展开：单位写成「对/副/pair」时按 2 支计
+    # （IPS UM2000AP / UM2000AT 主库 remark：「1 对 = 2 支」）
+    for e in av:
+        if str(e.get("_unit", "")).strip().lower() in PAIR_UNITS:
+            e["quantity"] = int(e.get("quantity", 1) or 1) * PAIR_UNIT_FACTOR
     kept = []
     for e in av:
         cat = e.get("category")

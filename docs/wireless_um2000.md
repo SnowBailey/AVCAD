@@ -6,7 +6,7 @@
 > - **易科内部主库 `eko_catalog.json` 的 remark 字段**（配单经验，与阳哥口径完全一致）
 > - 阳哥 2026-08-30 口述确认
 >
-> 状态：**待阳哥确认后再写入程序**
+> 状态：**已于 2026-08-30 实现并落盘**（实现内容见第 6 节）
 
 ---
 
@@ -97,9 +97,65 @@
 
 ---
 
-## 5. 待实现能力（写入程序时需要）
+## 5. 已落盘的实现（2026-08-30）
 
-1. **天线级联链渲染**：`ATD#1 → ATD#2 → … → ATD#n` 的链式连线（现 `ANT_DIST` 是星型直连接收机）
-2. **4 口/台 的端口预算校验**：给出接收机数量时，自动算出所需 ATD 台数并提示
-3. **数量按"对"展开**：清单里 UM2000AP 数量 1（单位"对"）应展开为 2 支
-4. **UM2002 端口图例**：4×BNC(in) + 2×XLR(out) + 1×6.35(out)
+### 5.1 主库 `eko_catalog.json`
+
+| 型号 | 修正前 | 修正后 |
+|---|---|---|
+| UM2002 / UM2002L / UM2002H | `category=WIRELESS_MIC`（发射端）<br>`params={channels_hint:1, bnc:1}` | `category=**WIRELESS_RX**`（接收机）<br>`params={channels:2, **antennas:4**}` |
+| UM2000ATD | `params={bnc:3}`（→ 默认 2 进 / 4 出） | `params={**inputs:2, outputs:10**}` |
+
+> 关键判断：UM2002 套装含「1 台接收机 + 2 支话筒」，系统图上要画的是**上机架、接天线分配器、输出 XLR** 的接收机，
+> 所以分类必须是 `WIRELESS_RX`；若按 `WIRELESS_MIC` 会被排在链路最前端当发射端，导致整条无线链断裂。
+
+### 5.2 规格模板 `device_specs/wireless_rx.yaml`
+
+新增 `antennas` 参数（默认 2），RF 输入口数改为 `count_from: antennas`——
+不再写死 2 口，真分集双通道机型（UM2002）取 4 口。
+
+### 5.3 级联连线 `wires/router.py`
+
+新增两个专用函数，替换原来的星型 `_generic_pair`：
+
+- `_antennas_to_first_dist()`：外置天线**只**接首台分配器的进口（第 2 台起由级联供信号）
+- `_antenna_distribution()`：
+  1. 分配器按 BOM 顺序串成链
+  2. 非末台取**末尾 2 个出口**（OUT9/OUT10）级联下一台进口
+  3. 剩余可用出口，按**每台接收机的实际天线口数**（UM2002 = 4）依次切分
+  4. 末台无需级联，全部出口可用
+  5. 出口不足时写 `project.meta["wireless_warnings"]`，不静默漏接
+
+### 5.4 成对展开 `workflow/importers.py`
+
+读取清单「单位」列；单位为 `对 / 副 / pair` 时数量 ×2
+（UM2000AP「1 对 = 2 支」，实测清单数量 1 对 → 正确展开为 2 支，分别进首台分配器的 2 个进口）。
+
+### 5.5 回归测试 `tests/test_wireless_cascade.py`（10 条）
+
+覆盖：主库解析、端口展开（4 天线口 / 2×XLR / 2 进 10 出）、级联只从首台发出且用末尾两口、
+每 4 口 1 台接收机、天线只进首台、末台用满出口、出口不足告警。
+
+### 5.6 实测（智慧剧场清单）
+
+```
+链路: ANTENNA → ANT_DIST → SOURCE(含 7 台 WIRELESS_RX) → PROC_PRE → MIXER → …
+UM2000AP ×2  →  ATD#1 (IN1/IN2)
+ATD#1 OUT9/OUT10 → ATD#2 IN1/IN2   （级联）
+ATD#2 OUT9/OUT10 → ATD#3 IN1/IN2   （级联）
+ATD#3 OUT9/OUT10 → ATD#4 IN1/IN2   （级联）
+ATD#1 OUT1-4→UM2002#1, OUT5-8→UM2002#2
+ATD#2 OUT1-4→UM2002#3, OUT5-8→UM2002#4
+ATD#3 OUT1-4→UM2002L#5, OUT5-8→UM2002L#6
+ATD#4(末台) OUT1-4→UM2002H#7
+校验: 重叠 0 / 斜线 0 / ok=True
+```
+
+---
+
+## 6. 仍待实现（本次未做）
+
+1. **6.35mm 混合输出**：UM2002 还有 1 路 6.35 混合输出，需新增 TRS 信号类型后补上图例
+2. **发射端渲染**：UM2002 套装里的 2 支话筒（手持/领夹/头戴）目前不单独出图，
+   如需画出需在导入时把「套装」拆成 1×WIRELESS_RX + 2×WIRELESS_MIC
+3. **ATD 台数自动测算提示**：目前只在出口不足时告警，未主动建议应配几台

@@ -5,8 +5,11 @@ features_available: [dante, control, aes]
 params:
   channels:
     {min: 1, default: 2, label: 接收通道数, unit: "Ch"}
+  # 天线接口数：真分集双通道 = 每通道 2 支天线 = 4 口（如 IPS UM2002 系列）
+  antennas:
+    {min: 1, default: 2, label: 天线接口数, unit: "口"}
 ports_template:
-  - {name: RF, side: left, signal: RF, role: in, count: 2, label: ANT}   # A/B 真分集
+  - {name: RF, side: left, signal: RF, role: in, count: 2, count_from: antennas, label: ANT}   # A/B 真分集
   - {name: XLR, side: right, signal: XLR, role: out, count_from: channels, label: OUT}   # 模拟输出(恒有)
   - {name: AES, side: right, signal: AES, role: out, count_from: channels, if_feature: aes, label: AES}
   - {name: DANTE, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
