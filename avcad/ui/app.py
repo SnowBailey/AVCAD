@@ -54,6 +54,53 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)
 # 进程内解析缓存（解析 + 主库补全结果），按 CSV 内容哈希
 _ENTRY_CACHE: dict = {}
 
+# ---------------- 产品主库（eko_catalog.json）读写 ----------------
+# 与 catalog_resolver 共用同一份路径定义，避免出现第二个「主库副本」
+from avcad.data.catalog_resolver import DEFAULT_JSON as _CATALOG_PATH  # noqa: E402
+_CATALOG = {"data": None, "mtime": 0}
+
+# 可编辑字段与取值提示（前端据此渲染控件）
+CATEGORY_CHOICES = [
+    "SOURCE", "WIRELESS_MIC", "WIRELESS_RX", "ANTENNA", "ANT_DIST",
+    "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH",
+    "IO", "",
+]
+FEATURE_CHOICES = [
+    "analog", "aes", "dante", "control", "wireless", "phantom",
+    "mix_out", "trs_out", "dsp", "active",
+]
+
+
+def _load_catalog():
+    """加载主库；文件 mtime 变化时自动重载，避免多进程写丢。"""
+    try:
+        mt = os.path.getmtime(_CATALOG_PATH)
+    except OSError:
+        return {"products": []}
+    if _CATALOG["data"] is not None and _CATALOG["mtime"] == mt:
+        return _CATALOG["data"]
+    with open(_CATALOG_PATH, encoding="utf-8") as f:
+        data = json.load(f)
+    _CATALOG["data"] = data
+    _CATALOG["mtime"] = mt
+    return data
+
+
+def _save_catalog():
+    """原子写回主库：先备份再落盘，失败不破坏原文件。"""
+    data = _load_catalog()
+    bak = f"{_CATALOG_PATH}.bak.{time.strftime('%Y%m%d%H%M%S')}"
+    try:
+        shutil.copy2(_CATALOG_PATH, bak)
+    except OSError:
+        pass
+    tmp = f"{_CATALOG_PATH}.tmp.{os.getpid()}"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, _CATALOG_PATH)
+    _CATALOG["mtime"] = os.path.getmtime(_CATALOG_PATH)
+    return bak
+
 
 def _entries_from_bom(bom: str) -> list:
     h = hashlib.sha1(bom.encode("utf-8")).hexdigest()
@@ -309,6 +356,23 @@ def _api_open_folder(data: dict):
     return {"ok": True, "path": target}
 
 
+def _catalog_item(idx: int, p: dict) -> dict:
+    """主库条目 -> 前端可编辑视图（只暴露需要人工校正的字段）。"""
+    return {
+        "idx": idx,
+        "brand": p.get("brand") or "",
+        "model": p.get("model") or "",
+        "name": p.get("name") or "",
+        "section": p.get("section") or "",
+        "category": p.get("category"),
+        "defer_reason": p.get("defer_reason") or "",
+        "features": list(p.get("features") or []),
+        "params": p.get("params") or {},
+        "remark": p.get("remark") or "",
+        "unit": p.get("unit") or "",
+    }
+
+
 def _dispatch(path, body):
     if path == "/api/parse":
         data = json.loads(body or "{}")
@@ -407,6 +471,67 @@ def _dispatch(path, body):
                 "total": len(items), "confirmed": len(items) - len(missing),
                 "ok": not missing}
 
+    if path == "/api/catalog":
+        """产品主库（eko_catalog.json）只读浏览 + 单条更正落盘。
+
+        供「品牌校正页」逐条手动修正类别 / 特性 / 参数，修改即写回主库文件。
+        """
+        data = json.loads(body or "{}")
+        act = data.get("action") or "list"
+        cat = _load_catalog()
+        products = cat.get("products", [])
+
+        if act == "meta":
+            counts = {}
+            for p in products:
+                b = str(p.get("brand") or "").strip() or "(空)"
+                counts[b] = counts.get(b, 0) + 1
+            return {
+                "path": _CATALOG_PATH,
+                "total": len(products),
+                "brands": [{"brand": b, "count": c}
+                           for b, c in sorted(counts.items(),
+                                              key=lambda x: (-x[1], x[0]))],
+                "categories": CATEGORY_CHOICES,
+                "features": FEATURE_CHOICES,
+            }
+
+        if act == "put":
+            idx = data.get("idx")
+            if not isinstance(idx, int) or not (0 <= idx < len(products)):
+                return {"error": f"idx 越界: {idx}"}
+            prod = products[idx]
+            if "category" in data:
+                v = data["category"]
+                prod["category"] = (str(v).strip() or None) if v is not None else None
+            if "features" in data:
+                prod["features"] = [str(x).strip().lower()
+                                    for x in (data["features"] or []) if str(x).strip()]
+            if "params" in data:
+                prod["params"] = data["params"] or {}
+            if "remark" in data:
+                prod["remark"] = data["remark"] or ""
+            bak = _save_catalog()
+            return {"ok": True, "backup": os.path.basename(bak),
+                    "item": _catalog_item(idx, products[idx])}
+
+        # 默认 list：按品牌 + 关键字过滤
+        brand = str(data.get("brand") or "").strip()
+        kw = str(data.get("q") or "").strip().lower()
+        only_wireless = bool(data.get("wireless_only"))
+        items = []
+        for i, p in enumerate(products):
+            if brand and str(p.get("brand") or "").strip() != brand:
+                continue
+            if kw and kw not in f"{p.get('model','')} {p.get('name','')}".lower():
+                continue
+            if only_wireless and str(p.get("category")) not in (
+                    "WIRELESS_RX", "WIRELESS_MIC", "ANTENNA", "ANT_DIST"):
+                continue
+            items.append(_catalog_item(i, p))
+        return {"items": items, "total": len(items)}
+
+
     if path == "/api/run":
         data = json.loads(body or "{}")
         bom = data.get("bom", "")
@@ -490,8 +615,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         p = urlparse(self.path).path
-        if p in ("/", "/index.html"):
-            with open(os.path.join(STATIC, "index.html"), encoding="utf-8") as f:
+        if p in ("/", "/index.html", "/catalog", "/catalog.html"):
+            fname = "catalog.html" if "catalog" in p else "index.html"
+            with open(os.path.join(STATIC, fname), encoding="utf-8") as f:
                 raw = f.read().encode("utf-8")
             # 禁用缓存：改完前端后刷新即可拿到最新页面，避免「找不到新加的开关」
             self.send_response(200)
