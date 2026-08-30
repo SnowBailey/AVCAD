@@ -75,11 +75,29 @@ dist\AVCAD\AVCAD.exe
 4. 启动器重写 `server_bind`：父类 `socket.getfqdn()` 反向 DNS 会卡几十秒。
 5. Windows 上 `--add-data` 分隔符是 `;`，macOS/Linux 是 `:`（脚本已按 Windows 写法）。
 
-## 七、给我一台 Windows 我就能直接出安装包
+## 七、用 GitHub Actions 自动出安装包（推荐，不用找 Windows 电脑）
 
-如果你希望我直接产出 `AVCAD-Setup-1.0.0.exe`，需要满足任一条件：
+仓库已配好两个工作流（`.github/workflows/`）：
 
-- 你有一台 Windows 电脑，把项目目录放上去后让我远程执行 `build.bat`；
-- 或在这台 Mac 上装 Windows 虚拟机（Parallels / UTM / VMware）并把项目共享进去。
+| 工作流 | 运行环境 | 产出 |
+|---|---|---|
+| `build-windows.yml` | `windows-latest` | `AVCAD-Setup-<版本>.exe`（Inno Setup）+ `AVCAD-<版本>-Windows-Portable.zip` |
+| `build-macos.yml` | `macos-latest` | `AVCAD-<版本>-macOS.dmg` |
 
-给到环境后，我照着 `build.bat` 直接跑并回传安装包。
+推送到 `main` 即触发（也可在 Actions 页面手动 `Run workflow`）；打 `v*` 标签还会自动挂到 Release。
+
+### 一条命令拿到安装包
+
+```bash
+bash packaging/ci_build.sh <你的 GitHub 个人访问令牌>
+```
+
+脚本会：提交改动 → 推送 main → 轮询 Windows 构建 → 下载产物 → 解包到 `dist/ci`，最后打印出
+`AVCAD-Setup-x.y.z.exe` 和便携版 ZIP。
+
+令牌申请：<https://github.com/settings/tokens>
+- 经典 token：勾 `repo`
+- 细粒度 token：Contents（读+写）、Actions（读）、Metadata（读）
+
+> 仓库：<https://github.com/SnowBailey/AVCAD> —— 本机没有可用凭据（未装 `gh`、无 token、无 SSH key），
+> 所以推送这一步需要你提供令牌；拿到令牌后我就能直接跑完并回传安装包。
