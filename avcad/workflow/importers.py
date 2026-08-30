@@ -151,11 +151,25 @@ def build_entries(path: str):
         })
     # 主库补全（品牌+型号）
     resolve_products(av)
+    kept = []
     for e in av:
         cat = e.get("category")
         if not cat:
-            cat = classify_category(e.get("name", "")) or "IO"
+            cat = classify_category(e.get("name", ""))
+            if not cat:
+                # 主库明确后置（配件/线缆/非音频，如充电箱、中继器、主缆）
+                # 且名称也命中不到任何音频类别 -> 与吊架同等处理：排除出图。
+                # ★ 注意不能一刀切：QU-16 这类「主库延迟」型号要靠名称兜底成 MIXER，
+                #   只有名称也识别不了时才排除；未命中主库的条目仍保留 IO 兜底。
+                if str(e.get("_resolved", "")).startswith("eko-deferred"):
+                    dropped.append({"设备名称": e.get("name") or e.get("model") or ""})
+                    continue
+                cat = "IO"
             e["category"] = cat
+        kept.append(e)
+    av = kept
+    for e in av:
+        cat = e.get("category")
         spec = e.get("spec", "")
         feats = set(str(x).lower() for x in e.get("features", []) or [])
         feats |= extract_features(spec, e.get("name", ""), cat)

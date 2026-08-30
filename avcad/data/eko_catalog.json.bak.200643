@@ -24006,7 +24006,8 @@
    "category": "SOURCE",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "wireless"
    ],
    "active": false,
    "params": {
@@ -24032,7 +24033,9 @@
    "section": "CF63系列有线无线融合会讨系统",
    "category": "SOURCE",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "wireless"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -24081,7 +24084,9 @@
    "section": "CF63系列有线无线融合会讨系统",
    "category": "SOURCE",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "wireless"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 200,
@@ -24103,7 +24108,9 @@
    "section": "CF63系列有线无线融合会讨系统",
    "category": "SOURCE",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "wireless"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 200,
@@ -24123,7 +24130,7 @@
    "name": "无线单元充电箱",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
-   "category": null,
+   "category": "SOURCE",
    "defer_reason": null,
    "features": [
     "wireless"
@@ -24194,7 +24201,8 @@
    "features": [
     "analog",
     "control",
-    "phantom"
+    "phantom",
+    "wireless"
    ],
    "active": false,
    "params": {
@@ -24221,7 +24229,8 @@
    "category": "SOURCE",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "wireless"
    ],
    "active": false,
    "params": {
@@ -24247,7 +24256,9 @@
    "section": "CF63系列有线无线融合会讨系统",
    "category": "SOURCE",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "wireless"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [

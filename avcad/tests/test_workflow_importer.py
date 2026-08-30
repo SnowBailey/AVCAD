@@ -130,6 +130,32 @@ def test_build_entries_skips_empty_name_rows(tmp_path):
     assert entries[0]["model"] == "TEST-M1"
 
 
+def test_deferred_keeps_name_fallback_but_drops_accessories(tmp_path):
+    """★ 回归：主库后置条目的两种去向必须分开。
+
+    - QU-16：主库 deferred，但名称「数字调音台」命中关键词 -> 兜底成 MIXER（必须保留）
+    - CF6300WCB 充电箱：主库 deferred 且名称无音频关键词 -> 排除出图（与吊架同等待遇）
+
+    历史 bug：一律兜底成 "IO"，导致 category=None 的「不出图」约定形同虚设，
+    充电箱/中继器/线缆都被画成 IO 设备。
+    """
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(["设备名称", "品牌", "型号", "数量"])
+    ws.append(["数字调音台", "ALLEN&HEATH", "QU-16", 1])
+    ws.append(["无线单元充电箱", "IPS", "CF6300WCB", 1])
+    path = tmp_path / "deferred.xlsx"
+    wb.save(path)
+    entries, dropped = build_entries(str(path))
+    models = {str(e.get("model", "")).upper(): e for e in entries}
+    assert "QU-16" in models, "QU-16 应靠名称兜底保留"
+    assert models["QU-16"]["category"] == "MIXER"
+    assert "CF6300WCB" not in models, "充电箱不传音频，应被排除"
+    dropped_names = [str(d.get("设备名称") or "") for d in dropped]
+    assert any("充电箱" in n for n in dropped_names)
+
+
 THEATRE_XLSX = "/Users/mac/Desktop/202601/智慧剧场20260728V2.xlsx"
 
 
