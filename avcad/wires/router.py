@@ -40,8 +40,20 @@ def connect(project):
 
     # 1) 相邻阶段线缆（模拟/RF/扬声器）
     for a, b in zip(chain, chain[1:]):
-        if a == "AMP" and b == "SPEAKER":
+        if b == "SPEAKER":
+            # 只要下游是扬声器就拆开处理：
+            #   有源音箱 → _handle_speakers（不经过管理器、只取一路信号）；
+            #   无源音箱 → 仍走通用相邻级配对（管理器 / 功放 → SPK 口）。
+            # 之前只有「功放→扬声器」才走专用规则，导致无功放级的方案里
+            # 有源音箱被通用配对连上模拟线、同时 _dante_pass 又补 Dante，
+            # 一台音箱两根线（EAW2：2 路 XLR + 14 路 Dante 混接）。
             _handle_speakers(project, by_stage, a, b)
+            # 功放→扬声器的匹配已在上面完成，别让通用配对再连一遍
+            fed = {c.to_uid for c in project.connections
+                   if c.signal == Signal.SPEAKER}
+            _generic_pair(project, by_stage.get(a, []),
+                          [s for s in by_stage.get(b, [])
+                           if not s.active and s.uid not in fed])
             continue
         # 无线天线链路走专用规则（级联 + 每台接收机占满天线口），不用星型配对
         if a == "ANT_DIST":
@@ -338,20 +350,50 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
                 break
     if active and prev:
         prev_devs = by_stage[prev]
+        # 前级出口可能已被相邻级配对占用（如调音台 OUT1~4 已给音响管理器）。
+        # 有源音箱只能接**空闲**出口，否则同一端口被复用：图上看着线数没变，
+        # 实际是两根线压在同一个口上（阳哥 2026-08-30：「调音台并没有增加输出的线」）。
+        used_out = {(c.from_uid, c.from_port) for c in project.connections
+                    if c.signal in (Signal.XLR, Signal.AES)}
+        # Dante 一律禁止设备间直连，统一由 _dante_pass 经交换机承载，
+        # 所以这里只取模拟/数字音频出口（XLR / AES）。
         pins = []
         for d in prev_devs:
             for p in d.ports:
-                if p.role == "out" and p.signal in (Signal.XLR, Signal.DANTE) and not p.air:
+                if (p.role == "out" and p.signal in (Signal.XLR, Signal.AES)
+                        and not p.air and (d.uid, p.id) not in used_out):
                     pins.append((d, p))
-        ains = []
+        # 每台有源音箱只取**一路**信号。
+        analog_spk, dante_spk = [], []
         for s in active:
-            for p in s.ports:
-                if p.role == "in" and p.signal in (Signal.XLR, Signal.DANTE) and not p.air:
-                    ains.append((s, p))
-        for k, (d, p) in enumerate(pins):
-            if k < len(ains):
-                ts, tp = ains[k]
-                project.connections.append(Connection(d.uid, p.id, ts.uid, tp.id, p.signal, _role(d, ts)))
+            ap = next((p for p in s.ports
+                       if p.role == "in" and p.signal in (Signal.XLR, Signal.AES)
+                       and not p.air), None)
+            dp = next((p for p in s.ports
+                       if p.role == "in" and p.signal == Signal.DANTE
+                       and not p.air), None)
+            if ap:
+                analog_spk.append((s, ap))
+            if dp:
+                dante_spk.append((s, dp))
+
+        # ★ 同一方案里有源音箱的取信号方式要**统一**，不要一半模拟一半 Dante：
+        #   空闲模拟出口够喂全部有源音箱 → 全走模拟；
+        #   不够、但每台都能走 Dante 且有交换机 → 全部交给 _dante_pass 走 Dante；
+        #   否则能走多少模拟走多少，剩下的由 _dante_pass 补 Dante。
+        if (len(pins) < len(analog_spk) and project.switches
+                and len(dante_spk) == len(active)):
+            return
+
+        for s, sp in analog_spk:
+            if not pins:
+                break
+            # 优先同信号类型的出口（XLR→XLR、AES→AES）
+            k = next((i for i, (_d, _p) in enumerate(pins)
+                      if _p.signal == sp.signal), 0)
+            d, p = pins.pop(k)
+            project.connections.append(
+                Connection(d.uid, p.id, s.uid, sp.id, sp.signal, _role(d, s)))
 
 
 def _orphan_sources_rescue(project, by_stage):
@@ -498,6 +540,12 @@ def _dante_pass(project):
     for d in project.instances:
         if d.category == "SWITCH":
             continue
+        # ★ 终端扬声器只取一路信号：模拟已经喂上了（调音台/处理器直供有源音箱），
+        #   就不再画 Dante 线。否则每台有源音箱会多出一条横向的 Dante 线
+        #   （阳哥 2026-08-30：太阳纸业 1F「横向的线多了两根」）。
+        #   注意只针对 SPEAKER——处理器/调音台跨模拟与 Dante 两个域是正常设计。
+        if d.category == "SPEAKER" and _has_analog_in(project, d):
+            continue
         backup = d.is_backup and sec is not None
         prefer = sec if backup else prim
         for p in d.ports:
@@ -543,6 +591,12 @@ def _failover(project):
             if ap and bp:
                 project.connections.append(Connection(
                     a.uid, ap.id, b.uid, bp.id, ap.signal, "backup", note="主备failover"))
+
+
+def _has_analog_in(project, dev):
+    """该设备是否已经接到了模拟/数字音频进线（XLR / AES）。"""
+    return any(c.to_uid == dev.uid and c.signal in (Signal.XLR, Signal.AES)
+               for c in project.connections)
 
 
 # ---- 端口查找助手 ----
