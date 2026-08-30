@@ -16,6 +16,7 @@ DATA_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "data"
 _CATEGORY_ORDER = [
     "SOURCE", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "WIRELESS_RX",
     "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH",
+    "MIC_HOST",
 ]
 
 _loaded = {}

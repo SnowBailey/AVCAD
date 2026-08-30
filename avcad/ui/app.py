@@ -63,7 +63,7 @@ _CATALOG = {"data": None, "mtime": 0}
 CATEGORY_CHOICES = [
     "SOURCE", "WIRELESS_MIC", "WIRELESS_RX", "ANTENNA", "ANT_DIST",
     "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH",
-    "IO", "",
+    "IO", "MIC_HOST", "",
 ]
 FEATURE_CHOICES = [
     "analog", "aes", "dante", "control", "wireless", "phantom",

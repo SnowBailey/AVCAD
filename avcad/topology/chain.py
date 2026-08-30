@@ -21,6 +21,7 @@ STAGE_LABELS = {
     "WIRELESS_RX": "无线接收机",
     "ANTENNA": "天线",
     "ANT_DIST": "天线信号分配",
+    "MIC_HOST": "话筒主机",
     "MIXER": "调音台",
     "IO": "接口箱/扩展",
     "SPEAKER_MGR": "扬声器管理",
@@ -121,6 +122,9 @@ def assign_stages(instances: list, chain: list):
     for i in instances:
         if i.category == "WIRELESS_RX":
             # 无线接收机属于音源输出端，与 SOURCE 同列布局
+            i.stage = "SOURCE"
+        elif i.category == "MIC_HOST":
+            # 话筒主机（会议主机）：话筒汇总后送核心级，与 SOURCE 同列
             i.stage = "SOURCE"
         elif i.category == "PROCESSOR":
             i.stage = PROC_PRE if _proc_position(i, amp_has_dsp) == "pre" else PROC_POST

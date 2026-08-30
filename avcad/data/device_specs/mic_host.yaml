@@ -1,0 +1,13 @@
+category: MIC_HOST
+name: 话筒主机（会议主机）
+redundancy_allowed: false
+features_available: [dante, aes, analog, control]
+params: {}
+ports_template:
+  # 话筒主机：手拉手有线话筒 + 无线会讨天线盒接入，音频汇总后送调音台。
+  # 具体端口通常由主库 params.ports_override 指定（如 CF6300：4×PHX + 1×XLR MIX）。
+  # 此处仅作未指定时的兜底模板。
+  - {name: MIC, side: left, signal: XLR, role: in, count: 1, label: MIC}
+  - {name: OUT, side: right, signal: XLR, role: out, count: 1, label: OUT}
+  - {name: DANTE, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
+  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

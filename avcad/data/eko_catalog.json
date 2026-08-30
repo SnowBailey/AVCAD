@@ -23518,7 +23518,7 @@
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "停产型号",
    "features": [
     "control"
    ],
@@ -23531,7 +23531,8 @@
    "qty": 0,
    "price": null,
    "remark": "主机装箱清单内不含延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000595",
@@ -23541,7 +23542,7 @@
    "group": "数字会讨系统（数字控制-数字传输）",
    "section": "CF68系列全数字会议系统",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "停产型号",
    "features": [
     "control"
    ],
@@ -23554,7 +23555,8 @@
    "qty": 0,
    "price": null,
    "remark": "主机装箱清单内不含延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000601",
@@ -23887,7 +23889,7 @@
    "name": "有线无线融合会议主机",
    "group": "模拟会讨系统（数字控制-模拟传输）",
    "section": "CF63系列有线无线融合会讨系统",
-   "category": "IO",
+   "category": "MIC_HOST",
    "defer_reason": null,
    "features": [
     "control",
@@ -24409,7 +24411,7 @@
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF68W系列无线数字会议系统",
    "category": null,
-   "defer_reason": "中控(V2)",
+   "defer_reason": "停产型号",
    "features": [
     "control",
     "wireless"
@@ -24424,7 +24426,8 @@
    "qty": 0,
    "price": null,
    "remark": "主机装箱清单内不含延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000635",
@@ -24530,7 +24533,7 @@
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF62系列数字会议系统",
    "category": null,
-   "defer_reason": "中控(V2)",
+   "defer_reason": "停产型号",
    "features": [
     "control"
    ],
@@ -24544,7 +24547,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存、主机装箱清单内不含延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000890",
@@ -25480,8 +25484,8 @@
    "name": "天线延长线两端BNC公头/10米",
    "group": "其他会议系统（前级）",
    "section": "天线分配系统",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频线缆(非天线)",
    "features": [],
    "active": true,
    "params": {},
@@ -25490,7 +25494,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001141",
@@ -25499,8 +25504,8 @@
    "name": "天线延长线两端BNC公头/15米",
    "group": "其他会议系统（前级）",
    "section": "天线分配系统",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频线缆(非天线)",
    "features": [],
    "active": true,
    "params": {},
@@ -25509,7 +25514,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001142",
@@ -25518,8 +25524,8 @@
    "name": "天线延长线两端BNC公头/20米",
    "group": "其他会议系统（前级）",
    "section": "天线分配系统",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "射频线缆(非天线)",
    "features": [],
    "active": true,
    "params": {},
@@ -25528,7 +25534,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001482",
@@ -27614,8 +27621,8 @@
    "name": "Dante接口盒",
    "group": "音频接口盒",
    "section": "音频接口盒",
-   "category": null,
-   "defer_reason": "视频(V3)",
+   "category": "IO",
+   "defer_reason": null,
    "features": [
     "control",
     "dante",
@@ -27631,7 +27638,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "drawable": true
   },
   {
    "code": "1100000135",
@@ -27641,7 +27649,7 @@
    "group": "音频接口盒",
    "section": "音频接口盒",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "机柜安装支架(配件)",
    "features": [
     "dante"
    ],
@@ -27652,7 +27660,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "drawable": false
   },
   {
    "code": "1100000053",
@@ -28170,8 +28179,8 @@
    "name": "网传发送器",
    "group": "视频产品",
    "section": "XP100系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(HDBaseT网传)",
    "features": [],
    "active": false,
    "params": {
@@ -28182,7 +28191,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP实际传输距离70m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000119",
@@ -28191,8 +28201,8 @@
    "name": "网传接收器",
    "group": "视频产品",
    "section": "XP100系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(HDBaseT网传)",
    "features": [],
    "active": false,
    "params": {
@@ -28203,7 +28213,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "CAT6，S/UTP实际传输距离70m",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000551",
@@ -28458,8 +28469,8 @@
    "name": "4路进HDBT板卡",
    "group": "视频产品",
    "section": "XP120系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(HDBaseT板卡)",
    "features": [
     "control"
    ],
@@ -28472,7 +28483,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001054",
@@ -28481,8 +28493,8 @@
    "name": "4路出HDBT板卡",
    "group": "视频产品",
    "section": "XP120系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(HDBaseT板卡)",
    "features": [
     "control"
    ],
@@ -28495,7 +28507,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001051",
@@ -28504,8 +28517,8 @@
    "name": "2路进4K HDBT板卡",
    "group": "视频产品",
    "section": "XP120系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(4K HDBT板卡)",
    "features": [
     "control"
    ],
@@ -28518,7 +28531,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001052",
@@ -28527,8 +28541,8 @@
    "name": "2路出4K HDBT板卡",
    "group": "视频产品",
    "section": "XP120系列视频矩阵",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "视频设备(4K HDBT板卡)",
    "features": [
     "control"
    ],
@@ -28541,7 +28555,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100001049",
@@ -29964,8 +29979,8 @@
    "name": "无线智能终端",
    "group": "MT融合会议产品系列",
    "section": "WP系列",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "无线协作终端(非音频)",
    "features": [
     "wireless"
    ],
@@ -29976,7 +29991,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001186",
@@ -29985,8 +30001,8 @@
    "name": "USB 发射器",
    "group": "MT融合会议产品系列",
    "section": "WP系列",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "无线协作USB发射器(非音频)",
    "features": [],
    "active": false,
    "params": {},
@@ -29995,7 +30011,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001326",
@@ -30004,8 +30021,8 @@
    "name": "智能无线多媒体协作器",
    "group": "MT融合会议产品系列",
    "section": "WP系列",
-   "category": "ANTENNA",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "无线协作终端(非音频)",
    "features": [
     "control",
     "wireless"
@@ -30019,7 +30036,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001327",
@@ -30029,7 +30047,7 @@
    "group": "MT融合会议产品系列",
    "section": "WP系列",
    "category": null,
-   "defer_reason": "视频(V3)",
+   "defer_reason": "无线协作USB收发器(非音频)",
    "features": [
     "wireless"
    ],
@@ -30040,7 +30058,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000959",
@@ -30049,8 +30068,8 @@
    "name": "毫米波人体感应器",
    "group": "CS传感器产品系列",
    "section": "CS传感器系列",
-   "category": "WIRELESS_MIC",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "毫米波传感器(非音频)",
    "features": [
     "control"
    ],
@@ -30061,7 +30080,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000463",

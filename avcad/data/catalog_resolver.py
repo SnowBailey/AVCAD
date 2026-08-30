@@ -25,6 +25,7 @@ CAT_SPEC = {
     "ANT_DIST": "ant_dist", "WIRELESS_RX": "wireless_rx", "MIXER": "mixer",
     "PROCESSOR": "processor", "SPEAKER_MGR": "speaker_mgr", "AMP": "amp",
     "SPEAKER": "speaker", "SWITCH": "switch", "IO": "io",
+    "MIC_HOST": "mic_host",
 }
 
 # 不画出图的品牌（阳哥指定）：Green-GO=无线内通基本不用；Community/Apart=不画。
@@ -115,6 +116,9 @@ class Catalog:
             "active": p.get("active"),
             "defer_reason": p.get("defer_reason"),
             "drawable": drawable,            # 是否有专属设备模板且品牌允许出图
+            # 人工校正标记：True 时即使名称能兜底出类别也不出图
+            # （停产型号 / 视频网传 / 线缆等，如「天线延长线」名称含「天线」）
+            "no_draw": bool(p.get("no_draw")),
             "draw_excluded_brand": bn in DRAW_EXCLUDE_BRANDS,
             "template": spec,                # 模板名（无则 None）
             "country": p.get("country"),

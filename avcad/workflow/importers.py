@@ -209,6 +209,12 @@ def build_entries(path: str):
     # 套装拆分：清单按「套」计价，图上要分别画出接收机与发射端
     # （IPS UM2002 系列 remark：「套装型号，里面包含 1 台接收机和 2 台麦克风」）
     av = _expand_sets(av)
+    # 主库显式标记 drawable=false（停产型号 / 视频网传 / 线缆等）：直接排除，
+    # 不再走下面的名称兜底——否则「天线延长线」会被兜底成 ANTENNA。
+    for e in av:
+        if e.get("_no_draw"):
+            dropped.append({"设备名称": e.get("name") or e.get("model") or ""})
+    av = [e for e in av if not e.get("_no_draw")]
     kept = []
     for e in av:
         cat = e.get("category")

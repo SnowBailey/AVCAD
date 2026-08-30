@@ -64,7 +64,16 @@ def resolve(entry: dict) -> dict:
     ek = _resolve_eko(brand, model, code)
     if ek:
         cat = ek.get("category")
-        if cat and ek.get("drawable"):
+        # 主库显式标记 drawable=false：即便名称能兜底出类别也不出图。
+        # 例：「天线延长线」名称含「天线」，会被 classify_category 兜底成 ANTENNA，
+        #     但它是线缆；停产型号同理。用显式标记压过名称兜底。
+        if ek.get("no_draw"):
+            entry["_resolved"] = "eko-no-draw:" + str(
+                ek.get("defer_reason") or "主库标记为不出图")
+            entry["_drawable"] = False
+            entry["_no_draw"] = True
+            entry["_defer_reason"] = ek.get("defer_reason")
+        elif cat and ek.get("drawable"):
             # 可出图的核心音频设备：以清单为准
             if not entry.get("category"):
                 entry["category"] = cat
