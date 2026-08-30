@@ -54,13 +54,34 @@ def _map_row(row: dict) -> dict:
     return out
 
 
+def _parse_value(v):
+    """单个参数值解析：JSON 数组/对象还原为 list/dict，其余按标量。
+
+    ★ 关键：list/dict 必须原样保留，不能被 _coerce 压成字符串。
+    否则 ports_override / slots 这类结构化参数会退化成 str，
+    expand_instance 遍历时得到的是字符而不是字典，直接
+    'str' object has no attribute 'get'。
+    """
+    s = (v if isinstance(v, str) else str(v)).strip()
+    if s[:1] in ("[", "{"):
+        try:
+            return json.loads(s)
+        except Exception:
+            pass
+    return _coerce(s)
+
+
 def _parse_params(raw):
     if isinstance(raw, dict):
-        return {k: _coerce(v) for k, v in raw.items()}
+        return {k: (v if isinstance(v, (list, dict)) else _coerce(v))
+                for k, v in raw.items()}
     s = str(raw).strip()
     if s.startswith("{"):
         try:
-            return {k: _coerce(v) for k, v in json.loads(s).items()}
+            loaded = json.loads(s)
+            if isinstance(loaded, dict):
+                return {k: (v if isinstance(v, (list, dict)) else _coerce(v))
+                        for k, v in loaded.items()}
         except Exception:
             pass
     out = {}
@@ -69,8 +90,20 @@ def _parse_params(raw):
         if not part or "=" not in part:
             continue
         k, v = part.split("=", 1)
-        out[k.strip()] = _coerce(v.strip())
+        out[k.strip()] = _parse_value(v.strip())
     return out
+
+
+def dump_params(params: dict) -> str:
+    """参数列序列化：含 list/dict 的复杂参数整体转 JSON（保证往返不丢类型）。
+
+    纯标量仍用 k=v;k2=v2，保持 CSV 可读性与历史兼容。
+    """
+    if not params:
+        return ""
+    if any(isinstance(v, (list, dict)) for v in params.values()):
+        return json.dumps(params, ensure_ascii=False)
+    return ";".join(f"{k}={v}" for k, v in params.items())
 
 
 def _coerce(v):

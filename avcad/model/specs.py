@@ -1,5 +1,7 @@
 """设备规格库：从 YAML 加载，并按清单条目参数化展开为设备实例。"""
 from __future__ import annotations
+import ast
+import json
 import os
 import re
 import yaml
@@ -67,6 +69,38 @@ def _norm_features(features) -> set:
     return set(s.strip().lower() for s in re.split(r"[,;]", str(features)) if s.strip())
 
 
+def _as_struct_list(v) -> tuple:
+    """把结构化参数（slots / ports_override）还原为「字典列表」。
+
+    返回 (items, ok)：ok 表示确实解析出了结构化数据，False 表示原值无法理解。
+
+    兼容三种来源：
+      - 正常 list[dict]（内存直传）
+      - JSON 字符串（to_bom_csv 新格式）
+      - Python repr 字符串（旧 CSV / 手工填写，如 "[{'name': 'PHX', ...}]"）
+
+    ★ 历史 bug：CSV 往返曾把 list 压成 str，外层遍历得到的是**单个字符**，
+    于是 t.get(...) 抛 'str' object has no attribute 'get'。
+    """
+    if isinstance(v, (list, tuple)):
+        return [x for x in v if isinstance(x, dict)], True
+    if not isinstance(v, str):
+        return [], False
+    s = v.strip()
+    if not s:
+        return [], True
+    for loader in (json.loads, ast.literal_eval):
+        try:
+            loaded = loader(s)
+        except Exception:
+            continue
+        if isinstance(loaded, (list, tuple)):
+            return [x for x in loaded if isinstance(x, dict)], True
+        if isinstance(loaded, dict):
+            return [loaded], True
+    return [], False
+
+
 def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstance:
     """把一条清单条目 + 规格展开为一个设备实例（含具体端口，坐标后置）。"""
     features = _norm_features(entry.get("features"))
@@ -89,7 +123,7 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
         electrical={**spec.electrical, **(entry.get("electrical") or {})},
     )
     # 可扩展卡槽（如 YAMAHA HY/MY/RY），仅可视化，非对外接口
-    inst.slots = list(params.get("slots", []))
+    inst.slots = _as_struct_list(params.get("slots", []))[0]
     # 端口展开
     ports = []
     for t in spec.ports_template:
@@ -118,7 +152,12 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
     # 设备特定端口覆盖（如 RMio64-D 这种特殊接口的转换器；空列表表示不画端口）
     if "ports_override" in params:
         override_ports = []
-        for t in params["ports_override"]:
+        # 解析失败（旧 CSV 把结构压成无法理解的 str）时保留模板端口，
+        # 避免设备端口被静默清空；解析成功则严格按 override 覆盖（含空列表=不画端口）。
+        ov_items, ov_ok = _as_struct_list(params["ports_override"])
+        if not ov_ok:
+            ov_items = None
+        for t in (ov_items if ov_items is not None else []):
             cnt = int(t.get("count", 1))
             sig = Signal(t["signal"])
             side = t.get("side", "left")
@@ -132,7 +171,8 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
                     uid=uid, side=side, signal=sig, label=plabel,
                     index=i, role=role, air=False,
                 ))
-        ports = override_ports
+        if ov_items is not None:
+            ports = override_ports
     inst.ports = ports
     return inst
 

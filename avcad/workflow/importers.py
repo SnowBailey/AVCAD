@@ -14,6 +14,7 @@ import io
 import json
 import re
 
+from avcad.parse.bom_parser import dump_params
 from avcad.parse.product_resolver import enrich as resolve_products
 
 # 非信号设备：机械/结构件，不出系统图
@@ -137,6 +138,10 @@ def build_entries(path: str):
         if is_rigging(name):
             dropped.append(r)
             continue
+        # 造价/计价清单里大量「项目特征描述」续行、小计行、空行：设备名称为空
+        # 一律跳过，否则会被当成无名设备导入（实测一份清单多出 150+ 条空条目）。
+        if not str(name).strip():
+            continue
         av.append({
             "brand": r.get("品牌") or r.get("brand") or "",
             "model": r.get("型号") or r.get("model") or "",
@@ -188,7 +193,9 @@ def to_bom_csv(entries: list) -> str:
             "名称": e.get("name", ""),
             "数量": e.get("quantity", 1),
             "特性": ";".join(e.get("features", []) or []),
-            "参数": ";".join(f"{k}={v}" for k, v in params.items()),
+            # 复杂参数（ports_override / slots 等 list/dict）整体转 JSON，
+            # 否则 CSV 往返会退化成 Python repr 字符串，后端遍历时拿到字符而非字典。
+            "参数": dump_params(params),
             "冗余": e.get("redundancy", "") or "",
             "处理器功能": e.get("proc_func", "") or "",
             "有源": "是" if e.get("active") else "",

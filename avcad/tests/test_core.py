@@ -52,6 +52,52 @@ def test_wireless_diversity():
         assert len(ant) >= 2
 
 
+def test_ports_override_as_string_does_not_crash():
+    """★ 回归：ports_override 被压成字符串（旧 CSV / Python repr）不能让出图崩溃。
+
+    历史 bug：遍历字符串得到单个字符 -> t.get() 抛
+    'str' object has no attribute 'get'。
+    """
+    override = [{"name": "PHX", "side": "right", "signal": "XLR",
+                 "role": "out", "label": "PHX", "count": 4}]
+    entries = [{
+        "category": "IO", "brand": "IPS", "model": "CF6300",
+        "name": "会议主机", "quantity": 1, "features": [],
+        "params": {"ports_override": str(override)},   # 模拟旧 CSV 的 Python repr
+    }]
+    p = build_project(entries, name="T")
+    inst = [i for i in p.instances if i.model == "CF6300"]
+    assert inst
+    # Python repr 可被 literal_eval 还原 -> 端口按 override 展开
+    assert len(inst[0].ports) == 4
+
+
+def test_ports_override_unparsable_keeps_template():
+    """无法解析的 ports_override 保留模板端口，不静默清空设备端口。"""
+    entries = [{
+        "category": "IO", "brand": "X", "model": "JUNK",
+        "name": "坏数据", "quantity": 1, "features": [],
+        "params": {"ports_override": "???不是JSON也不是repr???"},
+    }]
+    p = build_project(entries, name="T")
+    inst = [i for i in p.instances if i.model == "JUNK"]
+    assert inst and len(inst[0].ports) > 0   # 回退到 IO 模板端口
+
+
+def test_slots_as_string_is_not_exploded():
+    """slots 被压成字符串时，不能按字符展开成一堆单字母卡槽。"""
+    slots = [{"type": "HY", "count": 2, "label": "HY"}]
+    entries = [{
+        "category": "MIXER", "brand": "Yamaha", "model": "CS-R10",
+        "name": "调音台", "quantity": 1, "features": [],
+        "params": {"slots": str(slots)},
+    }]
+    p = build_project(entries, name="T")
+    inst = [i for i in p.instances if i.model == "CS-R10"]
+    assert inst
+    assert len(inst[0].slots) == 1, f"slots 被错误展开: {inst[0].slots}"
+
+
 def test_candidates_redundancy():
     cands = generate_candidates(parse_bom(SAMPLE))
     assert len(cands) == 3
