@@ -265,8 +265,10 @@ def test_ips_catalog_round3_nodraw_and_reclass(tmp_path):
 
     # 分类纠正
     assert got["AM860"]["category"] == "PROCESSOR"
-    assert got["SI Box"]["category"] == "IO"
-    assert got["DI Box"]["category"] == "IO"
+    # DI 盒 = 电脑非平衡音频转平衡进调音台，属**音源侧**；
+    # 归 IO 会被画成「调音台 -> DI盒」（chain 里 IO 在 MIXER 之后），方向反了。
+    assert got["SI Box"]["category"] == "SOURCE"
+    assert got["DI Box"]["category"] == "SOURCE"
 
 
 def test_ezacoustics_accessories_nodraw(tmp_path):

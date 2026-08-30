@@ -36,7 +36,9 @@ CATEGORY_KW = [
     ("ANTENNA", ["天线"]),
     ("IO", ["接口箱", "接口卡", "接口矩阵"]),
     ("SWITCH", ["交换机"]),
-    ("MIXER", ["调音台", "控制台", "混音"]),
+    # 「调音」单独成词：真实清单有「数字调音控制盘」「数字调音控制台」等写法，
+    # 只匹配「调音台」会漏（A&H QU-16 在菏泽清单里就叫「数字调音控制盘」）。
+    ("MIXER", ["调音台", "调音", "控制台", "混音"]),
     ("PROCESSOR", ["处理器", "dsp", "音频处理"]),
     ("AMP", ["功率放大器", "功放", "放大器"]),
     ("SPEAKER", ["扬声器", "音箱", "全频", "线阵列", "低音", "补声", "返送",
@@ -131,19 +133,154 @@ def _qty(v) -> int:
         return 1
 
 
-def read_xlsx_rows(path: str) -> list:
-    from openpyxl import load_workbook
-    wb = load_workbook(path, data_only=True)
-    ws = wb.active
+# 表头别名 -> 标准列名（真实清单千差万别，大小写/换行/中英混用都要兜住）
+HEADER_ALIASES = {
+    "设备名称": ["设备名称", "产品名称", "名称", "设备名",
+                "设备名称\nname of equipment", "name of equipment", "name"],
+    "品牌": ["品牌", "品牌/国别", "品牌/产地", "厂商", "brand", "manufacturer",
+            "品牌/国别\nbrand/country", "brand/country"],
+    "型号": ["型号", "规格型号", "产品型号", "model", "model number",
+            "型号\nmodel number"],
+    "数量": ["数量", "台数", "qty", "quantity", "数量\nquantity"],
+    "单位": ["单位", "计量单位", "unit"],
+    "指标参数": ["指标参数", "产品参数", "规格", "规格参数", "技术参数", "参数",
+                "index parameter", "spec"],
+}
+# 价目表（产品总表）判定阈值
+# 真实报价文件常把「厂商全系价目表」挂在最后一个 sheet，几百行、数量列几乎全空/零
+PRICELIST_MAX_COLS = 30      # 列数异常多 -> 价目表（EAW 配单表 2575 列）
+PRICELIST_MIN_ROWS = 20      # 行数达到这个量才启用「零占比」判据
+PRICELIST_ZERO_RATIO = 0.6   # 数量列空/零占比超过此值 -> 价目表
+
+
+def _find_header_row(rows) -> int:
+    """在前 12 行内找表头行：必须同时含「设备名称类」与「型号类」列。"""
+    name_keys = set(HEADER_ALIASES["设备名称"])
+    model_keys = set(HEADER_ALIASES["型号"])
+    for i, r in enumerate(rows[:12]):
+        cells = {str(c).strip().lower() for c in r if c is not None}
+        if cells & name_keys and cells & model_keys:
+            return i
+    return -1
+
+
+def _clean_brand(v) -> str:
+    """品牌归一化：真实清单常写成「IPS/深圳」「Allen & Heath/英国」「ezacoustics/深圳」。
+
+    主库里存的是纯品牌名（IPS / ALLEN&HEATH / ezacoustics），带国别后缀会
+    导致主库**完全匹配不上**，只能退化到名称关键词兜底（QU-16 因此被判成 IO）。
+    """
+    s = str(v or "").strip()
+    if not s:
+        return ""
+    for sep in ("/", "／", "\\", "|"):
+        if sep in s:
+            s = s.split(sep)[0].strip()
+            break
+    # 去空白：清单写「Allen & Heath」，主库存「ALLEN&HEATH」
+    return "".join(s.split())
+
+
+def is_section_heading(row: dict) -> bool:
+    """分组标题行判定：品牌、型号、数量三列全空。
+
+    清单常用「扬声器系统」「处理及周边设备」「3F会议室」这类小标题分节。
+    它们名称常含音频关键词（"扬声器"/"处理"/"音源"），会被名称兜底成
+    设备；但只要**没有数量**就不是采购项，据此与真实设备区分。
+    """
+    def _empty(v):
+        return v is None or str(v).strip() == ""
+    return (_empty(row.get("品牌")) and _empty(row.get("型号"))
+            and _empty(row.get("数量")))
+
+
+def _normalize_header(header) -> dict:
+    """返回 {原始列下标: 标准列名}；无法识别的列忽略。"""
+    m = {}
+    for i, h in enumerate(header):
+        key = str(h or "").strip().lower()
+        if not key:
+            continue
+        for std, aliases in HEADER_ALIASES.items():
+            if key in aliases:
+                m[i] = std
+                break
+    return m
+
+
+def _sheet_rows(ws):
+    """单个工作表 -> 归一化行 dict 列表；非配置清单（无表头/价目表）返回 None。"""
     rows = list(ws.iter_rows(values_only=True))
     if not rows:
-        return []
-    header = [str(h) if h is not None else "" for h in rows[0]]
+        return None
+    hi = _find_header_row(rows)
+    if hi < 0:
+        return None
+    hmap = _normalize_header(rows[hi])
+    # ★ hmap 是 {列下标: 标准名}，判存在要查 values() 而不是 key
+    stds = set(hmap.values())
+    if "设备名称" not in stds or "型号" not in stds:
+        return None
+    cn = next(i for i, k in hmap.items() if k == "设备名称")
+    cq = next((i for i, k in hmap.items() if k == "数量"), None)
+    # 价目表识别：列数爆炸，或数量列几乎全空/零
+    if ws.max_column > PRICELIST_MAX_COLS:
+        return None
+    named = [r for r in rows[hi + 1:]
+             if cn < len(r) and r[cn] is not None and str(r[cn]).strip()]
+    if len(named) >= PRICELIST_MIN_ROWS and cq is not None:
+        zero = 0
+        for r in named:
+            q = r[cq] if cq < len(r) else None
+            if q is None or str(q).strip() == "":
+                zero += 1
+            else:
+                try:
+                    if float(q) == 0:
+                        zero += 1
+                except (ValueError, TypeError):
+                    pass
+        if zero / len(named) > PRICELIST_ZERO_RATIO:
+            return None
     out = []
-    for r in rows[1:]:
+    for r in rows[hi + 1:]:
         if all(c is None for c in r):
             continue
-        out.append({header[i]: r[i] for i in range(len(header))})
+        row = {}
+        for i, std in hmap.items():
+            if i < len(r):
+                row[std] = r[i]
+        for std in HEADER_ALIASES:
+            row.setdefault(std, None)
+        if not str(row.get("设备名称") or "").strip():
+            continue
+        out.append(row)
+    return out
+
+
+def read_xlsx_sheets(path: str) -> dict:
+    """返回 {工作表名: 归一化行列表}，已排除价目表/无表头 sheet。"""
+    from openpyxl import load_workbook
+    wb = load_workbook(path, data_only=True)
+    return {ws.title: r for ws in wb.worksheets
+            if (r := _sheet_rows(ws))}
+
+
+def read_xlsx_rows(path: str, sheet=None) -> list:
+    """读 xlsx 的设备行。
+
+    sheet 为 None 时合并**全部有效配置 sheet**（多房间 / 多方案清单常见），
+    每行打 ``_sheet`` 标记来源；指定 sheet 名时只读该表。
+    """
+    sheets = read_xlsx_sheets(path)
+    if sheet is not None:
+        return [dict(r) for r in sheets.get(sheet, [])]
+    out = []
+    for name, rows in sheets.items():
+        for r in rows:
+            d = dict(r)
+            d["_sheet"] = name
+            out.append(d)
     return out
 
 
@@ -191,13 +328,15 @@ def _expand_sets(av: list) -> list:
     return out
 
 
-def build_entries(path: str):
-    """读 xlsx -> 规范化条目（已排除吊架）。返回 (entries, dropped_rows)。
+def build_entries(path: str, sheet=None):
+    """读 xlsx -> 规范化条目（已排除吊架/占位项/不出图型号）。返回 (entries, dropped_rows)。
+
+    sheet 为 None 时合并全部有效配置 sheet（多房间 / 多方案清单）；指定时只读该表。
 
     entries 元素含：brand/model/name/quantity/category/features(list)/params(dict)/
-    electrical(dict,仅功放)/spec(原始指标参数，仅内部用)。
+    electrical(dict,仅功放)/spec(原始指标参数，仅内部用)/_sheet(来源工作表名)。
     """
-    raw = read_xlsx_rows(path)
+    raw = read_xlsx_rows(path, sheet=sheet)
     av, dropped = [], []
     for r in raw:
         name = r.get("设备名称") or r.get("名称") or r.get("name") or ""
@@ -208,18 +347,25 @@ def build_entries(path: str):
         if is_placeholder(name, r):
             dropped.append(r)
             continue
+        # 分组标题行：清单常用「扬声器系统」「处理及周边设备」「3F会议室」
+        # 这类小标题分节，品牌/型号/数量三列全空。它们不含数量，据此与
+        # 真实设备区分（真实设备哪怕写「1 批」也有数量）。
+        if is_section_heading(r):
+            continue
         # 造价/计价清单里大量「项目特征描述」续行、小计行、空行：设备名称为空
         # 一律跳过，否则会被当成无名设备导入（实测一份清单多出 150+ 条空条目）。
         if not str(name).strip():
             continue
         av.append({
-            "brand": r.get("品牌") or r.get("brand") or "",
+            # 品牌去国别后缀（「IPS/深圳」->「IPS」），否则主库匹配失效
+            "brand": _clean_brand(r.get("品牌") or r.get("brand")),
             "model": r.get("型号") or r.get("model") or "",
             "name": name,
             "quantity": _qty(r.get("数量") or r.get("qty")),
             # 计量单位：用于「成对销售」设备的数量展开（如 UM2000AP 单位=对 → 2 支）
             "_unit": str(r.get("单位") or r.get("unit") or "").strip(),
             "spec": r.get("指标参数") or r.get("参数") or r.get("spec") or "",
+            "_sheet": r.get("_sheet") or "",
         })
     # 主库补全（品牌+型号）
     resolve_products(av)

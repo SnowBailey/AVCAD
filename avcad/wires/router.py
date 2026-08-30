@@ -31,6 +31,13 @@ def connect(project):
     for i in instances:
         by_stage[i.stage].append(i)
 
+    # 0) 会讨手拉手优先：会议单元串到主机后，由主机统一汇出，
+    #    不再走 SOURCE 的星型配对（否则会画成「每台话筒直连处理器」）。
+    conf_units = _conference_link(project, by_stage)
+    if conf_units:
+        by_stage["SOURCE"] = [i for i in by_stage.get("SOURCE", [])
+                              if i.uid not in conf_units]
+
     # 1) 相邻阶段线缆（模拟/RF/扬声器）
     for a, b in zip(chain, chain[1:]):
         if a == "AMP" and b == "SPEAKER":
@@ -54,7 +61,10 @@ def connect(project):
     # 4) 主备 failover 虚线
     _failover(project)
 
-    # 5) 连线去重
+    # 5) 末位救援：仍孤立的音源接到空闲进口（话筒多于处理器输入路数时）
+    _orphan_sources_rescue(project, by_stage)
+
+    # 6) 连线去重
     _dedup(project)
 
 
@@ -266,9 +276,28 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
     active = [s for s in speakers if s.active]
     # 无源：按功放通道匹配
     if amps and passive:
+        # 按各功放的**通道容量加权**分配，而不是简单取模轮询：
+        # 两通道与四通道功放混用时，轮询会让小功放超载。
+        # 通道不够时由 match_speakers_to_amp 在通道内并联（吸顶音箱常见）。
+        caps = [max(1, len([p for p in a.ports
+                            if p.role == "out" and p.signal == Signal.SPEAKER]))
+                for a in amps]
+        total_cap = sum(caps)
+        n = len(passive)
         buckets = [[] for _ in amps]
-        for idx, s in enumerate(passive):
-            buckets[idx % len(amps)].append(s)
+        quota = [max(1, round(n * c / total_cap)) for c in caps]
+        idx = 0
+        for s in passive:
+            # 找还没满额且剩余额度最多的功放
+            order = sorted(range(len(amps)),
+                           key=lambda k: (quota[k] - len(buckets[k])), reverse=True)
+            for k in order:
+                if len(buckets[k]) < quota[k]:
+                    buckets[k].append(s)
+                    idx += 1
+                    break
+            else:
+                buckets[order[0]].append(s)
         for amp, grp in zip(amps, buckets):
             res = match_speakers_to_amp(amp, grp)
             spk_by_uid = {s.uid: s for s in grp}
@@ -316,6 +345,104 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
                 project.connections.append(Connection(d.uid, p.id, ts.uid, tp.id, p.signal, _role(d, ts)))
 
 
+def _orphan_sources_rescue(project, by_stage):
+    """末位救援：常规配对后仍孤立的音源，接到还有空闲进口的处理/混音设备。
+
+    真实清单常见「话筒数 > 处理器输入路数」（如太阳纸业 4F：27 支话筒 vs
+    2 台 GMN1208D 共 24 路模拟输入）。多余话筒应直入调音台的**空闲**通道。
+
+    ★ 必须在所有常规连线之后调用：先让处理器占满调音台输入，
+      再用剩下的空口接溢出音源，否则会把调音台挤爆（进线数 > 进口数）。
+    """
+    used_in = {(c.to_uid, c.to_port) for c in project.connections}
+    linked = {c.from_uid for c in project.connections}
+
+    orphans = []
+    for d in by_stage.get("SOURCE", []):
+        if d.uid in linked:
+            continue
+        p = next((p for p in d.ports
+                  if p.role == "out" and p.signal in CABLE_SIGNALS and not p.air), None)
+        if p:
+            orphans.append((d, p))
+    if not orphans:
+        return
+
+    free = []
+    for st in ("PROC_PRE", "PROCESSOR", "MIXER"):
+        for d in by_stage.get(st, []):
+            for p in d.ports:
+                if (p.role == "in" and p.signal in CABLE_SIGNALS and not p.air
+                        and (d.uid, p.id) not in used_in):
+                    free.append((d, p))
+
+    for d, p in orphans:
+        for k, (td, tp) in enumerate(free):
+            if tp.signal != p.signal:
+                continue
+            role = _role(d, td)
+            project.connections.append(Connection(
+                d.uid, p.id, td.uid, tp.id, p.signal, role,
+                note="音源直入" if td.category == "MIXER" else ""))
+            free.pop(k)
+            break
+
+
+def _conference_link(project, by_stage):
+    """会讨手拉手：有线会议单元用六芯 T 型线串联后接入会议主机。
+
+    官方（ezpro CF63 系列）：「会议主机与有线会议单元、天线盒均采用专用六芯
+    主缆连接」「有线系统单元间采用 T 型线连接」「支持有线单元环形手拉手连接，
+    某台单元故障不影响整套系统工作」。
+
+    主库侧约定：会议单元 ``params.host`` 指向主机型号（如 CF6300），
+    且带一对 DIN in/out（T 型线）。本函数按主机进口数把单元分成若干条链，
+    链内首尾相接，链尾接主机的一路输入。
+
+    返回已接线的单元 uid 集合——这些单元不应再参与 SOURCE 的星型配对。
+    """
+    hosts = [i for i in project.instances if i.category == "MIC_HOST"]
+    if not hosts:
+        return set()
+    units = [i for i in project.instances
+             if (getattr(i, "params", None) or {}).get("host")]
+    if not units:
+        return set()
+
+    host = hosts[0]
+    ins = [p for p in host.ports if p.role == "in"]
+    if not ins:
+        return set()
+
+    chains = [[] for _ in ins]
+    for idx, u in enumerate(units):
+        chains[idx % len(chains)].append(u)
+
+    wired = set()
+    for k, ch in enumerate(chains):
+        if not ch:
+            continue
+        prev = None
+        for u in ch:
+            u_in = next((p for p in u.ports if p.role == "in"), None)
+            if prev is not None and u_in is not None:
+                p_out = next((p for p in prev.ports if p.role == "out"), None)
+                if p_out:
+                    project.connections.append(Connection(
+                        prev.uid, p_out.id, u.uid, u_in.id, Signal.XLR,
+                        "primary", note="手拉手"))
+                    wired.add(prev.uid)
+            prev = u
+        # 链尾 -> 主机
+        last_out = next((p for p in prev.ports if p.role == "out"), None)
+        if last_out:
+            project.connections.append(Connection(
+                prev.uid, last_out.id, host.uid, ins[k].id, Signal.XLR,
+                "primary", note="手拉手→主机"))
+            wired.add(prev.uid)
+    return wired
+
+
 def _dante_pass(project):
     switches = project.switches
     if not switches:
@@ -325,26 +452,53 @@ def _dante_pass(project):
 
     # 交换机端口按连接顺序分配，避免所有 Dante 线挤到同一个口
     used_idx = {sw.uid: 0 for sw in switches}
+    # 已级联过的交换机（用于避免重复画级联线）
+    cascaded = set()
 
-    def _alloc_port(sw):
-        dante_ports = [p for p in sw.ports if p.signal == Signal.DANTE and not p.air]
-        idx = used_idx[sw.uid]
-        if idx >= len(dante_ports):
-            return dante_ports[-1] if dante_ports else None
-        used_idx[sw.uid] = idx + 1
-        return dante_ports[idx]
+    def _first_free(prefer=None):
+        """返回 (交换机, 端口)。优先用 prefer，端口用尽后顺延到下一台。"""
+        order = ([prefer] if prefer else []) + \
+                [s for s in switches if s is not prefer]
+        for sw in order:
+            if sw is None:
+                continue
+            dante_ports = [p for p in sw.ports
+                           if p.signal == Signal.DANTE and not p.air]
+            idx = used_idx[sw.uid]
+            if idx < len(dante_ports):
+                used_idx[sw.uid] = idx + 1
+                return sw, dante_ports[idx]
+        return None, None
+
+    def _cascade_to(sw, backup):
+        """首次用到非首选交换机时，画一条「上级交换机 → 本机」的级联线。"""
+        if sw is None or sw is prim or sw.uid in cascaded:
+            return
+        cascaded.add(sw.uid)
+        up, up_port = _first_free(prim)
+        if up is None:
+            return
+        my_ports = [p for p in sw.ports
+                    if p.signal == Signal.DANTE and not p.air]
+        if not my_ports:
+            return
+        project.connections.append(Connection(
+            up.uid, up_port.id, sw.uid, my_ports[-1].id, Signal.DANTE,
+            "backup" if backup else "primary", note="交换机级联"))
 
     for d in project.instances:
         if d.category == "SWITCH":
             continue
         backup = d.is_backup and sec is not None
-        tgt = sec if backup else prim
+        prefer = sec if backup else prim
         for p in d.ports:
             if p.signal != Signal.DANTE or p.air:
                 continue
-            sp = _alloc_port(tgt)
+            tgt, sp = _first_free(prefer)
             if sp is None:
                 continue
+            if tgt is not prim:
+                _cascade_to(tgt, backup)
             if p.role == "out":
                 project.connections.append(Connection(
                     d.uid, p.id, tgt.uid, sp.id, Signal.DANTE,
@@ -353,6 +507,12 @@ def _dante_pass(project):
                 project.connections.append(Connection(
                     tgt.uid, sp.id, d.uid, p.id, Signal.DANTE,
                     "backup" if backup else "primary", note="Dante←交换机"))
+
+    # 清单配了多台交换机但 Dante 设备不多时，空闲交换机会变成孤立节点。
+    # 工程上多交换机必然成链（堆叠/级联），这里补上，避免图上有悬空设备。
+    for sw in switches[1:]:
+        if sw.uid not in cascaded and used_idx.get(sw.uid, 0) == 0:
+            _cascade_to(sw, False)
 
 
 def _failover(project):

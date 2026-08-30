@@ -1,5 +1,5 @@
 {
- "total": 2298,
+ "total": 2325,
  "products": [
   {
    "code": "1200003080",
@@ -2641,9 +2641,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "英国",
    "unit": "台",
    "qty": 0,
@@ -2691,9 +2689,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 128
-   },
+   "params": {},
    "country": "英国",
    "unit": "台",
    "qty": 0,
@@ -2741,9 +2737,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 128
-   },
+   "params": {},
    "country": "英国",
    "unit": "台",
    "qty": 0,
@@ -2764,9 +2758,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "英国",
    "unit": "台",
    "qty": 0,
@@ -3414,9 +3406,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 32
-   },
+   "params": {},
    "country": "英国",
    "unit": "块",
    "qty": 0,
@@ -6466,7 +6456,10 @@
     "phantom"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "inputs": 11,
+    "outputs": 22
+   },
    "country": "比利时",
    "unit": "台",
    "qty": 0,
@@ -6612,9 +6605,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "比利时",
    "unit": "只",
    "qty": 0,
@@ -6636,9 +6627,7 @@
     "phantom"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 3
-   },
+   "params": {},
    "country": "比利时",
    "unit": "只",
    "qty": 0,
@@ -6656,12 +6645,14 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": 4,
-    "power_w": 100
+    "power_w": 100,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6698,10 +6689,13 @@
    "section": "Pandant系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6719,10 +6713,13 @@
    "section": "Pandant系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6740,10 +6737,13 @@
    "section": "Pandant系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6761,10 +6761,13 @@
    "section": "Pandant系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6783,7 +6786,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -6792,7 +6796,8 @@
      4,
      7,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6810,14 +6815,17 @@
    "section": "Pandant系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
     ],
-    "channels_hint": 16
+    "channels_hint": 16,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6840,7 +6848,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6859,14 +6868,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6885,14 +6896,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6911,14 +6924,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6937,14 +6952,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6963,11 +6980,13 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
-    "impedance_ohm": 4
+    "impedance_ohm": 4,
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -6986,14 +7005,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -7012,14 +7033,16 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
     "impedance_ohm": [
      4,
      8
-    ]
+    ],
+    "channels": 2
    },
    "country": "比利时",
    "unit": "台",
@@ -7472,7 +7495,10 @@
     "phantom"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "inputs": 11,
+    "outputs": 22
+   },
    "country": "比利时",
    "unit": "个",
    "qty": 0,
@@ -7489,9 +7515,13 @@
    "section": "IR REMOTE 遥控器",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2
+   },
    "country": "比利时",
    "unit": "个",
    "qty": 0,
@@ -13846,17 +13876,20 @@
    "name": "双8\"二分频有源线阵列",
    "group": "NT系列",
    "section": null,
-   "category": null,
-   "defer_reason": "音频未识别",
+   "category": "SPEAKER",
+   "defer_reason": null,
    "features": [],
    "active": true,
-   "params": {},
+   "params": {
+    "impedance_ohm": 8
+   },
    "country": "美国",
    "unit": "",
    "qty": null,
    "price": 0.0,
    "remark": "",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": false
   },
   {
    "code": "1200003015",
@@ -14377,7 +14410,7 @@
    "group": "RADIUS系列配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "吊挂件(配件)",
    "features": [],
    "active": false,
    "params": {},
@@ -14386,7 +14419,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售指导价，已签约，只允许配单销售，不可单独销售。设计之初与分销租赁BU做项目报备，",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000694",
@@ -14396,7 +14430,7 @@
    "group": "RADIUS系列配件",
    "section": null,
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "吊挂件(配件)",
    "features": [],
    "active": false,
    "params": {},
@@ -14405,7 +14439,8 @@
    "qty": 0,
    "price": 0.0,
    "remark": "仅一档销售指导价",
-   "sheet": "EAW"
+   "sheet": "EAW",
+   "no_draw": true
   },
   {
    "code": "1200000695",
@@ -15627,7 +15662,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -15652,7 +15688,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -15677,7 +15714,8 @@
    "params": {
     "impedance_ohm": 8,
     "power_w": 3200,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -15703,7 +15741,8 @@
    "params": {
     "impedance_ohm": 8,
     "power_w": 3200,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -15729,7 +15768,8 @@
    "params": {
     "impedance_ohm": 8,
     "power_w": 6400,
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "美国",
    "unit": "",
@@ -15754,7 +15794,8 @@
    "active": false,
    "params": {
     "power_w": 16000,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "",
@@ -15779,7 +15820,8 @@
    "active": false,
    "params": {
     "power_w": 16000,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "",
@@ -15797,9 +15839,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2
+   },
    "country": "美国",
    "unit": "",
    "qty": null,
@@ -15816,9 +15862,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2
+   },
    "country": "美国",
    "unit": "",
    "qty": null,
@@ -17574,7 +17624,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -17584,7 +17635,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -17606,9 +17658,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 8000
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -17677,9 +17727,7 @@
    "defer_reason": null,
    "features": [],
    "active": false,
-   "params": {
-    "channels_hint": 64
-   },
+   "params": {},
    "country": "美国",
    "unit": "块",
    "qty": 0,
@@ -17700,9 +17748,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 32
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -17723,9 +17769,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 16
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -17746,9 +17790,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 16
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -17769,9 +17811,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 32
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -23257,7 +23297,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23281,7 +23322,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23305,7 +23347,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -23330,7 +23373,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23355,7 +23399,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23380,7 +23425,8 @@
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23399,7 +23445,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -23409,7 +23456,8 @@
      8
     ],
     "power_w": 1400,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23428,7 +23476,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -23437,7 +23486,8 @@
      8
     ],
     "power_w": 2400,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -23456,7 +23506,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -23465,7 +23516,8 @@
      8
     ],
     "power_w": 3400,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -23484,7 +23536,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -23493,7 +23546,8 @@
      8
     ],
     "power_w": 5200,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -23512,7 +23566,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -23521,7 +23576,8 @@
      8
     ],
     "power_w": 6800,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -23552,7 +23608,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -23579,7 +23636,9 @@
     "impedance_ohm": [
      103,
      306
-    ]
+    ],
+    "inputs": 4,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -23602,9 +23661,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 64
-   },
+   "params": {},
    "country": "中国",
    "unit": "台",
    "qty": 0,
@@ -24064,6 +24121,14 @@
    "params": {
     "ports_override": [
      {
+      "name": "CH",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "CH",
+      "count": 4
+     },
+     {
       "name": "PHX",
       "side": "right",
       "signal": "XLR",
@@ -24182,7 +24247,27 @@
      32,
      200
     ],
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24207,7 +24292,27 @@
      32,
      200
     ],
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24253,7 +24358,27 @@
    "active": false,
    "params": {
     "impedance_ohm": 200,
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24275,7 +24400,27 @@
    "active": false,
    "params": {
     "impedance_ohm": 200,
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24373,7 +24518,27 @@
      32,
      200
     ],
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24400,7 +24565,27 @@
      32,
      200
     ],
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -24425,7 +24610,27 @@
      32,
      200
     ],
-    "channels_hint": 1
+    "channels_hint": 1,
+    "host": "CF6300",
+    "conf_link": "6P_DIN",
+    "ports_override": [
+     {
+      "name": "DIN",
+      "side": "left",
+      "signal": "XLR",
+      "role": "in",
+      "label": "DIN",
+      "count": 1
+     },
+     {
+      "name": "DIN",
+      "side": "right",
+      "signal": "XLR",
+      "role": "out",
+      "label": "DIN",
+      "count": 1
+     }
+    ]
    },
    "country": "中国",
    "unit": "台",
@@ -25880,10 +26085,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ]
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -25909,10 +26112,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ]
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -25937,10 +26138,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ]
+    "inputs": 16,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -25965,11 +26164,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     150,
-     300
-    ],
-    "channels_hint": 6
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -25995,11 +26191,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     150,
-     300
-    ],
-    "channels_hint": 6
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26164,11 +26357,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ],
-    "channels_hint": 8
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26194,11 +26384,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     300,
-     600
-    ],
-    "channels_hint": 8
+    "inputs": 8,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26223,11 +26410,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ],
-    "channels_hint": 8
+    "inputs": 12,
+    "outputs": 12
    },
    "country": "中国",
    "unit": "台",
@@ -26253,11 +26437,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     300,
-     600
-    ],
-    "channels_hint": 8
+    "inputs": 12,
+    "outputs": 12
    },
    "country": "中国",
    "unit": "台",
@@ -26282,11 +26463,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     153,
-     306
-    ],
-    "channels_hint": 8
+    "inputs": 16,
+    "outputs": 16
    },
    "country": "中国",
    "unit": "台",
@@ -26312,11 +26490,8 @@
    ],
    "active": false,
    "params": {
-    "impedance_ohm": [
-     300,
-     600
-    ],
-    "channels_hint": 8
+    "inputs": 16,
+    "outputs": 16
    },
    "country": "中国",
    "unit": "台",
@@ -26385,7 +26560,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26410,7 +26586,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26437,7 +26614,9 @@
     "impedance_ohm": [
      51,
      102
-    ]
+    ],
+    "inputs": 4,
+    "outputs": 8
    },
    "country": "中国",
    "unit": "台",
@@ -26460,9 +26639,7 @@
     "phantom"
    ],
    "active": true,
-   "params": {
-    "impedance_ohm": 600
-   },
+   "params": {},
    "country": "中国",
    "unit": "台",
    "qty": 0,
@@ -26481,7 +26658,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -26490,7 +26668,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -26509,7 +26688,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -26518,7 +26698,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -26537,7 +26718,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -26546,7 +26728,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -26565,7 +26748,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -26574,7 +26758,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -26593,7 +26778,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -26602,7 +26788,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 2
    },
    "country": "中国",
    "unit": "台",
@@ -26632,7 +26819,8 @@
      4,
      8,
      16
-    ]
+    ],
+    "channels": 4
    },
    "country": "中国",
    "unit": "台",
@@ -27903,7 +28091,7 @@
    "name": "单电脑DI盒",
    "group": "音频接口盒",
    "section": "音频接口盒",
-   "category": "IO",
+   "category": "SOURCE",
    "defer_reason": null,
    "features": [],
    "active": false,
@@ -27923,7 +28111,7 @@
    "name": "双电脑DI盒",
    "group": "音频接口盒",
    "section": "音频接口盒",
-   "category": "IO",
+   "category": "SOURCE",
    "defer_reason": null,
    "features": [],
    "active": false,
@@ -30671,9 +30859,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "impedance_ohm": 75
-   },
+   "params": {},
    "country": "",
    "unit": "个",
    "qty": null,
@@ -30878,9 +31064,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "impedance_ohm": 100
-   },
+   "params": {},
    "country": "",
    "unit": "个",
    "qty": null,
@@ -31089,9 +31273,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "impedance_ohm": 600
-   },
+   "params": {},
    "country": "",
    "unit": "个",
    "qty": null,
@@ -31299,7 +31481,9 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 8
+    "channels_hint": 8,
+    "inputs": 16,
+    "outputs": 42
    },
    "country": "美国",
    "unit": "台",
@@ -31323,7 +31507,9 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 8
+    "channels_hint": 8,
+    "inputs": 16,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -31346,7 +31532,9 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 6
+    "channels_hint": 6,
+    "inputs": 24,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -31369,7 +31557,9 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 6
+    "channels_hint": 6,
+    "inputs": 32,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -31944,9 +32134,7 @@
     "analog"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 2
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -31968,9 +32156,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 2
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -32033,10 +32219,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -32054,10 +32243,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -32075,9 +32267,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -32094,10 +32290,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -32115,10 +32314,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -32136,10 +32338,13 @@
    "section": null,
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -33228,9 +33433,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 2
-   },
+   "params": {},
    "country": "德国",
    "unit": "个",
    "qty": 0,
@@ -33462,11 +33665,14 @@
    "section": "DIGAM M 系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33484,11 +33690,14 @@
    "section": "DIGAM M 系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33506,11 +33715,14 @@
    "section": "DIGAM M 系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33528,11 +33740,14 @@
    "section": "DIGAM M 系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33550,11 +33765,14 @@
    "section": "DIGAM M 系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33572,11 +33790,14 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": 8,
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33605,7 +33826,8 @@
      2,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33705,7 +33927,9 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -33713,7 +33937,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33741,7 +33966,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33760,7 +33986,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -33769,7 +33996,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33799,7 +34027,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33818,7 +34047,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -33827,7 +34057,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33857,7 +34088,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -33876,7 +34108,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -33885,7 +34118,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33915,7 +34149,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -33991,7 +34226,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34000,7 +34236,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34020,7 +34257,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34029,7 +34267,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34049,7 +34288,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34058,7 +34298,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34077,7 +34318,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34086,7 +34328,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34106,7 +34349,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34115,7 +34359,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34135,7 +34380,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34144,7 +34390,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34164,7 +34411,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "phantom"
+    "phantom",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34173,7 +34421,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34194,7 +34443,8 @@
    "features": [
     "aes",
     "control",
-    "phantom"
+    "phantom",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34203,7 +34453,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34223,7 +34474,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34232,7 +34484,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34251,7 +34504,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34260,7 +34514,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34280,7 +34535,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34289,7 +34545,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34309,7 +34566,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34318,7 +34576,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34337,7 +34596,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34346,7 +34606,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34366,7 +34627,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34375,7 +34637,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34395,7 +34658,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34404,7 +34668,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34423,7 +34688,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34432,7 +34698,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34452,7 +34719,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34461,7 +34729,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34481,7 +34750,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34490,7 +34760,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34509,7 +34780,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34518,7 +34790,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34538,7 +34811,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34547,7 +34821,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34567,7 +34842,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34576,7 +34852,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34595,7 +34872,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34604,7 +34882,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34624,7 +34903,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "control"
+    "control",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34633,7 +34913,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34653,7 +34934,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34662,7 +34944,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34693,7 +34976,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34725,7 +35009,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34757,7 +35042,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 4
    },
    "country": "意大利",
    "unit": "台",
@@ -34789,7 +35075,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34821,7 +35108,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34853,7 +35141,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34885,7 +35174,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34917,7 +35207,8 @@
      8,
      16
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34935,7 +35226,9 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -34944,7 +35237,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34963,7 +35257,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "aes"
+    "aes",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -34973,7 +35268,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -34993,7 +35289,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35003,7 +35300,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35021,7 +35319,9 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -35030,7 +35330,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35049,7 +35350,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "aes"
+    "aes",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35059,7 +35361,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35079,7 +35382,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35089,7 +35393,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35107,7 +35412,9 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -35116,7 +35423,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35135,7 +35443,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "aes"
+    "aes",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35145,7 +35454,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35165,7 +35475,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35175,7 +35486,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35193,7 +35505,9 @@
    "section": "DIGAM K系列",
    "category": "AMP",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "analog"
+   ],
    "active": false,
    "params": {
     "impedance_ohm": [
@@ -35202,7 +35516,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35221,7 +35536,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "aes"
+    "aes",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35231,7 +35547,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35251,7 +35568,8 @@
    "defer_reason": null,
    "features": [
     "aes",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35261,7 +35579,8 @@
      8,
      16
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35280,7 +35599,8 @@
    "category": "AMP",
    "defer_reason": null,
    "features": [
-    "aes"
+    "aes",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -35290,7 +35610,8 @@
      8,
      16
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35550,7 +35871,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35580,7 +35902,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35611,7 +35934,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35641,7 +35965,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35672,7 +35997,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35703,7 +36029,8 @@
      4,
      8
     ],
-    "channels_hint": 8
+    "channels_hint": 8,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35733,7 +36060,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35763,7 +36091,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35793,7 +36122,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35823,7 +36153,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35853,7 +36184,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35883,7 +36215,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35913,7 +36246,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35943,7 +36277,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -35973,7 +36308,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -36003,7 +36339,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -36033,7 +36370,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -36063,7 +36401,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "意大利",
    "unit": "台",
@@ -36474,9 +36813,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 4
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -36498,9 +36835,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 8
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -36522,9 +36857,7 @@
     "control"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -36781,7 +37114,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -36806,9 +37140,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 8
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -36833,7 +37165,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -36859,7 +37192,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -36885,7 +37219,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -36911,7 +37246,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -36937,7 +37273,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -36963,7 +37300,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -36987,7 +37325,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -37011,7 +37350,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -37037,7 +37377,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -37063,7 +37404,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 12
+    "inputs": 12,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -37083,9 +37425,7 @@
    "defer_reason": null,
    "features": [],
    "active": false,
-   "params": {
-    "channels_hint": 8
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37104,9 +37444,7 @@
    "defer_reason": null,
    "features": [],
    "active": false,
-   "params": {
-    "channels_hint": 16
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37586,9 +37924,7 @@
     "phantom"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37611,9 +37947,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 12
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37637,9 +37971,7 @@
     "phantom"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 4
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37662,9 +37994,7 @@
     "dante"
    ],
    "active": false,
-   "params": {
-    "channels_hint": 4
-   },
+   "params": {},
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -37689,7 +38019,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 4
+    "inputs": 4,
+    "outputs": 4
    },
    "country": "美国",
    "unit": "台",
@@ -37731,10 +38062,7 @@
     "phantom"
    ],
    "active": false,
-   "params": {
-    "impedance_ohm": 150,
-    "channels_hint": 4
-   },
+   "params": {},
    "country": "美国",
    "unit": "张",
    "qty": 0,
@@ -37837,10 +38165,7 @@
     "phantom"
    ],
    "active": false,
-   "params": {
-    "impedance_ohm": 150,
-    "channels_hint": 4
-   },
+   "params": {},
    "country": "美国",
    "unit": "张",
    "qty": 0,
@@ -45057,7 +45382,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -45066,7 +45392,8 @@
      4,
      8
     ],
-    "channels_hint": 2
+    "channels_hint": 2,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -45086,7 +45413,8 @@
    "defer_reason": null,
    "features": [
     "control",
-    "dante"
+    "dante",
+    "analog"
    ],
    "active": false,
    "params": {
@@ -45095,7 +45423,8 @@
      4,
      8
     ],
-    "channels_hint": 4
+    "channels_hint": 4,
+    "channels": 2
    },
    "country": "美国",
    "unit": "台",
@@ -50553,6 +50882,393 @@
    "price": 0.0,
    "remark": "备少量/查库存配单,",
    "sheet": "AUDIX固定安装及无线 "
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "KARA IIi",
+   "name": "可变曲率线阵列全频扬声器",
+   "category": "SPEAKER",
+   "features": [],
+   "params": {
+    "impedance_ohm": 8
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "SB18 IIi",
+   "name": "次低频扬声器",
+   "category": "SPEAKER",
+   "features": [],
+   "params": {
+    "impedance_ohm": 8
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "KS28",
+   "name": "超低频扬声器",
+   "category": "SPEAKER",
+   "features": [],
+   "params": {
+    "impedance_ohm": 8
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "X12",
+   "name": "同轴全频扬声器",
+   "category": "SPEAKER",
+   "features": [],
+   "params": {
+    "impedance_ohm": 8
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "X8",
+   "name": "同轴全频扬声器",
+   "category": "SPEAKER",
+   "features": [],
+   "params": {
+    "impedance_ohm": 8
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "LA12X",
+   "name": "四通道功放控制器",
+   "category": "AMP",
+   "features": [
+    "dante",
+    "control",
+    "analog"
+   ],
+   "params": {
+    "channels": 4
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "LA4X",
+   "name": "四通道功放控制器",
+   "category": "AMP",
+   "features": [
+    "dante",
+    "control",
+    "analog"
+   ],
+   "params": {
+    "channels": 4
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "LA2Xi",
+   "name": "四通道功放控制器",
+   "category": "AMP",
+   "features": [
+    "dante",
+    "control",
+    "analog"
+   ],
+   "params": {
+    "channels": 4
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "LS10",
+   "name": "AVB 音频交换机",
+   "category": "SWITCH",
+   "features": [
+    "control"
+   ],
+   "params": {
+    "ports": 10
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "L-NET",
+   "name": "功率放大器控制软件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "控制软件(非设备)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "KARAIIi-BUMP/M-BARi",
+   "name": "主扩扬声器组吊挂件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "吊挂件(配件)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "KARAIIi-BUMP",
+   "name": "次低频扬声器组吊挂件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "吊挂件(配件)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "A10i-LIFT",
+   "name": "拉声像扬声器吊挂件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "吊挂件(配件)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "X-UL12",
+   "name": "返送扬声器吊挂件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "吊挂件(配件)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "L-ACOUSTICS",
+   "model": "X-UL8i",
+   "name": "效果声扬声器吊挂件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "吊挂件(配件)",
+   "section": "L-ACOUSTICS 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "SENNHEISER",
+   "model": "EW-D ASA",
+   "name": "有源天线分配器",
+   "category": "ANT_DIST",
+   "features": [],
+   "params": {
+    "inputs": 2,
+    "outputs": 8,
+    "cascade_outs": 0,
+    "impedance_ohm": 50
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "SENNHEISER 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "SENNHEISER",
+   "model": "ADP UHF",
+   "name": "无源指向性天线",
+   "category": "ANTENNA",
+   "features": [],
+   "params": {
+    "impedance_ohm": 50
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "SENNHEISER 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "SENNHEISER",
+   "model": "EW 300 G4-BASE SKM-S/MMD945-1 BK",
+   "name": "无线手持话筒",
+   "category": "WIRELESS_RX",
+   "features": [
+    "control"
+   ],
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "SENNHEISER 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "SENNHEISER",
+   "model": "EW 300 G4-BASE SK-RC/HSP ESSENTIAL OMW",
+   "name": "无线头戴话筒",
+   "category": "WIRELESS_RX",
+   "features": [
+    "control"
+   ],
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "SENNHEISER 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "VINGLOOP",
+   "model": "AIM-24MG6XF-UPoE",
+   "name": "音频交换机",
+   "category": "SWITCH",
+   "features": [
+    "control"
+   ],
+   "params": {
+    "ports": 24
+   },
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "VINGLOOP 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "VINGLOOP",
+   "model": "SWM-1GS",
+   "name": "SFP光纤模块",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "光模块(配件)",
+   "section": "VINGLOOP 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "SK-LINK",
+   "model": "SFP-GE-SX-MM850",
+   "name": "SFP光纤模块",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "光模块(配件)",
+   "section": "SK-LINK 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "HUAWEI",
+   "model": "千兆交换机",
+   "name": "网络音频交换机",
+   "category": "SWITCH",
+   "features": [
+    "control"
+   ],
+   "params": {},
+   "no_draw": false,
+   "defer_reason": null,
+   "section": "HUAWEI 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "RME",
+   "model": "RME AVB Tool",
+   "name": "AVB 调试工具",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "调试工具(非设备)",
+   "section": "RME 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "定制",
+   "model": "16U",
+   "name": "航空机柜",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "机柜(配件)",
+   "section": "定制 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "甬声",
+   "model": "定制",
+   "name": "接插件",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "接插件(配件)",
+   "section": "甬声 增补(官网查证 2026-08-30)",
+   "remark": ""
+  },
+  {
+   "brand": "EAW",
+   "model": "ACCESSORY RSX12X WALL MOUNT BRACKET",
+   "name": "返送扬声器壁挂架",
+   "category": null,
+   "features": [],
+   "params": {},
+   "no_draw": true,
+   "defer_reason": "安装架(配件)",
+   "section": "EAW 增补(官网查证 2026-08-30)",
+   "remark": ""
   }
  ]
 }

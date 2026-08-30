@@ -54,7 +54,14 @@ def build_project(entries: list, name: str = "AV System",
     has_dante = any(p.signal.name == "DANTE" for i in instances for p in i.ports)
     redundant_dante = any(i.is_backup and any(p.signal.name == "DANTE" for p in i.ports)
                           for i in instances)
-    switches = _make_switches(instances, redundant_dante) if has_dante else []
+    # 清单里明确配了交换机（如 VINGLOOP AIM-24MG6XF-UPoE、L-Acoustics LS10）时
+    # 直接用清单的，不要再凭空造一台虚拟交换机——否则会出现
+    # 「虚拟交换机连满、清单里的真交换机成了孤立节点」的怪图。
+    real_switches = [i for i in instances if i.category == "SWITCH"]
+    if real_switches:
+        switches = real_switches
+    else:
+        switches = _make_switches(instances, redundant_dante) if has_dante else []
 
     proj = Project(name=name, instances=instances, chain=chain, switches=switches)
     size = place(instances, chain, switches)

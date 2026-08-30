@@ -3,10 +3,14 @@ name: 音箱管理器
 redundancy_allowed: false
 features_available: [dante, control]
 params:
+  inputs:
+    {min: 1, default: 2, label: 输入路数, unit: "路"}
   zones:
     {min: 1, default: 4, label: 管理分区数, unit: "区"}
 ports_template:
-  - {name: IN, side: left, signal: XLR, role: in, count: 1, label: IN}
+  # 输入路数按主库 params.inputs（型号里就写着，如 FIRM4×8 = 4 进 8 出）
+  - {name: IN, side: left, signal: XLR, role: in, count_from: inputs, label: IN}
   - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
-  - {name: OUT, side: right, signal: XLR, role: out, count_from: zones, label: ZONE}
+  # 输出路数按主库 params.outputs（型号里就写着，如 FIRM4×8 = 4 进 8 出）
+  - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: ZONE}
   - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

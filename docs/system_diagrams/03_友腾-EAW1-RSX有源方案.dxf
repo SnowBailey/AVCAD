@@ -1,0 +1,30058 @@
+  0
+SECTION
+  2
+HEADER
+  9
+$ACADVER
+  1
+AC1024
+  9
+$ACADMAINTVER
+ 70
+6
+  9
+$DWGCODEPAGE
+  3
+ANSI_1252
+  9
+$LASTSAVEDBY
+  1
+ezdxf
+  9
+$INSBASE
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$EXTMIN
+ 10
+1e+20
+ 20
+1e+20
+ 30
+1e+20
+  9
+$EXTMAX
+ 10
+-1e+20
+ 20
+-1e+20
+ 30
+-1e+20
+  9
+$LIMMIN
+ 10
+0.0
+ 20
+0.0
+  9
+$LIMMAX
+ 10
+420.0
+ 20
+297.0
+  9
+$ORTHOMODE
+ 70
+0
+  9
+$REGENMODE
+ 70
+1
+  9
+$FILLMODE
+ 70
+1
+  9
+$QTEXTMODE
+ 70
+0
+  9
+$MIRRTEXT
+ 70
+1
+  9
+$LTSCALE
+ 40
+1.0
+  9
+$ATTMODE
+ 70
+1
+  9
+$TEXTSIZE
+ 40
+2.5
+  9
+$TRACEWID
+ 40
+1.0
+  9
+$TEXTSTYLE
+  7
+Standard
+  9
+$CLAYER
+  8
+0
+  9
+$CELTYPE
+  6
+ByLayer
+  9
+$CECOLOR
+ 62
+256
+  9
+$CELTSCALE
+ 40
+1.0
+  9
+$DISPSILH
+ 70
+0
+  9
+$DIMSCALE
+ 40
+1.0
+  9
+$DIMASZ
+ 40
+2.5
+  9
+$DIMEXO
+ 40
+0.625
+  9
+$DIMDLI
+ 40
+3.75
+  9
+$DIMRND
+ 40
+0.0
+  9
+$DIMDLE
+ 40
+0.0
+  9
+$DIMEXE
+ 40
+1.25
+  9
+$DIMTP
+ 40
+0.0
+  9
+$DIMTM
+ 40
+0.0
+  9
+$DIMTXT
+ 40
+2.5
+  9
+$DIMCEN
+ 40
+2.5
+  9
+$DIMTSZ
+ 40
+0.0
+  9
+$DIMTOL
+ 70
+0
+  9
+$DIMLIM
+ 70
+0
+  9
+$DIMTIH
+ 70
+0
+  9
+$DIMTOH
+ 70
+0
+  9
+$DIMSE1
+ 70
+0
+  9
+$DIMSE2
+ 70
+0
+  9
+$DIMTAD
+ 70
+1
+  9
+$DIMZIN
+ 70
+8
+  9
+$DIMBLK
+  1
+
+  9
+$DIMASO
+ 70
+1
+  9
+$DIMSHO
+ 70
+1
+  9
+$DIMPOST
+  1
+
+  9
+$DIMAPOST
+  1
+
+  9
+$DIMALT
+ 70
+0
+  9
+$DIMALTD
+ 70
+3
+  9
+$DIMALTF
+ 40
+0.03937007874
+  9
+$DIMLFAC
+ 40
+1.0
+  9
+$DIMTOFL
+ 70
+1
+  9
+$DIMTVP
+ 40
+0.0
+  9
+$DIMTIX
+ 70
+0
+  9
+$DIMSOXD
+ 70
+0
+  9
+$DIMSAH
+ 70
+0
+  9
+$DIMBLK1
+  1
+
+  9
+$DIMBLK2
+  1
+
+  9
+$DIMSTYLE
+  2
+ISO-25
+  9
+$DIMCLRD
+ 70
+0
+  9
+$DIMCLRE
+ 70
+0
+  9
+$DIMCLRT
+ 70
+0
+  9
+$DIMTFAC
+ 40
+1.0
+  9
+$DIMGAP
+ 40
+0.625
+  9
+$DIMJUST
+ 70
+0
+  9
+$DIMSD1
+ 70
+0
+  9
+$DIMSD2
+ 70
+0
+  9
+$DIMTOLJ
+ 70
+0
+  9
+$DIMTZIN
+ 70
+8
+  9
+$DIMALTZ
+ 70
+0
+  9
+$DIMALTTZ
+ 70
+0
+  9
+$DIMUPT
+ 70
+0
+  9
+$DIMDEC
+ 70
+2
+  9
+$DIMTDEC
+ 70
+2
+  9
+$DIMALTU
+ 70
+2
+  9
+$DIMALTTD
+ 70
+3
+  9
+$DIMTXSTY
+  7
+Standard
+  9
+$DIMAUNIT
+ 70
+0
+  9
+$DIMADEC
+ 70
+0
+  9
+$DIMALTRND
+ 40
+0.0
+  9
+$DIMAZIN
+ 70
+0
+  9
+$DIMDSEP
+ 70
+44
+  9
+$DIMATFIT
+ 70
+3
+  9
+$DIMFRAC
+ 70
+0
+  9
+$DIMLDRBLK
+  1
+
+  9
+$DIMLUNIT
+ 70
+2
+  9
+$DIMLWD
+ 70
+-2
+  9
+$DIMLWE
+ 70
+-2
+  9
+$DIMTMOVE
+ 70
+0
+  9
+$DIMFXL
+ 40
+1.0
+  9
+$DIMFXLON
+ 70
+0
+  9
+$DIMJOGANG
+ 40
+0.785398163397
+  9
+$DIMTFILL
+ 70
+0
+  9
+$DIMTFILLCLR
+ 70
+0
+  9
+$DIMARCSYM
+ 70
+0
+  9
+$DIMLTYPE
+  6
+
+  9
+$DIMLTEX1
+  6
+
+  9
+$DIMLTEX2
+  6
+
+  9
+$DIMTXTDIRECTION
+ 70
+0
+  9
+$LUNITS
+ 70
+2
+  9
+$LUPREC
+ 70
+4
+  9
+$SKETCHINC
+ 40
+1.0
+  9
+$FILLETRAD
+ 40
+10.0
+  9
+$AUNITS
+ 70
+0
+  9
+$AUPREC
+ 70
+2
+  9
+$MENU
+  1
+.
+  9
+$ELEVATION
+ 40
+0.0
+  9
+$PELEVATION
+ 40
+0.0
+  9
+$THICKNESS
+ 40
+0.0
+  9
+$LIMCHECK
+ 70
+0
+  9
+$CHAMFERA
+ 40
+0.0
+  9
+$CHAMFERB
+ 40
+0.0
+  9
+$CHAMFERC
+ 40
+0.0
+  9
+$CHAMFERD
+ 40
+0.0
+  9
+$SKPOLY
+ 70
+0
+  9
+$TDCREATE
+ 40
+2461283.9372685184
+  9
+$TDUCREATE
+ 40
+2458532.153996898
+  9
+$TDUPDATE
+ 40
+2461283.9372685184
+  9
+$TDUUPDATE
+ 40
+2458532.1544311
+  9
+$TDINDWG
+ 40
+0.0
+  9
+$TDUSRTIMER
+ 40
+0.0
+  9
+$USRTIMER
+ 70
+1
+  9
+$ANGBASE
+ 50
+0.0
+  9
+$ANGDIR
+ 70
+0
+  9
+$PDMODE
+ 70
+0
+  9
+$PDSIZE
+ 40
+0.0
+  9
+$PLINEWID
+ 40
+0.0
+  9
+$SPLFRAME
+ 70
+0
+  9
+$SPLINETYPE
+ 70
+6
+  9
+$SPLINESEGS
+ 70
+8
+  9
+$HANDSEED
+  5
+3BA
+  9
+$SURFTAB1
+ 70
+6
+  9
+$SURFTAB2
+ 70
+6
+  9
+$SURFTYPE
+ 70
+6
+  9
+$SURFU
+ 70
+6
+  9
+$SURFV
+ 70
+6
+  9
+$UCSBASE
+  2
+
+  9
+$UCSNAME
+  2
+
+  9
+$UCSORG
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSXDIR
+ 10
+1.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSYDIR
+ 10
+0.0
+ 20
+1.0
+ 30
+0.0
+  9
+$UCSORTHOREF
+  2
+
+  9
+$UCSORTHOVIEW
+ 70
+0
+  9
+$UCSORGTOP
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSORGBOTTOM
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSORGLEFT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSORGRIGHT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSORGFRONT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$UCSORGBACK
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSBASE
+  2
+
+  9
+$PUCSNAME
+  2
+
+  9
+$PUCSORG
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSXDIR
+ 10
+1.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSYDIR
+ 10
+0.0
+ 20
+1.0
+ 30
+0.0
+  9
+$PUCSORTHOREF
+  2
+
+  9
+$PUCSORTHOVIEW
+ 70
+0
+  9
+$PUCSORGTOP
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSORGBOTTOM
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSORGLEFT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSORGRIGHT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSORGFRONT
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PUCSORGBACK
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$USERI1
+ 70
+0
+  9
+$USERI2
+ 70
+0
+  9
+$USERI3
+ 70
+0
+  9
+$USERI4
+ 70
+0
+  9
+$USERI5
+ 70
+0
+  9
+$USERR1
+ 40
+0.0
+  9
+$USERR2
+ 40
+0.0
+  9
+$USERR3
+ 40
+0.0
+  9
+$USERR4
+ 40
+0.0
+  9
+$USERR5
+ 40
+0.0
+  9
+$WORLDVIEW
+ 70
+1
+  9
+$SHADEDGE
+ 70
+3
+  9
+$SHADEDIF
+ 70
+70
+  9
+$TILEMODE
+ 70
+1
+  9
+$MAXACTVP
+ 70
+64
+  9
+$PINSBASE
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  9
+$PLIMCHECK
+ 70
+0
+  9
+$PEXTMIN
+ 10
+1e+20
+ 20
+1e+20
+ 30
+1e+20
+  9
+$PEXTMAX
+ 10
+-1e+20
+ 20
+-1e+20
+ 30
+-1e+20
+  9
+$PLIMMIN
+ 10
+0.0
+ 20
+0.0
+  9
+$PLIMMAX
+ 10
+420.0
+ 20
+297.0
+  9
+$UNITMODE
+ 70
+0
+  9
+$VISRETAIN
+ 70
+1
+  9
+$PLINEGEN
+ 70
+0
+  9
+$PSLTSCALE
+ 70
+1
+  9
+$TREEDEPTH
+ 70
+3020
+  9
+$CMLSTYLE
+  2
+Standard
+  9
+$CMLJUST
+ 70
+0
+  9
+$CMLSCALE
+ 40
+20.0
+  9
+$PROXYGRAPHICS
+ 70
+1
+  9
+$MEASUREMENT
+ 70
+1
+  9
+$CELWEIGHT
+370
+-1
+  9
+$ENDCAPS
+280
+0
+  9
+$JOINSTYLE
+280
+0
+  9
+$LWDISPLAY
+290
+0
+  9
+$INSUNITS
+ 70
+6
+  9
+$HYPERLINKBASE
+  1
+
+  9
+$STYLESHEET
+  1
+
+  9
+$XEDIT
+290
+1
+  9
+$CEPSNTYPE
+380
+0
+  9
+$PSTYLEMODE
+290
+1
+  9
+$FINGERPRINTGUID
+  2
+{C249B26C-D9B3-4191-99C0-CDF98C22ADA3}
+  9
+$VERSIONGUID
+  2
+{79353EC4-8DBC-4168-941B-34044A2CE651}
+  9
+$EXTNAMES
+290
+1
+  9
+$PSVPSCALE
+ 40
+0.0
+  9
+$OLESTARTUP
+290
+0
+  9
+$SORTENTS
+280
+127
+  9
+$INDEXCTL
+280
+0
+  9
+$HIDETEXT
+280
+1
+  9
+$XCLIPFRAME
+280
+1
+  9
+$HALOGAP
+280
+0
+  9
+$OBSCOLOR
+ 70
+257
+  9
+$OBSLTYPE
+280
+0
+  9
+$INTERSECTIONDISPLAY
+280
+0
+  9
+$INTERSECTIONCOLOR
+ 70
+257
+  9
+$DIMASSOC
+280
+2
+  9
+$PROJECTNAME
+  1
+
+  9
+$CAMERADISPLAY
+290
+0
+  9
+$LENSLENGTH
+ 40
+50.0
+  9
+$CAMERAHEIGHT
+ 40
+0.0
+  9
+$STEPSPERSEC
+ 40
+24.0
+  9
+$STEPSIZE
+ 40
+100.0
+  9
+$3DDWFPREC
+ 40
+2.0
+  9
+$PSOLWIDTH
+ 40
+0.005
+  9
+$PSOLHEIGHT
+ 40
+0.08
+  9
+$LOFTANG1
+ 40
+1.570796326795
+  9
+$LOFTANG2
+ 40
+1.570796326795
+  9
+$LOFTMAG1
+ 40
+0.0
+  9
+$LOFTMAG2
+ 40
+0.0
+  9
+$LOFTPARAM
+ 70
+7
+  9
+$LOFTNORMALS
+280
+1
+  9
+$LATITUDE
+ 40
+37.795
+  9
+$LONGITUDE
+ 40
+-122.394
+  9
+$NORTHDIRECTION
+ 40
+0.0
+  9
+$TIMEZONE
+ 70
+-8000
+  9
+$LIGHTGLYPHDISPLAY
+280
+1
+  9
+$TILEMODELIGHTSYNCH
+280
+1
+  9
+$CMATERIAL
+347
+20
+  9
+$SOLIDHIST
+280
+0
+  9
+$SHOWHIST
+280
+1
+  9
+$DWFFRAME
+280
+2
+  9
+$DGNFRAME
+280
+2
+  9
+$REALWORLDSCALE
+290
+1
+  9
+$INTERFERECOLOR
+ 62
+256
+  9
+$CSHADOW
+280
+0
+  9
+$SHADOWPLANELOCATION
+ 40
+0.0
+  0
+ENDSEC
+  0
+SECTION
+  2
+CLASSES
+  0
+CLASS
+  1
+ACDBDICTIONARYWDFLT
+  2
+AcDbDictionaryWithDefault
+  3
+ObjectDBX Classes
+ 90
+0
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+SUN
+  2
+AcDbSun
+  3
+SCENEOE
+ 90
+1153
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+VISUALSTYLE
+  2
+AcDbVisualStyle
+  3
+ObjectDBX Classes
+ 90
+4095
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+MATERIAL
+  2
+AcDbMaterial
+  3
+ObjectDBX Classes
+ 90
+1153
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+SCALE
+  2
+AcDbScale
+  3
+ObjectDBX Classes
+ 90
+1153
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+TABLESTYLE
+  2
+AcDbTableStyle
+  3
+ObjectDBX Classes
+ 90
+4095
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+MLEADERSTYLE
+  2
+AcDbMLeaderStyle
+  3
+ACDB_MLEADERSTYLE_CLASS
+ 90
+4095
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+DICTIONARYVAR
+  2
+AcDbDictionaryVar
+  3
+ObjectDBX Classes
+ 90
+0
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+CELLSTYLEMAP
+  2
+AcDbCellStyleMap
+  3
+ObjectDBX Classes
+ 90
+1152
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+MENTALRAYRENDERSETTINGS
+  2
+AcDbMentalRayRenderSettings
+  3
+SCENEOE
+ 90
+1024
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+ACDBDETAILVIEWSTYLE
+  2
+AcDbDetailViewStyle
+  3
+ObjectDBX Classes
+ 90
+1025
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+ACDBSECTIONVIEWSTYLE
+  2
+AcDbSectionViewStyle
+  3
+ObjectDBX Classes
+ 90
+1025
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+RASTERVARIABLES
+  2
+AcDbRasterVariables
+  3
+ISM
+ 90
+0
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+ACDBPLACEHOLDER
+  2
+AcDbPlaceHolder
+  3
+ObjectDBX Classes
+ 90
+0
+ 91
+0
+280
+0
+281
+0
+  0
+CLASS
+  1
+LAYOUT
+  2
+AcDbLayout
+  3
+ObjectDBX Classes
+ 90
+0
+ 91
+0
+280
+0
+281
+0
+  0
+ENDSEC
+  0
+SECTION
+  2
+TABLES
+  0
+TABLE
+  2
+VPORT
+  5
+8
+330
+0
+100
+AcDbSymbolTable
+ 70
+1
+  0
+VPORT
+  5
+23
+330
+8
+100
+AcDbSymbolTableRecord
+100
+AcDbViewportTableRecord
+  2
+*Active
+ 70
+0
+ 10
+0.0
+ 20
+0.0
+ 11
+1.0
+ 21
+1.0
+ 12
+0.0
+ 22
+0.0
+ 13
+0.0
+ 23
+0.0
+ 14
+0.5
+ 24
+0.5
+ 15
+0.5
+ 25
+0.5
+ 16
+0.0
+ 26
+0.0
+ 36
+1.0
+ 17
+0.0
+ 27
+0.0
+ 37
+0.0
+ 40
+1000.0
+ 41
+1.34
+ 42
+50.0
+ 43
+0.0
+ 44
+0.0
+ 50
+0.0
+ 51
+0.0
+ 71
+0
+ 72
+1000
+ 73
+1
+ 74
+3
+ 75
+0
+ 76
+0
+ 77
+0
+ 78
+0
+281
+0
+ 65
+0
+146
+0.0
+  0
+ENDTAB
+  0
+TABLE
+  2
+LTYPE
+  5
+2
+330
+0
+100
+AcDbSymbolTable
+ 70
+3
+  0
+LTYPE
+  5
+24
+330
+2
+100
+AcDbSymbolTableRecord
+100
+AcDbLinetypeTableRecord
+  2
+ByBlock
+ 70
+0
+  3
+
+ 72
+65
+ 73
+0
+ 40
+0.0
+  0
+LTYPE
+  5
+25
+330
+2
+100
+AcDbSymbolTableRecord
+100
+AcDbLinetypeTableRecord
+  2
+ByLayer
+ 70
+0
+  3
+
+ 72
+65
+ 73
+0
+ 40
+0.0
+  0
+LTYPE
+  5
+26
+330
+2
+100
+AcDbSymbolTableRecord
+100
+AcDbLinetypeTableRecord
+  2
+Continuous
+ 70
+0
+  3
+
+ 72
+65
+ 73
+0
+ 40
+0.0
+  0
+ENDTAB
+  0
+TABLE
+  2
+LAYER
+  5
+1
+330
+0
+100
+AcDbSymbolTable
+ 70
+14
+  0
+LAYER
+  5
+27
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+0
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+28
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+Defpoints
+ 70
+0
+ 62
+7
+  6
+Continuous
+290
+0
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+2F
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+DEVICES
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+30
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LABELS
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+31
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+PORTS
+ 70
+0
+ 62
+6
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+32
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_ANALOG
+ 70
+0
+ 62
+4
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+33
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_DIGITAL
+ 70
+0
+ 62
+4
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+34
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_DANTE
+ 70
+0
+ 62
+5
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+35
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_CONTROL
+ 70
+0
+ 62
+6
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+36
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_RF
+ 70
+0
+ 62
+40
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+37
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_SPEAKER
+ 70
+0
+ 62
+1
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+38
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRES_POWER
+ 70
+0
+ 62
+8
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+39
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+WIRE_LABELS
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+3A
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+LEGEND
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+ENDTAB
+  0
+TABLE
+  2
+STYLE
+  5
+5
+330
+0
+100
+AcDbSymbolTable
+ 70
+2
+  0
+STYLE
+  5
+29
+330
+5
+100
+AcDbSymbolTableRecord
+100
+AcDbTextStyleTableRecord
+  2
+Standard
+ 70
+0
+ 40
+0.0
+ 41
+1.0
+ 50
+0.0
+ 71
+0
+ 42
+2.5
+  3
+txt
+  4
+
+  0
+STYLE
+  5
+3B
+330
+5
+100
+AcDbSymbolTableRecord
+100
+AcDbTextStyleTableRecord
+  2
+CJK
+ 70
+0
+ 40
+0.0
+ 41
+1.0
+ 50
+0.0
+ 71
+0
+ 42
+2.5
+  3
+simsun.ttc
+  4
+
+  0
+ENDTAB
+  0
+TABLE
+  2
+VIEW
+  5
+7
+330
+0
+100
+AcDbSymbolTable
+ 70
+0
+  0
+ENDTAB
+  0
+TABLE
+  2
+UCS
+  5
+6
+330
+0
+100
+AcDbSymbolTable
+ 70
+0
+  0
+ENDTAB
+  0
+TABLE
+  2
+APPID
+  5
+3
+330
+0
+100
+AcDbSymbolTable
+ 70
+3
+  0
+APPID
+  5
+2A
+330
+3
+100
+AcDbSymbolTableRecord
+100
+AcDbRegAppTableRecord
+  2
+ACAD
+ 70
+0
+  0
+APPID
+  5
+3B7
+330
+3
+100
+AcDbSymbolTableRecord
+100
+AcDbRegAppTableRecord
+  2
+HATCHBACKGROUNDCOLOR
+ 70
+0
+  0
+APPID
+  5
+3B8
+330
+3
+100
+AcDbSymbolTableRecord
+100
+AcDbRegAppTableRecord
+  2
+EZDXF
+ 70
+0
+  0
+ENDTAB
+  0
+TABLE
+  2
+DIMSTYLE
+  5
+4
+330
+0
+100
+AcDbSymbolTable
+ 70
+1
+100
+AcDbDimStyleTable
+  0
+DIMSTYLE
+105
+2B
+330
+4
+100
+AcDbSymbolTableRecord
+100
+AcDbDimStyleTableRecord
+  2
+Standard
+ 70
+0
+ 40
+1.0
+ 41
+2.5
+ 42
+0.625
+ 43
+3.75
+ 44
+1.25
+ 45
+0.0
+ 46
+0.0
+ 47
+0.0
+ 48
+0.0
+ 49
+2.5
+140
+2.5
+141
+2.5
+142
+0.0
+143
+0.03937007874
+144
+1.0
+145
+0.0
+146
+1.0
+147
+0.625
+148
+0.0
+ 69
+0
+ 70
+0
+ 71
+0
+ 72
+0
+ 73
+0
+ 74
+0
+ 75
+0
+ 76
+0
+ 77
+1
+ 78
+8
+ 79
+3
+170
+0
+171
+3
+172
+1
+173
+0
+174
+0
+175
+0
+176
+0
+177
+0
+178
+0
+179
+2
+271
+2
+272
+2
+273
+2
+274
+3
+275
+0
+276
+0
+277
+2
+278
+44
+279
+0
+280
+0
+281
+0
+282
+0
+283
+0
+284
+8
+285
+0
+286
+0
+288
+0
+289
+3
+290
+0
+371
+-2
+372
+-2
+  0
+ENDTAB
+  0
+TABLE
+  2
+BLOCK_RECORD
+  5
+9
+330
+0
+100
+AcDbSymbolTable
+ 70
+2
+  0
+BLOCK_RECORD
+  5
+17
+330
+9
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+*Model_Space
+340
+1A
+ 70
+0
+280
+1
+281
+0
+  0
+BLOCK_RECORD
+  5
+1B
+330
+9
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+*Paper_Space
+340
+1E
+ 70
+0
+280
+1
+281
+0
+  0
+ENDTAB
+  0
+ENDSEC
+  0
+SECTION
+  2
+BLOCKS
+  0
+BLOCK
+  5
+18
+330
+17
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+*Model_Space
+ 70
+0
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+*Model_Space
+  1
+
+  0
+ENDBLK
+  5
+19
+330
+17
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+BLOCK
+  5
+1C
+330
+1B
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+*Paper_Space
+ 70
+0
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+*Paper_Space
+  1
+
+  0
+ENDBLK
+  5
+1D
+330
+1B
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+ENDSEC
+  0
+SECTION
+  2
+ENTITIES
+  0
+MTEXT
+  5
+3C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+2.0
+ 20
+-5630.0
+ 30
+0.0
+ 40
+12.0
+ 41
+0.0
+ 71
+7
+  1
+03_友腾-EAW1-RSX有源方案
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+3D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-40.0
+ 10
+454.0
+ 20
+-40.0
+ 10
+454.0
+ 20
+-104.0
+ 10
+290.0
+ 20
+-104.0
+ 10
+290.0
+ 20
+-40.0
+  0
+MTEXT
+  5
+3E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-50.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+3F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-60.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+40
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-69.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+41
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-130.0
+ 10
+454.0
+ 20
+-130.0
+ 10
+454.0
+ 20
+-194.0
+ 10
+290.0
+ 20
+-194.0
+ 10
+290.0
+ 20
+-130.0
+  0
+MTEXT
+  5
+42
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-140.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+43
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-150.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+44
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-159.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+45
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-220.0
+ 10
+454.0
+ 20
+-220.0
+ 10
+454.0
+ 20
+-284.0
+ 10
+290.0
+ 20
+-284.0
+ 10
+290.0
+ 20
+-220.0
+  0
+MTEXT
+  5
+46
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-230.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+47
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-240.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+48
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-249.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+49
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-310.0
+ 10
+454.0
+ 20
+-310.0
+ 10
+454.0
+ 20
+-374.0
+ 10
+290.0
+ 20
+-374.0
+ 10
+290.0
+ 20
+-310.0
+  0
+MTEXT
+  5
+4A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-320.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+4B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-330.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+4C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-339.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+4D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-400.0
+ 10
+454.0
+ 20
+-400.0
+ 10
+454.0
+ 20
+-464.0
+ 10
+290.0
+ 20
+-464.0
+ 10
+290.0
+ 20
+-400.0
+  0
+MTEXT
+  5
+4E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-410.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+4F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-420.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+50
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-429.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+51
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-490.0
+ 10
+454.0
+ 20
+-490.0
+ 10
+454.0
+ 20
+-554.0
+ 10
+290.0
+ 20
+-554.0
+ 10
+290.0
+ 20
+-490.0
+  0
+MTEXT
+  5
+52
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-500.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+53
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-510.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+54
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-519.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+55
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-580.0
+ 10
+454.0
+ 20
+-580.0
+ 10
+454.0
+ 20
+-644.0
+ 10
+290.0
+ 20
+-644.0
+ 10
+290.0
+ 20
+-580.0
+  0
+MTEXT
+  5
+56
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-590.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+57
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-600.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+58
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-609.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+59
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-670.0
+ 10
+454.0
+ 20
+-670.0
+ 10
+454.0
+ 20
+-734.0
+ 10
+290.0
+ 20
+-734.0
+ 10
+290.0
+ 20
+-670.0
+  0
+MTEXT
+  5
+5A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-680.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+中央声道远场扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+5B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-690.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+5C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-699.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+5D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-760.0
+ 10
+454.0
+ 20
+-760.0
+ 10
+454.0
+ 20
+-824.0
+ 10
+290.0
+ 20
+-824.0
+ 10
+290.0
+ 20
+-760.0
+  0
+MTEXT
+  5
+5E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-770.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+5F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-780.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+60
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-789.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+61
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-850.0
+ 10
+454.0
+ 20
+-850.0
+ 10
+454.0
+ 20
+-914.0
+ 10
+290.0
+ 20
+-914.0
+ 10
+290.0
+ 20
+-850.0
+  0
+MTEXT
+  5
+62
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-860.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+63
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-870.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+64
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-879.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+65
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-940.0
+ 10
+454.0
+ 20
+-940.0
+ 10
+454.0
+ 20
+-1004.0
+ 10
+290.0
+ 20
+-1004.0
+ 10
+290.0
+ 20
+-940.0
+  0
+MTEXT
+  5
+66
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-950.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+67
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-960.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+68
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-969.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+69
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1030.0
+ 10
+454.0
+ 20
+-1030.0
+ 10
+454.0
+ 20
+-1094.0
+ 10
+290.0
+ 20
+-1094.0
+ 10
+290.0
+ 20
+-1030.0
+  0
+MTEXT
+  5
+6A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1040.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+6B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1050.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+6C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1059.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+6D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1120.0
+ 10
+454.0
+ 20
+-1120.0
+ 10
+454.0
+ 20
+-1184.0
+ 10
+290.0
+ 20
+-1184.0
+ 10
+290.0
+ 20
+-1120.0
+  0
+MTEXT
+  5
+6E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1130.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+6F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1140.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+70
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1149.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+71
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1210.0
+ 10
+454.0
+ 20
+-1210.0
+ 10
+454.0
+ 20
+-1274.0
+ 10
+290.0
+ 20
+-1274.0
+ 10
+290.0
+ 20
+-1210.0
+  0
+MTEXT
+  5
+72
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1220.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+73
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1230.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+74
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1239.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+75
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1300.0
+ 10
+454.0
+ 20
+-1300.0
+ 10
+454.0
+ 20
+-1364.0
+ 10
+290.0
+ 20
+-1364.0
+ 10
+290.0
+ 20
+-1300.0
+  0
+MTEXT
+  5
+76
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1310.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+77
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1320.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+78
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1329.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+79
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1390.0
+ 10
+454.0
+ 20
+-1390.0
+ 10
+454.0
+ 20
+-1454.0
+ 10
+290.0
+ 20
+-1454.0
+ 10
+290.0
+ 20
+-1390.0
+  0
+MTEXT
+  5
+7A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1400.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+7B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1410.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+7C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1419.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+7D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1480.0
+ 10
+454.0
+ 20
+-1480.0
+ 10
+454.0
+ 20
+-1544.0
+ 10
+290.0
+ 20
+-1544.0
+ 10
+290.0
+ 20
+-1480.0
+  0
+MTEXT
+  5
+7E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1490.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+7F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1500.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+80
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1509.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+81
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1570.0
+ 10
+454.0
+ 20
+-1570.0
+ 10
+454.0
+ 20
+-1634.0
+ 10
+290.0
+ 20
+-1634.0
+ 10
+290.0
+ 20
+-1570.0
+  0
+MTEXT
+  5
+82
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1580.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+83
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1590.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+84
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1599.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+85
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1660.0
+ 10
+454.0
+ 20
+-1660.0
+ 10
+454.0
+ 20
+-1724.0
+ 10
+290.0
+ 20
+-1724.0
+ 10
+290.0
+ 20
+-1660.0
+  0
+MTEXT
+  5
+86
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1670.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+87
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1680.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+88
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1689.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+89
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1750.0
+ 10
+454.0
+ 20
+-1750.0
+ 10
+454.0
+ 20
+-1814.0
+ 10
+290.0
+ 20
+-1814.0
+ 10
+290.0
+ 20
+-1750.0
+  0
+MTEXT
+  5
+8A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1760.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+8B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1770.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+8C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1779.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+8D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1840.0
+ 10
+454.0
+ 20
+-1840.0
+ 10
+454.0
+ 20
+-1904.0
+ 10
+290.0
+ 20
+-1904.0
+ 10
+290.0
+ 20
+-1840.0
+  0
+MTEXT
+  5
+8E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1850.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+8F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1860.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+90
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1869.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+91
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-1930.0
+ 10
+454.0
+ 20
+-1930.0
+ 10
+454.0
+ 20
+-1994.0
+ 10
+290.0
+ 20
+-1994.0
+ 10
+290.0
+ 20
+-1930.0
+  0
+MTEXT
+  5
+92
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1940.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+93
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1950.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+94
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-1959.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+95
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2020.0
+ 10
+454.0
+ 20
+-2020.0
+ 10
+454.0
+ 20
+-2084.0
+ 10
+290.0
+ 20
+-2084.0
+ 10
+290.0
+ 20
+-2020.0
+  0
+MTEXT
+  5
+96
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2030.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+97
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2040.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+98
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2049.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+99
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2110.0
+ 10
+454.0
+ 20
+-2110.0
+ 10
+454.0
+ 20
+-2174.0
+ 10
+290.0
+ 20
+-2174.0
+ 10
+290.0
+ 20
+-2110.0
+  0
+MTEXT
+  5
+9A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2120.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右主扩声扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+9B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2130.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+9C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2139.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX208L
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+9D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2200.0
+ 10
+454.0
+ 20
+-2200.0
+ 10
+454.0
+ 20
+-2264.0
+ 10
+290.0
+ 20
+-2264.0
+ 10
+290.0
+ 20
+-2200.0
+  0
+MTEXT
+  5
+9E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2210.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+9F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2220.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+A0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2229.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+A1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2290.0
+ 10
+454.0
+ 20
+-2290.0
+ 10
+454.0
+ 20
+-2354.0
+ 10
+290.0
+ 20
+-2354.0
+ 10
+290.0
+ 20
+-2290.0
+  0
+MTEXT
+  5
+A2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2300.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+A3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2310.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+A4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2319.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+A5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2380.0
+ 10
+454.0
+ 20
+-2380.0
+ 10
+454.0
+ 20
+-2444.0
+ 10
+290.0
+ 20
+-2444.0
+ 10
+290.0
+ 20
+-2380.0
+  0
+MTEXT
+  5
+A6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2390.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+A7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2400.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+A8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2409.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+A9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2470.0
+ 10
+454.0
+ 20
+-2470.0
+ 10
+454.0
+ 20
+-2534.0
+ 10
+290.0
+ 20
+-2534.0
+ 10
+290.0
+ 20
+-2470.0
+  0
+MTEXT
+  5
+AA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2480.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+AB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2490.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+AC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2499.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+AD
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2560.0
+ 10
+454.0
+ 20
+-2560.0
+ 10
+454.0
+ 20
+-2624.0
+ 10
+290.0
+ 20
+-2624.0
+ 10
+290.0
+ 20
+-2560.0
+  0
+MTEXT
+  5
+AE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2570.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+AF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2580.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+B0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2589.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+B1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2650.0
+ 10
+454.0
+ 20
+-2650.0
+ 10
+454.0
+ 20
+-2714.0
+ 10
+290.0
+ 20
+-2714.0
+ 10
+290.0
+ 20
+-2650.0
+  0
+MTEXT
+  5
+B2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2660.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右次低频扬声器组
+  7
+CJK
+  0
+MTEXT
+  5
+B3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2670.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+B4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+372.0
+ 20
+-2679.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12 
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+B5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2740.0
+ 10
+441.0
+ 20
+-2740.0
+ 10
+441.0
+ 20
+-2793.0
+ 10
+290.0
+ 20
+-2793.0
+ 10
+290.0
+ 20
+-2740.0
+  0
+MTEXT
+  5
+B6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2750.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右拉声像扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+B7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2760.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+B8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2769.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK2396i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+B9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2819.0
+ 10
+441.0
+ 20
+-2819.0
+ 10
+441.0
+ 20
+-2872.0
+ 10
+290.0
+ 20
+-2872.0
+ 10
+290.0
+ 20
+-2819.0
+  0
+MTEXT
+  5
+BA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2829.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右拉声像扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+BB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2839.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+BC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2848.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK2396i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+BD
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2898.0
+ 10
+441.0
+ 20
+-2898.0
+ 10
+441.0
+ 20
+-2951.0
+ 10
+290.0
+ 20
+-2951.0
+ 10
+290.0
+ 20
+-2898.0
+  0
+MTEXT
+  5
+BE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2908.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右拉声像扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+BF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2918.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+C0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2927.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK2396i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+C1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-2977.0
+ 10
+441.0
+ 20
+-2977.0
+ 10
+441.0
+ 20
+-3030.0
+ 10
+290.0
+ 20
+-3030.0
+ 10
+290.0
+ 20
+-2977.0
+  0
+MTEXT
+  5
+C2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2987.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+左/右拉声像扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+C3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-2997.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+C4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-3006.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK2396i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+C5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3056.0
+ 10
+428.0
+ 20
+-3056.0
+ 10
+428.0
+ 20
+-3120.0
+ 10
+290.0
+ 20
+-3120.0
+ 10
+290.0
+ 20
+-3056.0
+  0
+MTEXT
+  5
+C6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3066.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+超低扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+C7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3076.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+C8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3085.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX218
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+C9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3146.0
+ 10
+428.0
+ 20
+-3146.0
+ 10
+428.0
+ 20
+-3210.0
+ 10
+290.0
+ 20
+-3210.0
+ 10
+290.0
+ 20
+-3146.0
+  0
+MTEXT
+  5
+CA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3156.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+超低扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+CB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3166.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+CC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3175.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX218
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+CD
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3236.0
+ 10
+428.0
+ 20
+-3236.0
+ 10
+428.0
+ 20
+-3300.0
+ 10
+290.0
+ 20
+-3300.0
+ 10
+290.0
+ 20
+-3236.0
+  0
+MTEXT
+  5
+CE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3246.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+超低扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+CF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3256.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+D0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3265.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX218
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+D1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3326.0
+ 10
+428.0
+ 20
+-3326.0
+ 10
+428.0
+ 20
+-3390.0
+ 10
+290.0
+ 20
+-3390.0
+ 10
+290.0
+ 20
+-3326.0
+  0
+MTEXT
+  5
+D2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3336.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+超低扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+D3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3346.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+D4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3355.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX218
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+D5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3416.0
+ 10
+428.0
+ 20
+-3416.0
+ 10
+428.0
+ 20
+-3480.0
+ 10
+290.0
+ 20
+-3480.0
+ 10
+290.0
+ 20
+-3416.0
+  0
+MTEXT
+  5
+D6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3426.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+固定返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+D7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3436.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+D8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3445.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX129
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+D9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3506.0
+ 10
+428.0
+ 20
+-3506.0
+ 10
+428.0
+ 20
+-3570.0
+ 10
+290.0
+ 20
+-3570.0
+ 10
+290.0
+ 20
+-3506.0
+  0
+MTEXT
+  5
+DA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3516.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+固定返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+DB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3526.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+DC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3535.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX129
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+DD
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3596.0
+ 10
+428.0
+ 20
+-3596.0
+ 10
+428.0
+ 20
+-3660.0
+ 10
+290.0
+ 20
+-3660.0
+ 10
+290.0
+ 20
+-3596.0
+  0
+MTEXT
+  5
+DE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3606.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+固定返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+DF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3616.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+E0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3625.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX129
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+E1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3686.0
+ 10
+428.0
+ 20
+-3686.0
+ 10
+428.0
+ 20
+-3750.0
+ 10
+290.0
+ 20
+-3750.0
+ 10
+290.0
+ 20
+-3686.0
+  0
+MTEXT
+  5
+E2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3696.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+固定返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+E3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3706.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+E4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3715.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX129
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+E5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3776.0
+ 10
+428.0
+ 20
+-3776.0
+ 10
+428.0
+ 20
+-3840.0
+ 10
+290.0
+ 20
+-3840.0
+ 10
+290.0
+ 20
+-3776.0
+  0
+MTEXT
+  5
+E6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3786.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+流动返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+E7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3796.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+E8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3805.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12M
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+E9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3866.0
+ 10
+428.0
+ 20
+-3866.0
+ 10
+428.0
+ 20
+-3930.0
+ 10
+290.0
+ 20
+-3930.0
+ 10
+290.0
+ 20
+-3866.0
+  0
+MTEXT
+  5
+EA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3876.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+流动返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+EB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3886.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+EC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3895.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12M
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+ED
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-3956.0
+ 10
+428.0
+ 20
+-3956.0
+ 10
+428.0
+ 20
+-4020.0
+ 10
+290.0
+ 20
+-4020.0
+ 10
+290.0
+ 20
+-3956.0
+  0
+MTEXT
+  5
+EE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3966.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+流动返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+EF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3976.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+F0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-3985.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12M
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+F1
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4046.0
+ 10
+428.0
+ 20
+-4046.0
+ 10
+428.0
+ 20
+-4110.0
+ 10
+290.0
+ 20
+-4110.0
+ 10
+290.0
+ 20
+-4046.0
+  0
+MTEXT
+  5
+F2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4056.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+流动返送扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+F3
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4066.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+F4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4075.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+RSX12M
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+F5
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+40.0
+ 20
+-40.0
+ 10
+220.0
+ 20
+-40.0
+ 10
+220.0
+ 20
+-115.0
+ 10
+40.0
+ 20
+-115.0
+ 10
+40.0
+ 20
+-40.0
+  0
+MTEXT
+  5
+F6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+130.0
+ 20
+-50.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+四通道数字功率放大器
+  7
+CJK
+  0
+MTEXT
+  5
+F7
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+130.0
+ 20
+-60.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+POWERSOFT
+  7
+CJK
+  0
+MTEXT
+  5
+F8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+130.0
+ 20
+-69.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+Quattrocanali 4804 DSP+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+F9
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+80.0
+ 20
+-5470.0
+ 10
+454.0
+ 20
+-5470.0
+ 10
+454.0
+ 20
+-5526.0
+ 10
+80.0
+ 20
+-5526.0
+ 10
+80.0
+ 20
+-5470.0
+  0
+MTEXT
+  5
+FA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5480.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+音频交换机
+  7
+CJK
+  0
+MTEXT
+  5
+FB
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5490.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+VINGLOOP
+  7
+CJK
+  0
+MTEXT
+  5
+FC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5499.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+AIM-24MG6XF-UPoE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+FD
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+494.0
+ 20
+-5470.0
+ 10
+868.0
+ 20
+-5470.0
+ 10
+868.0
+ 20
+-5526.0
+ 10
+494.0
+ 20
+-5526.0
+ 10
+494.0
+ 20
+-5470.0
+  0
+MTEXT
+  5
+FE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5480.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+音频交换机
+  7
+CJK
+  0
+MTEXT
+  5
+FF
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5490.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+VINGLOOP
+  7
+CJK
+  0
+MTEXT
+  5
+100
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5499.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+AIM-24MG6XF-UPoE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+101
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4136.0
+ 10
+441.0
+ 20
+-4136.0
+ 10
+441.0
+ 20
+-4189.0
+ 10
+290.0
+ 20
+-4189.0
+ 10
+290.0
+ 20
+-4136.0
+  0
+MTEXT
+  5
+102
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4146.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+103
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4156.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+104
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4165.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+105
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4215.0
+ 10
+441.0
+ 20
+-4215.0
+ 10
+441.0
+ 20
+-4268.0
+ 10
+290.0
+ 20
+-4268.0
+ 10
+290.0
+ 20
+-4215.0
+  0
+MTEXT
+  5
+106
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4225.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+107
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4235.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+108
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4244.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+109
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4294.0
+ 10
+441.0
+ 20
+-4294.0
+ 10
+441.0
+ 20
+-4347.0
+ 10
+290.0
+ 20
+-4347.0
+ 10
+290.0
+ 20
+-4294.0
+  0
+MTEXT
+  5
+10A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4304.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+10B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4314.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+10C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4323.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+10D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4373.0
+ 10
+441.0
+ 20
+-4373.0
+ 10
+441.0
+ 20
+-4426.0
+ 10
+290.0
+ 20
+-4426.0
+ 10
+290.0
+ 20
+-4373.0
+  0
+MTEXT
+  5
+10E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4383.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+10F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4393.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+110
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4402.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+111
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4452.0
+ 10
+441.0
+ 20
+-4452.0
+ 10
+441.0
+ 20
+-4505.0
+ 10
+290.0
+ 20
+-4505.0
+ 10
+290.0
+ 20
+-4452.0
+  0
+MTEXT
+  5
+112
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4462.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+113
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4472.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+114
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4481.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+115
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4531.0
+ 10
+441.0
+ 20
+-4531.0
+ 10
+441.0
+ 20
+-4584.0
+ 10
+290.0
+ 20
+-4584.0
+ 10
+290.0
+ 20
+-4531.0
+  0
+MTEXT
+  5
+116
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4541.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+117
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4551.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+118
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4560.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+119
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4610.0
+ 10
+441.0
+ 20
+-4610.0
+ 10
+441.0
+ 20
+-4663.0
+ 10
+290.0
+ 20
+-4663.0
+ 10
+290.0
+ 20
+-4610.0
+  0
+MTEXT
+  5
+11A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4620.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+11B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4630.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+11C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4639.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+11D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4689.0
+ 10
+441.0
+ 20
+-4689.0
+ 10
+441.0
+ 20
+-4742.0
+ 10
+290.0
+ 20
+-4742.0
+ 10
+290.0
+ 20
+-4689.0
+  0
+MTEXT
+  5
+11E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4699.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+观众席效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+11F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4709.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+120
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+365.5
+ 20
+-4718.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+121
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4768.0
+ 10
+428.0
+ 20
+-4768.0
+ 10
+428.0
+ 20
+-4821.0
+ 10
+290.0
+ 20
+-4821.0
+ 10
+290.0
+ 20
+-4768.0
+  0
+MTEXT
+  5
+122
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4778.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+123
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4788.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+124
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4797.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+125
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4847.0
+ 10
+428.0
+ 20
+-4847.0
+ 10
+428.0
+ 20
+-4900.0
+ 10
+290.0
+ 20
+-4900.0
+ 10
+290.0
+ 20
+-4847.0
+  0
+MTEXT
+  5
+126
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4857.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+127
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4867.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+128
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4876.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+129
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-4926.0
+ 10
+428.0
+ 20
+-4926.0
+ 10
+428.0
+ 20
+-4979.0
+ 10
+290.0
+ 20
+-4979.0
+ 10
+290.0
+ 20
+-4926.0
+  0
+MTEXT
+  5
+12A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4936.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+12B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4946.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+12C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-4955.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+12D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-5005.0
+ 10
+428.0
+ 20
+-5005.0
+ 10
+428.0
+ 20
+-5058.0
+ 10
+290.0
+ 20
+-5058.0
+ 10
+290.0
+ 20
+-5005.0
+  0
+MTEXT
+  5
+12E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5015.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+12F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5025.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+130
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5034.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+131
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-5084.0
+ 10
+428.0
+ 20
+-5084.0
+ 10
+428.0
+ 20
+-5137.0
+ 10
+290.0
+ 20
+-5137.0
+ 10
+290.0
+ 20
+-5084.0
+  0
+MTEXT
+  5
+132
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5094.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+133
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5104.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+134
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5113.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+135
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-5163.0
+ 10
+428.0
+ 20
+-5163.0
+ 10
+428.0
+ 20
+-5216.0
+ 10
+290.0
+ 20
+-5216.0
+ 10
+290.0
+ 20
+-5163.0
+  0
+MTEXT
+  5
+136
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5173.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+137
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5183.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+138
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5192.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+139
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-5242.0
+ 10
+428.0
+ 20
+-5242.0
+ 10
+428.0
+ 20
+-5295.0
+ 10
+290.0
+ 20
+-5295.0
+ 10
+290.0
+ 20
+-5242.0
+  0
+MTEXT
+  5
+13A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5252.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+13B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5262.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+13C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5271.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+13D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+290.0
+ 20
+-5321.0
+ 10
+428.0
+ 20
+-5321.0
+ 10
+428.0
+ 20
+-5374.0
+ 10
+290.0
+ 20
+-5374.0
+ 10
+290.0
+ 20
+-5321.0
+  0
+MTEXT
+  5
+13E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5331.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+二层效果声扬声器
+  7
+CJK
+  0
+MTEXT
+  5
+13F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5341.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+EAW
+  7
+CJK
+  0
+MTEXT
+  5
+140
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+359.0
+ 20
+-5350.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+MK8196i
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+141
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+40.0
+ 20
+-141.0
+ 10
+220.0
+ 20
+-141.0
+ 10
+220.0
+ 20
+-216.0
+ 10
+40.0
+ 20
+-216.0
+ 10
+40.0
+ 20
+-141.0
+  0
+MTEXT
+  5
+142
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+130.0
+ 20
+-151.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+四通道数字功率放大器
+  7
+CJK
+  0
+MTEXT
+  5
+143
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+130.0
+ 20
+-161.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+POWERSOFT
+  7
+CJK
+  0
+MTEXT
+  5
+144
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+130.0
+ 20
+-170.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+Quattrocanali 4804 DSP+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+145
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+40.0
+ 20
+-242.0
+ 10
+220.0
+ 20
+-242.0
+ 10
+220.0
+ 20
+-317.0
+ 10
+40.0
+ 20
+-317.0
+ 10
+40.0
+ 20
+-242.0
+  0
+MTEXT
+  5
+146
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+130.0
+ 20
+-252.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+四通道数字功率放大器
+  7
+CJK
+  0
+MTEXT
+  5
+147
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+130.0
+ 20
+-262.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+POWERSOFT
+  7
+CJK
+  0
+MTEXT
+  5
+148
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+130.0
+ 20
+-271.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+Quattrocanali 4804 DSP+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+149
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+40.0
+ 20
+-343.0
+ 10
+220.0
+ 20
+-343.0
+ 10
+220.0
+ 20
+-418.0
+ 10
+40.0
+ 20
+-418.0
+ 10
+40.0
+ 20
+-343.0
+  0
+MTEXT
+  5
+14A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+130.0
+ 20
+-353.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+四通道数字功率放大器
+  7
+CJK
+  0
+MTEXT
+  5
+14B
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+130.0
+ 20
+-363.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+POWERSOFT
+  7
+CJK
+  0
+MTEXT
+  5
+14C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+130.0
+ 20
+-372.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+Quattrocanali 4804 DSP+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+14D
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+40.0
+ 20
+-444.0
+ 10
+220.0
+ 20
+-444.0
+ 10
+220.0
+ 20
+-519.0
+ 10
+40.0
+ 20
+-519.0
+ 10
+40.0
+ 20
+-444.0
+  0
+MTEXT
+  5
+14E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+130.0
+ 20
+-454.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+四通道数字功率放大器
+  7
+CJK
+  0
+MTEXT
+  5
+14F
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+130.0
+ 20
+-464.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+POWERSOFT
+  7
+CJK
+  0
+MTEXT
+  5
+150
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+130.0
+ 20
+-473.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+Quattrocanali 4804 DSP+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+151
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+80.0
+ 20
+-5470.0
+ 10
+454.0
+ 20
+-5470.0
+ 10
+454.0
+ 20
+-5526.0
+ 10
+80.0
+ 20
+-5526.0
+ 10
+80.0
+ 20
+-5470.0
+  0
+MTEXT
+  5
+152
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5480.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+音频交换机
+  7
+CJK
+  0
+MTEXT
+  5
+153
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5490.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+VINGLOOP
+  7
+CJK
+  0
+MTEXT
+  5
+154
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+267.0
+ 20
+-5499.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+AIM-24MG6XF-UPoE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+155
+330
+17
+100
+AcDbEntity
+  8
+DEVICES
+ 62
+7
+370
+25
+420
+11842217
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+494.0
+ 20
+-5470.0
+ 10
+868.0
+ 20
+-5470.0
+ 10
+868.0
+ 20
+-5526.0
+ 10
+494.0
+ 20
+-5526.0
+ 10
+494.0
+ 20
+-5470.0
+  0
+MTEXT
+  5
+156
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+15855592
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5480.0
+ 30
+0.0
+ 40
+9.0
+ 41
+0.0
+ 71
+8
+  1
+音频交换机
+  7
+CJK
+  0
+MTEXT
+  5
+157
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+12894904
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5490.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+VINGLOOP
+  7
+CJK
+  0
+MTEXT
+  5
+158
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+10131341
+100
+AcDbMText
+ 10
+681.0
+ 20
+-5499.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+8
+  1
+AIM-24MG6XF-UPoE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+159
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-88.5
+ 10
+230.0
+ 20
+-88.5
+ 10
+255.0
+ 20
+-88.5
+ 10
+255.0
+ 20
+-2777.5
+ 10
+280.0
+ 20
+-2777.5
+ 10
+290.0
+ 20
+-2777.5
+  0
+MTEXT
+  5
+15A
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-85.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+15B
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-88.5
+ 10
+230.0
+ 20
+-88.5
+ 10
+255.0
+ 20
+-88.5
+ 10
+255.0
+ 20
+-4647.5
+ 10
+280.0
+ 20
+-4647.5
+ 10
+290.0
+ 20
+-4647.5
+  0
+MTEXT
+  5
+15C
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-4644.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+15D
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-99.5
+ 10
+230.0
+ 20
+-99.5
+ 10
+255.0
+ 20
+-99.5
+ 10
+255.0
+ 20
+-4252.5
+ 10
+280.0
+ 20
+-4252.5
+ 10
+290.0
+ 20
+-4252.5
+  0
+MTEXT
+  5
+15E
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-96.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+15F
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-99.5
+ 10
+230.0
+ 20
+-99.5
+ 10
+255.0
+ 20
+-99.5
+ 10
+255.0
+ 20
+-5042.5
+ 10
+280.0
+ 20
+-5042.5
+ 10
+290.0
+ 20
+-5042.5
+  0
+MTEXT
+  5
+160
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-5039.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+161
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-189.5
+ 10
+230.0
+ 20
+-189.5
+ 10
+255.0
+ 20
+-189.5
+ 10
+255.0
+ 20
+-2856.5
+ 10
+280.0
+ 20
+-2856.5
+ 10
+290.0
+ 20
+-2856.5
+  0
+MTEXT
+  5
+162
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-186.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+163
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-189.5
+ 10
+230.0
+ 20
+-189.5
+ 10
+255.0
+ 20
+-189.5
+ 10
+255.0
+ 20
+-4726.5
+ 10
+280.0
+ 20
+-4726.5
+ 10
+290.0
+ 20
+-4726.5
+  0
+MTEXT
+  5
+164
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-4723.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+165
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-200.5
+ 10
+230.0
+ 20
+-200.5
+ 10
+255.0
+ 20
+-200.5
+ 10
+255.0
+ 20
+-4331.5
+ 10
+280.0
+ 20
+-4331.5
+ 10
+290.0
+ 20
+-4331.5
+  0
+MTEXT
+  5
+166
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-197.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+167
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-200.5
+ 10
+230.0
+ 20
+-200.5
+ 10
+255.0
+ 20
+-200.5
+ 10
+255.0
+ 20
+-5121.5
+ 10
+280.0
+ 20
+-5121.5
+ 10
+290.0
+ 20
+-5121.5
+  0
+MTEXT
+  5
+168
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-5118.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+169
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-290.5
+ 10
+230.0
+ 20
+-290.5
+ 10
+255.0
+ 20
+-290.5
+ 10
+255.0
+ 20
+-2935.5
+ 10
+280.0
+ 20
+-2935.5
+ 10
+290.0
+ 20
+-2935.5
+  0
+MTEXT
+  5
+16A
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-287.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+16B
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-290.5
+ 10
+230.0
+ 20
+-290.5
+ 10
+255.0
+ 20
+-290.5
+ 10
+255.0
+ 20
+-4805.5
+ 10
+280.0
+ 20
+-4805.5
+ 10
+290.0
+ 20
+-4805.5
+  0
+MTEXT
+  5
+16C
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-4802.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+16D
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-301.5
+ 10
+230.0
+ 20
+-301.5
+ 10
+255.0
+ 20
+-301.5
+ 10
+255.0
+ 20
+-4410.5
+ 10
+280.0
+ 20
+-4410.5
+ 10
+290.0
+ 20
+-4410.5
+  0
+MTEXT
+  5
+16E
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-298.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+16F
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-301.5
+ 10
+230.0
+ 20
+-301.5
+ 10
+255.0
+ 20
+-301.5
+ 10
+255.0
+ 20
+-5200.5
+ 10
+280.0
+ 20
+-5200.5
+ 10
+290.0
+ 20
+-5200.5
+  0
+MTEXT
+  5
+170
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-5197.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+171
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-391.5
+ 10
+230.0
+ 20
+-391.5
+ 10
+255.0
+ 20
+-391.5
+ 10
+255.0
+ 20
+-3014.5
+ 10
+280.0
+ 20
+-3014.5
+ 10
+290.0
+ 20
+-3014.5
+  0
+MTEXT
+  5
+172
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-388.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+173
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-391.5
+ 10
+230.0
+ 20
+-391.5
+ 10
+255.0
+ 20
+-391.5
+ 10
+255.0
+ 20
+-4884.5
+ 10
+280.0
+ 20
+-4884.5
+ 10
+290.0
+ 20
+-4884.5
+  0
+MTEXT
+  5
+174
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-4881.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+175
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-402.5
+ 10
+230.0
+ 20
+-402.5
+ 10
+255.0
+ 20
+-402.5
+ 10
+255.0
+ 20
+-4489.5
+ 10
+280.0
+ 20
+-4489.5
+ 10
+290.0
+ 20
+-4489.5
+  0
+MTEXT
+  5
+176
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-399.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+177
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-402.5
+ 10
+230.0
+ 20
+-402.5
+ 10
+255.0
+ 20
+-402.5
+ 10
+255.0
+ 20
+-5279.5
+ 10
+280.0
+ 20
+-5279.5
+ 10
+290.0
+ 20
+-5279.5
+  0
+MTEXT
+  5
+178
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-5276.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+179
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-492.5
+ 10
+230.0
+ 20
+-492.5
+ 10
+255.0
+ 20
+-492.5
+ 10
+255.0
+ 20
+-4173.5
+ 10
+280.0
+ 20
+-4173.5
+ 10
+290.0
+ 20
+-4173.5
+  0
+MTEXT
+  5
+17A
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-489.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+17B
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-492.5
+ 10
+230.0
+ 20
+-492.5
+ 10
+255.0
+ 20
+-492.5
+ 10
+255.0
+ 20
+-4963.5
+ 10
+280.0
+ 20
+-4963.5
+ 10
+290.0
+ 20
+-4963.5
+  0
+MTEXT
+  5
+17C
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-4960.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+17D
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-503.5
+ 10
+230.0
+ 20
+-503.5
+ 10
+255.0
+ 20
+-503.5
+ 10
+255.0
+ 20
+-4568.5
+ 10
+280.0
+ 20
+-4568.5
+ 10
+290.0
+ 20
+-4568.5
+  0
+MTEXT
+  5
+17E
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+230.0
+ 20
+-500.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+17F
+330
+17
+100
+AcDbEntity
+  8
+WIRES_SPEAKER
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+220.0
+ 20
+-503.5
+ 10
+230.0
+ 20
+-503.5
+ 10
+255.0
+ 20
+-503.5
+ 10
+255.0
+ 20
+-5358.5
+ 10
+280.0
+ 20
+-5358.5
+ 10
+290.0
+ 20
+-5358.5
+  0
+MTEXT
+  5
+180
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+15230298
+100
+AcDbMText
+ 10
+255.0
+ 20
+-5355.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+SPEAKER
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+181
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+524.375
+ 20
+-5470.0
+ 10
+524.375
+ 20
+-5460.0
+ 10
+524.375
+ 20
+-5460.0
+ 10
+852.5416666666666
+ 20
+-5460.0
+ 10
+852.5416666666666
+ 20
+-5460.0
+ 10
+852.5416666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+182
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+524.375
+ 20
+-5457.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+183
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+83.45833333333333
+ 20
+-5426.0
+ 10
+450.54166666666663
+ 20
+-5426.0
+  0
+MTEXT
+  5
+184
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+83.45833333333333
+ 20
+-5423.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE 主干 x24
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+185
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-88.5
+ 10
+280.0
+ 20
+-88.5
+ 10
+264.0
+ 20
+-88.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+95.45833333333333
+ 20
+-5426.0
+ 10
+95.45833333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+186
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-85.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+187
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-178.5
+ 10
+280.0
+ 20
+-178.5
+ 10
+264.0
+ 20
+-178.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+110.375
+ 20
+-5426.0
+ 10
+110.375
+ 20
+-5470.0
+  0
+MTEXT
+  5
+188
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-175.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+189
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-268.5
+ 10
+280.0
+ 20
+-268.5
+ 10
+264.0
+ 20
+-268.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+125.29166666666666
+ 20
+-5426.0
+ 10
+125.29166666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+18A
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-265.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+18B
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-358.5
+ 10
+280.0
+ 20
+-358.5
+ 10
+264.0
+ 20
+-358.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+140.20833333333334
+ 20
+-5426.0
+ 10
+140.20833333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+18C
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-355.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+18D
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-448.5
+ 10
+280.0
+ 20
+-448.5
+ 10
+264.0
+ 20
+-448.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+155.125
+ 20
+-5426.0
+ 10
+155.125
+ 20
+-5470.0
+  0
+MTEXT
+  5
+18E
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-445.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+18F
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-538.5
+ 10
+280.0
+ 20
+-538.5
+ 10
+264.0
+ 20
+-538.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+170.04166666666666
+ 20
+-5426.0
+ 10
+170.04166666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+190
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-535.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+191
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-628.5
+ 10
+280.0
+ 20
+-628.5
+ 10
+264.0
+ 20
+-628.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+184.95833333333334
+ 20
+-5426.0
+ 10
+184.95833333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+192
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-625.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+193
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-718.5
+ 10
+280.0
+ 20
+-718.5
+ 10
+264.0
+ 20
+-718.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+199.875
+ 20
+-5426.0
+ 10
+199.875
+ 20
+-5470.0
+  0
+MTEXT
+  5
+194
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-715.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+195
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-808.5
+ 10
+280.0
+ 20
+-808.5
+ 10
+264.0
+ 20
+-808.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+214.79166666666666
+ 20
+-5426.0
+ 10
+214.79166666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+196
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-805.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+197
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-898.5
+ 10
+280.0
+ 20
+-898.5
+ 10
+264.0
+ 20
+-898.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+229.70833333333334
+ 20
+-5426.0
+ 10
+229.70833333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+198
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-895.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+199
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-988.5
+ 10
+280.0
+ 20
+-988.5
+ 10
+264.0
+ 20
+-988.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+244.625
+ 20
+-5426.0
+ 10
+244.625
+ 20
+-5470.0
+  0
+MTEXT
+  5
+19A
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-985.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+19B
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1078.5
+ 10
+280.0
+ 20
+-1078.5
+ 10
+264.0
+ 20
+-1078.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+259.54166666666663
+ 20
+-5426.0
+ 10
+259.54166666666663
+ 20
+-5470.0
+  0
+MTEXT
+  5
+19C
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1075.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+19D
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1168.5
+ 10
+280.0
+ 20
+-1168.5
+ 10
+264.0
+ 20
+-1168.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+274.4583333333333
+ 20
+-5426.0
+ 10
+274.4583333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+19E
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1165.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+19F
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1258.5
+ 10
+280.0
+ 20
+-1258.5
+ 10
+264.0
+ 20
+-1258.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+289.37499999999994
+ 20
+-5426.0
+ 10
+289.37499999999994
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1A0
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1255.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1A1
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1348.5
+ 10
+280.0
+ 20
+-1348.5
+ 10
+264.0
+ 20
+-1348.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+304.29166666666663
+ 20
+-5426.0
+ 10
+304.29166666666663
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1A2
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1345.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1A3
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1438.5
+ 10
+280.0
+ 20
+-1438.5
+ 10
+264.0
+ 20
+-1438.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+319.2083333333333
+ 20
+-5426.0
+ 10
+319.2083333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1A4
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1435.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1A5
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1528.5
+ 10
+280.0
+ 20
+-1528.5
+ 10
+264.0
+ 20
+-1528.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+334.12499999999994
+ 20
+-5426.0
+ 10
+334.12499999999994
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1A6
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1525.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1A7
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1618.5
+ 10
+280.0
+ 20
+-1618.5
+ 10
+264.0
+ 20
+-1618.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+349.04166666666663
+ 20
+-5426.0
+ 10
+349.04166666666663
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1A8
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1615.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1A9
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1708.5
+ 10
+280.0
+ 20
+-1708.5
+ 10
+264.0
+ 20
+-1708.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+363.9583333333333
+ 20
+-5426.0
+ 10
+363.9583333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1AA
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1705.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1AB
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1798.5
+ 10
+280.0
+ 20
+-1798.5
+ 10
+264.0
+ 20
+-1798.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+378.87499999999994
+ 20
+-5426.0
+ 10
+378.87499999999994
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1AC
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1795.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1AD
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1888.5
+ 10
+280.0
+ 20
+-1888.5
+ 10
+264.0
+ 20
+-1888.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+393.79166666666663
+ 20
+-5426.0
+ 10
+393.79166666666663
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1AE
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1885.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1AF
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-1978.5
+ 10
+280.0
+ 20
+-1978.5
+ 10
+264.0
+ 20
+-1978.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+408.7083333333333
+ 20
+-5426.0
+ 10
+408.7083333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1B0
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-1975.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1B1
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2068.5
+ 10
+280.0
+ 20
+-2068.5
+ 10
+264.0
+ 20
+-2068.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+423.62499999999994
+ 20
+-5426.0
+ 10
+423.62499999999994
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1B2
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2065.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1B3
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2158.5
+ 10
+280.0
+ 20
+-2158.5
+ 10
+264.0
+ 20
+-2158.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+438.54166666666663
+ 20
+-5426.0
+ 10
+438.54166666666663
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1B4
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2155.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1B5
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+2
+ 70
+0
+ 10
+2.0
+ 20
+-5426.0
+ 10
+864.5416666666666
+ 20
+-5426.0
+  0
+MTEXT
+  5
+1B6
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+2.0
+ 20
+-5423.0
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE 主干 x23
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1B7
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2248.5
+ 10
+280.0
+ 20
+-2248.5
+ 10
+264.0
+ 20
+-2248.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+509.4583333333333
+ 20
+-5426.0
+ 10
+509.4583333333333
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1B8
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2245.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1B9
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2338.5
+ 10
+280.0
+ 20
+-2338.5
+ 10
+264.0
+ 20
+-2338.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+539.2916666666667
+ 20
+-5426.0
+ 10
+539.2916666666667
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1BA
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2335.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1BB
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2428.5
+ 10
+280.0
+ 20
+-2428.5
+ 10
+264.0
+ 20
+-2428.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+554.2083333333334
+ 20
+-5426.0
+ 10
+554.2083333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1BC
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2425.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1BD
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2518.5
+ 10
+280.0
+ 20
+-2518.5
+ 10
+264.0
+ 20
+-2518.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+569.125
+ 20
+-5426.0
+ 10
+569.125
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1BE
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2515.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1BF
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2608.5
+ 10
+280.0
+ 20
+-2608.5
+ 10
+264.0
+ 20
+-2608.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+584.0416666666667
+ 20
+-5426.0
+ 10
+584.0416666666667
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1C0
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2605.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1C1
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-2698.5
+ 10
+280.0
+ 20
+-2698.5
+ 10
+264.0
+ 20
+-2698.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+598.9583333333334
+ 20
+-5426.0
+ 10
+598.9583333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1C2
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-2695.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1C3
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3104.5
+ 10
+280.0
+ 20
+-3104.5
+ 10
+264.0
+ 20
+-3104.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+613.875
+ 20
+-5426.0
+ 10
+613.875
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1C4
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3101.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1C5
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3194.5
+ 10
+280.0
+ 20
+-3194.5
+ 10
+264.0
+ 20
+-3194.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+628.7916666666667
+ 20
+-5426.0
+ 10
+628.7916666666667
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1C6
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3191.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1C7
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3284.5
+ 10
+280.0
+ 20
+-3284.5
+ 10
+264.0
+ 20
+-3284.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+643.7083333333334
+ 20
+-5426.0
+ 10
+643.7083333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1C8
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3281.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1C9
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3374.5
+ 10
+280.0
+ 20
+-3374.5
+ 10
+264.0
+ 20
+-3374.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+658.625
+ 20
+-5426.0
+ 10
+658.625
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1CA
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3371.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1CB
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3464.5
+ 10
+280.0
+ 20
+-3464.5
+ 10
+264.0
+ 20
+-3464.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+673.5416666666666
+ 20
+-5426.0
+ 10
+673.5416666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1CC
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3461.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1CD
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3554.5
+ 10
+280.0
+ 20
+-3554.5
+ 10
+264.0
+ 20
+-3554.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+688.4583333333334
+ 20
+-5426.0
+ 10
+688.4583333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1CE
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3551.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1CF
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3644.5
+ 10
+280.0
+ 20
+-3644.5
+ 10
+264.0
+ 20
+-3644.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+703.375
+ 20
+-5426.0
+ 10
+703.375
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1D0
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3641.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1D1
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3734.5
+ 10
+280.0
+ 20
+-3734.5
+ 10
+264.0
+ 20
+-3734.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+718.2916666666666
+ 20
+-5426.0
+ 10
+718.2916666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1D2
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3731.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1D3
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3824.5
+ 10
+280.0
+ 20
+-3824.5
+ 10
+264.0
+ 20
+-3824.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+733.2083333333334
+ 20
+-5426.0
+ 10
+733.2083333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1D4
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3821.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1D5
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-3914.5
+ 10
+280.0
+ 20
+-3914.5
+ 10
+264.0
+ 20
+-3914.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+748.125
+ 20
+-5426.0
+ 10
+748.125
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1D6
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-3911.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1D7
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-4004.5
+ 10
+280.0
+ 20
+-4004.5
+ 10
+264.0
+ 20
+-4004.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+763.0416666666666
+ 20
+-5426.0
+ 10
+763.0416666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1D8
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-4001.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1D9
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+290.0
+ 20
+-4094.5
+ 10
+280.0
+ 20
+-4094.5
+ 10
+264.0
+ 20
+-4094.5
+ 10
+264.0
+ 20
+-5426.0
+ 10
+777.9583333333334
+ 20
+-5426.0
+ 10
+777.9583333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1DA
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+264.0
+ 20
+-4091.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1DB
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+40.0
+ 20
+-99.5
+ 10
+30.0
+ 20
+-99.5
+ 10
+14.0
+ 20
+-99.5
+ 10
+14.0
+ 20
+-5426.0
+ 10
+792.875
+ 20
+-5426.0
+ 10
+792.875
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1DC
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+14.0
+ 20
+-96.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1DD
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+40.0
+ 20
+-200.5
+ 10
+30.0
+ 20
+-200.5
+ 10
+14.0
+ 20
+-200.5
+ 10
+14.0
+ 20
+-5426.0
+ 10
+807.7916666666666
+ 20
+-5426.0
+ 10
+807.7916666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1DE
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+14.0
+ 20
+-197.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1DF
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+40.0
+ 20
+-301.5
+ 10
+30.0
+ 20
+-301.5
+ 10
+14.0
+ 20
+-301.5
+ 10
+14.0
+ 20
+-5426.0
+ 10
+822.7083333333334
+ 20
+-5426.0
+ 10
+822.7083333333334
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1E0
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+14.0
+ 20
+-298.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1E1
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+40.0
+ 20
+-402.5
+ 10
+30.0
+ 20
+-402.5
+ 10
+14.0
+ 20
+-402.5
+ 10
+14.0
+ 20
+-5426.0
+ 10
+837.625
+ 20
+-5426.0
+ 10
+837.625
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1E2
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+14.0
+ 20
+-399.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+1E3
+330
+17
+100
+AcDbEntity
+  8
+WIRES_DANTE
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbPolyline
+ 90
+6
+ 70
+0
+ 10
+40.0
+ 20
+-503.5
+ 10
+30.0
+ 20
+-503.5
+ 10
+14.0
+ 20
+-503.5
+ 10
+14.0
+ 20
+-5426.0
+ 10
+852.5416666666666
+ 20
+-5426.0
+ 10
+852.5416666666666
+ 20
+-5470.0
+  0
+MTEXT
+  5
+1E4
+330
+17
+100
+AcDbEntity
+  8
+WIRE_LABELS
+420
+3640029
+100
+AcDbMText
+ 10
+14.0
+ 20
+-500.5
+ 30
+0.0
+ 40
+7.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1E5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-77.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1E6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-80.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1E7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-88.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1E8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-91.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1E9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-167.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1EA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-170.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1EB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-178.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1EC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-181.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1ED
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-257.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1EE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-260.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1EF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-268.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1F0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-271.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1F1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-347.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1F2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-350.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1F3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-358.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1F4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-361.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1F5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-437.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1F6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-440.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1F7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-448.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1F8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-451.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1F9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-527.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1FA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-530.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1FB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-538.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1FC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-541.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+1FD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-617.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+1FE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-620.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+1FF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-628.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+200
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-631.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+201
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-707.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+202
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-710.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+203
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-718.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+204
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-721.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+205
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-797.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+206
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-800.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+207
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-808.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+208
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-811.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+209
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-887.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+20A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-890.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+20B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-898.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+20C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-901.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+20D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-977.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+20E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-980.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+20F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-988.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+210
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-991.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+211
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1067.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+212
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1070.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+213
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1078.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+214
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1081.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+215
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1157.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+216
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1160.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+217
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1168.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+218
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1171.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+219
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1247.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+21A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1250.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+21B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1258.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+21C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1261.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+21D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1337.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+21E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1340.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+21F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1348.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+220
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1351.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+221
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1427.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+222
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1430.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+223
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1438.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+224
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1441.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+225
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1517.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+226
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1520.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+227
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1528.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+228
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1531.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+229
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1607.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+22A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1610.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+22B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1618.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+22C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1621.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+22D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1697.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+22E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1700.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+22F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1708.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+230
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1711.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+231
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1787.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+232
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1790.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+233
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1798.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+234
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1801.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+235
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1877.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+236
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1880.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+237
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1888.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+238
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1891.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+239
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1967.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+23A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1970.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+23B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-1978.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+23C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-1981.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+23D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2057.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+23E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2060.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+23F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2068.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+240
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2071.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+241
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2147.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+242
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2150.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+243
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2158.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+244
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2161.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+245
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2237.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+246
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2240.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+247
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2248.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+248
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2251.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+249
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2327.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+24A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2330.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+24B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2338.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+24C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2341.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+24D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2417.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+24E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2420.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+24F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2428.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+250
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2431.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+251
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2507.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+252
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2510.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+253
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2518.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+254
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2521.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+255
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2597.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+256
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2600.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+257
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2608.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+258
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2611.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+259
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2687.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+25A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2690.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+25B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2698.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+25C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2701.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+25D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2777.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+25E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2780.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+25F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2856.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+260
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2859.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+261
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-2935.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+262
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-2938.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+263
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3014.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+264
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3017.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+265
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3093.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+266
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3096.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+267
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3104.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+268
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3107.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+269
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3183.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+26A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3186.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+26B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3194.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+26C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3197.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+26D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3273.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+26E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3276.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+26F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3284.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+270
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3287.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+271
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3363.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+272
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3366.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+273
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3374.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+274
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3377.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+275
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3453.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+276
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3456.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+277
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3464.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+278
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3467.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+279
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3543.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+27A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3546.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+27B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3554.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+27C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3557.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+27D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3633.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+27E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3636.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+27F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3644.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+280
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3647.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+281
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3723.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+282
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3726.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+283
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3734.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+284
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3737.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+285
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3813.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+286
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3816.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+287
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3824.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+288
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3827.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+289
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3903.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+28A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3906.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+28B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3914.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+28C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3917.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+28D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-3993.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+28E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-3996.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+28F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4004.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+290
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4007.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+291
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4083.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+292
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4086.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN
+  7
+CJK
+  0
+CIRCLE
+  5
+293
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4094.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+294
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4097.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+295
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-77.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+296
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-80.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN1
+  7
+CJK
+  0
+CIRCLE
+  5
+297
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-88.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+298
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-91.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN2
+  7
+CJK
+  0
+CIRCLE
+  5
+299
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-99.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+29A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-102.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+29B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+11566297
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-77.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+29C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-80.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+CTRL
+  7
+CJK
+  0
+CIRCLE
+  5
+29D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-88.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+29E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-91.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK1
+  7
+CJK
+  0
+CIRCLE
+  5
+29F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-99.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2A0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-102.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK2
+  7
+CJK
+  0
+CIRCLE
+  5
+2A1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+95.45833333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2A2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+95.45833333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE1
+  7
+CJK
+  0
+CIRCLE
+  5
+2A3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+110.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2A4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+110.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE2
+  7
+CJK
+  0
+CIRCLE
+  5
+2A5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+125.29166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2A6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+125.29166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE3
+  7
+CJK
+  0
+CIRCLE
+  5
+2A7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+140.20833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2A8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+140.20833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE4
+  7
+CJK
+  0
+CIRCLE
+  5
+2A9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+155.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2AA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+155.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE5
+  7
+CJK
+  0
+CIRCLE
+  5
+2AB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+170.04166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2AC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+170.04166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE6
+  7
+CJK
+  0
+CIRCLE
+  5
+2AD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+184.95833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2AE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+184.95833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE7
+  7
+CJK
+  0
+CIRCLE
+  5
+2AF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+199.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2B0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+199.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE8
+  7
+CJK
+  0
+CIRCLE
+  5
+2B1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+214.79166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2B2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+214.79166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE9
+  7
+CJK
+  0
+CIRCLE
+  5
+2B3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+229.70833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2B4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+229.70833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE10
+  7
+CJK
+  0
+CIRCLE
+  5
+2B5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+244.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2B6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+244.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE11
+  7
+CJK
+  0
+CIRCLE
+  5
+2B7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+259.54166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2B8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+259.54166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE12
+  7
+CJK
+  0
+CIRCLE
+  5
+2B9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+274.4583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2BA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+274.4583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE13
+  7
+CJK
+  0
+CIRCLE
+  5
+2BB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+289.37499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2BC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+289.37499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE14
+  7
+CJK
+  0
+CIRCLE
+  5
+2BD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+304.29166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2BE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+304.29166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE15
+  7
+CJK
+  0
+CIRCLE
+  5
+2BF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+319.2083333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2C0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+319.2083333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE16
+  7
+CJK
+  0
+CIRCLE
+  5
+2C1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+334.12499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2C2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+334.12499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE17
+  7
+CJK
+  0
+CIRCLE
+  5
+2C3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+349.04166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2C4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+349.04166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE18
+  7
+CJK
+  0
+CIRCLE
+  5
+2C5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+363.9583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2C6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+363.9583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE19
+  7
+CJK
+  0
+CIRCLE
+  5
+2C7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+378.87499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2C8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+378.87499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE20
+  7
+CJK
+  0
+CIRCLE
+  5
+2C9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+393.79166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2CA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+393.79166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE21
+  7
+CJK
+  0
+CIRCLE
+  5
+2CB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+408.7083333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2CC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+408.7083333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE22
+  7
+CJK
+  0
+CIRCLE
+  5
+2CD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+423.62499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2CE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+423.62499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE23
+  7
+CJK
+  0
+CIRCLE
+  5
+2CF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+438.54166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2D0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+438.54166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE24
+  7
+CJK
+  0
+CIRCLE
+  5
+2D1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+509.4583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2D2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+509.4583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE1
+  7
+CJK
+  0
+CIRCLE
+  5
+2D3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+524.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2D4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+524.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE2
+  7
+CJK
+  0
+CIRCLE
+  5
+2D5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+539.2916666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2D6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+539.2916666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE3
+  7
+CJK
+  0
+CIRCLE
+  5
+2D7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+554.2083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2D8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+554.2083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE4
+  7
+CJK
+  0
+CIRCLE
+  5
+2D9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+569.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2DA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+569.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE5
+  7
+CJK
+  0
+CIRCLE
+  5
+2DB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+584.0416666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2DC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+584.0416666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE6
+  7
+CJK
+  0
+CIRCLE
+  5
+2DD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+598.9583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2DE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+598.9583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE7
+  7
+CJK
+  0
+CIRCLE
+  5
+2DF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+613.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2E0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+613.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE8
+  7
+CJK
+  0
+CIRCLE
+  5
+2E1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+628.7916666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2E2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+628.7916666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE9
+  7
+CJK
+  0
+CIRCLE
+  5
+2E3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+643.7083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2E4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+643.7083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE10
+  7
+CJK
+  0
+CIRCLE
+  5
+2E5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+658.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2E6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+658.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE11
+  7
+CJK
+  0
+CIRCLE
+  5
+2E7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+673.5416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2E8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+673.5416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE12
+  7
+CJK
+  0
+CIRCLE
+  5
+2E9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+688.4583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2EA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+688.4583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE13
+  7
+CJK
+  0
+CIRCLE
+  5
+2EB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+703.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2EC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+703.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE14
+  7
+CJK
+  0
+CIRCLE
+  5
+2ED
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+718.2916666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2EE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+718.2916666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE15
+  7
+CJK
+  0
+CIRCLE
+  5
+2EF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+733.2083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2F0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+733.2083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE16
+  7
+CJK
+  0
+CIRCLE
+  5
+2F1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+748.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2F2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+748.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE17
+  7
+CJK
+  0
+CIRCLE
+  5
+2F3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+763.0416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2F4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+763.0416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE18
+  7
+CJK
+  0
+CIRCLE
+  5
+2F5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+777.9583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2F6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+777.9583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE19
+  7
+CJK
+  0
+CIRCLE
+  5
+2F7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+792.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2F8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+792.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE20
+  7
+CJK
+  0
+CIRCLE
+  5
+2F9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+807.7916666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2FA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+807.7916666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE21
+  7
+CJK
+  0
+CIRCLE
+  5
+2FB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+822.7083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2FC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+822.7083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE22
+  7
+CJK
+  0
+CIRCLE
+  5
+2FD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+837.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+2FE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+837.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE23
+  7
+CJK
+  0
+CIRCLE
+  5
+2FF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+852.5416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+300
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+852.5416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE24
+  7
+CJK
+  0
+CIRCLE
+  5
+301
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4173.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+302
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4176.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+303
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4252.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+304
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4255.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+305
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4331.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+306
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4334.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+307
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4410.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+308
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4413.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+309
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4489.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+30A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4492.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+30B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4568.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+30C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4571.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+30D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4647.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+30E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4650.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+30F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4726.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+310
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4729.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+311
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4805.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+312
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4808.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+313
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4884.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+314
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4887.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+315
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-4963.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+316
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-4966.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+317
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-5042.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+318
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-5045.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+319
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-5121.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+31A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-5124.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+31B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-5200.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+31C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-5203.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+31D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-5279.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+31E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-5282.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+31F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+290.0
+ 20
+-5358.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+320
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+297.0
+ 20
+-5361.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+SPK
+  7
+CJK
+  0
+CIRCLE
+  5
+321
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-178.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+322
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-181.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN1
+  7
+CJK
+  0
+CIRCLE
+  5
+323
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-189.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+324
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-192.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN2
+  7
+CJK
+  0
+CIRCLE
+  5
+325
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-200.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+326
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-203.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+327
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+11566297
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-178.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+328
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-181.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+CTRL
+  7
+CJK
+  0
+CIRCLE
+  5
+329
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-189.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+32A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-192.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK1
+  7
+CJK
+  0
+CIRCLE
+  5
+32B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-200.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+32C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-203.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK2
+  7
+CJK
+  0
+CIRCLE
+  5
+32D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-279.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+32E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-282.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN1
+  7
+CJK
+  0
+CIRCLE
+  5
+32F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-290.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+330
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-293.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN2
+  7
+CJK
+  0
+CIRCLE
+  5
+331
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-301.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+332
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-304.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+333
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+11566297
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-279.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+334
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-282.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+CTRL
+  7
+CJK
+  0
+CIRCLE
+  5
+335
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-290.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+336
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-293.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK1
+  7
+CJK
+  0
+CIRCLE
+  5
+337
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-301.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+338
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-304.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK2
+  7
+CJK
+  0
+CIRCLE
+  5
+339
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-380.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+33A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-383.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN1
+  7
+CJK
+  0
+CIRCLE
+  5
+33B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-391.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+33C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-394.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN2
+  7
+CJK
+  0
+CIRCLE
+  5
+33D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-402.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+33E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-405.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+33F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+11566297
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-380.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+340
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-383.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+CTRL
+  7
+CJK
+  0
+CIRCLE
+  5
+341
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-391.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+342
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-394.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK1
+  7
+CJK
+  0
+CIRCLE
+  5
+343
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-402.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+344
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-405.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK2
+  7
+CJK
+  0
+CIRCLE
+  5
+345
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-481.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+346
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-484.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN1
+  7
+CJK
+  0
+CIRCLE
+  5
+347
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+6146725
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-492.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+348
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-495.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+IN2
+  7
+CJK
+  0
+CIRCLE
+  5
+349
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+40.0
+ 20
+-503.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+34A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+47.0
+ 20
+-506.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+DANTE
+  7
+CJK
+  0
+CIRCLE
+  5
+34B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+11566297
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-481.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+34C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-484.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+CTRL
+  7
+CJK
+  0
+CIRCLE
+  5
+34D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-492.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+34E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-495.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK1
+  7
+CJK
+  0
+CIRCLE
+  5
+34F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+15230298
+100
+AcDbCircle
+ 10
+220.0
+ 20
+-503.5
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+350
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+213.0
+ 20
+-506.5
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+9
+  1
+SPK2
+  7
+CJK
+  0
+CIRCLE
+  5
+351
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+95.45833333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+352
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+95.45833333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE1
+  7
+CJK
+  0
+CIRCLE
+  5
+353
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+110.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+354
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+110.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE2
+  7
+CJK
+  0
+CIRCLE
+  5
+355
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+125.29166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+356
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+125.29166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE3
+  7
+CJK
+  0
+CIRCLE
+  5
+357
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+140.20833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+358
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+140.20833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE4
+  7
+CJK
+  0
+CIRCLE
+  5
+359
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+155.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+35A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+155.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE5
+  7
+CJK
+  0
+CIRCLE
+  5
+35B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+170.04166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+35C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+170.04166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE6
+  7
+CJK
+  0
+CIRCLE
+  5
+35D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+184.95833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+35E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+184.95833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE7
+  7
+CJK
+  0
+CIRCLE
+  5
+35F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+199.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+360
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+199.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE8
+  7
+CJK
+  0
+CIRCLE
+  5
+361
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+214.79166666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+362
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+214.79166666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE9
+  7
+CJK
+  0
+CIRCLE
+  5
+363
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+229.70833333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+364
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+229.70833333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE10
+  7
+CJK
+  0
+CIRCLE
+  5
+365
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+244.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+366
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+244.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE11
+  7
+CJK
+  0
+CIRCLE
+  5
+367
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+259.54166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+368
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+259.54166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE12
+  7
+CJK
+  0
+CIRCLE
+  5
+369
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+274.4583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+36A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+274.4583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE13
+  7
+CJK
+  0
+CIRCLE
+  5
+36B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+289.37499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+36C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+289.37499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE14
+  7
+CJK
+  0
+CIRCLE
+  5
+36D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+304.29166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+36E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+304.29166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE15
+  7
+CJK
+  0
+CIRCLE
+  5
+36F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+319.2083333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+370
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+319.2083333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE16
+  7
+CJK
+  0
+CIRCLE
+  5
+371
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+334.12499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+372
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+334.12499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE17
+  7
+CJK
+  0
+CIRCLE
+  5
+373
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+349.04166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+374
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+349.04166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE18
+  7
+CJK
+  0
+CIRCLE
+  5
+375
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+363.9583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+376
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+363.9583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE19
+  7
+CJK
+  0
+CIRCLE
+  5
+377
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+378.87499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+378
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+378.87499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE20
+  7
+CJK
+  0
+CIRCLE
+  5
+379
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+393.79166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+37A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+393.79166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE21
+  7
+CJK
+  0
+CIRCLE
+  5
+37B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+408.7083333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+37C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+408.7083333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE22
+  7
+CJK
+  0
+CIRCLE
+  5
+37D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+423.62499999999994
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+37E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+423.62499999999994
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE23
+  7
+CJK
+  0
+CIRCLE
+  5
+37F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+438.54166666666663
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+380
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+438.54166666666663
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE24
+  7
+CJK
+  0
+CIRCLE
+  5
+381
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+509.4583333333333
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+382
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+509.4583333333333
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE1
+  7
+CJK
+  0
+CIRCLE
+  5
+383
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+524.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+384
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+524.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE2
+  7
+CJK
+  0
+CIRCLE
+  5
+385
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+539.2916666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+386
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+539.2916666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE3
+  7
+CJK
+  0
+CIRCLE
+  5
+387
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+554.2083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+388
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+554.2083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE4
+  7
+CJK
+  0
+CIRCLE
+  5
+389
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+569.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+38A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+569.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE5
+  7
+CJK
+  0
+CIRCLE
+  5
+38B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+584.0416666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+38C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+584.0416666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE6
+  7
+CJK
+  0
+CIRCLE
+  5
+38D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+598.9583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+38E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+598.9583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE7
+  7
+CJK
+  0
+CIRCLE
+  5
+38F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+613.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+390
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+613.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE8
+  7
+CJK
+  0
+CIRCLE
+  5
+391
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+628.7916666666667
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+392
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+628.7916666666667
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE9
+  7
+CJK
+  0
+CIRCLE
+  5
+393
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+643.7083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+394
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+643.7083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE10
+  7
+CJK
+  0
+CIRCLE
+  5
+395
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+658.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+396
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+658.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE11
+  7
+CJK
+  0
+CIRCLE
+  5
+397
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+673.5416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+398
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+673.5416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE12
+  7
+CJK
+  0
+CIRCLE
+  5
+399
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+688.4583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+39A
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+688.4583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE13
+  7
+CJK
+  0
+CIRCLE
+  5
+39B
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+703.375
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+39C
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+703.375
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE14
+  7
+CJK
+  0
+CIRCLE
+  5
+39D
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+718.2916666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+39E
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+718.2916666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE15
+  7
+CJK
+  0
+CIRCLE
+  5
+39F
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+733.2083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3A0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+733.2083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE16
+  7
+CJK
+  0
+CIRCLE
+  5
+3A1
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+748.125
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3A2
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+748.125
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE17
+  7
+CJK
+  0
+CIRCLE
+  5
+3A3
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+763.0416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3A4
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+763.0416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE18
+  7
+CJK
+  0
+CIRCLE
+  5
+3A5
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+777.9583333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3A6
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+777.9583333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE19
+  7
+CJK
+  0
+CIRCLE
+  5
+3A7
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+792.875
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3A8
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+792.875
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE20
+  7
+CJK
+  0
+CIRCLE
+  5
+3A9
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+807.7916666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3AA
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+807.7916666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE21
+  7
+CJK
+  0
+CIRCLE
+  5
+3AB
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+822.7083333333334
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3AC
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+822.7083333333334
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE22
+  7
+CJK
+  0
+CIRCLE
+  5
+3AD
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+837.625
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3AE
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+837.625
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE23
+  7
+CJK
+  0
+CIRCLE
+  5
+3AF
+330
+17
+100
+AcDbEntity
+  8
+PORTS
+420
+3640029
+100
+AcDbCircle
+ 10
+852.5416666666666
+ 20
+-5470.0
+ 30
+0.0
+ 40
+2.4
+  0
+MTEXT
+  5
+3B0
+330
+17
+100
+AcDbEntity
+  8
+LABELS
+420
+16119276
+100
+AcDbMText
+ 10
+852.5416666666666
+ 20
+-5509.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+8
+  1
+DANTE24
+  7
+CJK
+  0
+LWPOLYLINE
+  5
+3B1
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+ 62
+7
+370
+25
+420
+9078136
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+2.0
+ 20
+-5556.0
+ 10
+208.0
+ 20
+-5556.0
+ 10
+208.0
+ 20
+-5614.0
+ 10
+2.0
+ 20
+-5614.0
+ 10
+2.0
+ 20
+-5556.0
+  0
+MTEXT
+  5
+3B2
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+420
+15855592
+100
+AcDbMText
+ 10
+12.0
+ 20
+-5570.0
+ 30
+0.0
+ 40
+10.0
+ 41
+0.0
+ 71
+7
+  1
+线型说明
+  7
+CJK
+  0
+LINE
+  5
+3B3
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+  6
+CONTINUOUS
+420
+3640029
+100
+AcDbLine
+ 10
+14.0
+ 20
+-5579.0
+ 30
+0.0
+ 11
+44.0
+ 21
+-5579.0
+ 31
+0.0
+  0
+MTEXT
+  5
+3B4
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+420
+15263453
+100
+AcDbMText
+ 10
+52.0
+ 20
+-5582.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+Dante 网络音频
+  7
+CJK
+  0
+LINE
+  5
+3B5
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+  6
+CONTINUOUS
+420
+15230298
+100
+AcDbLine
+ 10
+14.0
+ 20
+-5593.0
+ 30
+0.0
+ 11
+44.0
+ 21
+-5593.0
+ 31
+0.0
+  0
+MTEXT
+  5
+3B6
+330
+17
+100
+AcDbEntity
+  8
+LEGEND
+420
+15263453
+100
+AcDbMText
+ 10
+52.0
+ 20
+-5596.0
+ 30
+0.0
+ 40
+8.0
+ 41
+0.0
+ 71
+7
+  1
+扬声器功率线
+  7
+CJK
+  0
+ENDSEC
+  0
+SECTION
+  2
+OBJECTS
+  0
+DICTIONARY
+  5
+A
+330
+0
+100
+AcDbDictionary
+281
+1
+  3
+ACAD_COLOR
+350
+B
+  3
+ACAD_GROUP
+350
+C
+  3
+ACAD_LAYOUT
+350
+D
+  3
+ACAD_MATERIAL
+350
+E
+  3
+ACAD_MLEADERSTYLE
+350
+F
+  3
+ACAD_MLINESTYLE
+350
+10
+  3
+ACAD_PLOTSETTINGS
+350
+11
+  3
+ACAD_PLOTSTYLENAME
+350
+12
+  3
+ACAD_SCALELIST
+350
+14
+  3
+ACAD_TABLESTYLE
+350
+15
+  3
+ACAD_VISUALSTYLE
+350
+16
+  3
+EZDXF_META
+350
+2D
+  0
+DICTIONARY
+  5
+B
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+DICTIONARY
+  5
+C
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+DICTIONARY
+  5
+D
+330
+A
+100
+AcDbDictionary
+281
+1
+  3
+Model
+350
+1A
+  3
+Layout1
+350
+1E
+  0
+DICTIONARY
+  5
+E
+330
+A
+100
+AcDbDictionary
+281
+1
+  3
+ByBlock
+350
+1F
+  3
+ByLayer
+350
+20
+  3
+Global
+350
+21
+  0
+DICTIONARY
+  5
+F
+330
+A
+100
+AcDbDictionary
+281
+1
+  3
+Standard
+350
+2C
+  0
+DICTIONARY
+  5
+10
+330
+A
+100
+AcDbDictionary
+281
+1
+  3
+Standard
+350
+22
+  0
+DICTIONARY
+  5
+11
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+ACDBDICTIONARYWDFLT
+  5
+12
+330
+A
+100
+AcDbDictionary
+281
+1
+  3
+Normal
+350
+13
+100
+AcDbDictionaryWithDefault
+340
+13
+  0
+ACDBPLACEHOLDER
+  5
+13
+330
+12
+  0
+DICTIONARY
+  5
+14
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+DICTIONARY
+  5
+15
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+DICTIONARY
+  5
+16
+330
+A
+100
+AcDbDictionary
+281
+1
+  0
+LAYOUT
+  5
+1A
+330
+D
+100
+AcDbPlotSettings
+  1
+
+  4
+A3
+  6
+
+ 40
+7.5
+ 41
+20.0
+ 42
+7.5
+ 43
+20.0
+ 44
+420.0
+ 45
+297.0
+ 46
+0.0
+ 47
+0.0
+ 48
+0.0
+ 49
+0.0
+140
+0.0
+141
+0.0
+142
+1.0
+143
+1.0
+ 70
+1024
+ 72
+1
+ 73
+0
+ 74
+5
+  7
+
+ 75
+16
+ 76
+0
+ 77
+2
+ 78
+300
+147
+1.0
+148
+0.0
+149
+0.0
+100
+AcDbLayout
+  1
+Model
+ 70
+1
+ 71
+0
+ 10
+0.0
+ 20
+0.0
+ 11
+420.0
+ 21
+297.0
+ 12
+0.0
+ 22
+0.0
+ 32
+0.0
+ 14
+1e+20
+ 24
+1e+20
+ 34
+1e+20
+ 15
+-1e+20
+ 25
+-1e+20
+ 35
+-1e+20
+146
+0.0
+ 13
+0.0
+ 23
+0.0
+ 33
+0.0
+ 16
+1.0
+ 26
+0.0
+ 36
+0.0
+ 17
+0.0
+ 27
+1.0
+ 37
+0.0
+ 76
+1
+330
+17
+  0
+LAYOUT
+  5
+1E
+330
+D
+100
+AcDbPlotSettings
+  1
+
+  4
+A3
+  6
+
+ 40
+7.5
+ 41
+20.0
+ 42
+7.5
+ 43
+20.0
+ 44
+420.0
+ 45
+297.0
+ 46
+0.0
+ 47
+0.0
+ 48
+0.0
+ 49
+0.0
+140
+0.0
+141
+0.0
+142
+1.0
+143
+1.0
+ 70
+0
+ 72
+1
+ 73
+0
+ 74
+5
+  7
+
+ 75
+16
+ 76
+0
+ 77
+2
+ 78
+300
+147
+1.0
+148
+0.0
+149
+0.0
+100
+AcDbLayout
+  1
+Layout1
+ 70
+1
+ 71
+1
+ 10
+0.0
+ 20
+0.0
+ 11
+420.0
+ 21
+297.0
+ 12
+0.0
+ 22
+0.0
+ 32
+0.0
+ 14
+1e+20
+ 24
+1e+20
+ 34
+1e+20
+ 15
+-1e+20
+ 25
+-1e+20
+ 35
+-1e+20
+146
+0.0
+ 13
+0.0
+ 23
+0.0
+ 33
+0.0
+ 16
+1.0
+ 26
+0.0
+ 36
+0.0
+ 17
+0.0
+ 27
+1.0
+ 37
+0.0
+ 76
+1
+330
+1B
+  0
+MATERIAL
+  5
+1F
+102
+{ACAD_REACTORS
+330
+E
+102
+}
+330
+E
+100
+AcDbMaterial
+  1
+ByBlock
+  2
+
+ 70
+0
+ 40
+1.0
+ 71
+1
+ 41
+1.0
+ 91
+-1023410177
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 44
+0.5
+ 73
+0
+ 45
+1.0
+ 46
+1.0
+ 77
+1
+  4
+
+ 78
+1
+ 79
+1
+170
+1
+ 48
+1.0
+171
+1
+  6
+
+172
+1
+173
+1
+174
+1
+140
+1.0
+141
+1.0
+175
+1
+  7
+
+176
+1
+177
+1
+178
+1
+143
+1.0
+179
+1
+  8
+
+270
+1
+271
+1
+272
+1
+145
+1.0
+146
+1.0
+273
+1
+  9
+
+274
+1
+275
+1
+276
+1
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 94
+63
+  0
+MATERIAL
+  5
+20
+102
+{ACAD_REACTORS
+330
+E
+102
+}
+330
+E
+100
+AcDbMaterial
+  1
+ByLayer
+  2
+
+ 70
+0
+ 40
+1.0
+ 71
+1
+ 41
+1.0
+ 91
+-1023410177
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 44
+0.5
+ 73
+0
+ 45
+1.0
+ 46
+1.0
+ 77
+1
+  4
+
+ 78
+1
+ 79
+1
+170
+1
+ 48
+1.0
+171
+1
+  6
+
+172
+1
+173
+1
+174
+1
+140
+1.0
+141
+1.0
+175
+1
+  7
+
+176
+1
+177
+1
+178
+1
+143
+1.0
+179
+1
+  8
+
+270
+1
+271
+1
+272
+1
+145
+1.0
+146
+1.0
+273
+1
+  9
+
+274
+1
+275
+1
+276
+1
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 94
+63
+  0
+MATERIAL
+  5
+21
+102
+{ACAD_REACTORS
+330
+E
+102
+}
+330
+E
+100
+AcDbMaterial
+  1
+Global
+  2
+
+ 70
+0
+ 40
+1.0
+ 71
+1
+ 41
+1.0
+ 91
+-1023410177
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 44
+0.5
+ 73
+0
+ 45
+1.0
+ 46
+1.0
+ 77
+1
+  4
+
+ 78
+1
+ 79
+1
+170
+1
+ 48
+1.0
+171
+1
+  6
+
+172
+1
+173
+1
+174
+1
+140
+1.0
+141
+1.0
+175
+1
+  7
+
+176
+1
+177
+1
+178
+1
+143
+1.0
+179
+1
+  8
+
+270
+1
+271
+1
+272
+1
+145
+1.0
+146
+1.0
+273
+1
+  9
+
+274
+1
+275
+1
+276
+1
+ 42
+1.0
+ 72
+1
+  3
+
+ 73
+1
+ 74
+1
+ 75
+1
+ 94
+63
+  0
+MLINESTYLE
+  5
+22
+102
+{ACAD_REACTORS
+330
+10
+102
+}
+330
+10
+100
+AcDbMlineStyle
+  2
+Standard
+ 70
+0
+  3
+
+ 62
+256
+ 51
+90.0
+ 52
+90.0
+ 71
+2
+ 49
+0.5
+ 62
+256
+  6
+BYLAYER
+ 49
+-0.5
+ 62
+256
+  6
+BYLAYER
+  0
+MLEADERSTYLE
+  5
+2C
+102
+{ACAD_REACTORS
+330
+F
+102
+}
+330
+F
+100
+AcDbMLeaderStyle
+179
+2
+170
+2
+171
+1
+172
+0
+ 90
+2
+ 40
+0.0
+ 41
+0.0
+173
+1
+ 91
+-1056964608
+ 92
+-2
+290
+1
+ 42
+2.0
+291
+1
+ 43
+8.0
+  3
+Standard
+ 44
+4.0
+300
+
+342
+29
+174
+1
+175
+1
+176
+0
+178
+1
+ 93
+-1056964608
+ 45
+4.0
+292
+0
+297
+0
+ 46
+4.0
+ 94
+-1056964608
+ 47
+1.0
+ 49
+1.0
+140
+1.0
+294
+1
+141
+0.0
+177
+0
+142
+1.0
+295
+0
+296
+0
+143
+3.75
+271
+0
+272
+9
+273
+9
+  0
+DICTIONARY
+  5
+2D
+330
+A
+100
+AcDbDictionary
+280
+1
+281
+1
+  3
+CREATED_BY_EZDXF
+350
+2E
+  3
+WRITTEN_BY_EZDXF
+350
+3B9
+  0
+DICTIONARYVAR
+  5
+2E
+330
+2D
+100
+DictionaryVariables
+280
+0
+  1
+1.4.4 @ 2026-08-30T14:29:40.027633+00:00
+  0
+DICTIONARYVAR
+  5
+3B9
+330
+2D
+100
+DictionaryVariables
+280
+0
+  1
+1.4.4 @ 2026-08-30T14:29:40.036435+00:00
+  0
+ENDSEC
+  0
+EOF
