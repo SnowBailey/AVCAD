@@ -58,6 +58,7 @@ jobs:
         run: |
           $iscc = Get-ChildItem "C:\Program Files*\Inno Setup *\ISCC.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
           if (-not $iscc) { throw "未找到 ISCC.exe" }
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
           & $iscc.FullName "/DMyAppVersion=${{ steps.ver.outputs.version }}" "packaging\windows\AVCAD.iss"
           if (-not (Test-Path "dist/AVCAD-Setup-${{ steps.ver.outputs.version }}.exe")) {
             throw "安装程序未生成"
