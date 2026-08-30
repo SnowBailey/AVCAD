@@ -5,12 +5,13 @@ features_available: [dante, control]
 params:
   inputs:
     {min: 1, default: 2, label: 输入路数, unit: "路"}
-  zones:
-    {min: 1, default: 4, label: 管理分区数, unit: "区"}
+  outputs:
+    {min: 1, default: 8, label: 输出路数, unit: "路"}
 ports_template:
-  # 输入路数按主库 params.inputs（型号里就写着，如 FIRM4×8 = 4 进 8 出）
+  # 音箱管理器不是分区管理器：输出就是普通 OUT（OUT1…），不叫 ZONE
+  # （阳哥规则 2026-08-30）。路数取主库 params.outputs，
+  # 型号里就写着，如 FIRM4×8 = 4 进 8 出。
   - {name: IN, side: left, signal: XLR, role: in, count_from: inputs, label: IN}
   - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
-  # 输出路数按主库 params.outputs（型号里就写着，如 FIRM4×8 = 4 进 8 出）
-  - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: ZONE}
+  - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: OUT}
   - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
