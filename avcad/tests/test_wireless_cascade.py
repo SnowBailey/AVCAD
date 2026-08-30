@@ -219,6 +219,72 @@ def test_set_expand_splits_receiver_and_transmitters(tmp_path):
     assert by_cat.get("WIRELESS_MIC") == 8, by_cat  # 4 套 -> 8 支话筒
 
 
+# ---------------- AUDIX（跨品牌差异） ----------------
+def _audix_project(n_rx=4, channels=2, dists=1):
+    entries = [
+        {"category": "ANTENNA", "brand": "AUDIX", "model": "ANTDA4161",
+         "name": "有源定向天线", "quantity": 2},
+        {"category": "ANT_DIST", "brand": "AUDIX", "model": "ADS48",
+         "name": "天线分配器", "quantity": dists,
+         "params": {"inputs": 2, "outputs": 8, "cascade_outs": 0}},
+        {"category": "WIRELESS_RX", "brand": "AUDIX", "model": "AP62",
+         "name": "AP62", "quantity": n_rx, "features": ["trs_out"],
+         "params": {"channels": channels, "antennas": 2}},
+        _mixer(),
+    ]
+    return build_project(entries, name="AUDIX")
+
+
+def test_audix_ads48_is_2in8out():
+    p = _audix_project()
+    d = [i for i in p.instances if i.category == "ANT_DIST"][0]
+    assert len([x for x in d.ports if x.role == "in"]) == 2
+    assert len([x for x in d.ports if x.role == "out"]) == 8
+
+
+def test_audix_receiver_uses_2_antennas_not_4():
+    """AUDIX 每机固定 2 支天线（A/B），与 IPS 真分集双通道的 4 口不同。"""
+    p = _audix_project()
+    rx = [i for i in p.instances if i.category == "WIRELESS_RX"][0]
+    rf_in = [x for x in rx.ports if x.signal.value == "RF" and x.role == "in"]
+    assert len(rf_in) == 2, f"AUDIX 天线口应为 2，实际 {len(rf_in)}"
+
+
+def test_audix_has_per_channel_trs_not_single_mix():
+    """AUDIX 是每通道各 1 路 1/4\" TS（与 XLR 并存），不是整机 1 路混合。"""
+    p = _audix_project(channels=2)
+    rx = [i for i in p.instances if i.category == "WIRELESS_RX"][0]
+    trs = [x for x in rx.ports if x.signal.value == "TRS"]
+    xlr = [x for x in rx.ports if x.signal.value == "XLR" and x.role == "out"]
+    assert len(trs) == 2 and len(xlr) == 2
+
+
+def test_audix_ads48_does_not_cascade():
+    """ADS48 官方资料未提级联 -> cascade_outs=0，不应产生级联线。"""
+    p = _audix_project()
+    assert not [c for c in p.connections if c.note == "分配器级联"]
+    # 8 出口全给接收机：4 台 × 2 口 = 8 条
+    assert len([c for c in p.connections if c.note == "天线分配"]) == 8
+
+
+def test_audix_required_dist_count():
+    """ADS48（8 出、无级联、每机 2 口）单台可带 4 台接收机。"""
+    assert required_dist_count(4, antennas_per_rx=2, outputs=8, cascade=0) == 1
+    assert required_dist_count(5, antennas_per_rx=2, outputs=8, cascade=0) == 2
+
+
+def test_audix_catalog_resolution():
+    from avcad.parse.product_resolver import resolve
+    e = {"brand": "AUDIX", "model": "AP62 BP", "name": "双通道无线话筒(接收机+腰包)"}
+    resolve(e)
+    assert e["category"] == "WIRELESS_RX"
+    assert e["params"]["channels"] == 2
+    assert e["params"]["antennas"] == 2
+    e2 = {"brand": "AUDIX", "model": "ADS48", "name": "天线分配器"}
+    resolve(e2)
+    assert e2["params"]["inputs"] == 2 and e2["params"]["outputs"] == 8
+
+
 def test_insufficient_outs_warns():
     """分配器出口不足时给出明确告警，而不是静默漏接。"""
     entries = [

@@ -25371,7 +25371,8 @@
    "params": {
     "impedance_ohm": 50,
     "inputs": 2,
-    "outputs": 10
+    "outputs": 10,
+    "cascade_outs": 2
    },
    "country": "中国",
    "unit": "台",
@@ -48926,13 +48927,22 @@
    "name": "单通道无线手持话筒套装",
    "group": "41系列单通道无线话筒（频率A)",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -48947,13 +48957,22 @@
    "name": "单通道无线耳挂话筒套装",
    "group": "单通道无线耳挂话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -48968,13 +48987,22 @@
    "name": "单通道无线领夹话筒套装",
    "group": "单通道无线耳挂话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -48993,10 +49021,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49011,13 +49048,22 @@
    "name": "单通道无线手持话筒套装",
    "group": "41系列单通道无线话筒(频率B)",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49032,13 +49078,22 @@
    "name": "单通道无线耳挂话筒套装",
    "group": "单通道无线耳挂话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49053,13 +49108,22 @@
    "name": "单通道无线领夹话筒套装",
    "group": "单通道无线耳挂话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49078,10 +49142,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49096,13 +49169,22 @@
    "name": "双通道无线手持话筒套装",
    "group": "42系列双通道无线话筒(频率A）",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49117,13 +49199,22 @@
    "name": "双通道无线手持话筒套装",
    "group": "双通道无线手持话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49142,10 +49233,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49160,13 +49260,22 @@
    "name": "双通道无线手持话筒套装",
    "group": "42系列双通道无线话筒（频率B）",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49181,13 +49290,22 @@
    "name": "双通道无线手持话筒套装",
    "group": "双通道无线手持话筒套装",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49206,10 +49324,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49224,13 +49351,22 @@
    "name": "单通道真分集无线手持话筒套装",
    "group": "61系列单通道真分集无线话筒",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": true,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49245,13 +49381,22 @@
    "name": "单通道真分集无线手持话筒套装",
    "group": "61系列单通道真分集无线话筒",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": true,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49270,10 +49415,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": true,
+    "set_expand": {
+     "rx": 1,
+     "tx": 1
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49288,13 +49442,22 @@
    "name": "双通道真分集无线手持话筒套装",
    "group": "62系列双通道真分集无线话筒",
    "section": null,
-   "category": "WIRELESS_MIC",
+   "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": true,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49313,10 +49476,19 @@
    "defer_reason": null,
    "features": [
     "control",
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": true,
+    "set_expand": {
+     "rx": 1,
+     "tx": 2
+    }
+   },
    "country": "美国",
    "unit": "套",
    "qty": 0,
@@ -49338,8 +49510,8 @@
    ],
    "active": false,
    "params": {
-    "channels_hint": 8,
-    "bnc": 1
+    "inputs": 2,
+    "outputs": 8
    },
    "country": "美国",
    "unit": "台",
@@ -49424,10 +49596,15 @@
    "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -49445,10 +49622,15 @@
    "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 1,
+    "antennas": 2,
+    "true_diversity": false
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -49466,10 +49648,15 @@
    "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -49487,10 +49674,15 @@
    "category": "WIRELESS_RX",
    "defer_reason": null,
    "features": [
+    "trs_out",
     "wireless"
    ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": false
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,
@@ -49507,9 +49699,15 @@
    "section": null,
    "category": "WIRELESS_RX",
    "defer_reason": null,
-   "features": [],
+   "features": [
+    "trs_out"
+   ],
    "active": false,
-   "params": {},
+   "params": {
+    "channels": 2,
+    "antennas": 2,
+    "true_diversity": true
+   },
    "country": "美国",
    "unit": "台",
    "qty": 0,

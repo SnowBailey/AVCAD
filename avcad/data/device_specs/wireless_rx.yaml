@@ -1,7 +1,7 @@
 category: WIRELESS_RX
 name: 无线接收机
 redundancy_allowed: false
-features_available: [dante, control, aes, mix_out]
+features_available: [dante, control, aes, mix_out, trs_out]
 params:
   channels:
     {min: 1, default: 2, label: 接收通道数, unit: "Ch"}
@@ -11,8 +11,11 @@ params:
 ports_template:
   - {name: RF, side: left, signal: RF, role: in, count: 2, count_from: antennas, label: ANT}   # A/B 真分集
   - {name: XLR, side: right, signal: XLR, role: out, count_from: channels, label: OUT}   # 模拟输出(恒有)
-  # 6.35mm 混合输出（如 IPS UM2002 系列：二路 XLR 独立 + 一路 6.35 混合）
+  # 6.35mm 输出（两种形态，用不同 feature 区分）
+  #   mix_out：整机 1 路混合输出（如 IPS UM2002：二路 XLR 独立 + 一路 6.35 混合）
+  #   trs_out：每通道各 1 路非平衡输出（如 AUDIX R41/R42/R61/R62：XLR 与 1/4" TS 并存）
   - {name: MIX, side: right, signal: TRS, role: out, count: 1, if_feature: mix_out, label: MIX}
+  - {name: TS, side: right, signal: TRS, role: out, count_from: channels, if_feature: trs_out, label: TS}
   - {name: AES, side: right, signal: AES, role: out, count_from: channels, if_feature: aes, label: AES}
   - {name: DANTE, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
   - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

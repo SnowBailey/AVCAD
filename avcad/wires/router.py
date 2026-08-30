@@ -75,8 +75,22 @@ def _connect_sources_to_core(project, by_stage):
 
 
 # ---- 无线天线链路（真分集 + 天线分配器级联） ----
-# 每台分配器预留末尾 2 个出口用于级联下一台（IPS UM2000ATD：2 进 / 10 出）
+# 默认级联预留出口数（仅当型号未显式声明 params.cascade_outs 时使用）
 CASCADE_OUTS = 2
+
+
+def _cascade_outs(dist):
+    """取该分配器的级联预留出口数。
+
+    只有明确支持级联的型号才 >0：
+      - IPS UM2000ATD = 2（官网：「级联端口能够以链式形式连接多套天线分配系统」）
+      - AUDIX ADS48   = 0（官方资料只说「合并 4 套系统」，未提级联）
+    """
+    try:
+        v = int((dist.params or {}).get("cascade_outs", CASCADE_OUTS))
+    except (TypeError, ValueError):
+        v = CASCADE_OUTS
+    return max(0, v)
 
 
 def required_dist_count(n_rx, antennas_per_rx=4, outputs=10, cascade=CASCADE_OUTS):
@@ -147,7 +161,7 @@ def _antenna_distribution(project, by_stage):
         if not outs:
             continue
         is_last = (idx == len(dists) - 1)
-        n_cas = 0 if is_last else min(CASCADE_OUTS, len(outs))
+        n_cas = 0 if is_last else min(_cascade_outs(dist), len(outs))
         # 末尾口留给级联，前面的口给接收机，读图时顺序更直观
         cascade_outs = outs[len(outs) - n_cas:] if n_cas else []
         usable = outs[: len(outs) - n_cas] if n_cas else outs
@@ -186,7 +200,8 @@ def _antenna_distribution(project, by_stage):
     if rxs:
         per_rx = max(len(_rf_ports([r], "in")) or 1 for r in rxs)
         outs = max((len(_rf_ports([d], "out")) for d in dists), default=0)
-        req = required_dist_count(len(rxs), per_rx, outs)
+        cas = _cascade_outs(dists[0]) if dists else CASCADE_OUTS
+        req = required_dist_count(len(rxs), per_rx, outs, cas)
         project.meta["wireless_plan"] = {
             "receivers": len(rxs),
             "antennas_per_receiver": per_rx,
