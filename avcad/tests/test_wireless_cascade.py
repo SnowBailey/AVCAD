@@ -226,7 +226,7 @@ def _audix_project(n_rx=4, channels=2, dists=1):
          "name": "有源定向天线", "quantity": 2},
         {"category": "ANT_DIST", "brand": "AUDIX", "model": "ADS48",
          "name": "天线分配器", "quantity": dists,
-         "params": {"inputs": 2, "outputs": 8, "cascade_outs": 0}},
+         "params": {"inputs": 2, "outputs": 8, "cascade_outs": 2}},
         {"category": "WIRELESS_RX", "brand": "AUDIX", "model": "AP62",
          "name": "AP62", "quantity": n_rx, "features": ["trs_out"],
          "params": {"channels": channels, "antennas": 2}},
@@ -259,18 +259,31 @@ def test_audix_has_per_channel_trs_not_single_mix():
     assert len(trs) == 2 and len(xlr) == 2
 
 
-def test_audix_ads48_does_not_cascade():
-    """ADS48 官方资料未提级联 -> cascade_outs=0，不应产生级联线。"""
+def test_audix_ads48_cascades_like_ips():
+    """ADS48 同样支持级联（阳哥 2026-08-30 确认：每 2 路输出给下一台输入）。"""
+    p = _audix_project(dists=2)
+    casc = [c for c in p.connections if c.note == "分配器级联"]
+    assert len(casc) == 2, f"级联线 {len(casc)} 条（应为 1 段 × 2 口）"
+    dists = [i for i in p.instances if i.category == "ANT_DIST"]
+    assert all(c.from_uid == dists[0].uid for c in casc)
+    # 级联用末尾两口 OUT7 / OUT8
+    assert sorted(int(c.from_port.split("_")[-1]) for c in casc) == [7, 8]
+
+
+def test_audix_ads48_single_unit_full_outputs():
+    """末台不级联时 8 出口全可用：4 台接收机 × 2 口 = 8 条。"""
     p = _audix_project()
     assert not [c for c in p.connections if c.note == "分配器级联"]
-    # 8 出口全给接收机：4 台 × 2 口 = 8 条
     assert len([c for c in p.connections if c.note == "天线分配"]) == 8
 
 
 def test_audix_required_dist_count():
-    """ADS48（8 出、无级联、每机 2 口）单台可带 4 台接收机。"""
-    assert required_dist_count(4, antennas_per_rx=2, outputs=8, cascade=0) == 1
-    assert required_dist_count(5, antennas_per_rx=2, outputs=8, cascade=0) == 2
+    """ADS48：8 出、留 2 口级联、每机 2 口 -> 首台带 4 台，之后每台 +3 台。"""
+    c = 2
+    assert required_dist_count(4, antennas_per_rx=2, outputs=8, cascade=c) == 1
+    assert required_dist_count(5, antennas_per_rx=2, outputs=8, cascade=c) == 2
+    assert required_dist_count(7, antennas_per_rx=2, outputs=8, cascade=c) == 2
+    assert required_dist_count(8, antennas_per_rx=2, outputs=8, cascade=c) == 3
 
 
 def test_audix_catalog_resolution():

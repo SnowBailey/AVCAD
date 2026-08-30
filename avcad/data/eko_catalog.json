@@ -49511,7 +49511,8 @@
    "active": false,
    "params": {
     "inputs": 2,
-    "outputs": 8
+    "outputs": 8,
+    "cascade_outs": 2
    },
    "country": "美国",
    "unit": "台",
