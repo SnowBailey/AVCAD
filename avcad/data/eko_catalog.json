@@ -24783,8 +24783,8 @@
    "name": "数字会议主机",
    "group": "模拟会讨系统（停产-销库存）",
    "section": "CF61系列数字会议系统",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "停产型号",
    "features": [
     "control"
    ],
@@ -24798,7 +24798,8 @@
    "qty": 0,
    "price": null,
    "remark": "销库存、主机装箱清单内不含延长主缆",
-   "sheet": "IPS爱普思"
+   "sheet": "IPS爱普思",
+   "no_draw": true
   },
   {
    "code": "1100000615",
@@ -29899,8 +29900,8 @@
    "name": "融合会议主机（升级款）-不带 Windows 授权",
    "group": "MT融合会议产品系列",
    "section": "融合会议主机",
-   "category": null,
-   "defer_reason": "音频未识别",
+   "category": "SOURCE",
+   "defer_reason": null,
    "features": [],
    "active": false,
    "params": {},
@@ -29909,7 +29910,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": false
   },
   {
    "code": "1100000681",
@@ -29919,7 +29921,7 @@
    "group": "MT融合会议产品系列",
    "section": "融合会议主机",
    "category": null,
-   "defer_reason": "音频未识别",
+   "defer_reason": "安装支架(配件)",
    "features": [],
    "active": false,
    "params": {},
@@ -29928,7 +29930,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000680",
@@ -29959,7 +29962,7 @@
    "group": "MT融合会议产品系列",
    "section": "融合会议主机",
    "category": null,
-   "defer_reason": "音频配件(需人工)",
+   "defer_reason": "软件加密狗(配件)",
    "features": [
     "control"
    ],
@@ -29970,7 +29973,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100001185",
@@ -30222,8 +30226,8 @@
    "name": "会议集控专用服务主机",
    "group": "MS服务主机产品系列",
    "section": "服务器主机",
-   "category": "PROCESSOR",
-   "defer_reason": null,
+   "category": null,
+   "defer_reason": "服务器主机(非音频)",
    "features": [
     "control"
    ],
@@ -30234,7 +30238,8 @@
    "qty": 0,
    "price": null,
    "remark": "",
-   "sheet": "IPS智能硬件"
+   "sheet": "IPS智能硬件",
+   "no_draw": true
   },
   {
    "code": "1100000833",
