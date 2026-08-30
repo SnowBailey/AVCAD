@@ -223,6 +223,7 @@
     transition:border-color .25s ease, box-shadow .3s ease, transform .2s ease;
   }
   .dev:hover{border-color:var(--line-strong);box-shadow:0 12px 28px -20px rgba(0,0,0,.95)}
+  .dev.excluded{opacity:.55;border-color:rgba(255,90,110,.25);box-shadow:inset 0 0 0 1px rgba(255,90,110,.08)}
   .dev .t{font-weight:600;display:flex;justify-content:space-between;gap:8px;letter-spacing:.03em}
   .dev .meta{color:var(--mut);font-size:11px;margin-top:4px;letter-spacing:.03em}
 
@@ -830,7 +831,8 @@ function renderModules(){
   const box = $("modules"); box.innerHTML = "";
   STATE.modules.forEach((m, i)=>{
     const d = document.createElement("div");
-    d.className = "dev";
+    const excluded = (m.decision || "include") === "exclude";
+    d.className = "dev" + (excluded ? " excluded" : "");
     d.innerHTML =
       '<div class="t"><span>' + (m.name || m.model || m.category) + '</span>' +
       '<span class="tag c">×' + (m.quantity || 1) + '</span></div>' +
@@ -841,14 +843,24 @@ function renderModules(){
       '<button class="ghost mini-in hidden" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">恢复出图</button>' +
       '</div>';
     box.appendChild(d);
-    const k = (m.brand || "") + "::" + (m.model || "");
+    const k = moduleDecisionKey(m);
+    if(excluded){
+      d.querySelector(".mini-ex").classList.add("hidden");
+      d.querySelector(".mini-in").classList.remove("hidden");
+    }
     d.querySelector(".mini-ex").addEventListener("click", ()=>{
       STATE.decisions[k] = "exclude";
+      m.decision = "exclude";
+      d.classList.add("excluded");
+      d.querySelector(".chip").textContent = "exclude";
       d.querySelector(".mini-ex").classList.add("hidden");
       d.querySelector(".mini-in").classList.remove("hidden");
     });
     d.querySelector(".mini-in").addEventListener("click", ()=>{
       STATE.decisions[k] = "include";
+      m.decision = "include";
+      d.classList.remove("excluded");
+      d.querySelector(".chip").textContent = "include";
       d.querySelector(".mini-in").classList.add("hidden");
       d.querySelector(".mini-ex").classList.remove("hidden");
     });
@@ -913,12 +925,18 @@ function aggregatePorts(ports){
   });
   return Object.values(m);
 }
+function moduleDecisionKey(m){
+  return (m.brand || "") + "::" + (m.model || "");
+}
 async function initLegends(){
   const list = await api("/api/legend", {action: "list"});
   STATE.library = list.library || null;
   const saved = {};
   (list.legends || []).forEach(lg=>{ saved[lg.key] = lg; });
-  STATE.legendItems = STATE.modules.map(m=>{
+  // 第二步点「不需要」的模块，不参与第三步图例确认
+  STATE.legendItems = STATE.modules.filter(m=>{
+    return STATE.decisions[moduleDecisionKey(m)] !== "exclude";
+  }).map(m=>{
     const b = m.brand || "", mo = m.model || "", c = m.category || "";
     const sv = saved[legendKey(b, mo, c)];
     return {
@@ -1156,7 +1174,7 @@ $("btnToStep4").addEventListener("click", async ()=>{
 /* ==================== ④ 参考架构 ==================== */
 async function loadArchitectures(){
   if(!STATE.csv) return;
-  const res = await api("/api/architectures", {bom: STATE.csv, redundancy: STATE.redundancy});
+  const res = await api("/api/architectures", {bom: STATE.csv, redundancy: STATE.redundancy, decisions: STATE.decisions});
   STATE.architectures = res.architectures || [];
   if(!STATE.arch && STATE.architectures.length) STATE.arch = STATE.architectures[0].id;
   const box = $("archList"); box.innerHTML = "";
@@ -1210,6 +1228,13 @@ async function runLegendCheck(){
   $("legendCheck").textContent = "检查中…";
   const res = await api("/api/legend-check", {bom: STATE.csv, decisions: STATE.decisions});
   STATE.legendCheck = res;
+  if(res.error){
+    $("legendCheck").className = "summary errbox";
+    $("legendCheck").textContent = "检查失败：" + res.error;
+    $("btnGenGo").disabled = true;
+    $("btnFixLegend").classList.remove("hidden");
+    return;
+  }
   const lines = [];
   lines.push("已确认 " + (res.confirmed || 0) + " / " + (res.total || 0) + " 个型号。");
   if(res.ok){

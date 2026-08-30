@@ -26,6 +26,9 @@ def build_module_list(entries: List[dict]) -> List[ModuleItem]:
     """按 (category, brand, model) 去重，汇总数量，记录原始行号。"""
     groups = {}
     for idx, e in enumerate(entries):
+        if not isinstance(e, dict):
+            # 防御：跳过非字典条目（如异常缓存/解析结果）
+            continue
         cat = str(e.get("category", "")).upper()
         brand = (e.get("brand") or "").strip()
         model = (e.get("model") or "").strip()

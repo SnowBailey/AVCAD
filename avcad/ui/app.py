@@ -355,6 +355,11 @@ def _dispatch(path, body):
     if path == "/api/architectures":
         data = json.loads(body or "{}")
         entries = _entries_from_bom(data.get("bom", ""))
+        decisions = data.get("decisions") or None
+        if decisions and not isinstance(decisions, dict):
+            decisions = None
+        if decisions:
+            entries, _ = confirm_modules(entries, decisions)
         ranked = select(entries, data.get("redundancy"))
         return {"architectures": [
             {"id": t.id, "title": t.title, "desc": t.desc,
@@ -372,11 +377,20 @@ def _dispatch(path, body):
         data = json.loads(body or "{}")
         entries = _entries_from_bom(data.get("bom", ""))
         decisions = data.get("decisions") or None
+        if decisions and not isinstance(decisions, dict):
+            # 防御：decisions 异常/旧数据不是字典时忽略，避免确认函数内部出错
+            decisions = None
         if decisions:
             entries, _ = confirm_modules(entries, decisions)
         st = LegendStore()
         seen, items = set(), []
         for e in entries:
+            if not isinstance(e, dict):
+                # 防御：跳过非字典条目，避免 'str' object has no attribute 'get'
+                import sys
+                print(f"[AVCAD] legend-check 跳过非字典条目: type={type(e).__name__} value={str(e)[:80]!r}",
+                      file=sys.stderr)
+                continue
             brand = (e.get("brand") or "").strip()
             model = (e.get("model") or "").strip()
             category = (e.get("category") or "").strip()

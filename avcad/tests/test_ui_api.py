@@ -153,6 +153,31 @@ def test_excluded_module_not_in_export():
     assert "箱子" in models
 
 
+def test_legend_check_excludes_module_by_decision():
+    """第二步点「不需要」的型号不应出现在图例一致性检查中。"""
+    bom = (
+        "设备类型,品牌,型号,名称,数量,特性,参数\n"
+        "MIXER,Yamaha,TF5,调音台,1,,\n"
+        "SPEAKER,L-Acoustics,KARA,音箱,1,,\n"
+    )
+    r = _call("/api/legend-check", {"bom": bom, "decisions": {"Yamaha::TF5": "exclude"}})
+    models = {m["model"] for m in r["items"]}
+    assert "TF5" not in models
+    assert "KARA" in models
+    assert r["total"] == 1
+
+
+def test_architectures_excludes_module_by_decision():
+    """第二步点「不需要」的型号不应影响参考架构推荐。"""
+    bom = (
+        "设备类型,品牌,型号,名称,数量,特性,参数\n"
+        "MIXER,Yamaha,TF5,调音台,1,,\n"
+        "SPEAKER,L-Acoustics,KARA,音箱,1,,\n"
+    )
+    r = _call("/api/architectures", {"bom": bom, "decisions": {"Yamaha::TF5": "exclude"}})
+    assert r["architectures"]
+
+
 # ---------- 线标落位：统一贴在「模块右出线」上方 ----------
 FULL_SAMPLE = (
     "设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源\n"
