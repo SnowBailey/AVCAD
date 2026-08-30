@@ -33,15 +33,26 @@ git -c url."https://x-access-token:${TOKEN}@github.com/${OWNER}/${REPO}".instead
     push -u origin main
 
 echo "▶ 2/4 等待 Actions 构建（Windows）"
+HEAD_SHA=$(git rev-parse HEAD)
+echo "   head_sha=$HEAD_SHA"
 RUN_ID=""
-for i in $(seq 1 20); do
-  RUN_ID=$(curl -s "${AUTH[@]}" "$API/actions/workflows/$WF/runs?branch=main&per_page=1" \
-           | python3 -c "import sys,json;d=json.load(sys.stdin);print(d['workflow_runs'][0]['id'] if d.get('workflow_runs') else '')" 2>/dev/null || echo "")
+for i in $(seq 1 30); do
+  # 必须按本次提交的 head_sha 匹配，否则会抓到上一次（可能失败）的运行
+  RUN_ID=$(curl -s "${AUTH[@]}" "$API/actions/workflows/$WF/runs?branch=main&per_page=10" \
+    | python3 -c "
+import sys, json
+sha = '$HEAD_SHA'
+d = json.load(sys.stdin)
+for r in d.get('workflow_runs', []):
+    if r.get('head_sha') == sha:
+        print(r['id'])
+        break
+" 2>/dev/null || echo "")
   if [[ -n "$RUN_ID" ]]; then break; fi
-  echo "   … 尚未出现运行记录，等待 15s（$i/20）"
-  sleep 15
+  echo "   … 尚未出现本次提交的运行记录，等待 10s（$i/30）"
+  sleep 10
 done
-if [[ -z "$RUN_ID" ]]; then echo "❌ 未找到 workflow 运行记录" >&2; exit 1; fi
+if [[ -z "$RUN_ID" ]]; then echo "❌ 未找到本次提交的 workflow 运行记录" >&2; exit 1; fi
 echo "   run_id=$RUN_ID"
 
 for i in $(seq 1 60); do
