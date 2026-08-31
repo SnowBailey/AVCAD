@@ -8,8 +8,8 @@
 清单后列出各函数的命中情况。**零命中的函数就是风险区**，需要构造样例场景
 单独人工核对（参考 `scripts/render_conference_box_demo.py` 的做法）。
 
-用法：python3 scripts/probe_link_coverage.py
-退出码：0 = 所有连线函数至少被命中一次；1 = 存在零命中（仅提示，非失败）
+用法：python3 scripts/probe_link_coverage.py   （或 scripts/probe_all.py 跑全部）
+退出码：0 = 不存在「零命中且未登记」的函数；1 = 存在（仅提示，非测试失败）
 
 已知零命中函数与它们的回归测试（2026-08-31 补齐，别再重复排查）：
     _conference_box_link  → avcad/tests/test_conference_box.py
@@ -63,6 +63,17 @@ LINK_FUNCS = [
 # 只做辅助、本身不产连线，但需要被执行到才有意义（统计调用次数而非连线数）
 CALL_ONLY = ["_dedup"]
 
+# 已确认「真实清单永远走不到」、但已用构造场景补了回归测试的函数。
+# 与 probe_issue_coverage 的 VERIFIED_FIRE_OK 同理：零命中是**预期结果**，
+# 不算待处置项，别再重复排查。新增连线函数若零命中且未登记到这里，
+# 探针会报 ⚠ 并退出 1。
+KNOWN_ZERO_HIT = {
+    "_conference_box_link": "avcad/tests/test_conference_box.py",
+    "_mixer_cascade": "avcad/tests/test_mixer_cascade.py",
+    "_orphan_sources_rescue": "avcad/tests/test_redundancy_failover.py",
+    "_failover": "avcad/tests/test_redundancy_failover.py",
+}
+
 hits = collections.defaultdict(lambda: {"calls": 0, "links": 0})
 _orig = {}
 
@@ -112,25 +123,37 @@ def main():
 
     print(f"\n{'='*74}\n连线函数覆盖情况（真实清单 {len(JOBS)} 份）\n{'='*74}")
     zero = []
+    known = []
     for fname in LINK_FUNCS:
         h = hits[fname]
-        flag = "  " if h["links"] else "⚠ "
+        if h["links"]:
+            flag = "  "
+        elif fname in KNOWN_ZERO_HIT:
+            flag = "✔ "            # 零命中是预期，已补构造场景回归测试
+            known.append(fname)
+        else:
+            flag = "⚠ "            # 零命中且没登记 → 真正的风险区
+            zero.append(fname)
         print(f"  {flag}{fname:<28s} 调用 {h['calls']:5d} 次  "
               f"产出连线 {h['links']:5d} 条")
-        if not h["links"]:
-            zero.append(fname)
     print(f"\n  （辅助）" + "  ".join(
         f"{f}:{hits[f]['calls']}次" for f in CALL_ONLY))
 
+    if known:
+        print(f"\n  已知零命中（真实清单走不到，已补构造场景回归测试）：")
+        for f in known:
+            print(f"    ✔ {f:<28s} {KNOWN_ZERO_HIT[f]}")
+
     if zero:
-        print(f"\n⚠ 以下 {len(zero)} 个连线函数在所有真实清单中产出 0 条连线：")
+        print(f"\n⚠ 以下 {len(zero)} 个连线函数零命中、且未登记到 KNOWN_ZERO_HIT：")
         for f in zero:
             print(f"    - {f}")
         print("\n  这些分支从未被真实数据覆盖，缺陷可能潜伏其中。")
-        print("  建议：构造样例场景单独人工核对（参见 "
-              "scripts/render_conference_box_demo.py）。")
+        print("  建议：构造样例场景单独人工核对"
+              "（参见 scripts/render_conference_box_demo.py），")
+        print("  补好回归测试后把函数名登记进 KNOWN_ZERO_HIT，别重复排查。")
         return 1
-    print("\n✓ 所有连线函数均被真实清单覆盖到。")
+    print("\n✓ 不存在「零命中且未登记」的连线函数。")
     return 0
 
 

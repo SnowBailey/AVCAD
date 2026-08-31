@@ -404,9 +404,7 @@
       "active": false,
       "params": {
         "inputs": 32,
-        "outputs": 24,
-        "dante_in": 26,
-        "dante_out": 32
+        "outputs": 24
       },
       "country": "日本",
       "unit": "台",
@@ -432,9 +430,7 @@
       "active": false,
       "params": {
         "inputs": 16,
-        "outputs": 8,
-        "dante_in": 10,
-        "dante_out": 16
+        "outputs": 8
       },
       "country": "日本",
       "unit": "台",
