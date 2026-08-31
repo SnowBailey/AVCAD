@@ -6,53 +6,108 @@
 <title>AVCAD · 品牌主库校正</title>
 <style>
   :root{
-    --bg:#03050b; --panel:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+    /* 与 index.html 相同的色板，确保视觉一致 */
+    --bg:#03050b; --panel:rgba(255,255,255,.045); --panel2:rgba(8,12,24,.6);
+    --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.16);
     --txt:#f3f6ff; --mut:#6f7e9a; --acc:#00e5ff; --acc2:#a855f7;
     --ok:#2ee8a0; --err:#ff5a6e; --warn:#f0b45f;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--txt);
     font-family:"SF Pro Display","PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,sans-serif;
-    font-size:13px;line-height:1.6;padding:22px 26px 60px}
-  h1{font-size:17px;font-weight:500;margin:0 0 4px}
+    font-size:13px;line-height:1.55;padding:22px 26px 60px}
+  h1{font-size:17px;font-weight:500;margin:0 0 4px;letter-spacing:.02em}
   .sub{color:var(--mut);font-size:12px;margin-bottom:16px}
   .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;
     padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
-  select,input[type=text]{background:rgba(255,255,255,.06);color:var(--txt);
-    border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;font-family:inherit}
-  select:focus,input:focus,textarea:focus{outline:none;border-color:var(--acc)}
+  select,input[type=text],textarea{background:rgba(255,255,255,.06);color:var(--txt);
+    border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;
+    font-family:inherit;outline:none}
+  select:focus,input:focus,textarea:focus{border-color:var(--acc)}
+  textarea{resize:vertical;line-height:1.55}
   button{cursor:pointer;font-family:inherit;font-size:12px;border-radius:999px;padding:6px 14px;
     border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt)}
   button:hover{border-color:var(--acc);color:#fff}
+  button:disabled{opacity:.4;cursor:not-allowed}
   button.primary{background:linear-gradient(96deg,rgba(0,229,255,.95),rgba(120,120,255,.9));
     color:#02121a;border:none;font-weight:600}
+  button.sec{background:rgba(46,232,160,.18);border-color:rgba(46,232,160,.5);color:var(--ok);
+    font-weight:600}
+  button.sec:hover{background:rgba(46,232,160,.28);color:#fff;border-color:var(--ok)}
   button.mini{padding:3px 10px;font-size:11px}
-  .card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;
-    background:var(--panel)}
-  .card.changed{border-color:var(--warn);box-shadow:inset 0 0 0 1px rgba(240,180,95,.18)}
-  .card .hd{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
-  .card .m{font-weight:600;font-size:14px}
-  .card .n{color:var(--mut);font-size:12px}
-  .card .sec{color:var(--acc2);font-size:11px}
-  .grid{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;align-items:start}
-  .k{color:var(--mut);font-size:12px;padding-top:5px}
+  button.ghost{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--mut)}
+  button.ghost:hover{color:var(--txt)}
+
+  /* ===== 与图例卡同款视觉 ===== */
+  .legend{border:1px solid var(--line);border-radius:15px;padding:12px;
+    margin-bottom:10px;background:var(--panel2);
+    transition:border-color .25s ease, box-shadow .3s ease}
+  .legend:hover{border-color:var(--line-strong)}
+  .legend.changed{border-color:rgba(240,180,95,.5);
+    box-shadow:inset 0 0 0 1px rgba(240,180,95,.18)}
+  .legend .th{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .legend .th .left{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .legend .th b{font-size:14px;font-weight:600;color:var(--txt)}
+  .legend .th .mut{color:var(--mut);font-size:12px}
+  .legend .cache{font-size:11px;letter-spacing:.05em}
+  .legend .cache.hit{color:var(--ok)}
+  .legend .cache.miss{color:var(--warn)}
+  .legend .cache.dirty{color:var(--warn)}
+  .legend .kv{font-size:12px;color:var(--mut);margin:6px 0 4px}
+
+  .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;
+    font-size:11px;border:1px solid var(--line-strong);letter-spacing:.04em;background:rgba(255,255,255,.03)}
+  .badge.hit{color:var(--ok);border-color:rgba(46,232,160,.5);background:rgba(46,232,160,.09)}
+  .badge.miss{color:var(--warn);border-color:rgba(240,180,95,.5);background:rgba(240,180,95,.08)}
+  .badge.mut{color:var(--mut)}
+
+  .row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .grow{flex:1}
+  .st{font-size:11px;color:var(--mut);min-width:24px}
+  .st.ok{color:var(--ok)} .st.err{color:var(--err)}
+
+  /* ===== 展开编辑区 ===== */
+  .edit-wrap{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+  .legend.open .edit-wrap{display:block}
+  .grid{display:grid;grid-template-columns:90px 1fr;gap:8px 12px;align-items:start}
+  .grid .k{color:var(--mut);font-size:12px;padding-top:6px}
   .feats{display:flex;flex-wrap:wrap;gap:6px}
   .feat{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;
     border:1px solid var(--line);font-size:11px;cursor:pointer;user-select:none;color:var(--mut)}
   .feat.on{background:rgba(0,229,255,.14);border-color:var(--acc);color:var(--acc)}
-  .pv{display:flex;gap:6px;align-items:center;margin-bottom:5px}
-  .pv input{flex:0 0 130px}
-  .pv textarea{flex:1;background:rgba(255,255,255,.06);color:var(--txt);
-    border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:12px;font-family:inherit;resize:vertical}
-  .rowbtn{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;align-items:center}
-  .st{font-size:11px;color:var(--mut)}
-  .st.ok{color:var(--ok)} .st.err{color:var(--err)}
-  .params-hint{color:var(--mut);font-size:11px;margin-top:4px}
-  #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
-    background:rgba(0,0,0,.85);border:1px solid var(--acc);color:#fff;padding:9px 18px;
-    border-radius:999px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .25s}
-  #toast.show{opacity:1}
-  .empty{color:var(--mut);padding:26px;text-align:center}
+
+  .pv{display:flex;gap:6px;align-items:flex-start;margin-bottom:5px}
+  .pv .pk{flex:0 0 130px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
+  .pv .pval{flex:1;min-width:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;line-height:1.5}
+  .pv button{flex:0 0 auto;align-self:center}
+  .pv textarea{min-height:30px}
+
+  /* ===== 常用 chip 区（替代旧版长 hints） ===== */
+  .preset{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+  .preset .chip{display:inline-flex;align-items:center;gap:3px;padding:2px 9px;
+    border-radius:999px;border:1px solid var(--line);font-size:11px;color:var(--mut);
+    cursor:pointer;user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .preset .chip:hover{border-color:var(--acc);color:var(--acc)}
+
+  .hint{color:var(--mut);font-size:11px;margin-top:4px;letter-spacing:.02em}
+
+  /* ===== 顶部 / 计数 ===== */
+  .count{color:var(--mut);font-size:11px;margin-left:auto;letter-spacing:.04em}
+  .count b{color:var(--txt);font-weight:500}
+
+  /* ===== 空态 / Toast ===== */
+  .empty{color:var(--mut);padding:34px;text-align:center;font-size:13px;letter-spacing:.04em}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(8px);
+    background:rgba(12,17,32,.96);border:1px solid var(--line-strong);
+    padding:11px 20px;border-radius:999px;font-size:13px;opacity:0;
+    transition:opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;z-index:90;letter-spacing:.03em;
+    box-shadow:0 24px 60px -26px rgba(0,0,0,.95), 0 0 0 1px rgba(0,229,255,.14);
+    backdrop-filter:blur(10px)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.ok{border-color:rgba(46,232,160,.5)}
+  .toast.err{border-color:rgba(255,90,110,.5)}
 </style>
 </head>
 <body>
@@ -60,27 +115,53 @@
 <div class="sub" id="meta">加载中…</div>
 
 <div class="bar">
-  <label>品牌
+  <label style="display:flex;gap:6px;align-items:center">
+    <span class="mut">品牌</span>
     <select id="brand"></select>
   </label>
-  <label>搜索
-    <input type="text" id="q" placeholder="型号或名称关键词" size="18"/>
+  <label style="display:flex;gap:6px;align-items:center;flex:1;min-width:200px">
+    <span class="mut">搜索</span>
+    <input type="text" id="q" placeholder="型号或名称关键词" style="flex:1"/>
   </label>
-  <label class="feat" id="fWireless">只看无线相关</label>
-  <span class="st" id="count"></span>
-  <span style="flex:1"></span>
-  <button class="primary" id="btnSaveAll">保存全部改动</button>
+  <span class="feat" id="fWireless" style="cursor:pointer">只看无线相关</span>
+  <span class="count" id="count"></span>
 </div>
 
 <div id="list"></div>
 
-<div id="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 const $ = id => document.getElementById(id);
+
+/* ★ 常用预设（替代旧版长 hints） */
+const PARAM_PRESETS = {
+  SOURCE:    ["count=1"],
+  WIRELESS_MIC: ["channels=1"],
+  ANTENNA:   ["polar=有源指向"],
+  WIRELESS_RX:["channels=N", "antennas=2"],
+  PROCESSOR: ["inputs=N", "outputs=N", "dante_ports=N", "usb_ports=N", "ctrl_ports=N"],
+  MIXER:     ["inputs=N", "outputs=N", "dante_ports=N", "usb_ports=N", "ctrl_ports=N"],
+  AMP:       ["inputs=N", "outputs=N", "set_expand=并行"],
+  SPEAKER:   ["active=true | passive"],
+  SPEAKER_MGR:["inputs=N", "outputs=N", "dante_ports=N"],
+  IO:        ["inputs=模拟入", "outputs=模拟出"],
+  MIC_HOST:  ["phantom_inputs=N", "audio_outputs=N", "aux_inputs=N"],
+  SWITCH:   ["lan_ports=N"],
+};
+const FEATURE_PRESETS = {
+  SOURCE: ["analog"], WIRELESS_MIC: ["wireless"], ANTENNA: ["active"],
+  WIRELESS_RX: ["dante", "control"], PROCESSOR: ["dsp", "dante"], MIXER: [],
+  AMP: ["dante"], SPEAKER: ["active"], SPEAKER_MGR: ["dante"],
+  IO: ["dante"], MIC_HOST: ["phantom"], SWITCH: ["control"],
+};
+/* 通用兜底 */
+const PARAM_PRESETS_DEFAULT = ["inputs=N", "outputs=N", "channels=N", "cascade_outs=N", "note="];
+
 let META = {categories:[], features:[]};
 let ITEMS = [];
-let DIRTY = new Set();
+let DIRTY = new Set();      // 已改动但未保存
+let SAVED = new Set();      // 本会话已落盘的 idx
 
 async function api(path, body){
   const r = await fetch(path, {method:"POST",
@@ -88,8 +169,11 @@ async function api(path, body){
   return await r.json();
 }
 let tt=null;
-function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show");
-  clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"), 2200); }
+function toast(m, kind){
+  const t=$("toast"); t.textContent=m;
+  t.className="toast show " + (kind||"");
+  clearTimeout(tt); tt=setTimeout(()=>t.className="toast", 2200);
+}
 
 async function loadMeta(){
   META = await api("/api/catalog", {action:"meta"});
@@ -97,7 +181,9 @@ async function loadMeta(){
   const sel = $("brand");
   sel.innerHTML = META.brands.map(b =>
     `<option value="${b.brand}">${b.brand}（${b.count}）</option>`).join("");
-  sel.value = "IPS";
+  const url = new URL(location.href);
+  const init = url.searchParams.get("brand");
+  sel.value = (init && META.brands.find(b=>b.brand===init)) ? init : (META.brands[0]||{}).brand || "";
 }
 
 async function loadItems(){
@@ -106,109 +192,195 @@ async function loadItems(){
     wireless_only: $("fWireless").classList.contains("on")});
   ITEMS = res.items || [];
   DIRTY.clear();
-  $("count").textContent = `共 ${ITEMS.length} 条`;
+  $("count").innerHTML = `共 <b>${ITEMS.length}</b> 条`;
   render();
 }
 
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
+/* ★ 每张卡都按 legend 卡的视觉模型渲染：默认折叠，只露标题+元信息+操作按钮 */
 function render(){
   const box = $("list");
   if(!ITEMS.length){ box.innerHTML = `<div class="empty">没有匹配的条目</div>`; return; }
-  box.innerHTML = ITEMS.map((it,i)=>{
-    const catOpts = META.categories.map(c =>
-      `<option value="${c}"${c===(it.category||"")?" selected":""}>${c||"（不出图）"}</option>`).join("");
-    const feats = META.features.map(f =>
-      `<span class="feat${it.features.includes(f)?" on":""}" data-i="${i}" data-f="${f}">${f}</span>`).join("");
-    const pvs = Object.entries(it.params||{}).map(([k,v])=>{
-      const vs = (typeof v === "object") ? JSON.stringify(v, null, 0) : String(v);
-      const multi = (typeof v === "object") || String(v).length > 40;
-      return `<div class="pv"><input type="text" value="${esc(k)}" data-i="${i}" class="pk"/>
-        ${multi ? `<textarea rows="2" data-i="${i}" class="pval">${esc(vs)}</textarea>`
-                : `<textarea rows="1" data-i="${i}" class="pval">${esc(vs)}</textarea>`}
-        <button class="mini" data-i="${i}" data-act="delp">删</button></div>`;
-    }).join("");
-    return `<div class="card" id="card_${i}">
-      <div class="hd">
-        <span class="m">${esc(it.model)}</span>
-        <span class="n">${esc(it.name)}</span>
-        <span class="sec">${esc(it.section)}</span>
-        ${it.defer_reason?`<span class="st err">后置：${esc(it.defer_reason)}</span>`:""}
-      </div>
-      <div class="grid">
-        <div class="k">类别 category</div>
-        <div><select data-i="${i}" class="cat">${catOpts}</select>
-          <div class="params-hint">「不出图」= 该型号不进系统图（配件/非音频）</div></div>
-        <div class="k">特性 features</div>
-        <div class="feats">${feats}</div>
-        <div class="k">参数 params</div>
-        <div>
-          <div id="pvs_${i}">${pvs}</div>
-          <div class="rowbtn">
-            <button class="mini" data-i="${i}" data-act="addp">+ 参数</button>
-            <span class="params-hint">常用：channels / antennas / inputs / outputs / cascade_outs /
-              set_expand / ports_override / slots / note<br/>
-              处理器关键参数：inputs 模拟输入 · outputs 模拟输出 · dante_ports 网口数 ·
-              usb_ports USB 口数 · ctrl_ports 控制口数（填 0 = 无网口）<br/>
-              调音台级联：cascade 填 1（生成 LINK 级联口）；IO 某个方向无端口请**显式填 0**</span>
-          </div>
-        </div>
-        <div class="k">备注 remark</div>
-        <div><textarea rows="2" data-i="${i}" class="rmk">${esc(it.remark)}</textarea></div>
-      </div>
-      <div class="rowbtn">
-        <button class="mini" data-i="${i}" data-act="save">保存这条</button>
-        <span class="st" id="st_${i}"></span>
-      </div>
-    </div>`;
+  box.innerHTML = "";
+  ITEMS.forEach((it,i)=>box.appendChild(buildCard(i)));
+}
+
+function badgeFor(i){
+  if(DIRTY.has(i))
+    return `<span class="cache dirty" id="bdg_${i}">◐ ${ITEMS[i].features.length} 特性 / ${Object.keys(ITEMS[i].params||{}).length} 参数 待保存</span>`;
+  if(SAVED.has(i))
+    return `<span class="cache hit" id="bdg_${i}">● 已落盘</span>`;
+  return `<span class="cache miss" id="bdg_${i}">○ 当前主库</span>`;
+}
+
+function metaLine(it){
+  const pcount = Object.keys(it.params||{}).length;
+  return `类别 <b style="color:var(--txt)">${esc(it.category||"（不出图）")}</b> · ` +
+         `特性 <b style="color:var(--txt)">${it.features.length}</b> · ` +
+         `参数 <b style="color:var(--txt)">${pcount}</b> · ` +
+         `备注 <b style="color:var(--txt)">${(it.remark||"").length}</b> 字`;
+}
+
+function buildCard(i){
+  const it = ITEMS[i];
+  const d = document.createElement("div");
+  d.className = "legend"; d.id = "cat_" + i;
+  d.innerHTML =
+    '<div class="th">' +
+      '<div class="left">' +
+        '<b>' + esc(it.model) + '</b>' +
+        '<span class="mut">· ' + esc([it.brand, it.section].filter(Boolean).join(" / ")) + '</span>' +
+        (it.defer_reason ? `<span class="badge miss">后置：${esc(it.defer_reason)}</span>` : "") +
+      '</div>' +
+      badgeFor(i) +
+    '</div>' +
+    '<div class="kv" id="kv_' + i + '">' + metaLine(it) + '</div>' +
+    '<div class="edit-wrap" id="ed_' + i + '">' + buildEdit(it) + '</div>' +
+    '<div class="row">' +
+      '<button class="ghost" id="tog_' + i + '" style="margin-top:0;padding:5px 14px;font-size:12px">展开编辑</button>' +
+      '<span class="grow"></span>' +
+      '<span class="st" id="st_' + i + '"></span>' +
+      '<button class="sec" id="ok_' + i + '" style="margin-top:0;padding:6px 16px;font-size:12px" '+
+        (DIRTY.has(i) ? '' : 'disabled') + '>✓ 保存并落盘</button>' +
+    '</div>';
+
+  wireCard(i, d);
+  return d;
+}
+
+function buildEdit(it){
+  const catOpts = META.categories.map(c =>
+    `<option value="${c}"${c===(it.category||"")?" selected":""}>${c||"（不出图）"}</option>`).join("");
+  const feats = META.features.map(f =>
+    `<span class="feat${it.features.includes(f)?" on":""}" data-f="${f}">${f}</span>`).join("");
+  const pvs = Object.entries(it.params||{}).map(([k,v])=>{
+    const vs = (typeof v === "object") ? JSON.stringify(v, null, 0) : String(v);
+    return `<div class="pv">
+      <input type="text" class="pk" value="${esc(k)}"/>
+      <textarea rows="1" class="pval">${esc(vs)}</textarea>
+      <button class="mini" data-act="delp">删</button></div>`;
   }).join("");
 
-  box.querySelectorAll(".cat").forEach(el=>el.addEventListener("change",()=>mark(+el.dataset.i)));
-  box.querySelectorAll(".feat").forEach(el=>el.addEventListener("click",()=>{
-    el.classList.toggle("on"); mark(+el.dataset.i);
-  }));
-  box.querySelectorAll(".pk,.pval,.rmk").forEach(el=>
-    el.addEventListener("input",()=>mark(+el.dataset.i)));
-  box.querySelectorAll("button[data-act]").forEach(b=>{
-    const i = +b.dataset.i, act = b.dataset.act;
-    if(act==="save") b.addEventListener("click",()=>saveOne(i));
-    if(act==="addp") b.addEventListener("click",()=>{
-      const wrap = $("pvs_"+i);
-      const d = document.createElement("div");
-      d.className="pv";
-      d.innerHTML = `<input type="text" value="" data-i="${i}" class="pk"/>
-        <textarea rows="1" data-i="${i}" class="pval"></textarea>
-        <button class="mini" data-i="${i}" data-act="delp">删</button>`;
-      wrap.appendChild(d);
-      d.querySelectorAll(".pk,.pval").forEach(el=>el.addEventListener("input",()=>mark(i)));
-      d.querySelector("button").addEventListener("click",()=>{ d.remove(); mark(i); });
+  const catPresets = (PARAM_PRESETS[it.category] || PARAM_PRESETS_DEFAULT)
+    .map(s => `<span class="chip" data-param="${esc(s)}">+ ${esc(s)}</span>`).join("");
+  const featPresets = (FEATURE_PRESETS[it.category] || [])
+    .map(f => `<span class="feat" data-f="${f}">+ ${f}</span>`).join("");
+
+  return (
+    '<div class="grid">' +
+      '<div class="k">类别</div>' +
+      '<div><select class="cat">'+catOpts+'</select>' +
+        '<div class="hint">「（不出图）」= 该型号不进系统图（配件 / 非音频）。</div></div>' +
+      '<div class="k">特性</div>' +
+      '<div><div class="feats">'+feats+'</div>' +
+        (featPresets ? '<div class="preset">'+featPresets+'</div>' : '') +
+        '<div class="hint">点击特性名 切换 加 / 减。</div></div>' +
+      '<div class="k">参数</div>' +
+      '<div><div id="pvs_'+it.idx+'">'+pvs+'</div>' +
+        '<div class="row" style="margin-top:6px">' +
+          '<button class="mini" id="addp_'+it.idx+'" style="margin-top:0">+ 参数</button>' +
+        '</div>' +
+        (catPresets ? '<div class="preset" style="margin-top:6px">常用：'+catPresets+'</div>' : '') +
+        '<div class="hint">处理器/调音台：inputs/outputs/dante_ports/usb_ports/ctrl_ports。<br>' +
+        '级联：cascade=1 · 调音台/处理器无某方向端口请**显式填 0**。</div></div>' +
+      '<div class="k">备注</div>' +
+      '<div><textarea rows="2" class="rmk">' + esc(it.remark||"") + '</textarea></div>' +
+    '</div>'
+  );
+}
+
+function wireCard(i, d){
+  d.querySelector("#tog_"+i).addEventListener("click", ()=>{
+    d.classList.toggle("open");
+    d.querySelector("#tog_"+i).textContent = d.classList.contains("open") ? "收起" : "展开编辑";
+  });
+  d.querySelector("#ok_"+i).addEventListener("click", ()=>saveOne(i));
+
+  /* change 监听 */
+  d.querySelector(".cat").addEventListener("change", ()=>mark(i));
+  d.querySelectorAll(".feat").forEach(el=>{
+    el.addEventListener("click", ()=>{ el.classList.toggle("on"); mark(i); });
+  });
+  d.querySelectorAll(".pk,.pval,.rmk").forEach(el=>{
+    el.addEventListener("input", ()=>mark(i));
+  });
+
+  /* 快捷插入：+ 参数 */
+  const addpBtn = d.querySelector("#addp_" + ITEMS[i].idx);
+  if(addpBtn){
+    addpBtn.addEventListener("click", ()=>{
+      const wrap = d.querySelector(".edit-wrap #pvs_" + ITEMS[i].idx);
+      const div = document.createElement("div"); div.className="pv";
+      div.innerHTML =
+        '<input type="text" class="pk" placeholder="参数名" value=""/>' +
+        '<textarea rows="1" class="pval" placeholder="值（数字自动转；{...} 自动 JSON）"></textarea>' +
+        '<button class="mini" data-act="delp">删</button>';
+      wrap.appendChild(div);
+      div.querySelector(".pk").addEventListener("input", ()=>mark(i));
+      div.querySelector(".pval").addEventListener("input", ()=>mark(i));
+      div.querySelector("button").addEventListener("click", ()=>{ div.remove(); mark(i); });
       mark(i);
     });
-    if(act==="delp") b.addEventListener("click",()=>{ b.closest(".pv").remove(); mark(i); });
+  }
+  /* 快捷插入：常用 chip 一键添加 */
+  d.querySelectorAll(".preset .chip").forEach(c=>{
+    c.addEventListener("click", ()=>{
+      const txt = c.dataset.param;
+      const eq = txt.indexOf("=");
+      const k = txt.slice(0, eq), v = txt.slice(eq+1);
+      const wrap = d.querySelector(".edit-wrap #pvs_" + ITEMS[i].idx);
+      const div = document.createElement("div"); div.className="pv";
+      div.innerHTML =
+        '<input type="text" class="pk" value="'+esc(k)+'"/>' +
+        '<textarea rows="1" class="pval">'+esc(v)+'</textarea>' +
+        '<button class="mini" data-act="delp">删</button>';
+      wrap.appendChild(div);
+      div.querySelector(".pk").addEventListener("input", ()=>mark(i));
+      div.querySelector(".pval").addEventListener("input", ()=>mark(i));
+      div.querySelector("button").addEventListener("click", ()=>{ div.remove(); mark(i); });
+      mark(i);
+      d.classList.add("open");
+    });
+  });
+  /* 快捷特性 +features 链接到现有 data-f 切换 */
+  d.querySelectorAll(".preset .feat").forEach(c=>{
+    c.addEventListener("click", ()=>{
+      const f = c.dataset.f;
+      const target = [...d.querySelectorAll(".feats .feat")].find(e=>e.dataset.f===f);
+      if(target){ target.classList.toggle("on"); mark(i); }
+    });
+  });
+  /* 已有参数的 删 */
+  d.querySelectorAll('[data-act="delp"]').forEach(b=>{
+    b.addEventListener("click", ()=>{ b.closest(".pv").remove(); mark(i); });
   });
 }
 
-function mark(i){ DIRTY.add(i); $("card_"+i).classList.add("changed"); }
-
-function collect(i){
-  const card = $("card_"+i);
-  const params = {};
-  card.querySelectorAll(".pv").forEach(pv=>{
+function mark(i){
+  DIRTY.add(i);
+  const c = $("cat_"+i);
+  c.classList.add("changed");
+  c.querySelector("#ok_"+i).disabled = false;
+  /* 同步徽章 + 元信息行（实时反映编辑） */
+  const it = ITEMS[i];
+  it.category = c.querySelector(".cat").value;
+  it.features = [...c.querySelectorAll(".feats .feat.on")].map(e=>e.dataset.f);
+  it.params = {};
+  c.querySelectorAll(".pv").forEach(pv=>{
     const k = pv.querySelector(".pk").value.trim();
     if(!k) return;
     let v = pv.querySelector(".pval").value.trim();
     const jp = tryJson(v);
-    params[k] = (jp !== undefined) ? jp : coerce(v);
+    it.params[k] = (jp !== undefined) ? jp : coerce(v);
   });
-  return {
-    idx: ITEMS[i].idx,
-    category: card.querySelector(".cat").value,
-    features: [...card.querySelectorAll(".feat.on")].map(e=>e.dataset.f),
-    params,
-    remark: card.querySelector(".rmk").value,
-  };
+  it.remark = c.querySelector(".rmk").value;
+  $("bdg_"+i).className = "cache dirty";
+  $("bdg_"+i).textContent = `◐ ${it.features.length} 特性 / ${Object.keys(it.params).length} 参数 待保存`;
+  $("kv_"+i).innerHTML = metaLine(it);
 }
+
 function tryJson(s){
   if(!(s.startsWith("{")||s.startsWith("["))) return undefined;
   try{ return JSON.parse(s); }catch(e){ return undefined; }
@@ -221,34 +393,40 @@ function coerce(v){
 }
 
 async function saveOne(i){
+  const card = $("cat_"+i);
+  /* 如果未展开也要能保存现状：collect() 直接从 it 拿 */
+  const it = ITEMS[i];
   const st = $("st_"+i);
   st.className="st"; st.textContent="保存中…";
-  const res = await api("/api/catalog", {action:"put", ...collect(i)});
-  if(res.error){ st.className="st err"; st.textContent="失败："+res.error; return; }
-  DIRTY.delete(i); $("card_"+i).classList.remove("changed");
-  st.className="st ok"; st.textContent="已落盘 · 备份 "+res.backup;
-  toast("已保存 "+ITEMS[i].model);
-}
-
-async function saveAll(){
-  const ids=[...DIRTY];
-  if(!ids.length){ toast("没有改动"); return; }
-  let ok=0, fail=0;
-  for(const i of ids){
-    const res = await api("/api/catalog", {action:"put", ...collect(i)});
-    if(res.error){ fail++; $("st_"+i).className="st err"; $("st_"+i).textContent="失败："+res.error; }
-    else { ok++; DIRTY.delete(i); $("card_"+i).classList.remove("changed");
-           $("st_"+i).className="st ok"; $("st_"+i).textContent="已落盘"; }
+  const payload = {
+    action:"put", idx: it.idx,
+    category: it.category || "",
+    features: it.features || [],
+    params: it.params || {},
+    remark: it.remark || "",
+  };
+  const res = await api("/api/catalog", payload);
+  if(res.error){
+    st.className="st err"; st.textContent="失败："+res.error;
+    toast("保存失败：" + res.error, "err"); return;
   }
-  toast(`保存完成：成功 ${ok} 条${fail?`，失败 ${fail} 条`:""}`);
+  DIRTY.delete(i);
+  SAVED.add(i);
+  card.classList.remove("changed");
+  card.querySelector("#ok_"+i).disabled = true;
+  $("bdg_"+i).className="cache hit";
+  $("bdg_"+i).textContent="● 已落盘 · 备份 " + res.backup;
+  st.className="st ok"; st.textContent = "已落盘";
+  toast("✓ 已保存 " + (it.model||it.name), "ok");
 }
 
+/* ===== 顶部交互 ===== */
 $("brand").addEventListener("change", loadItems);
 $("q").addEventListener("input", ()=>{ clearTimeout(window._qt);
-  window._qt = setTimeout(loadItems, 300); });
+  window._qt = setTimeout(loadItems, 280); });
 $("fWireless").addEventListener("click", ()=>{
-  $("fWireless").classList.toggle("on"); loadItems(); });
-$("btnSaveAll").addEventListener("click", saveAll);
+  $("fWireless").classList.toggle("on"); loadItems();
+});
 
 (async ()=>{ await loadMeta(); await loadItems(); })();
 </script>
