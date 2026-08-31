@@ -10,9 +10,22 @@ from avcad.validate.checks import validate
 
 
 def _ensure_wireless_dist(entries):
+    """清单里没配天线分配器时自动补一台——但只在**确实需要**时补。
+
+    两个前提缺一不可，否则会凭空造出一台孤立设备：
+      1. 有接收机（WIRELESS_MIC / WIRELESS_RX）等着分天线信号；
+      2. 有**外接天线**——会讨天线盒（``params.conf_box``，如 IPS CF6300WB）
+         自带 UHF 接收，经六芯主缆回主机 BOX 口，不进分配器链路。
+    """
     cats = {str(e.get("category", "")).upper() for e in entries}
-    wireless = bool(cats & {"WIRELESS_MIC", "WIRELESS_RX", "ANTENNA"})
-    if wireless and "ANT_DIST" not in cats:
+    if "ANT_DIST" in cats:
+        return entries
+    receivers = bool(cats & {"WIRELESS_MIC", "WIRELESS_RX"})
+    ext_antenna = any(
+        str(e.get("category", "")).upper() == "ANTENNA"
+        and not (e.get("params") or {}).get("conf_box")
+        for e in entries)
+    if receivers and ext_antenna:
         entries = list(entries) + [{
             "category": "ANT_DIST", "name": "天线信号分配器", "quantity": 1,
             "params": {"inputs": 2, "outputs": 4},

@@ -187,6 +187,7 @@ def _antenna_distribution(project, by_stage):
         return
     rxs = [d for d in project.instances if d.category == "WIRELESS_RX"]
     pending = list(rxs)
+    no_rf_port = set()   # 未建模 RF 天线口的接收机（不能硬凑口，只能跳过）
 
     for idx, dist in enumerate(dists):
         outs = _rf_ports([dist], "out")
@@ -211,16 +212,28 @@ def _antenna_distribution(project, by_stage):
         while pending and i < len(usable):
             rx = pending[0]
             rins = _rf_ports([rx], "in")
-            need = len(rins) or 1
+            pending.pop(0)
+            if not rins:
+                # 接收机未建模 RF 天线口（主库 ports_override 缺省或纯数字接口），
+                # 无法接分配器——跳过而不是硬凑 1 口（否则 rins[k] 越界崩溃）。
+                no_rf_port.add(rx.uid)
+                continue
+            need = len(rins)
             if i + need > len(usable):
                 break          # 本台剩余出口不够，交给下一台分配器
-            pending.pop(0)
             for k, (sd, sp) in enumerate(usable[i:i + need]):
                 td, tp = rins[k]
                 project.connections.append(Connection(
                     sd.uid, sp.id, td.uid, tp.id, Signal.RF, "primary",
                     note="天线分配"))
             i += need
+
+    if no_rf_port:
+        names = sorted({next((x.model for x in project.instances
+                              if x.uid == u), u) for u in no_rf_port})
+        project.meta.setdefault("wireless_warnings", []).append(
+            f"{len(no_rf_port)} 台无线接收机未建模天线输入口，未接入分配器："
+            f"{'、'.join(names)}（请在主库补 RF 天线口）")
 
     if pending:
         need = sum(len(_rf_ports([r], "in")) or 1 for r in pending)
@@ -229,13 +242,14 @@ def _antenna_distribution(project, by_stage):
             f"（尚缺 {need} 口，建议增加 UM2000ATD）")
 
     # 容量测算：给出「带这些接收机实际需要几台分配器」的提示
-    if rxs:
-        per_rx = max(len(_rf_ports([r], "in")) or 1 for r in rxs)
+    wired_rxs = [r for r in rxs if _rf_ports([r], "in")]
+    if wired_rxs:
+        per_rx = max(len(_rf_ports([r], "in")) for r in wired_rxs)
         outs = max((len(_rf_ports([d], "out")) for d in dists), default=0)
         cas = _cascade_outs(dists[0]) if dists else CASCADE_OUTS
-        req = required_dist_count(len(rxs), per_rx, outs, cas)
+        req = required_dist_count(len(wired_rxs), per_rx, outs, cas)
         project.meta["wireless_plan"] = {
-            "receivers": len(rxs),
+            "receivers": len(wired_rxs),
             "antennas_per_receiver": per_rx,
             "dists": len(dists),
             "dists_required": req,
@@ -244,7 +258,7 @@ def _antenna_distribution(project, by_stage):
         }
         if len(dists) < req:
             project.meta.setdefault("wireless_warnings", []).append(
-                f"天线分配器数量不足：{len(rxs)} 台接收机至少需要 {req} 台"
+                f"天线分配器数量不足：{len(wired_rxs)} 台接收机至少需要 {req} 台"
                 f"（当前 {len(dists)} 台）")
 
 
@@ -536,7 +550,9 @@ def _conference_link(project, by_stage):
     buckets = defaultdict(list)
     for i in project.instances:
         pr = getattr(i, "params", None) or {}
-        if not pr.get("host") or pr.get("conf_wireless"):
+        # conf_box（无线会讨天线盒）走 _conference_box_link 的 BOX 口，
+        # 不能混进手拉手链——否则它会既连 CH 口又连 BOX 口，主机上多出一条线。
+        if not pr.get("host") or pr.get("conf_wireless") or pr.get("conf_box"):
             continue
         if not any(p.role == "in" and p.signal == sig for p in i.ports):
             continue
@@ -643,20 +659,14 @@ def _conference_box_link(project, by_stage, conf_units):
     if not wl or not boxes:
         return linked
     for idx, u in enumerate(wl):
-        box = boxes[0]
+        box = boxes[idx % len(boxes)]
+        # ★ 只认 RF 空中口：找不到就跳过，绝不退化到 DIN/XLR 等有线口，
+        #   否则会画出「单元 XLR OUT → 天线盒 RF」这类方向/信号都错的线。
         rp = next((p for p in box.ports
                    if p.role == "in" and p.signal == Signal.RF), None)
-        if rp is None:
-            rp = next((p for p in box.ports if p.role == "in"), None)
-        if rp is None:
-            continue
         up = next((p for p in u.ports
                    if p.role == "out" and p.signal == Signal.RF), None)
-        if up is None:
-            # 无线单元本身没有 RF 端口（主库 ports_override=[]），
-            # 直接以单元本体为起点画一条无线链路
-            up = next((p for p in u.ports if p.role == "out"), None)
-        if up is None:
+        if rp is None or up is None:
             continue
         project.connections.append(Connection(
             u.uid, up.id, box.uid, rp.id, Signal.RF, "primary",

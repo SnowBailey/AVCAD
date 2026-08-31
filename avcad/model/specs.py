@@ -179,7 +179,11 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
                 override_ports.append(ConcretePort(
                     id=f"{uid}:{base}_{i+1}",
                     uid=uid, side=side, signal=sig, label=plabel,
-                    index=i, role=role, air=False,
+                    # ★ 必须透传 air：主库用它标记「空中/非线缆接口」（如无线
+                    #   会讨单元的 UHF 发射口）。此前写死 False，导致 air 机制
+                    #   在主库侧完全失效——无线单元会被 _generic_pair 拉去跟
+                    #   调音台做星型配对，画出根本不存在的线缆。
+                    index=i, role=role, air=bool(t.get("air", False)),
                 ))
         if ov_items is not None:
             ports = override_ports

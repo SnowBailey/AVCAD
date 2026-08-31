@@ -117,6 +117,7 @@ class Port:
     label: str
     count: int = 1
     role: str = "io"     # in / out
+    air: bool = False    # True = 空中/非线缆接口（天线 RF 收发），不连线、不校验未连
 
 
 @dataclass

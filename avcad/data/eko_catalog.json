@@ -24518,10 +24518,20 @@
             "role": "out",
             "label": "HOST",
             "count": 1
+          },
+          {
+            "name": "RF",
+            "side": "top",
+            "signal": "RF",
+            "role": "in",
+            "label": "RF",
+            "count": 1,
+            "air": true
           }
         ],
         "note": "无线会讨天线板；4×6P_DIN IN + 1×XLR IN；RJ45/UPDATE/RS485/RS232",
-        "conf_box": true
+        "conf_box": true,
+        "host": "CF6300"
       },
       "country": "中国",
       "unit": "台",
@@ -24641,7 +24651,17 @@
         "channels_hint": 5,
         "host": "CF6300",
         "conf_wireless": true,
-        "ports_override": []
+        "ports_override": [
+          {
+            "name": "RF",
+            "side": "top",
+            "signal": "RF",
+            "role": "out",
+            "label": "RF",
+            "count": 1,
+            "air": true
+          }
+        ]
       },
       "country": "中国",
       "unit": "台",
@@ -24962,7 +24982,17 @@
         "channels_hint": 5,
         "host": "CF6300",
         "conf_wireless": true,
-        "ports_override": []
+        "ports_override": [
+          {
+            "name": "RF",
+            "side": "top",
+            "signal": "RF",
+            "role": "out",
+            "label": "RF",
+            "count": 1,
+            "air": true
+          }
+        ]
       },
       "country": "中国",
       "unit": "台",
@@ -25940,14 +25970,13 @@
         ],
         "note": "四通道无线会议系统；1×XLR MIX out + 4×XLR OUT",
         "antennas": 2,
-        "channels": 4,
-        "conf_wireless": true
+        "channels": 4
       },
       "country": "中国",
       "unit": "套",
       "qty": 0,
       "price": null,
-      "remark": "4 通道无线会议系统接收机；配 CF6300WB 天线盒使用",
+      "remark": "4 通道无线会议系统接收机（独立系统，非 CF6300 会讨单元）；1×XLR MIX out + 4×XLR OUT；天线经 UM2000ATD 分配器",
       "sheet": "IPS爱普思"
     },
     {
@@ -25970,13 +25999,31 @@
         "bnc": 1,
         "antennas": 2,
         "channels": 8,
-        "conf_wireless": true
+        "ports_override": [
+          {
+            "name": "MIX",
+            "side": "right",
+            "signal": "XLR",
+            "role": "out",
+            "label": "MIX",
+            "count": 1
+          },
+          {
+            "name": "OUT",
+            "side": "right",
+            "signal": "XLR",
+            "role": "out",
+            "label": "OUT",
+            "count": 8
+          }
+        ],
+        "note": "八通道无线会议系统；1×XLR MIX out + 8×XLR OUT（按 CF6804 同系列推断，待复核）"
       },
       "country": "中国",
       "unit": "套",
       "qty": 0,
       "price": null,
-      "remark": "8 通道无线会议系统接收机；配 CF6300WB 天线盒使用",
+      "remark": "8 通道无线会议系统接收机（独立系统，非 CF6300 会讨单元）；1×XLR MIX out + 8×XLR OUT；天线经 UM2000ATD 分配器",
       "sheet": "IPS爱普思"
     },
     {

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>00_样例-会讨天线盒链路</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#03050b;color:#e6eaf2;
+ font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+header{padding:18px 26px;border-bottom:1px solid rgba(0,229,255,.18);
+ background:radial-gradient(120% 160% at 12% 0%,rgba(0,229,255,.12),transparent 60%)}
+h1{margin:0;font-size:19px;letter-spacing:.04em}
+h1 span{background:linear-gradient(90deg,#00e5ff,#a855f7);-webkit-background-clip:text;
+ -webkit-text-fill-color:transparent}
+.sub{margin-top:6px;font-size:12px;color:#7c8aa5}
+.canvas{padding:16px;background:
+ radial-gradient(70% 55% at 50% 8%,rgba(168,85,247,.10),transparent 70%)}
+.canvas svg{width:100%;height:auto;display:block}
+.side{padding:16px 26px 40px;border-top:1px solid rgba(0,229,255,.14)}
+h2{font-size:13px;color:#00e5ff;margin:18px 0 10px;letter-spacing:.06em}
+table{border-collapse:collapse;font-size:12px}
+td,th{padding:4px 10px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+th{color:#7c8aa5;font-weight:500;font-size:11px}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;
+ border:1px solid rgba(0,229,255,.4);color:#00e5ff;margin-right:6px}
+.badge.warn{border-color:rgba(251,191,36,.5);color:#fbbf24}
+.badge.bad{border-color:rgba(248,113,113,.5);color:#f87171}
+.note{margin:8px 0;padding:8px 10px;border-radius:8px;font-size:12px;
+ background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.24);color:#fbbf24}
+</style></head><body>
+<header>
+  <h1><span>00_样例-会讨天线盒链路</span></h1>
+  <div class="sub">IPS CF63 会讨：无线单元经 RF 空中口进天线盒，天线盒用六芯主缆回主机 BOX 口；有线单元手拉手串链进 CH 口</div>
+</header>
+  <div class="canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="6 2 843 1053" width="100%" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif" style="background:#1e1e1c">
+<rect x="6" y="2" width="843" height="1053" fill="#1e1e1c"/>
+<rect x="414.0" y="40.0" width="164.0" height="97.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="496.0" y="50.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">有线无线融合会议主机</text>
+<text x="496.0" y="60.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="496.0" y="69.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6300</text>
+<rect x="40.0" y="40.0" width="138.0" height="97.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="109.0" y="50.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线会讨天线盒</text>
+<text x="109.0" y="60.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="109.0" y="69.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6300WB</text>
+<rect x="40.0" y="163.0" width="138.0" height="97.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="109.0" y="173.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线会讨天线盒</text>
+<text x="109.0" y="183.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="109.0" y="192.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6300WB</text>
+<rect x="414.0" y="163.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="173.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="183.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="192.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="242.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="252.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="262.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="271.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="321.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="331.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="341.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="350.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="400.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="410.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="420.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="429.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="479.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="489.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="499.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="508.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="558.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="568.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">无线数字会议单元</text>
+<text x="483.0" y="578.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="587.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6350</text>
+<rect x="414.0" y="637.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="647.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">会议单元</text>
+<text x="483.0" y="657.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="666.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6320</text>
+<rect x="414.0" y="716.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="726.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">会议单元</text>
+<text x="483.0" y="736.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="745.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6320</text>
+<rect x="414.0" y="795.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="805.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">会议单元</text>
+<text x="483.0" y="815.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="824.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6320</text>
+<rect x="414.0" y="874.0" width="138.0" height="53.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="483.0" y="884.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">会议单元</text>
+<text x="483.0" y="894.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">IPS</text>
+<text x="483.0" y="903.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">CF6320</text>
+<rect x="648.0" y="40.0" width="177.0" height="218.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
+<text x="736.5" y="50.0" fill="#f1efe8" font-size="9" text-anchor="middle" data-layer="LABELS" font-weight="bold">数字调音台</text>
+<text x="736.5" y="60.0" fill="#c4c2b8" font-size="8" text-anchor="middle" data-layer="LABELS">ALLEN&amp;HEATH</text>
+<text x="736.5" y="69.0" fill="#9a978d" font-size="7" text-anchor="middle" data-layer="LABELS">QU-16</text>
+<polyline points="552.0,674.5 562.0,674.5 562.0,771.5 404.0,771.5 404.0,753.5 414.0,753.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="566.0" y="674.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="552.0,753.5 562.0,753.5 562.0,850.5 404.0,850.5 404.0,832.5 414.0,832.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="566.0" y="753.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="552.0,832.5 562.0,832.5 562.0,929.5 404.0,929.5 404.0,911.5 414.0,911.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="566.0" y="832.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="552.0,911.5 562.0,911.5 562.0,141.5 404.0,141.5 404.0,77.5 414.0,77.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="566.0" y="911.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="178.0,77.5 188.0,77.5 296.0,77.5 296.0,121.5 404.0,121.5 414.0,121.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="188.0" y="74.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="178.0,200.5 188.0,200.5 188.0,29.5 30.0,29.5 30.0,77.5 40.0,77.5" fill="none" stroke="#c9a227" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="171.2" y="26.5" fill="#c9a227" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">CONF</text>
+<polyline points="483.0,163.0 483.0,153.0 319.0,153.0 319.0,30.0 155.0,30.0 155.0,40.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="150.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="483.0,242.0 483.0,232.0 319.0,232.0 319.0,153.0 155.0,153.0 155.0,163.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="229.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="483.0,321.0 483.0,311.0 319.0,311.0 319.0,30.0 155.0,30.0 155.0,40.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="308.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="483.0,400.0 483.0,390.0 319.0,390.0 319.0,153.0 155.0,153.0 155.0,163.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="387.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="483.0,479.0 483.0,469.0 319.0,469.0 319.0,30.0 155.0,30.0 155.0,40.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="466.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="483.0,558.0 483.0,548.0 319.0,548.0 319.0,153.0 155.0,153.0 155.0,163.0" fill="none" stroke="#e8923c" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="474.6" y="545.0" fill="#e8923c" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">RF</text>
+<polyline points="578.0,77.5 588.0,77.5 613.0,77.5 613.0,77.5 638.0,77.5 648.0,77.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="588.0" y="74.5" fill="#5dcaa5" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">XLR</text>
+<polyline points="578.0,88.5 588.0,88.5 613.0,88.5 613.0,88.5 638.0,88.5 648.0,88.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="588.0" y="85.5" fill="#5dcaa5" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">XLR</text>
+<polyline points="578.0,99.5 588.0,99.5 613.0,99.5 613.0,99.5 638.0,99.5 648.0,99.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="588.0" y="96.5" fill="#5dcaa5" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">XLR</text>
+<polyline points="578.0,110.5 588.0,110.5 613.0,110.5 613.0,110.5 638.0,110.5 648.0,110.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="588.0" y="107.5" fill="#5dcaa5" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">XLR</text>
+<polyline points="578.0,121.5 588.0,121.5 613.0,121.5 613.0,121.5 638.0,121.5 648.0,121.5" fill="none" stroke="#5dcaa5" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="588.0" y="118.5" fill="#5dcaa5" font-size="7" text-anchor="start" data-layer="WIRE_LABELS">XLR</text>
+<circle cx="414.0" cy="77.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">CH1</text>
+<circle cx="414.0" cy="88.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="91.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">CH2</text>
+<circle cx="414.0" cy="99.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="102.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">CH3</text>
+<circle cx="414.0" cy="110.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="113.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">CH4</text>
+<circle cx="578.0" cy="77.5" r="2.4" fill="#5dcaa5"/>
+<text x="571.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">PHX1</text>
+<circle cx="578.0" cy="88.5" r="2.4" fill="#5dcaa5"/>
+<text x="571.0" y="91.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">PHX2</text>
+<circle cx="578.0" cy="99.5" r="2.4" fill="#5dcaa5"/>
+<text x="571.0" y="102.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">PHX3</text>
+<circle cx="578.0" cy="110.5" r="2.4" fill="#5dcaa5"/>
+<text x="571.0" y="113.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">PHX4</text>
+<circle cx="578.0" cy="121.5" r="2.4" fill="#5dcaa5"/>
+<text x="571.0" y="124.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">MIX</text>
+<circle cx="414.0" cy="121.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="124.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">BOX</text>
+<circle cx="40.0" cy="77.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN1</text>
+<circle cx="40.0" cy="88.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="91.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN2</text>
+<circle cx="40.0" cy="99.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="102.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN3</text>
+<circle cx="40.0" cy="110.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="113.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN4</text>
+<circle cx="40.0" cy="121.5" r="2.4" fill="#5dcaa5"/>
+<text x="47.0" y="124.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN</text>
+<circle cx="63.0" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="63.0" y="79.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RJ45</text>
+<circle cx="86.0" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="86.0" y="79.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">UPDATE</text>
+<circle cx="109.0" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="109.0" y="79.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RS485</text>
+<circle cx="132.0" cy="40.0" r="2.4" fill="#b07cd9"/>
+<text x="132.0" y="79.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RS232</text>
+<circle cx="178.0" cy="77.5" r="2.4" fill="#c9a227"/>
+<text x="171.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">HOST</text>
+<circle cx="155.0" cy="40.0" r="2.4" fill="#e8923c"/>
+<circle cx="40.0" cy="200.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="203.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN1</text>
+<circle cx="40.0" cy="211.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="214.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN2</text>
+<circle cx="40.0" cy="222.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="225.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN3</text>
+<circle cx="40.0" cy="233.5" r="2.4" fill="#c9a227"/>
+<text x="47.0" y="236.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN4</text>
+<circle cx="40.0" cy="244.5" r="2.4" fill="#5dcaa5"/>
+<text x="47.0" y="247.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN</text>
+<circle cx="63.0" cy="163.0" r="2.4" fill="#b07cd9"/>
+<text x="63.0" y="202.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RJ45</text>
+<circle cx="86.0" cy="163.0" r="2.4" fill="#b07cd9"/>
+<text x="86.0" y="202.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">UPDATE</text>
+<circle cx="109.0" cy="163.0" r="2.4" fill="#b07cd9"/>
+<text x="109.0" y="202.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RS485</text>
+<circle cx="132.0" cy="163.0" r="2.4" fill="#b07cd9"/>
+<text x="132.0" y="202.0" fill="#f5f5ec" font-size="8" text-anchor="middle" data-layer="LABELS" font-weight="bold">RS232</text>
+<circle cx="178.0" cy="200.5" r="2.4" fill="#c9a227"/>
+<text x="171.0" y="203.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">HOST</text>
+<circle cx="155.0" cy="163.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="163.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="242.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="321.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="400.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="479.0" r="2.4" fill="#e8923c"/>
+<circle cx="483.0" cy="558.0" r="2.4" fill="#e8923c"/>
+<circle cx="414.0" cy="674.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="677.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="552.0" cy="674.5" r="2.4" fill="#c9a227"/>
+<text x="545.0" y="677.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="414.0" cy="753.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="756.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="552.0" cy="753.5" r="2.4" fill="#c9a227"/>
+<text x="545.0" y="756.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="414.0" cy="832.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="835.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="552.0" cy="832.5" r="2.4" fill="#c9a227"/>
+<text x="545.0" y="835.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="414.0" cy="911.5" r="2.4" fill="#c9a227"/>
+<text x="421.0" y="914.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="552.0" cy="911.5" r="2.4" fill="#c9a227"/>
+<text x="545.0" y="914.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">DIN</text>
+<circle cx="648.0" cy="77.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN1</text>
+<circle cx="648.0" cy="88.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="91.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN2</text>
+<circle cx="648.0" cy="99.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="102.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN3</text>
+<circle cx="648.0" cy="110.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="113.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN4</text>
+<circle cx="648.0" cy="121.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="124.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN5</text>
+<circle cx="648.0" cy="132.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="135.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN6</text>
+<circle cx="648.0" cy="143.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="146.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN7</text>
+<circle cx="648.0" cy="154.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="157.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN8</text>
+<circle cx="648.0" cy="165.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="168.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN9</text>
+<circle cx="648.0" cy="176.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="179.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN10</text>
+<circle cx="648.0" cy="187.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="190.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN11</text>
+<circle cx="648.0" cy="198.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="201.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN12</text>
+<circle cx="648.0" cy="209.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="212.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN13</text>
+<circle cx="648.0" cy="220.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="223.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN14</text>
+<circle cx="648.0" cy="231.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="234.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN15</text>
+<circle cx="648.0" cy="242.5" r="2.4" fill="#5dcaa5"/>
+<text x="655.0" y="245.5" fill="#f5f5ec" font-size="8" text-anchor="start" data-layer="LABELS" font-weight="bold">IN16</text>
+<circle cx="825.0" cy="77.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="80.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT1</text>
+<circle cx="825.0" cy="88.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="91.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT2</text>
+<circle cx="825.0" cy="99.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="102.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT3</text>
+<circle cx="825.0" cy="110.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="113.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT4</text>
+<circle cx="825.0" cy="121.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="124.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT5</text>
+<circle cx="825.0" cy="132.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="135.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT6</text>
+<circle cx="825.0" cy="143.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="146.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT7</text>
+<circle cx="825.0" cy="154.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="157.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT8</text>
+<circle cx="825.0" cy="165.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="168.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT9</text>
+<circle cx="825.0" cy="176.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="179.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT10</text>
+<circle cx="825.0" cy="187.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="190.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT11</text>
+<circle cx="825.0" cy="198.5" r="2.4" fill="#5dcaa5"/>
+<text x="818.0" y="201.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">OUT12</text>
+<circle cx="825.0" cy="209.5" r="2.4" fill="#7fd1e8"/>
+<text x="818.0" y="212.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">dSNAKE </text>
+<circle cx="825.0" cy="220.5" r="2.4" fill="#7fd1e8"/>
+<text x="818.0" y="223.5" fill="#f5f5ec" font-size="8" text-anchor="end" data-layer="LABELS" font-weight="bold">AES</text>
+<rect x="30.0" y="959.5" width="206.0" height="72.0" fill="none" stroke="#8a8578" stroke-width="1.0" rx="3"/>
+<text x="40.0" y="973.5" fill="#f1efe8" font-size="10" text-anchor="start" data-layer="LEGEND" font-weight="bold">线型说明</text>
+<line x1="42.0" y1="982.5" x2="72.0" y2="982.5" stroke="#5dcaa5" stroke-width="1.8"/>
+<text x="80.0" y="985.5" fill="#e8e6dd" font-size="8" text-anchor="start" data-layer="LEGEND">模拟音频（XLR）</text>
+<line x1="42.0" y1="996.5" x2="72.0" y2="996.5" stroke="#e8923c" stroke-width="1.8"/>
+<text x="80.0" y="999.5" fill="#e8e6dd" font-size="8" text-anchor="start" data-layer="LEGEND">射频 / 天线（RF）</text>
+<line x1="42.0" y1="1010.5" x2="72.0" y2="1010.5" stroke="#c9a227" stroke-width="1.8"/>
+<text x="80.0" y="1013.5" fill="#e8e6dd" font-size="8" text-anchor="start" data-layer="LEGEND">CONF</text>
+</svg></div>
+  <div class="side">
+    <span class="badge">设备 14</span><span class="badge">连线 17</span><span class="badge ok">RF 无线链路 6 条（6 只单元期望 6 条）</span><span class="badge bad">天线盒分摊 {'IPS CF6300WB:RF_1': 6}（期望每台 3 条）</span><span class="badge ok">天线盒→主机 BOX 口 1 条</span><span class="badge bad">拓扑异常，见下方明细</span>
+    <h2>无线会讨链路（单元 --RF--> 天线盒）</h2><table><tr><th>从</th><th></th><th>到</th><th>信号</th><th>备注</th></tr><tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr>
+<tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr>
+<tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr>
+<tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr>
+<tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr>
+<tr><td>IPS CF6350:RF_1</td><td>→</td><td>IPS CF6300WB:RF_1</td><td>RF</td><td>无线会议单元</td></tr></table><h2>六芯主缆 / 手拉手（CONF）</h2><table><tr><th>从</th><th></th><th>到</th><th>信号</th><th>备注</th></tr><tr><td>IPS CF6320:DIN_OUT_1</td><td>→</td><td>IPS CF6320:DIN_IN_1</td><td>CONF</td><td>手拉手 T 型线</td></tr>
+<tr><td>IPS CF6320:DIN_OUT_1</td><td>→</td><td>IPS CF6320:DIN_IN_1</td><td>CONF</td><td>手拉手 T 型线</td></tr>
+<tr><td>IPS CF6320:DIN_OUT_1</td><td>→</td><td>IPS CF6320:DIN_IN_1</td><td>CONF</td><td>手拉手 T 型线</td></tr>
+<tr><td>IPS CF6320:DIN_OUT_1</td><td>→</td><td>IPS CF6300:CH_1</td><td>CONF</td><td>六芯主缆→主机</td></tr>
+<tr><td>IPS CF6300WB:HOST_1</td><td>→</td><td>IPS CF6300:BOX_1</td><td>CONF</td><td>六芯主缆→主机</td></tr>
+<tr><td>IPS CF6300WB:HOST_1</td><td>→</td><td>IPS CF6300WB:DIN_1</td><td>CONF</td><td>天线盒级联</td></tr></table><h2>汇入主机的连线</h2><table><tr><th>从</th><th></th><th>到</th><th>信号</th><th>备注</th></tr><tr><td>IPS CF6320:DIN_OUT_1</td><td>→</td><td>IPS CF6300:CH_1</td><td>CONF</td><td>六芯主缆→主机</td></tr>
+<tr><td>IPS CF6300WB:HOST_1</td><td>→</td><td>IPS CF6300:BOX_1</td><td>CONF</td><td>六芯主缆→主机</td></tr></table><h2>连线按信号统计</h2><table><tr><td>CONF</td><td>6</td></tr>
+<tr><td>RF</td><td>6</td></tr>
+<tr><td>XLR</td><td>5</td></tr></table>
+  </div>
+</body></html>
