@@ -51,6 +51,31 @@ def _make_switches(instances, redundant: bool):
     return sw
 
 
+def _clone_as_backup_switch(primary):
+    """按主交换机克隆一台备交换机（同品牌/型号/端口数）。
+
+    用于「清单只配了 1 台交换机，但冗余级别要求双交换机」的场景。此前
+    `switches = real_switches` 直接返回，链路冗余会静默退化成单链路——
+    只在报告里留一条 SPOF 警告，图上仍然只有一台交换机，主备设备还是
+    挤在同一台交换机上，冗余形同虚设。
+    """
+    specs = load_specs()
+    spec = specs["SWITCH"]
+    e = {"category": "SWITCH",
+         "name": (primary.name or "Dante 交换机") + "(备)",
+         "brand": primary.brand, "model": primary.model,
+         "params": dict(primary.params or {}),
+         # uid 必须显式给定：expand_instance 默认按 `switch_{idx+1}` 生成，
+         # 与清单里的真交换机编号同段，端口/连线索引会撞车。
+         "uid": f"{primary.uid}_bak"}
+    inst = expand_instance(spec, e, 0)
+    inst.redundancy = Redundancy.LINK_BACKUP
+    inst.is_backup = True
+    inst.pair = primary.uid
+    primary.pair = inst.uid
+    return inst
+
+
 def build_project(entries: list, name: str = "AV System",
                   legend_store=None, redundancy: str = None) -> Project:
     """legend_store: 可选 LegendStore；若提供，实例建成后立即按缓存图例回填端口
@@ -85,7 +110,12 @@ def build_project(entries: list, name: str = "AV System",
     # 「虚拟交换机连满、清单里的真交换机成了孤立节点」的怪图。
     real_switches = [i for i in instances if i.category == "SWITCH"]
     if real_switches:
-        switches = real_switches
+        switches = list(real_switches)
+        # ★ 清单只配 1 台交换机、但冗余级别要求双交换机时，按首台克隆一台备机。
+        #   此前这里直接返回清单交换机，LINK_BACKUP / FULL_CHAIN 会静默退化成
+        #   单链路——报告里只有一条 SPOF 警告，图上主备设备仍挤在同一台交换机上。
+        if len(switches) == 1 and has_dante and (level_dual or redundant_dante):
+            switches.append(_clone_as_backup_switch(switches[0]))
     else:
         sw_redundant = redundant_dante or level_dual
         switches = _make_switches(instances, sw_redundant) if has_dante else []

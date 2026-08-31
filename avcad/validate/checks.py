@@ -64,6 +64,11 @@ def validate(project) -> list:
                                     f"无线接收机 {i.name} 真分集需≥2路天线输入，当前{len(ant)}路", i.uid))
 
     # Dante 必须有交换机
+    # ★ 不变式守卫：build_project 保证「有 Dante 必有交换机」（清单没配就由
+    #   _make_switches 造一台），所以正常流程走不到这里。保留它是为了在
+    #   build_project 的交换机逻辑被改坏时立刻报错，而不是悄悄出一张没有
+    #   交换机的 Dante 图。探针 scripts/probe_issue_coverage.py 里已登记为
+    #   KNOWN_UNREACHABLE，别再当「疑似漏报」反复排查。
     has_dante = any(p.signal == Signal.DANTE for i in project.instances for p in i.ports)
     if has_dante and not project.switches:
         issues.append(Issue("ERROR", "NO_SWITCH", "系统含 Dante 设备但未生成交换机", ""))

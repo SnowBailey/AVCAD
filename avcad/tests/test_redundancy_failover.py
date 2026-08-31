@@ -198,6 +198,15 @@ def _failover_links(p):
     return [c for c in p.connections if c.note == "主备failover"]
 
 
+def _with_real_switch(backbone, n_switch=1, sw_redundancy=None):
+    """给骨架挂上「清单里明确配了」的真交换机（模拟造价清单自带网络交换机）。"""
+    return list(backbone) + [
+        _dev("SWITCH", "AIM-24MG6XF", n_switch,
+             params={"ports": 24},
+             **({"redundancy": sw_redundancy} if sw_redundancy else {})),
+    ]
+
+
 def test_link_backup_pair_has_no_failover_but_dual_switch():
     """链路冗余：主备各走一台交换机，设备之间**不画** failover 线。"""
     p = build_project(_dante_backbone("LINK_BACKUP"), name="T")
@@ -269,6 +278,52 @@ def test_chinese_redundancy_end_to_end():
     baks = [i for i in p.instances if i.is_backup]
     assert len(baks) == 1 and baks[0].category == "MIXER"
     assert len(_failover_links(p)) == 1
+
+
+def test_single_real_switch_is_cloned_when_level_requires_dual():
+    """★ 清单只配 1 台交换机 + 冗余级别要求双交换机 → 必须补一台备机。
+
+    回归背景：此前 `switches = real_switches` 直接短路返回，LINK_BACKUP /
+    FULL_CHAIN 静默退化成单链路，只在报告里留一条 SPOF 警告，图上主备设备
+    仍挤在同一台交换机上，冗余形同虚设。
+    """
+    for lvl in ("LINK_BACKUP", "FULL_CHAIN"):
+        p = build_project(_with_real_switch(_dante_backbone(lvl), 1), name="T")
+        assert len(p.switches) == 2, f"{lvl} 应补出双交换机，实际 {len(p.switches)}"
+        # 备机要继承主交换机的品牌/型号/端口数，不是凭空造一台规格不同的
+        prim, bak = p.switches
+        assert bak.model == prim.model and bak.brand == prim.brand
+        assert len(bak.ports) == len(prim.ports), "备交换机端口数应与主交换机一致"
+        assert bak.is_backup and bak.pair == prim.uid
+        assert not any(i.code == "SPOF" for i in p.issues), \
+            f"{lvl} 补齐双交换机后不该再有 SPOF 告警：{_spofs(p)}"
+
+
+def test_two_real_switches_are_never_cloned():
+    """清单已经配了 2 台交换机时不得再补第三台（设备数量是事实，不能凭空加）。"""
+    for lvl in ("LINK_BACKUP", "FULL_CHAIN", "NONE"):
+        p = build_project(_with_real_switch(_dante_backbone(lvl), 2), name="T")
+        assert len(p.switches) == 2, f"{lvl} 不该多出交换机，实际 {len(p.switches)}"
+
+
+def test_single_switch_stays_single_without_redundancy():
+    """无冗余时清单配几台就是几台（NONE 不得触发克隆）。"""
+    p = build_project(_with_real_switch(_dante_backbone("NONE"), 1), name="T")
+    assert len(p.switches) == 1, "无冗余不该凭空补备交换机"
+
+
+def test_cloned_backup_switch_actually_carries_traffic():
+    """克隆出的备交换机必须真的接上备设备的 Dante，不能是孤立节点。"""
+    p = build_project(_with_real_switch(_dante_backbone("LINK_BACKUP"), 1), name="T")
+    bak_sw = [s for s in p.switches if s.is_backup]
+    assert len(bak_sw) == 1
+    sw_uid = bak_sw[0].uid
+    assert any(c.from_uid == sw_uid or c.to_uid == sw_uid for c in p.connections), \
+        "备交换机没接上任何连线，成了孤立节点"
+
+
+def _spofs(p):
+    return [i.msg for i in p.issues if i.code == "SPOF"]
 
 
 def test_no_orphan_left_when_capacity_is_enough():
