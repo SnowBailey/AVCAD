@@ -23,7 +23,7 @@ STAGE_LABELS = {
     "ANT_DIST": "天线信号分配",
     "MIC_HOST": "话筒主机",
     "MIXER": "调音台",
-    "IO": "接口箱/扩展",
+    "SIDE": "侧层设备",
     "SPEAKER_MGR": "扬声器管理",
     "AMP": "功放",
     "SPEAKER": "扬声器",
@@ -103,8 +103,11 @@ def build_chain(instances: list) -> list:
     if "post" in proc_pos:
         chain.append(PROC_POST)
 
-    if "IO" in cats:
-        chain.append("IO")       # I/O 接口箱/扩展卡：紧接核心设备，作为扩展接口
+    # I/O 接口箱/扩展卡：不进入主链路，作为「侧层设备」与调音台/处理器平级。
+    #   通过 DANTE 网络互通（DANTE 端口由 _dante_pass 经交换机处理），
+    #   XLR IN/OUT 端按工程需要单独连话筒/功放，不画成「调音台→IO」串联。
+    #   此前放在 PROC_POST 之后被当成下一级，画出 8 条 XLR 串联线（错）。
+
     if "SPEAKER_MGR" in cats:
         chain.append("SPEAKER_MGR")
     # 功放：只要有独立功放实例就保留阶段（即使扬声器全有源，也按用户清单画出）
@@ -128,6 +131,10 @@ def assign_stages(instances: list, chain: list):
             i.stage = "SOURCE"
         elif i.category == "PROCESSOR":
             i.stage = PROC_PRE if _proc_position(i, amp_has_dsp) == "pre" else PROC_POST
+        elif i.category == "IO":
+            # IO 设备与调音台/处理器平级（仅通过 DANTE 网络互通），
+            # 不进入 by_stage 主链路，避免被画成 XLR 串联。
+            i.stage = "SIDE"
         elif i.category in chain:
             i.stage = i.category
         elif i.category == "SWITCH":

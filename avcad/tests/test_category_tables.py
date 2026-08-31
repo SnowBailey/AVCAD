@@ -34,8 +34,14 @@ def _spec_categories():
 
 # STAGE_LABELS 是**链路阶段名**而非类别名：处理器在链路里被拆成「前置/后置」
 # 两个虚拟阶段，所以表里没有 PROCESSOR 本身，却多出这两个虚拟阶段。
-_VIRTUAL_STAGES = {"PROC_PRE", "PROC_POST"}
-_REPLACED_BY_STAGES = {"PROCESSOR"}
+# ★ 这些 stage 不是规格库里的设备类别，是 assign_stages 给特定类别打的标记：
+#   PROC_PRE / PROC_POST = 处理器前置/后置（同一类处理器可分属两种 stage）
+#   SIDE = 不进入主链路的「侧层设备」（如 IO 与调音台平级，仅通过 DANTE 经交换机互通）
+_VIRTUAL_STAGES = {"PROC_PRE", "PROC_POST", "SIDE"}
+# 规格库里有这些类别，但它们已被替代 stage 承载，链路上不再以自身出现：
+#   PROCESSOR -> PROC_PRE / PROC_POST（前置/后置两种）
+#   IO        -> SIDE（侧层设备，不进入主链路）
+_REPLACED_BY_STAGES = {"PROCESSOR", "IO"}
 
 
 def test_every_category_has_chinese_name():

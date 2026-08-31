@@ -19,6 +19,11 @@ from avcad.parse.product_resolver import enrich as resolve_products
 
 # 非信号设备：机械/结构件，不出系统图
 RIGGING = ["吊架", "飞行架", "桁架"]
+# 电源类辅助设备：电源时序器、电源管理器、电源控制器等。
+# 它们是配电系统的一部分，但不在音频信号链路上——出图会让画图逻辑误判
+# （友腾 EAW2/3 清单里有 2 台「电源时序器」被兜底成 IO，既错又孤立）。
+# 这里走 drop 路径，与 RIGGING 同处理（is_rigging 也复用此判断）。
+POWER_AUX = ["电源时序器", "电源管理器", "电源控制器", "电源监测"]
 # 占位项：造价清单里的「甲方自配 / 按需保留 / 待定」等，无品牌无型号，
 # 无法建模，也不该让用户每次在第②步手动点「不需要」。
 # ★ 只在 brand 与 model 同时为空时才排除，避免误杀真实设备。
@@ -57,7 +62,12 @@ _OUT = re.compile(r"模拟输出\s*(\d+)\s*路")
 
 
 def is_rigging(name: str) -> bool:
-    return any(k in (name or "") for k in RIGGING)
+    """非信号设备判定：机械/结构件 + 电源类辅助设备（不出系统图）。
+
+    阳哥 2026-08-31：「电源时序器」等配电设备不属于音频信号链路，
+    应在第②步被排除出图，而不是被兜底成 IO 设备后孤立。
+    """
+    return any(k in (name or "") for k in RIGGING + POWER_AUX)
 
 
 def is_placeholder(name: str, row=None) -> bool:

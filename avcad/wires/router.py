@@ -66,6 +66,11 @@ def connect(project):
         if b == "ANT_DIST":
             _antennas_to_first_dist(project, by_stage)
             continue
+        # ★ MIC_HOST（会议主机）走专用规则：只画 1 路 MIX→核心级，PHX 分区
+        #   凤凰端出图不连。否则会被相邻阶段配对成「5 条 XLR 全连到首个核心级」。
+        if a == "SOURCE" and any(d.category == "MIC_HOST"
+                                for d in by_stage.get(a, [])):
+            continue
         _generic_pair(project, by_stage.get(a, []), by_stage.get(b, []),
                       skip_out_uids=cascade_slaves if a == "MIXER" else None)
 
@@ -90,6 +95,9 @@ def _connect_sources_to_core(project, by_stage):
 
     级联调音台的从机也保留在目标列表里——它的 IN 口同样要接话筒
     （级联的意义就是扩展输入路数）；从机的 OUT 由 connect() 单独跳过。
+
+    ★ MIC_HOST（会议主机）单独走 _connect_mic_host：只画 1 路 MIX → MIXER
+    （无则 PROCESSOR），其它 out 端口（如分区凤凰端 PHX）出图不连。
     """
     target = None
     for c in project.chain:
@@ -102,8 +110,59 @@ def _connect_sources_to_core(project, by_stage):
     if not tdevs:
         return
     for src in ("SOURCE", "WIRELESS_RX"):
-        if by_stage.get(src):
-            _generic_pair(project, by_stage[src], tdevs)
+        devs = list(by_stage.get(src, []))
+        if not devs:
+            continue
+        non_host = []
+        for d in devs:
+            if d.category == "MIC_HOST":
+                _connect_mic_host(project, d, by_stage)
+            else:
+                non_host.append(d)
+        if non_host:
+            _generic_pair(project, non_host, tdevs)
+
+
+def _connect_mic_host(project, host, by_stage):
+    """会议主机只画 1 路 MIX → 核心级；PHX 分区凤凰端出图不连。
+
+    阳哥规则（2026-08-31）：
+      - CF6300 等会议主机一般只用 1 路 MIX（XLR out）送调音台；
+      - 剩余 PHX 分区输出虽标 out，但「出图不用连接」；
+      - 目标优先 MIXER，无则 PROCESSOR（小型系统用处理器代调音台）。
+    """
+    # 取 1 路：优先选 label 含 "MIX" 的 XLR out，否则第一个 XLR out
+    out_port = None
+    for p in host.ports:
+        if p.role == "out" and p.signal == Signal.XLR and not p.air:
+            if "MIX" in (p.label or "").upper():
+                out_port = p
+                break
+    if out_port is None:
+        for p in host.ports:
+            if p.role == "out" and p.signal == Signal.XLR and not p.air:
+                out_port = p
+                break
+    if out_port is None:
+        return
+
+    # 目标：MIXER 优先，无则 PROCESSOR（PROC_PRE / PROC_POST 都算）
+    target_dev = None
+    for cat in ("MIXER", "PROC_PRE", "PROC_POST"):
+        ds = by_stage.get(cat, [])
+        if ds:
+            target_dev = ds[0]
+            break
+    if target_dev is None:
+        return
+
+    # 取目标的第一个空闲 XLR in
+    for p in target_dev.ports:
+        if p.role == "in" and p.signal == Signal.XLR and not p.air:
+            project.connections.append(Connection(
+                host.uid, out_port.id, target_dev.uid, p.id, Signal.XLR,
+                "primary", note="会议主机 MIX→核心级"))
+            return
 
 
 # ---- 无线天线链路（真分集 + 天线分配器级联） ----
