@@ -14,6 +14,8 @@
 退出码：0 = 全部 Issue 码至少触发过一次；1 = 存在零命中（仅提示，非失败）
 """
 from __future__ import annotations
+import os
+import re
 import sys
 import collections
 
@@ -40,12 +42,26 @@ JOBS = [
     ("C-4F会议室", TAIYANG, "4F会议室"),
 ]
 
-# checks.py 里定义的全部 Issue 码（新增校验时记得同步这里）
-KNOWN_CODES = [
-    "UNKNOWN_TYPE", "UNCONNECTED", "SPARE_OUT", "UNMET_IN",
-    "DIVERSITY", "NO_SWITCH", "SPOF", "PAIR_MISSING", "PAIR_TYPE",
-    "REDUNDANCY", "LINK_BACKUP_NO_DANTE",
-]
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CHECKS_PY = os.path.join(_ROOT, "avcad", "validate", "checks.py")
+
+
+def source_codes():
+    """从 checks.py 源码里正则提取全部 Issue 码。
+
+    ★ 此前这里是硬编码名单（KNOWN_CODES），注释还写着「新增校验时记得同步这里」——
+      结果 PORT_SIDE / PORT_ROLE 加进 checks.py 后没同步，两个码直接**从探针
+      视野里消失**，探针依旧报告「不存在未验证的校验码」。一个用来发现
+      「名单没跟上枚举」的工具，自己倒在了同一个坑里。
+      改成从源码提取后，新增校验自动进入统计，漏登记会立刻被报为存疑。
+    """
+    src = open(CHECKS_PY, encoding="utf-8").read()
+    found = re.findall(r'Issue\(\s*["\'][A-Z]+["\']\s*,\s*["\']([A-Z_]+)["\']', src)
+    assert found, (
+        f"从 {CHECKS_PY} 里没提取到任何 Issue 码——Issue(...) 的写法变了？"
+        f"请更新本函数的正则，别回退成硬编码名单。"
+    )
+    return sorted(set(found))
 
 # 已人工构造「必然违规」场景验证过：规则本身能正常触发，真实清单零命中
 # 只是因为这些清单确实合规。**不要**再当成疑似漏报重复排查。
@@ -66,6 +82,13 @@ KNOWN_UNREACHABLE = {
     "NO_SWITCH": "build_project 保证「有 Dante 必有交换机」（清单没配就由 "
                  "_make_switches 造一台），条件恒不成立。保留它只为在交换机"
                  "逻辑被改坏时立刻报错。",
+    "PORT_SIDE": "端口方向（left/right/top/bottom）只来自规格模板与主库 "
+                 "ports_override，前端下拉已受限，正常数据恒合法。写错的后果"
+                 "是端口坐标停在 (0,0) 飞出图纸——保留它以便立刻定位。"
+                 "已构造必然违规场景（side='Bottom'）验证能正常报错。",
+    "PORT_ROLE": "进出角色（in/out/io）同上。写错会让端口不参与任何配对，"
+                 "图上只显示成「余量未连」，极难察觉。"
+                 "已构造必然违规场景（role='input'）验证能正常报错。",
 }
 
 
@@ -95,9 +118,10 @@ def main():
               + ("  ".join(f"{c}:{n}" for c, n in sorted(by_code.items()))
                  or "无"))
 
+    codes = source_codes()
     print(f"\n{'='*74}\n校验覆盖情况（真实清单 {len(JOBS)} 份）\n{'='*74}")
     zero = []
-    for code in KNOWN_CODES:
+    for code in codes:
         n = hits[code]
         if code in KNOWN_UNREACHABLE:
             flag = "· "           # 不可达守卫，零命中是预期
@@ -110,11 +134,17 @@ def main():
         print(f"  {flag}{code:<24s} 触发 {n:5d} 次")
         if not n and code not in VERIFIED_FIRE_OK and code not in KNOWN_UNREACHABLE:
             zero.append(code)
-    extra = [c for c in hits if c not in KNOWN_CODES]
+    extra = [c for c in hits if c not in codes]
     if extra:
-        print("\n  ! 出现未登记的 Issue 码（checks.py 新增了校验？请同步 KNOWN_CODES）：")
+        print("\n  ! 出现源码里没有的 Issue 码：")
         for c in extra:
             print(f"      - {c} ×{hits[c]}")
+    stale = [c for c in list(VERIFIED_FIRE_OK) + list(KNOWN_UNREACHABLE)
+             if c not in codes]
+    if stale:
+        print("\n  ! 以下码已从 checks.py 删除，但还留在本文件的常量里，请清理：")
+        for c in stale:
+            print(f"      - {c}")
 
     if VERIFIED_FIRE_OK:
         print("\n  已人工验证（能正常触发，零命中仅因清单合规）：")

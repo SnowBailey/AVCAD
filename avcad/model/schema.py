@@ -203,14 +203,23 @@ def normalize_redundancy(val) -> Redundancy:
     return Redundancy(lvl) if lvl else Redundancy.NONE
 
 
+# 端口方向的唯一权威取值。前端 `index.html` 的 SIDES / ROLES 常量必须与之
+# 一致（由 avcad/tests/test_port_geometry.py 守卫）；写错不会崩，但会静默失效：
+#   side 错 -> 布局不认识该方向，端口坐标停在 (0,0)，图纸上直接飞出去
+#   role 错 -> 端口不参与任何进出配对，图上表现为「余量未连」，极难察觉
+VALID_SIDES = ("left", "right", "top", "bottom")
+VALID_ROLES = ("in", "out", "io")     # io = 双向，不参与进出配对
+
+
 @dataclass
 class Port:
     id: str
-    side: str            # left / right / top
+    # side 取值必须与前端 SIDES 常量一致（avcad/tests/test_port_geometry.py 守卫）
+    side: str            # left / right / top / bottom
     signal: Signal
     label: str
     count: int = 1
-    role: str = "io"     # in / out
+    role: str = "io"     # in / out / io（io = 双向，不参与进出配对）
     air: bool = False    # True = 空中/非线缆接口（天线 RF 收发），不连线、不校验未连
 
 

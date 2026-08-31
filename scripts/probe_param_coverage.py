@@ -54,11 +54,14 @@ KNOWN_INFO = {
 }
 
 # 已核实为「规范统一前的遗留字段」：应清理主库，保持参数规范统一
-DEPRECATED = {
+# 已清理的遗留字段：主库里已删干净，**命中才报警**。
+# 此前放在 DEPRECATED 里无条件打印，清理完后仍每轮输出「命中 0 条」，
+# 反而让看报告的人误以为这条还没处理。现在只在有人又加回来时才出声。
+CLEANED_UP = {
     "dante_in": "阳哥 2026-08-31 定的参数规范：接口箱只留 `dante_ports`（物理网口数，"
                 "默认 1）。Dante 所有通道走一根网线，图上不按通道数画口——"
-                "所以 dante_in/dante_out 是规范统一前的遗留，应删",
-    "dante_out": "同上（与 dante_in 成对出现）",
+                "dante_in/dante_out 是规范统一前的遗留，已从主库删除",
+    "dante_out": "同上（与 dante_in 成对出现），已从主库删除",
 }
 
 # 已知「未建模的能力」：物理上存在但当前不画
@@ -123,8 +126,8 @@ def main():
     buckets = {
         "✔ 信息字段（不参与建模，预期）": KNOWN_INFO,
         "· 已知未建模的能力": KNOWN_UNMODELLED,
-        "✗ 遗留字段（应清理主库）": DEPRECATED,
     }
+    revived = []
     stray = []
     for (cat, k), n in unknown.most_common():
         tag = None
@@ -132,8 +135,9 @@ def main():
             tag = "✔ 信息字段（不参与建模，预期）"
         elif k in KNOWN_UNMODELLED:
             tag = "· 已知未建模的能力"
-        elif k in DEPRECATED:
-            tag = "✗ 遗留字段（应清理主库）"
+        elif k in CLEANED_UP:
+            tag = None
+            revived.append((cat, k, n))
         if tag is None:
             stray.append((cat, k, n))
             continue
@@ -144,21 +148,24 @@ def main():
         print(f"\n  {title}：")
         for k, why in table.items():
             hit = sum(n for (c, kk), n in unknown.items() if kk == k)
-            # ★ 遗留字段清理干净后仍会一直打印（命中 0 条），不标注容易被
-            #   下次看报告的人误读成「这条还没处理」，于是反复去主库里找。
-            suffix = ""
-            if table is DEPRECATED and hit == 0:
-                suffix = "  ← 已清理完毕，可从 DEPRECATED 常量里移除本条目"
-            print(f"      {k:<18} 命中 {hit:4d} 条  {why}{suffix}")
+            print(f"      {k:<18} 命中 {hit:4d} 条  {why}")
+
+    if revived:
+        print(f"\n⚠ 已删除的遗留字段又出现在主库里（{len(revived)} 处）：")
+        for cat, k, n in revived:
+            print(f"    - {cat}.{k}  ×{n}  例：{', '.join(examples[(cat, k)])}")
+            print(f"      {CLEANED_UP[k]}")
 
     if stray:
         print(f"\n⚠ 以下 {len(stray)} 个参数键未归类，需要判断是拼错还是该补进模板：")
         for cat, k, n in stray:
             print(f"    - {cat}.{k}  ×{n}  例：{', '.join(examples[(cat, k)])}")
         print("\n  处置三选一：① 模板改名/主库改名对齐 ② 确属信息字段 → 加进")
-        print("  KNOWN_INFO ③ 确属遗留 → 清理主库并加进 DEPRECATED。")
+        print("  KNOWN_INFO ③ 确属遗留 → 清理主库并加进 CLEANED_UP。")
         return 1
-    print("\n✓ 不存在未归类的参数键。")
+    if revived:
+        return 1
+    print("\n✓ 不存在未归类的参数键，也无死灰复燃的遗留字段。")
     return 0
 
 

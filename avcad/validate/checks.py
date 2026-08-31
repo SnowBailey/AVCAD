@@ -1,7 +1,8 @@
 """校验模块：出图前门禁。未连端口 / 通道不匹配 / 阻抗越限 / SPOF / 未知类型 / 无线分集缺失。"""
 from __future__ import annotations
 from collections import defaultdict
-from avcad.model.schema import Issue, Signal, Redundancy, redundancy_scope
+from avcad.model.schema import (Issue, Signal, Redundancy, redundancy_scope,
+                                VALID_SIDES, VALID_ROLES)
 from avcad.model.specs import load_specs
 
 
@@ -25,6 +26,22 @@ def validate(project) -> list:
         if i.category not in known:
             issues.append(Issue("ERROR", "UNKNOWN_TYPE",
                                 f"未知设备类型: {i.category} ({i.name})", i.uid))
+
+    # 端口方向 / 进出角色合法性
+    # ★ 不变式守卫：这两个值只来自规格模板与主库 ports_override（前端下拉已
+    #   受限），正常数据零命中。写错的后果不是崩溃而是静默失效——side 错会让
+    #   端口坐标停在 (0,0) 飞出图纸，role 错会让端口不参与任何配对、图上只
+    #   显示成「余量未连」。保留它以便在数据被写坏时立刻定位，而不是靠肉眼看图。
+    for i in project.instances + project.switches:
+        for p in i.ports:
+            if p.side not in VALID_SIDES:
+                issues.append(Issue("ERROR", "PORT_SIDE",
+                                    f"{i.name} 端口 {p.label} 方向非法: {p.side!r}"
+                                    f"（应为 {'/'.join(VALID_SIDES)}）", i.uid))
+            if p.role not in VALID_ROLES:
+                issues.append(Issue("ERROR", "PORT_ROLE",
+                                    f"{i.name} 端口 {p.label} 进出角色非法: {p.role!r}"
+                                    f"（应为 {'/'.join(VALID_ROLES)}）", i.uid))
 
     # 已用端口
     used = set()

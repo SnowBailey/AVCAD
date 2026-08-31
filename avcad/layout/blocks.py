@@ -14,7 +14,9 @@ SW_PORT_PITCH = 14   # 交换机顶部端口间距
 def compute_geometry(inst: DeviceInstance):
     left = [p for p in inst.ports if p.side == "left"]
     right = [p for p in inst.ports if p.side == "right"]
-    top = [p for p in inst.ports if p.side == "top" or p.side == "bottom"]
+    # top / bottom 都横向排布，但必须各自成组计数（见下方坐标分配）
+    tops = [p for p in inst.ports if p.side == "top"]
+    bots = [p for p in inst.ports if p.side == "bottom"]
     rows = max(len(left), len(right), 1)
     title_len = max(len(inst.name), len(inst.brand), len(inst.model), 8)
     maxlab = max([len(p.label) for p in inst.ports] + [title_len])
@@ -23,12 +25,12 @@ def compute_geometry(inst: DeviceInstance):
     slot_extra = SLOT_H + 4 if inst.slots else 0
     # 交换机：端口全部在顶部，按使用口数横向拉长
     if inst.category == "SWITCH":
-        n_top = len([p for p in top if p.side == "top"])
+        n_top = len(tops)
         w = max(MIN_W, SW_PORT_PITCH * (n_top + 1) + 24)
         h = HEADER + PAD + 14
     else:
         # 交换机需容纳上下两排端口（非交换机不影响）
-        switch_extra = 18 if inst.category == "SWITCH" and len(top) > 4 else 0
+        switch_extra = 18 if inst.category == "SWITCH" and (len(tops) + len(bots)) > 4 else 0
         h = HEADER + rows * ROW_H + PAD + slot_extra + switch_extra
     inst.w = w
     inst.h = h
@@ -38,12 +40,13 @@ def compute_geometry(inst: DeviceInstance):
     for idx, p in enumerate(right):
         p.x = inst.x + w
         p.y = inst.y + HEADER + idx * ROW_H + ROW_H / 2
-    n = len(top)
-    for idx, p in enumerate(top):
-        if p.side == "top":
-            p.x = inst.x + (idx + 1) * (w / (n + 1))
-            p.y = inst.y
-        else:
-            p.x = inst.x + (idx + 1) * (w / (n + 1))
-            p.y = inst.y + h
+    # ★ 顶口与底口各自独立均分宽度。此前两者混成一个序列统一均分，
+    #   于是排列靠前的顶口全落在左半边、靠后的底口全落在右半边
+    #   （2 顶 2 底实测：顶口占比 0.20/0.40，底口 0.60/0.80）。
+    #   纯 top（现有全部真实数据）时新旧公式等价，改动对存量零影响。
+    for group, y in ((tops, inst.y), (bots, inst.y + h)):
+        m = len(group)
+        for idx, p in enumerate(group):
+            p.x = inst.x + (idx + 1) * (w / (m + 1))
+            p.y = y
     return inst
