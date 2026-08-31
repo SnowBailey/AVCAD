@@ -874,7 +874,10 @@ function renderModules(){
 $("btnToStep3").addEventListener("click", ()=>goto(3));
 
 /* ==================== ③ 图例确认（永久文档） ==================== */
-const SIGNALS = ["XLR","AES","DANTE","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK"];
+/* ★ 顺序与后端 Signal 枚举保持一致（avcad/model/schema.py）。
+   新增信号必须同步 4 处：枚举 / config/signal_colors.json / 这里 / render/draw.py 的图例中文名。
+   自动化测试 avcad/tests/test_signal_registry.py 会拦截遗漏，别再靠人肉同步。 */
+const SIGNALS = ["XLR","AES","DANTE","RS232","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK"];
 const ROLES = ["in","out","io"];
 const SIDES = ["left","right","top","bottom"];
 
@@ -1099,7 +1102,15 @@ function renderPortRows(i, scope, setTa){
   box.innerHTML = "";
   it.ports.forEach((p, k)=>{
     const r = document.createElement("div"); r.className = "prow";
-    const sel = (arr, val)=>arr.map(o=>'<option' + (o === val ? " selected" : "") + '>' + o + '</option>').join("");
+    /* ★ 兜底：当前值不在候选列表里时，把它补成首项并选中。
+       否则 select 会默认选中第一个 option，用户一保存就把原值静默改成首项——
+       RS232 曾漏在 SIGNALS 之外，图例里 4 个 RS232 端口一编辑就变成 XLR。
+       兜底值限定字母数字与下划线横线，避免把未转义数据拼进 innerHTML。 */
+    const sel = (arr, val)=>{
+      const opts = (val && arr.indexOf(val) < 0 && /^[\w-]+$/.test(String(val)))
+        ? [val].concat(arr) : arr;
+      return opts.map(o=>'<option' + (o === val ? " selected" : "") + '>' + o + '</option>').join("");
+    };
     r.innerHTML =
       '<span class="idx">' + (k + 1) + '</span>' +
       '<select class="sg">' + sel(SIGNALS, p.signal) + '</select>' +

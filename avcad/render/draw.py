@@ -888,9 +888,20 @@ _SIGNAL_CN = {
     Signal.GPIO:    "控制（GPIO）",
     Signal.OPTICAL: "光纤（OPTICAL）",
     Signal.POWER:   "电源",
+    # ★ 会讨/级联类：新增信号时必须同步 4 处（枚举 / config/signal_colors.json /
+    #   ui/static/index.html 的 SIGNALS / 这里）。此前漏了 CONF，而 1F 会议室真实
+    #   出图有 10 条 CONF 连线，图幅底部的线型说明只能显示英文原名。
+    #   测试 avcad/tests/test_signal_registry.py 会拦截遗漏。
+    Signal.TRS:     "模拟音频（TRS）",
+    Signal.CONF:    "会议总线（CONF）",
+    Signal.USB:     "USB 数据",
+    Signal.LINK:    "设备级联（LINK）",
 }
+# ★ 末尾追加新信号，不要插到中间——这张表决定图幅底部说明表的行序，
+#   插队会改变已有图纸的 DXF 输出。
 _SIGNAL_ORDER = [Signal.XLR, Signal.AES, Signal.DANTE, Signal.RF, Signal.SPEAKER,
-                 Signal.RS232, Signal.IP, Signal.GPIO, Signal.OPTICAL, Signal.POWER]
+                 Signal.RS232, Signal.IP, Signal.GPIO, Signal.OPTICAL, Signal.POWER,
+                 Signal.TRS, Signal.CONF, Signal.USB, Signal.LINK]
 
 _LEG_SAMPLE = 30.0     # 线型样例长度
 _LEG_ROW_H = 14.0      # 行高

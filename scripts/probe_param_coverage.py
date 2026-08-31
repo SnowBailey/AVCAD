@@ -144,7 +144,12 @@ def main():
         print(f"\n  {title}：")
         for k, why in table.items():
             hit = sum(n for (c, kk), n in unknown.items() if kk == k)
-            print(f"      {k:<18} 命中 {hit:4d} 条  {why}")
+            # ★ 遗留字段清理干净后仍会一直打印（命中 0 条），不标注容易被
+            #   下次看报告的人误读成「这条还没处理」，于是反复去主库里找。
+            suffix = ""
+            if table is DEPRECATED and hit == 0:
+                suffix = "  ← 已清理完毕，可从 DEPRECATED 常量里移除本条目"
+            print(f"      {k:<18} 命中 {hit:4d} 条  {why}{suffix}")
 
     if stray:
         print(f"\n⚠ 以下 {len(stray)} 个参数键未归类，需要判断是拼错还是该补进模板：")
