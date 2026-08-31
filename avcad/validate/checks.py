@@ -2,17 +2,27 @@
 from __future__ import annotations
 from collections import defaultdict
 from avcad.model.schema import Issue, Signal, Redundancy, redundancy_scope
+from avcad.model.specs import load_specs
 
-KNOWN = {"SOURCE", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "WIRELESS_RX",
-         "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH", "IO"}
+
+def known_categories() -> set:
+    """已知设备类别 = 规格库里真正加载到的类别。
+
+    ★ 此前这里是硬编码白名单，漏了 `MIC_HOST`，导致**每台会议主机都报一条
+    「未知设备类型」的 ERROR**——而它的连线完全正确，纯属白名单没跟上规格库。
+    改成从 `load_specs()` 动态取后，新增类别只要加一个 yaml 就自动被认识，
+    不会再出现「类别加了却忘了同步某个白名单」这类漏报/误报。
+    """
+    return set(load_specs())
 
 
 def validate(project) -> list:
     issues = []
+    known = known_categories()
 
     # 未知类型
     for i in project.instances:
-        if i.category not in KNOWN:
+        if i.category not in known:
             issues.append(Issue("ERROR", "UNKNOWN_TYPE",
                                 f"未知设备类型: {i.category} ({i.name})", i.uid))
 

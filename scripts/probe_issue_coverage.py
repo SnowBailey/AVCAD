@@ -50,6 +50,9 @@ KNOWN_CODES = [
 # 已人工构造「必然违规」场景验证过：规则本身能正常触发，真实清单零命中
 # 只是因为这些清单确实合规。**不要**再当成疑似漏报重复排查。
 VERIFIED_FIRE_OK = {
+    "UNKNOWN_TYPE": "此前真实清单触发过 1 次，是 MIC_HOST 被误报（类别漏在 checks.py "
+                    "的硬编码白名单里）；白名单改成从 load_specs() 动态取后归零，"
+                    "属修复效果不是漏报",
     "DIVERSITY": "1 路天线输入的接收机 → ERROR 正常报",
     "SPOF": "单交换机 + 备机带 Dante → WARN 正常报",
     "PAIR_MISSING": "pair 指向不存在的 uid → ERROR 正常报",
