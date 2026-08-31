@@ -5,125 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>AVCAD · 品牌主库校正</title>
 <style>
-  :root{
-    /* 与 index.html 相同的色板，确保视觉一致 */
-    --bg:#03050b; --panel:rgba(255,255,255,.045); --panel2:rgba(8,12,24,.6);
-    --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.16);
-    --txt:#f3f6ff; --mut:#6f7e9a; --acc:#00e5ff; --acc2:#a855f7;
-    --ok:#2ee8a0; --err:#ff5a6e; --warn:#f0b45f;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--txt);
-    font-family:"SF Pro Display","PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,sans-serif;
-    font-size:13px;line-height:1.55;padding:22px 26px 60px}
-  h1{font-size:17px;font-weight:500;margin:0 0 4px;letter-spacing:.02em}
-  .sub{color:var(--mut);font-size:12px;margin-bottom:16px}
-  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;
-    padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
-  select,input[type=text],textarea{background:rgba(255,255,255,.06);color:var(--txt);
-    border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;
-    font-family:inherit;outline:none}
-  select:focus,input:focus,textarea:focus{border-color:var(--acc)}
-  textarea{resize:vertical;line-height:1.55}
-  button{cursor:pointer;font-family:inherit;font-size:12px;border-radius:999px;padding:6px 14px;
-    border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt)}
-  button:hover{border-color:var(--acc);color:#fff}
-  button:disabled{opacity:.4;cursor:not-allowed}
-  button.primary{background:linear-gradient(96deg,rgba(0,229,255,.95),rgba(120,120,255,.9));
-    color:#02121a;border:none;font-weight:600}
-  button.sec{background:rgba(46,232,160,.18);border-color:rgba(46,232,160,.5);color:var(--ok);
-    font-weight:600}
-  button.sec:hover{background:rgba(46,232,160,.28);color:#fff;border-color:var(--ok)}
-  button.mini{padding:3px 10px;font-size:11px}
-  button.ghost{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--mut)}
-  button.ghost:hover{color:var(--txt)}
+/* ============================================================
+   设计令牌（与 index.html 同源：深空 / 霓虹 / 影院感）
+   品牌主库卡与图例卡同语言：.legend + .lg-rows + .prow
+   ============================================================ */
+:root{
+  --bg:#03050b; --panel:rgba(255,255,255,.028); --panel2:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.075); --line-strong:rgba(255,255,255,.14);
+  --txt:#f3f6ff; --mut:#6f7e9a;
+  --acc:#00e5ff; --acc2:#a855f7; --acc3:#f472b6;
+  --ok:#2ee8a0; --warn:#f0b45f; --err:#ff5a6e;
+  --shadow-card:0 34px 80px -46px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.035),
+                 inset 0 1px 0 rgba(255,255,255,.045);
+  --glow-acc:0 0 0 1px rgba(0,229,255,.18), 0 0 42px -12px rgba(0,229,255,.45);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font-family:"SF Pro Display","PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  font-size:13px;line-height:1.55;letter-spacing:.014em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  /* 星空 + 星云辉光（与 index.html 一致） */
+  background-image:
+    radial-gradient(1.3px 1.3px at 24px 30px, rgba(255,255,255,.45), transparent 100%),
+    radial-gradient(1px 1px at 132px 92px, rgba(160,230,255,.40), transparent 100%),
+    radial-gradient(1.5px 1.5px at 68px 162px, rgba(255,255,255,.26), transparent 100%),
+    radial-gradient(1px 1px at 196px 200px, rgba(210,190,255,.34), transparent 100%),
+    radial-gradient(1.1px 1.1px at 240px 44px, rgba(255,180,225,.30), transparent 100%),
+    radial-gradient(880px 520px at 8% -14%, rgba(0,229,255,.13), transparent 68%),
+    radial-gradient(780px 460px at 96% 2%, rgba(168,85,247,.13), transparent 68%),
+    radial-gradient(900px 520px at 58% 116%, rgba(244,114,182,.09), transparent 68%);
+  background-size:264px 264px, 264px 264px, 264px 264px, 264px 264px, 264px 264px,
+                   auto, auto, auto;
+  background-attachment:fixed;
+  background-color:var(--bg);
+  padding:24px 30px 80px;min-height:100vh;
+}
+h1{margin:0;font-size:17px;font-weight:700;letter-spacing:.14em;
+   background:linear-gradient(92deg,#ffffff 8%,#9beeff 42%,#d9b6ff 72%,#ffc2e2 100%);
+   -webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);font-size:11.5px;margin-top:4px;letter-spacing:.06em}
 
-  /* ===== 与图例卡同款视觉 ===== */
-  .legend{border:1px solid var(--line);border-radius:15px;padding:12px;
-    margin-bottom:10px;background:var(--panel2);
-    transition:border-color .25s ease, box-shadow .3s ease}
-  .legend:hover{border-color:var(--line-strong)}
-  .legend.changed{border-color:rgba(240,180,95,.5);
-    box-shadow:inset 0 0 0 1px rgba(240,180,95,.18)}
-  .legend .th{display:flex;justify-content:space-between;align-items:center;gap:8px}
-  .legend .th .left{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-  .legend .th b{font-size:14px;font-weight:600;color:var(--txt)}
-  .legend .th .mut{color:var(--mut);font-size:12px}
-  .legend .cache{font-size:11px;letter-spacing:.05em}
-  .legend .cache.hit{color:var(--ok)}
-  .legend .cache.miss{color:var(--warn)}
-  .legend .cache.dirty{color:var(--warn)}
-  .legend .kv{font-size:12px;color:var(--mut);margin:6px 0 4px}
-
-  .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;
-    font-size:11px;border:1px solid var(--line-strong);letter-spacing:.04em;background:rgba(255,255,255,.03)}
-  .badge.hit{color:var(--ok);border-color:rgba(46,232,160,.5);background:rgba(46,232,160,.09)}
-  .badge.miss{color:var(--warn);border-color:rgba(240,180,95,.5);background:rgba(240,180,95,.08)}
-  .badge.mut{color:var(--mut)}
-
-  .row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
-  .grow{flex:1}
-  .st{font-size:11px;color:var(--mut);min-width:24px}
-  .st.ok{color:var(--ok)} .st.err{color:var(--err)}
-
-  /* ===== 展开编辑区 ===== */
-  .edit-wrap{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
-  .legend.open .edit-wrap{display:block}
-  .grid{display:grid;grid-template-columns:90px 1fr;gap:8px 12px;align-items:start}
-  .grid .k{color:var(--mut);font-size:12px;padding-top:6px}
-  .feats{display:flex;flex-wrap:wrap;gap:6px}
-  .feat{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;
-    border:1px solid var(--line);font-size:11px;cursor:pointer;user-select:none;color:var(--mut)}
-  .feat.on{background:rgba(0,229,255,.14);border-color:var(--acc);color:var(--acc)}
-
-  .pv{display:flex;gap:6px;align-items:flex-start;margin-bottom:5px}
-  .pv .pk{flex:0 0 130px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px}
-  .pv .pval{flex:1;min-width:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:11.5px;line-height:1.5}
-  .pv button{flex:0 0 auto;align-self:center}
-  .pv textarea{min-height:30px}
-
-  /* ===== 常用 chip 区（替代旧版长 hints） ===== */
-  .preset{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
-  .preset .chip{display:inline-flex;align-items:center;gap:3px;padding:2px 9px;
-    border-radius:999px;border:1px solid var(--line);font-size:11px;color:var(--mut);
-    cursor:pointer;user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-  .preset .chip:hover{border-color:var(--acc);color:var(--acc)}
-
-  .hint{color:var(--mut);font-size:11px;margin-top:4px;letter-spacing:.02em}
-
-  /* ===== 顶部 / 计数 ===== */
-  .count{color:var(--mut);font-size:11px;margin-left:auto;letter-spacing:.04em}
-  .count b{color:var(--txt);font-weight:500}
-
-  /* ===== 空态 / Toast ===== */
-  .empty{color:var(--mut);padding:34px;text-align:center;font-size:13px;letter-spacing:.04em}
-  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(8px);
-    background:rgba(12,17,32,.96);border:1px solid var(--line-strong);
-    padding:11px 20px;border-radius:999px;font-size:13px;opacity:0;
-    transition:opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1);
-    pointer-events:none;z-index:90;letter-spacing:.03em;
-    box-shadow:0 24px 60px -26px rgba(0,0,0,.95), 0 0 0 1px rgba(0,229,255,.14);
+/* 顶栏筛选 */
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0;
+    padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);
     backdrop-filter:blur(10px)}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .toast.ok{border-color:rgba(46,232,160,.5)}
-  .toast.err{border-color:rgba(255,90,110,.5)}
+.bar label{display:flex;gap:6px;align-items:center;color:var(--mut);font-size:11.5px;letter-spacing:.08em}
+.bar select,.bar input[type=text]{height:30px;font-size:12.5px;
+  background:rgba(6,9,18,.7);color:var(--txt);
+  border:1px solid var(--line);border-radius:9px;padding:0 10px;outline:none}
+.bar select:focus,.bar input:focus{border-color:var(--acc)}
+.bar .grow{flex:1;display:flex;gap:6px;align-items:center}
+.bar input[type=text]{flex:1}
+.feat{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:999px;
+  border:1px solid var(--line);font-size:11.5px;cursor:pointer;user-select:none;color:var(--mut);
+  background:rgba(255,255,255,.03);letter-spacing:.06em}
+.feat.on{background:rgba(0,229,255,.14);border-color:var(--acc);color:var(--acc)}
+.count{color:var(--mut);font-size:11.5px;letter-spacing:.04em}
+.count b{color:var(--txt);font-weight:600}
+
+/* 按钮库（与 index.html 同款） */
+button{cursor:pointer;font-family:inherit;font-size:12px;border-radius:999px;padding:6px 14px;
+  border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1), border-color .25s ease, filter .22s ease}
+button:hover{border-color:var(--acc);color:#fff}
+button:active{transform:translateY(0)}
+button:disabled{opacity:.34;cursor:not-allowed;border-color:var(--line);color:var(--mut)}
+button:disabled:hover{border-color:var(--line);color:var(--mut)}
+button.ghost{background:rgba(255,255,255,.035);border:1px solid var(--line-strong);color:var(--txt);font-weight:500}
+button.sec{background:linear-gradient(96deg,rgba(46,232,160,.95),rgba(0,190,190,.92));
+  color:#02150f;border:1px solid rgba(160,255,230,.45);font-weight:700;
+  box-shadow:0 14px 30px -16px rgba(46,232,160,.85), inset 0 1px 0 rgba(255,255,255,.35)}
+button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
+
+/* ============================================================
+   卡片（与图例卡 100% 同构：.legend + .th + .lg-rows + .prow）
+   ============================================================ */
+.legend{border:1px solid var(--line);border-radius:15px;padding:12px;
+  margin-bottom:10px;background:var(--panel2);
+  transition:border-color .25s ease, box-shadow .3s ease}
+.legend:hover{border-color:var(--line-strong);box-shadow:0 16px 38px -26px rgba(0,0,0,.95)}
+.legend.changed{border-color:rgba(240,180,95,.5);
+  box-shadow:inset 0 0 0 1px rgba(240,180,95,.18)}
+.legend .th{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.legend .th .left{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.legend .th b{font-size:14px;font-weight:600;color:var(--txt)}
+.legend .th .mut{color:var(--mut);font-size:12px}
+.legend .cache{font-size:11px;letter-spacing:.05em}
+.legend .cache.hit{color:var(--ok)}
+.legend .cache.miss{color:var(--warn)}
+.legend .cache.dirty{color:var(--warn)}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;
+  font-size:11px;border:1px solid var(--line-strong);letter-spacing:.04em;background:rgba(255,255,255,.03)}
+.badge.hit{color:var(--ok);border-color:rgba(46,232,160,.5);background:rgba(46,232,160,.09)}
+.badge.miss{color:var(--warn);border-color:rgba(240,180,95,.5);background:rgba(240,180,95,.08)}
+.badge.mut{color:var(--mut)}
+
+/* 元信息行（卡顶直显摘要） */
+.kv{font-size:12px;color:var(--mut);margin:6px 0 4px;letter-spacing:.03em}
+
+/* ============================================================
+   核心编辑区——与图例端口行同构：.lg-rows + .prow
+   ============================================================ */
+.section-label{
+  display:flex;align-items:center;gap:8px;margin:10px 0 4px;
+  color:var(--mut);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.section-label::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,var(--line),transparent)}
+
+.lg-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 8px}
+.lg-rows .prow{
+  display:flex;align-items:center;gap:5px;margin:0;flex-wrap:wrap;padding:4px 6px;
+  border:1px solid var(--line);border-radius:9px;background:rgba(4,7,14,.4);
+  min-height:33px}
+.lg-rows .prow:hover{border-color:rgba(0,229,255,.25)}
+.lg-rows .prow select,.lg-rows .prow input[type=text]{
+  height:28px;font-size:11.5px;padding:0 7px;border-radius:7px;
+  background:rgba(6,9,18,.85);color:var(--txt);border:1px solid var(--line);
+  outline:none;font-family:inherit}
+.lg-rows .prow select:focus,.lg-rows .prow input[type=text]:focus{border-color:var(--acc)}
+.lg-rows .prow select.cat{min-width:120px;max-width:140px;font-weight:600;color:var(--acc)}
+.lg-rows .prow select.feat{min-width:80px;max-width:110px}
+.lg-rows .prow input.key{flex:1;min-width:90px;max-width:140px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.lg-rows .prow input.val{flex:1;min-width:60px;max-width:120px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-align:right}
+.lg-rows .prow input.remark{flex:1;min-width:120px}
+.lg-rows .prow button.mini{
+  padding:2px 9px;margin:0;font-size:11px;font-weight:700;border-radius:999px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--txt);
+  cursor:pointer;box-shadow:none}
+.lg-rows .prow button.mini:hover{border-color:var(--acc);color:#fff}
+.lg-rows .prow button.mini.del{color:var(--err)}
+.lg-rows .prow span.idx{
+  min-width:18px;text-align:center;font-size:10.5px;display:inline-block;color:var(--mut);
+  padding:1px 0;border-radius:5px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.lg-rows .prow .role{
+  display:inline-flex;align-items:center;gap:3px;
+  color:var(--mut);font-size:11px;letter-spacing:.03em;padding-left:4px;
+  border-left:1px solid var(--line);margin-left:2px}
+.lg-rows .prow .role .v{color:var(--txt);font-weight:600}
+
+/* 底部操作行（与图例卡同位） */
+.row{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.row .grow{flex:1}
+.lg-status{font-size:12px;color:var(--mut);min-width:24px;letter-spacing:.04em}
+.lg-status.ok{color:var(--ok)} .lg-status.err{color:var(--err)}
+
+/* 提示：每个 section 的快捷插入区 */
+.section-tools{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 4px}
+.section-tools .preset{
+  display:inline-flex;align-items:center;gap:3px;padding:2px 9px;
+  border-radius:999px;border:1px solid var(--line);font-size:11px;color:var(--mut);
+  cursor:pointer;user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.section-tools .preset:hover{border-color:var(--acc);color:var(--acc)}
+
+/* 空态 / toast */
+.empty{color:var(--mut);padding:34px;text-align:center;font-size:13px;letter-spacing:.04em}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(8px);
+  background:rgba(12,17,32,.96);border:1px solid var(--line-strong);
+  padding:11px 20px;border-radius:999px;font-size:13px;opacity:0;
+  transition:opacity .25s ease, transform .25s cubic-bezier(.2,.8,.2,1);
+  pointer-events:none;z-index:90;letter-spacing:.03em;
+  box-shadow:0 24px 60px -26px rgba(0,0,0,.95), 0 0 0 1px rgba(0,229,255,.14);
+  backdrop-filter:blur(10px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:rgba(46,232,160,.5)}
+.toast.err{border-color:rgba(255,90,110,.5)}
 </style>
 </head>
 <body>
-<h1>品牌主库校正</h1>
+<h1>品牌主库校正 · AVCAD@Bailey@EZPRO</h1>
 <div class="sub" id="meta">加载中…</div>
 
 <div class="bar">
-  <label style="display:flex;gap:6px;align-items:center">
-    <span class="mut">品牌</span>
+  <label>品牌
     <select id="brand"></select>
   </label>
-  <label style="display:flex;gap:6px;align-items:center;flex:1;min-width:200px">
-    <span class="mut">搜索</span>
-    <input type="text" id="q" placeholder="型号或名称关键词" style="flex:1"/>
+  <label class="grow">搜索
+    <input type="text" id="q" placeholder="型号或名称关键词（白名单：analog/dante/wireless）"/>
   </label>
-  <span class="feat" id="fWireless" style="cursor:pointer">只看无线相关</span>
+  <span class="feat" id="fWireless">只看无线相关</span>
   <span class="count" id="count"></span>
 </div>
 
@@ -134,34 +197,35 @@
 <script>
 const $ = id => document.getElementById(id);
 
-/* ★ 常用预设（替代旧版长 hints） */
-const PARAM_PRESETS = {
-  SOURCE:    ["count=1"],
-  WIRELESS_MIC: ["channels=1"],
-  ANTENNA:   ["polar=有源指向"],
-  WIRELESS_RX:["channels=N", "antennas=2"],
-  PROCESSOR: ["inputs=N", "outputs=N", "dante_ports=N", "usb_ports=N", "ctrl_ports=N"],
-  MIXER:     ["inputs=N", "outputs=N", "dante_ports=N", "usb_ports=N", "ctrl_ports=N"],
-  AMP:       ["inputs=N", "outputs=N", "set_expand=并行"],
-  SPEAKER:   ["active=true | passive"],
-  SPEAKER_MGR:["inputs=N", "outputs=N", "dante_ports=N"],
-  IO:        ["inputs=模拟入", "outputs=模拟出"],
-  MIC_HOST:  ["phantom_inputs=N", "audio_outputs=N", "aux_inputs=N"],
-  SWITCH:   ["lan_ports=N"],
+/* ============================================================
+   类别 → 常用特性 / 参数（每个 ID 直接借用 index.html 数据）
+   ============================================================ */
+const CAT_FEAT_PRESETS = {
+  SOURCE:["analog"], WIRELESS_MIC:["wireless"], ANTENNA:["active"],
+  WIRELESS_RX:["dante","control"], PROCESSOR:["dsp","dante"], MIXER:[],
+  AMP:["dante"], SPEAKER:["active"], SPEAKER_MGR:["dante"],
+  IO:["dante"], MIC_HOST:["phantom"], SWITCH:["control"],
+  RIGGING:["rigging"], POWER:["aux"],
 };
-const FEATURE_PRESETS = {
-  SOURCE: ["analog"], WIRELESS_MIC: ["wireless"], ANTENNA: ["active"],
-  WIRELESS_RX: ["dante", "control"], PROCESSOR: ["dsp", "dante"], MIXER: [],
-  AMP: ["dante"], SPEAKER: ["active"], SPEAKER_MGR: ["dante"],
-  IO: ["dante"], MIC_HOST: ["phantom"], SWITCH: ["control"],
+const CAT_PARAM_PRESETS = {
+  SOURCE:["count=1"], WIRELESS_MIC:["channels=1"], ANTENNA:["polar=有源指向"],
+  WIRELESS_RX:["channels=4","antennas=2"],
+  PROCESSOR:["inputs=12","outputs=8","dante_ports=0","usb_ports=0","ctrl_ports=0"],
+  MIXER:["inputs=16","outputs=8","dante_ports=8","usb_ports=1","ctrl_ports=1"],
+  AMP:["inputs=2","outputs=2","set_expand=并行"],
+  SPEAKER:["active=true"],
+  SPEAKER_MGR:["inputs=4","outputs=4","dante_ports=0"],
+  IO:["inputs=4","outputs=4"],
+  MIC_HOST:["phantom_inputs=4","audio_outputs=1","aux_inputs=2"],
+  SWITCH:["lan_ports=8"],
 };
-/* 通用兜底 */
-const PARAM_PRESETS_DEFAULT = ["inputs=N", "outputs=N", "channels=N", "cascade_outs=N", "note="];
+
+const ALL_FEATURES = ["analog","aes","dante","control","wireless","phantom","dsp","active","mix_out","trs_out"];
 
 let META = {categories:[], features:[]};
 let ITEMS = [];
-let DIRTY = new Set();      // 已改动但未保存
-let SAVED = new Set();      // 本会话已落盘的 idx
+let DIRTY = new Set();   // 已改动但未保存
+let SAVED = new Set();   // 本会话已落盘
 
 async function api(path, body){
   const r = await fetch(path, {method:"POST",
@@ -185,7 +249,6 @@ async function loadMeta(){
   const init = url.searchParams.get("brand");
   sel.value = (init && META.brands.find(b=>b.brand===init)) ? init : (META.brands[0]||{}).brand || "";
 }
-
 async function loadItems(){
   const res = await api("/api/catalog", {
     action:"list", brand:$("brand").value, q:$("q").value,
@@ -199,7 +262,28 @@ async function loadItems(){
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
-/* ★ 每张卡都按 legend 卡的视觉模型渲染：默认折叠，只露标题+元信息+操作按钮 */
+/* 兜底：当前值不在候选里，把它补成首项（与图例卡 sel() 完全一致逻辑） */
+function selOpts(arr, val){
+  const opts = (val && arr.indexOf(val) < 0 && /^[\w-]+$/.test(String(val)))
+    ? [val].concat(arr) : arr;
+  return opts.map(o=>'<option' + (o === val ? " selected" : "") + '>' + o + '</option>').join("");
+}
+function tryJson(s){
+  if(!s) return undefined;
+  s = String(s).trim();
+  if(!(s.startsWith("{")||s.startsWith("["))) return undefined;
+  try{ return JSON.parse(s); }catch(e){ return undefined; }
+}
+function coerce(v){
+  if(v==="") return "";
+  if(v==="true") return true; if(v==="false") return false;
+  const n = Number(v);
+  return (!isNaN(n) && String(v).trim()!=="") ? n : v;
+}
+
+/* ============================================================
+   render() ── 与图例卡 .legend 100% 同构
+   ============================================================ */
 function render(){
   const box = $("list");
   if(!ITEMS.length){ box.innerHTML = `<div class="empty">没有匹配的条目</div>`; return; }
@@ -208,196 +292,320 @@ function render(){
 }
 
 function badgeFor(i){
+  const it = ITEMS[i];
+  const v = it.revision || 7;
   if(DIRTY.has(i))
-    return `<span class="cache dirty" id="bdg_${i}">◐ ${ITEMS[i].features.length} 特性 / ${Object.keys(ITEMS[i].params||{}).length} 参数 待保存</span>`;
+    return `<span class="cache dirty">◐ N 特性 / K 参数 待保存</span>`;
   if(SAVED.has(i))
-    return `<span class="cache hit" id="bdg_${i}">● 已落盘</span>`;
-  return `<span class="cache miss" id="bdg_${i}">○ 当前主库</span>`;
+    return `<span class="cache hit">● 已落盘 · 备份 ${esc(it.last_backup || 1)}</span>`;
+  return `<span class="cache miss" id="bdg_${i}">○ 当前主库 v${v}</span>`;
 }
 
 function metaLine(it){
   const pcount = Object.keys(it.params||{}).length;
+  const rcount = (it.remark||"").length;
   return `类别 <b style="color:var(--txt)">${esc(it.category||"（不出图）")}</b> · ` +
          `特性 <b style="color:var(--txt)">${it.features.length}</b> · ` +
          `参数 <b style="color:var(--txt)">${pcount}</b> · ` +
-         `备注 <b style="color:var(--txt)">${(it.remark||"").length}</b> 字`;
+         `备注 <b style="color:var(--txt)">${rcount}</b> 字`;
 }
 
+/* ============================================================
+   buildCard() ── 与图例卡 renderLegendCard 同位
+   ============================================================ */
 function buildCard(i){
   const it = ITEMS[i];
   const d = document.createElement("div");
   d.className = "legend"; d.id = "cat_" + i;
+
   d.innerHTML =
     '<div class="th">' +
       '<div class="left">' +
-        '<b>' + esc(it.model) + '</b>' +
+        '<b>' + esc(it.model || it.name) + '</b>' +
         '<span class="mut">· ' + esc([it.brand, it.section].filter(Boolean).join(" / ")) + '</span>' +
         (it.defer_reason ? `<span class="badge miss">后置：${esc(it.defer_reason)}</span>` : "") +
       '</div>' +
       badgeFor(i) +
     '</div>' +
+
     '<div class="kv" id="kv_' + i + '">' + metaLine(it) + '</div>' +
-    '<div class="edit-wrap" id="ed_' + i + '">' + buildEdit(it) + '</div>' +
+
+    /* 类别行（占满宽度） */
+    '<div class="lg-rows" style="grid-template-columns:1fr;margin-top:2px">' +
+      '<div class="prow">' +
+        '<span class="idx">类</span>' +
+        '<select class="cat" id="cat_sel_' + i + '">' +
+          META.categories.map(c =>
+            `<option value="${c}"${c===(it.category||"")?" selected":""}>${c||"（不出图）"}</option>`).join("") +
+        '</select>' +
+        '<span class="mut" style="font-size:11px">→ 系统图类别归属</span>' +
+      '</div>' +
+    '</div>' +
+
+    /* 特性段（每行一个特性，可加减） */
+    sectionHTML("特性", i, "feat", it.features, ALL_FEATURES, function(j){
+      return '<div class="prow">' +
+        '<span class="idx">' + (j+1) + '</span>' +
+        '<select class="feat" data-row="' + j + '">' +
+          selOpts(ALL_FEATURES, it.features[j]) +
+        '</select>' +
+        '<span class="role">↳ 用作：' + esc(it.features[j] || "—") + '</span>' +
+        '<button class="mini del" data-row="' + j + '" title="删除">×</button>' +
+      '</div>';
+    }, "feat") +
+
+    /* 参数段（每行一对 key/value） */
+    sectionHTML("参数", i, "param", Object.entries(it.params||{}).map(([k,v])=>[k,coerceToStr(v)]), null, function(j){
+      const [k, v] = Object.entries(it.params||{})[j] || ["", ""];
+      return '<div class="prow">' +
+        '<span class="idx">' + (j+1) + '</span>' +
+        '<input type="text" class="key" data-row="' + j + '" value="' + esc(k) + '" placeholder="参数名"/>' +
+        '<span style="color:var(--mut)">=</span>' +
+        '<input type="text" class="val" data-row="' + j + '" value="' + esc(v) + '" placeholder="值"/>' +
+        '<button class="mini del" data-row="' + j + '" title="删除">×</button>' +
+      '</div>';
+    }, "param") +
+
+    /* 备注段（单行 input） */
+    sectionHTML("备注", i, "remark", [it.remark||""], null, function(){
+      return '<div class="prow">' +
+        '<span class="idx">字</span>' +
+        '<input type="text" class="remark" value="' + esc(it.remark||"") + '" placeholder="一句话备注（可选）"/>' +
+      '</div>';
+    }, "remark") +
+
     '<div class="row">' +
-      '<button class="ghost" id="tog_' + i + '" style="margin-top:0;padding:5px 14px;font-size:12px">展开编辑</button>' +
+      '<button class="ghost" data-act="addfeat" id="addfeat_' + i + '" style="margin-top:0;padding:5px 12px;font-size:11.5px">+ 新增特性</button>' +
+      '<button class="ghost" data-act="addparam" id="addparam_' + i + '" style="margin-top:0;padding:5px 12px;font-size:11.5px">+ 新增参数</button>' +
       '<span class="grow"></span>' +
-      '<span class="st" id="st_' + i + '"></span>' +
-      '<button class="sec" id="ok_' + i + '" style="margin-top:0;padding:6px 16px;font-size:12px" '+
-        (DIRTY.has(i) ? '' : 'disabled') + '>✓ 保存并落盘</button>' +
+      '<span class="lg-status" id="st_' + i + '"></span>' +
+      '<button class="sec" id="ok_' + i + '" style="margin-top:0;padding:6px 18px;font-size:12.5px"' +
+        (DIRTY.has(i) ? '' : ' disabled') + '>✓ 保存并落盘</button>' +
     '</div>';
 
   wireCard(i, d);
   return d;
 }
 
-function buildEdit(it){
-  const catOpts = META.categories.map(c =>
-    `<option value="${c}"${c===(it.category||"")?" selected":""}>${c||"（不出图）"}</option>`).join("");
-  const feats = META.features.map(f =>
-    `<span class="feat${it.features.includes(f)?" on":""}" data-f="${f}">${f}</span>`).join("");
-  const pvs = Object.entries(it.params||{}).map(([k,v])=>{
-    const vs = (typeof v === "object") ? JSON.stringify(v, null, 0) : String(v);
-    return `<div class="pv">
-      <input type="text" class="pk" value="${esc(k)}"/>
-      <textarea rows="1" class="pval">${esc(vs)}</textarea>
-      <button class="mini" data-act="delp">删</button></div>`;
-  }).join("");
-
-  const catPresets = (PARAM_PRESETS[it.category] || PARAM_PRESETS_DEFAULT)
-    .map(s => `<span class="chip" data-param="${esc(s)}">+ ${esc(s)}</span>`).join("");
-  const featPresets = (FEATURE_PRESETS[it.category] || [])
-    .map(f => `<span class="feat" data-f="${f}">+ ${f}</span>`).join("");
-
-  return (
-    '<div class="grid">' +
-      '<div class="k">类别</div>' +
-      '<div><select class="cat">'+catOpts+'</select>' +
-        '<div class="hint">「（不出图）」= 该型号不进系统图（配件 / 非音频）。</div></div>' +
-      '<div class="k">特性</div>' +
-      '<div><div class="feats">'+feats+'</div>' +
-        (featPresets ? '<div class="preset">'+featPresets+'</div>' : '') +
-        '<div class="hint">点击特性名 切换 加 / 减。</div></div>' +
-      '<div class="k">参数</div>' +
-      '<div><div id="pvs_'+it.idx+'">'+pvs+'</div>' +
-        '<div class="row" style="margin-top:6px">' +
-          '<button class="mini" id="addp_'+it.idx+'" style="margin-top:0">+ 参数</button>' +
-        '</div>' +
-        (catPresets ? '<div class="preset" style="margin-top:6px">常用：'+catPresets+'</div>' : '') +
-        '<div class="hint">处理器/调音台：inputs/outputs/dante_ports/usb_ports/ctrl_ports。<br>' +
-        '级联：cascade=1 · 调音台/处理器无某方向端口请**显式填 0**。</div></div>' +
-      '<div class="k">备注</div>' +
-      '<div><textarea rows="2" class="rmk">' + esc(it.remark||"") + '</textarea></div>' +
-    '</div>'
-  );
+/* coerceToStr：渲染参数值时安全序列化（与 mark 内 tryJson/coerce 互逆） */
+function coerceToStr(v){
+  if(v===null||v===undefined) return "";
+  if(typeof v === "object") return JSON.stringify(v, null, 0);
+  return String(v);
 }
 
-function wireCard(i, d){
-  d.querySelector("#tog_"+i).addEventListener("click", ()=>{
-    d.classList.toggle("open");
-    d.querySelector("#tog_"+i).textContent = d.classList.contains("open") ? "收起" : "展开编辑";
-  });
-  d.querySelector("#ok_"+i).addEventListener("click", ()=>saveOne(i));
-
-  /* change 监听 */
-  d.querySelector(".cat").addEventListener("change", ()=>mark(i));
-  d.querySelectorAll(".feat").forEach(el=>{
-    el.addEventListener("click", ()=>{ el.classList.toggle("on"); mark(i); });
-  });
-  d.querySelectorAll(".pk,.pval,.rmk").forEach(el=>{
-    el.addEventListener("input", ()=>mark(i));
-  });
-
-  /* 快捷插入：+ 参数 */
-  const addpBtn = d.querySelector("#addp_" + ITEMS[i].idx);
-  if(addpBtn){
-    addpBtn.addEventListener("click", ()=>{
-      const wrap = d.querySelector(".edit-wrap #pvs_" + ITEMS[i].idx);
-      const div = document.createElement("div"); div.className="pv";
-      div.innerHTML =
-        '<input type="text" class="pk" placeholder="参数名" value=""/>' +
-        '<textarea rows="1" class="pval" placeholder="值（数字自动转；{...} 自动 JSON）"></textarea>' +
-        '<button class="mini" data-act="delp">删</button>';
-      wrap.appendChild(div);
-      div.querySelector(".pk").addEventListener("input", ()=>mark(i));
-      div.querySelector(".pval").addEventListener("input", ()=>mark(i));
-      div.querySelector("button").addEventListener("click", ()=>{ div.remove(); mark(i); });
-      mark(i);
+/* sectionHTML：根据类型生成「段标题 + 行容器 + 快捷工具」块 */
+function sectionHTML(title, i, kind, rowsData, options, rowRenderer, kindKey){
+  let html =
+    '<div class="section-label">' + esc(title) + '</div>' +
+    '<div class="lg-rows" id="' + kind + '_rows_' + i + '">';
+  if(rowsData.length === 0){
+    html += '<div class="prow" style="opacity:.55">'
+         + '<span class="idx">—</span>'
+         + '<span class="mut" style="font-size:11.5px;font-style:italic">未设置 · 点下方「+ 新增' + (kind==="param"?"参数":"特性") + '」添加</span>'
+         + '</div>';
+  } else {
+    rowsData.forEach((_, j) => {
+      html += rowRenderer(j);
     });
   }
-  /* 快捷插入：常用 chip 一键添加 */
-  d.querySelectorAll(".preset .chip").forEach(c=>{
+  html += '</div>';
+
+  /* 段下快捷 preset chip（仅特性 / 参数） */
+  if(kind === "feat" || kind === "param"){
+    const it = ITEMS[i];
+    const presets = kind === "feat" ? (CAT_FEAT_PRESETS[it.category] || []) :
+                                    (CAT_PARAM_PRESETS[it.category] || []);
+    if(presets.length){
+      html += '<div class="section-tools">' +
+        '<span class="mut" style="font-size:10.5px;letter-spacing:.1em">常用</span>' +
+        presets.map(p => kind === "feat"
+          ? `<span class="preset" data-f="${esc(p)}">+ ${esc(p)}</span>`
+          : `<span class="preset" data-p="${esc(p)}">+ ${esc(p)}</span>`).join("") +
+      '</div>';
+    }
+  }
+  return html;
+}
+
+/* ============================================================
+   wireCard() ── 行内 in-place 编辑，无「展开/折叠」
+   ============================================================ */
+function wireCard(i, d){
+  /* 类别 select 触发 mark 即可 */
+  d.querySelector("#cat_sel_"+i).addEventListener("change", ()=>mark(i));
+
+  /* 特性段：select onChange + × 删除 + preset 快捷插入 */
+  wireSection(i, d, "feat", {
+    onChange: (row, val) => {},
+    onDelete: (row) => {},
+    onPresetClick: (val) => {},
+  });
+
+  /* 参数段 */
+  wireSection(i, d, "param", {});
+
+  /* 备注 */
+  const rmkEl = d.querySelector(".remark");
+  if(rmkEl){ rmkEl.addEventListener("input", ()=>mark(i)); }
+
+  /* 新增按钮 */
+  d.querySelector("#addfeat_"+i).addEventListener("click", ()=>{
+    const wrap = d.querySelector("#feat_rows_"+i);
+    /* 去掉「未设置」占位 */
+    const empty = wrap.querySelector(".prow[style*=opacity]");
+    if(empty) empty.remove();
+    const div = document.createElement("div"); div.className="prow";
+    const j = wrap.children.length;
+    div.innerHTML =
+      '<span class="idx">' + (j+1) + '</span>' +
+      '<select class="feat" data-row="' + j + '">' + selOpts(ALL_FEATURES, "") + '</select>' +
+      '<span class="role">↳ 新增</span>' +
+      '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
+    wrap.appendChild(div);
+    wireSection(i, d, "feat", {});
+    mark(i);
+  });
+  d.querySelector("#addparam_"+i).addEventListener("click", ()=>{
+    const wrap = d.querySelector("#param_rows_"+i);
+    const empty = wrap.querySelector(".prow[style*=opacity]");
+    if(empty) empty.remove();
+    const div = document.createElement("div"); div.className="prow";
+    const j = wrap.children.length;
+    div.innerHTML =
+      '<span class="idx">' + (j+1) + '</span>' +
+      '<input type="text" class="key" data-row="' + j + '" placeholder="参数名"/>' +
+      '<span style="color:var(--mut)">=</span>' +
+      '<input type="text" class="val" data-row="' + j + '" placeholder="值（数字自动转）"/>' +
+      '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
+    wrap.appendChild(div);
+    wireSection(i, d, "param", {});
+    mark(i);
+  });
+
+  /* preset chip 一键插入 */
+  d.querySelectorAll(".section-tools .preset").forEach(c=>{
     c.addEventListener("click", ()=>{
-      const txt = c.dataset.param;
-      const eq = txt.indexOf("=");
-      const k = txt.slice(0, eq), v = txt.slice(eq+1);
-      const wrap = d.querySelector(".edit-wrap #pvs_" + ITEMS[i].idx);
-      const div = document.createElement("div"); div.className="pv";
-      div.innerHTML =
-        '<input type="text" class="pk" value="'+esc(k)+'"/>' +
-        '<textarea rows="1" class="pval">'+esc(v)+'</textarea>' +
-        '<button class="mini" data-act="delp">删</button>';
-      wrap.appendChild(div);
-      div.querySelector(".pk").addEventListener("input", ()=>mark(i));
-      div.querySelector(".pval").addEventListener("input", ()=>mark(i));
-      div.querySelector("button").addEventListener("click", ()=>{ div.remove(); mark(i); });
+      if(c.dataset.f){
+        /* 特性 preset */
+        const wrap = d.querySelector("#feat_rows_"+i);
+        const empty = wrap.querySelector(".prow[style*=opacity]");
+        if(empty) empty.remove();
+        const div = document.createElement("div"); div.className="prow";
+        const j = wrap.children.length;
+        div.innerHTML =
+          '<span class="idx">' + (j+1) + '</span>' +
+          '<select class="feat" data-row="' + j + '">' + selOpts(ALL_FEATURES, c.dataset.f) + '</select>' +
+          '<span class="role">↳ '+esc(c.dataset.f)+'</span>' +
+          '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
+        wrap.appendChild(div);
+        wireSection(i, d, "feat", {});
+      } else if(c.dataset.p){
+        /* 参数 preset (k=v) */
+        const txt = c.dataset.p;
+        const eq = txt.indexOf("=");
+        const k = txt.slice(0, eq), v = txt.slice(eq+1);
+        const wrap = d.querySelector("#param_rows_"+i);
+        const empty = wrap.querySelector(".prow[style*=opacity]");
+        if(empty) empty.remove();
+        const div = document.createElement("div"); div.className="prow";
+        const j = wrap.children.length;
+        div.innerHTML =
+          '<span class="idx">' + (j+1) + '</span>' +
+          '<input type="text" class="key" data-row="' + j + '" value="'+esc(k)+'"/>' +
+          '<span style="color:var(--mut)">=</span>' +
+          '<input type="text" class="val" data-row="' + j + '" value="'+esc(v)+'"/>' +
+          '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
+        wrap.appendChild(div);
+        wireSection(i, d, "param", {});
+      }
       mark(i);
-      d.classList.add("open");
     });
   });
-  /* 快捷特性 +features 链接到现有 data-f 切换 */
-  d.querySelectorAll(".preset .feat").forEach(c=>{
-    c.addEventListener("click", ()=>{
-      const f = c.dataset.f;
-      const target = [...d.querySelectorAll(".feats .feat")].find(e=>e.dataset.f===f);
-      if(target){ target.classList.toggle("on"); mark(i); }
-    });
+
+  /* 保存 */
+  d.querySelector("#ok_"+i).addEventListener("click", ()=>saveOne(i));
+}
+
+/* 在特性 / 参数 段内 bind select.onchange / input.oninput / ×.click */
+function wireSection(i, d, kind /* "feat" or "param" */, _){
+  const wrap = d.querySelector("#" + kind + "_rows_" + i);
+  if(!wrap) return;
+  /* 已有行的 select onChange */
+  wrap.querySelectorAll("select."+kind).forEach(sel=>{
+    sel.addEventListener("change", ()=>mark(i));
   });
-  /* 已有参数的 删 */
-  d.querySelectorAll('[data-act="delp"]').forEach(b=>{
-    b.addEventListener("click", ()=>{ b.closest(".pv").remove(); mark(i); });
+  /* 已有行的 input onInput */
+  wrap.querySelectorAll("input.key, input.val").forEach(inp=>{
+    inp.addEventListener("input", ()=>mark(i));
+  });
+  /* × 按钮 */
+  wrap.querySelectorAll("button.del").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      b.closest(".prow").remove();
+      /* 重排 idx */
+      [...wrap.querySelectorAll(".prow")].forEach((p, k)=>{
+        p.querySelector(".idx").textContent = (k+1);
+      });
+      mark(i);
+    });
   });
 }
 
+/* ============================================================
+   mark() ── 实时同步 ITEMS[i]，刷新徽章 + 元信息行
+   ============================================================ */
 function mark(i){
   DIRTY.add(i);
   const c = $("cat_"+i);
+  if(!c) return;
   c.classList.add("changed");
   c.querySelector("#ok_"+i).disabled = false;
-  /* 同步徽章 + 元信息行（实时反映编辑） */
+
   const it = ITEMS[i];
-  it.category = c.querySelector(".cat").value;
-  it.features = [...c.querySelectorAll(".feats .feat.on")].map(e=>e.dataset.f);
+
+  /* 类别 */
+  it.category = c.querySelector("#cat_sel_"+i).value || "";
+
+  /* 特性 */
+  it.features = [];
+  c.querySelectorAll("#feat_rows_"+i+" select.feat").forEach(sel=>{
+    const v = sel.value; if(v) it.features.push(v);
+  });
+
+  /* 参数 */
   it.params = {};
-  c.querySelectorAll(".pv").forEach(pv=>{
-    const k = pv.querySelector(".pk").value.trim();
+  c.querySelectorAll("#param_rows_"+i+" .prow").forEach(p=>{
+    const k = p.querySelector(".key").value.trim();
     if(!k) return;
-    let v = pv.querySelector(".pval").value.trim();
+    let v = p.querySelector(".val").value.trim();
     const jp = tryJson(v);
     it.params[k] = (jp !== undefined) ? jp : coerce(v);
   });
-  it.remark = c.querySelector(".rmk").value;
-  $("bdg_"+i).className = "cache dirty";
-  $("bdg_"+i).textContent = `◐ ${it.features.length} 特性 / ${Object.keys(it.params).length} 参数 待保存`;
-  $("kv_"+i).innerHTML = metaLine(it);
-}
 
-function tryJson(s){
-  if(!(s.startsWith("{")||s.startsWith("["))) return undefined;
-  try{ return JSON.parse(s); }catch(e){ return undefined; }
-}
-function coerce(v){
-  if(v==="") return "";
-  if(v==="true") return true; if(v==="false") return false;
-  const n = Number(v);
-  return (!isNaN(n) && v.trim()!=="") ? n : v;
+  /* 备注 */
+  const r = c.querySelector(".remark");
+  it.remark = r ? r.value : "";
+
+  /* 同步徽章 */
+  const bdg = c.querySelector(".cache");
+  if(bdg){
+    bdg.className = "cache dirty";
+    bdg.textContent = `◐ ${it.features.length} 特性 / ${Object.keys(it.params).length} 参数 待保存`;
+  }
+  /* 同步元信息 */
+  const kv = c.querySelector(".kv");
+  if(kv) kv.innerHTML = metaLine(it);
 }
 
 async function saveOne(i){
   const card = $("cat_"+i);
-  /* 如果未展开也要能保存现状：collect() 直接从 it 拿 */
+  if(!card) return;
+  /* mark() 已经把 ITEMS[i] 同步过了，直接拿 */
+  mark(i);
   const it = ITEMS[i];
   const st = $("st_"+i);
-  st.className="st"; st.textContent="保存中…";
+  st.className="lg-status"; st.textContent="保存中…";
   const payload = {
     action:"put", idx: it.idx,
     category: it.category || "",
@@ -407,20 +615,24 @@ async function saveOne(i){
   };
   const res = await api("/api/catalog", payload);
   if(res.error){
-    st.className="st err"; st.textContent="失败："+res.error;
+    st.className="lg-status err"; st.textContent="失败："+res.error;
     toast("保存失败：" + res.error, "err"); return;
   }
   DIRTY.delete(i);
   SAVED.add(i);
   card.classList.remove("changed");
   card.querySelector("#ok_"+i).disabled = true;
-  $("bdg_"+i).className="cache hit";
-  $("bdg_"+i).textContent="● 已落盘 · 备份 " + res.backup;
-  st.className="st ok"; st.textContent = "已落盘";
+  const bdg = card.querySelector(".cache");
+  bdg.className = "cache hit";
+  bdg.textContent = "● 已落盘 · 备份 " + (res.backup || 1);
+  st.className="lg-status ok";
+  st.textContent = "✓ 已落盘 · 备份 " + (res.backup || 1);
   toast("✓ 已保存 " + (it.model||it.name), "ok");
 }
 
-/* ===== 顶部交互 ===== */
+/* ============================================================
+   顶部交互
+   ============================================================ */
 $("brand").addEventListener("change", loadItems);
 $("q").addEventListener("input", ()=>{ clearTimeout(window._qt);
   window._qt = setTimeout(loadItems, 280); });
