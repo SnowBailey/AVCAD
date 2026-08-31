@@ -7,6 +7,7 @@ import re
 import yaml
 from avcad.model.schema import (
     DeviceSpec, DeviceInstance, ConcretePort, Signal, Redundancy, Port,
+    normalize_redundancy,
 )
 
 # normpath 很关键：PyInstaller 打包后 __file__ 指向归档内的虚拟路径，
@@ -112,7 +113,7 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
     )
     params = default_params(spec, entry.get("params", {}) or {})
     qty = int(entry.get("quantity", 1) or 1)
-    redundancy = Redundancy(str(entry.get("redundancy", "NONE")).upper())
+    redundancy = normalize_redundancy(entry.get("redundancy", "NONE"))
     active = bool(entry.get("active", spec.fixed.get("active", False)))
 
     uid = entry.get("uid") or f"{spec.category.lower()}_{idx+1}"
@@ -209,7 +210,7 @@ def build_instances(entries: list) -> list:
                 quantity=int(e.get("quantity", 1) or 1),
                 features=_norm_features(e.get("features")),
                 params=e.get("params", {}) or {},
-                redundancy=Redundancy(str(e.get("redundancy", "NONE")).upper()),
+                redundancy=normalize_redundancy(e.get("redundancy", "NONE")),
             ))
             continue
         qty = int(e.get("quantity", 1) or 1)

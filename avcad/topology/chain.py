@@ -136,12 +136,24 @@ def assign_stages(instances: list, chain: list):
             i.stage = i.category
 
 
-def pair_redundancy(instances: list):
-    """按类别聚合冗余设备并建立主备分组（仅 MIXER/PROCESSOR 允许）。"""
+def pair_redundancy(instances: list) -> list:
+    """按类别聚合冗余设备并建立主备分组，返回未能成组的告警列表。
+
+    ★ 此前「清单里写了冗余列但同类别不足 2 台」会**静默失效**——用户以为
+    设了冗余，图上却没有任何变化。现在一律记告警，由 build_project 收进
+    project.meta，报告里能看见。
+
+    注意：`REDUNDANCY_SCOPE[级别].categories` 只决定 `_apply_redundancy`
+    **复制哪些类别**，不限制这里能配对的类别——清单里给 2 台调音台标
+    LINK_BACKUP（意为「这一对走双链路冗余」）是合法用法，不能被判越界。
+    """
     by_cat = {}
     for i in instances:
-        if i.redundancy in (Redundancy.PROCESSOR_BACKUP, Redundancy.LINK_BACKUP, Redundancy.FULL_CHAIN):
-            by_cat.setdefault(i.category, []).append(i)
+        if i.redundancy in (Redundancy.NONE,) or not i.redundancy:
+            continue
+        by_cat.setdefault(i.category, []).append(i)
+
+    warns = []
     for cat, grp in by_cat.items():
         if len(grp) >= 2:
             grp[0].redundant_group = cat + "_grp"
@@ -150,3 +162,14 @@ def pair_redundancy(instances: list):
             grp[1].pair = grp[0].uid
             grp[0].is_backup = False
             grp[1].is_backup = True
+            if len(grp) > 2:
+                extra = "、".join(g.name for g in grp[2:])
+                warns.append(f"{cat} 类有 {len(grp)} 台标了冗余，只取前 2 台配成主备，"
+                             f"其余未参与：{extra}")
+        else:
+            d = grp[0]
+            lvl = d.redundancy.value if hasattr(d.redundancy, "value") else str(d.redundancy)
+            warns.append(
+                f"{d.name} 标了冗余「{lvl}」，但同类别只有 1 台，无法组成主备——"
+                f"需要 2 台同型号设备，或在第④步选带主备的候选架构")
+    return warns

@@ -82,7 +82,7 @@ AVCAD 是一个面向专业音视频系统设计师的自动出图工具。用�
 | 数量 | 是 | 整数，决定生成几个实例 |
 | 特性 | 否 | `dante;control;analog` 等，分号/逗号分隔 |
 | 参数 | 否 | `inputs=8;outputs=8;channels=4` 等 |
-| 冗余 | 否 | NONE / PROCESSOR_BACKUP / LINK_BACKUP / FULL_CHAIN |
+| 冗余 | 否 | NONE / DEVICE_BACKUP / PROCESSOR_BACKUP / LINK_BACKUP / FULL_CHAIN。语义见 `schema.REDUNDANCY_SCOPE`：设备级热备（复制调音台）/ 处理器热备（复制处理器）/ 链路冗余（双交换机、不画设备间 failover 线）/ 全链路。**清单里写级别不复制设备**——需同类 ≥2 台才会配成主备，不足 2 台会告警 |
 
 **异常状态**：
 - 文件解析失败：在预览区红色提示「未能识别列头，请手动映射」。

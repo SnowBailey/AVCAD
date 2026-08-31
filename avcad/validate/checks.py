@@ -1,7 +1,7 @@
 """校验模块：出图前门禁。未连端口 / 通道不匹配 / 阻抗越限 / SPOF / 未知类型 / 无线分集缺失。"""
 from __future__ import annotations
 from collections import defaultdict
-from avcad.model.schema import Issue, Signal, Redundancy
+from avcad.model.schema import Issue, Signal, Redundancy, redundancy_scope
 
 KNOWN = {"SOURCE", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "WIRELESS_RX",
          "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH", "IO"}
@@ -87,6 +87,17 @@ def validate(project) -> list:
             elif partner.category != i.category:
                 issues.append(Issue("ERROR", "PAIR_TYPE",
                                     f"{i.name} 与配对设备 {partner.name} 类型不一致", i.uid))
+
+    # 冗余告警：清单标了冗余却没组成主备对（同类不足 2 台 / 超过 2 台）
+    # ★ 此前这类情况静默失效，用户以为设了冗余、图上却毫无变化。
+    for w in project.meta.get("redundancy_warnings", []):
+        issues.append(Issue("WARN", "REDUNDANCY", w, ""))
+
+    # 链路冗余要求 Dante 网络承载；无 Dante 时「双交换机」无从谈起
+    if any(redundancy_scope(i.redundancy)["dual_switch"] for i in project.instances):
+        if not any(p.signal == Signal.DANTE for i in project.instances for p in i.ports):
+            issues.append(Issue("WARN", "LINK_BACKUP_NO_DANTE",
+                                "配置了链路冗余，但系统无 Dante 设备，双交换机无从承载", ""))
 
     project.issues = issues
     return issues

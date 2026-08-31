@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from avcad.model.schema import (
     Signal, Redundancy, Connection, DeviceInstance,
-    signal_color, signal_layer, signal_ltype,
+    signal_color, signal_layer, signal_ltype, redundancy_scope,
 )
 from avcad.wires.amp_match import match_speakers_to_amp
 from avcad.topology.chain import PROC_PRE, PROC_POST
@@ -765,6 +765,11 @@ def _failover(project):
     for grp in pairs.values():
         if len(grp) >= 2:
             a, b = grp[0], grp[1]
+            # 链路冗余（LINK_BACKUP）的冗余在网络层：主备各走一台交换机，
+            # 设备之间**不画** failover 直连线——画了就等于把主备串成一条链，
+            # 备机反而失去了独立链路的意义。
+            if not redundancy_scope(a.redundancy or b.redundancy)["failover_link"]:
+                continue
             ap = _first_out(a, Signal.XLR) or _first_out(a, Signal.AES)
             bp = _first_in(b, Signal.XLR) or _first_in(b, Signal.AES)
             if ap and bp:

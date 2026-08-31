@@ -1,15 +1,29 @@
-"""主备 failover 与孤立音源救援的回归测试。
+"""冗余分级语义 + 主备 failover + 孤立音源救援的回归测试。
 
-背景（2026-08-31）：用 `scripts/probe_link_coverage.py` 扫描 10 份真实清单，
-发现 `_failover` 与 `_orphan_sources_rescue` **产出 0 条连线**——即从未被
-真实数据覆盖。构造场景验证后确认两者行为正确，故补测试锁住，避免日后改坏。
+2026-08-31 补齐的语义（阳哥「你来判断最佳方案」后定，见
+`schema.REDUNDANCY_SCOPE`）：
+
+    DEVICE_BACKUP     设备级热备（复制调音台），画主备 failover 线
+    PROCESSOR_BACKUP  处理器热备（复制处理器），画主备 failover 线
+    LINK_BACKUP       链路冗余（冗余载体是交换机），**不画**设备间 failover 线
+    FULL_CHAIN        全链路（调音台+处理器+双交换机），画 failover 线
+
+★ 级别在两条入口路径上的含义不同，别混为一谈：
+  - 候选 / API 路径（`_apply_redundancy`）：级别决定**复制哪些类别**；
+  - 清单 CSV 路径：用户已经用「冗余」列指明了哪几台是主备，级别只描述
+    **怎么冗余**（是否画 failover 线、是否要双交换机），不复制设备——
+    清单是造价清单，买了 1 台就不该凭空变 2 台。
+
+本文件的由来：用 `scripts/probe_link_coverage.py` 扫描 10 份真实清单，发现
+`_failover` 与 `_orphan_sources_rescue` **产出 0 条连线**——即从未被真实数据
+覆盖。构造场景验证后确认两者行为正确，故补测试锁住，避免日后改坏。
 
 ★ 真实清单全绿 ≠ 代码正确，只说明这条路径没被走到。
 """
 from __future__ import annotations
 
 from avcad.core.build import build_project
-from avcad.model.schema import Signal
+from avcad.model.schema import Signal, Redundancy, normalize_redundancy
 
 
 def _dev(cat, model="X", n=1, **kw):
@@ -160,6 +174,101 @@ def test_orphan_rescue_matches_signal_type():
         dp = next(q for q in dst.ports if q.id == c.to_port)
         assert sp.signal == dp.signal, \
             f"救援连线信号不匹配：{sp.signal} -> {dp.signal}"
+
+
+# ------------------------------------------------- 冗余分级语义（清单路径）
+
+
+def _dante_backbone(mixer_redundancy=None, n_mixer=2):
+    """带 Dante 的骨架：若干台调音台（可统一标冗余）+ 音源 + 功放 + 音箱。"""
+    return [
+        _dev("SOURCE", "MT110", 2, features=["analog"],
+             params={"outputs": 1}),
+        _dev("MIXER", "TF5", n_mixer, features=["analog", "dante", "control"],
+             params={"inputs": 16, "outputs": 8},
+             **({"redundancy": mixer_redundancy} if mixer_redundancy else {})),
+        _dev("AMP", "DA250Q", features=["analog", "control"],
+             params={"channels": 4}),
+        _dev("SPEAKER", "CI600", 2,
+             params={"impedance_ohm": 8, "power_w": 80}),
+    ]
+
+
+def _failover_links(p):
+    return [c for c in p.connections if c.note == "主备failover"]
+
+
+def test_link_backup_pair_has_no_failover_but_dual_switch():
+    """链路冗余：主备各走一台交换机，设备之间**不画** failover 线。"""
+    p = build_project(_dante_backbone("LINK_BACKUP"), name="T")
+    baks = [i for i in p.instances if i.is_backup]
+    assert len(baks) == 1 and baks[0].category == "MIXER", "2 台调音台应配成一主一备"
+    assert not _failover_links(p), "链路冗余不得画设备间 failover 直连线"
+    assert len(p.switches) == 2, "链路冗余必须双交换机"
+
+
+def test_device_backup_pair_draws_failover_line():
+    """设备级热备：要画「主 → 备」的 failover 线。"""
+    p = build_project(_dante_backbone("DEVICE_BACKUP"), name="T")
+    assert len(_failover_links(p)) == 1, "设备级热备应画 1 条 failover 线"
+
+
+def test_redundancy_levels_differ_in_csv_path():
+    """清单路径上 LINK_BACKUP 与 DEVICE_BACKUP 必须产出不同的图。
+
+    回归背景：此前三档在清单路径上产出完全相同的图（级别值被当布尔丢弃）。
+    """
+    link = build_project(_dante_backbone("LINK_BACKUP"), name="T")
+    dev = build_project(_dante_backbone("DEVICE_BACKUP"), name="T")
+    assert len(_failover_links(link)) == 0 and len(_failover_links(dev)) == 1
+    assert len(link.connections) < len(dev.connections), \
+        "两档连线数应当不同，否则级别又退化成布尔了"
+
+
+def test_single_device_redundancy_warns_instead_of_silently_ignored():
+    """★ 同类只有 1 台却标了冗余：必须告警，不能静默失效。"""
+    p = build_project(_dante_backbone("FULL_CHAIN", n_mixer=1), name="T")
+    warns = p.meta.get("redundancy_warnings", [])
+    assert warns, "标了冗余却没能成对，必须告警（此前是完全静默）"
+    assert any("只有 1 台" in w for w in warns), warns
+    assert not [i for i in p.instances if i.is_backup], "不应凭空造出备机"
+    # 告警要能进校验报告
+    assert any(i.code == "REDUNDANCY" for i in p.issues), \
+        "冗余告警未进入 issues，报告里看不到"
+
+
+def test_more_than_two_redundant_devices_warns():
+    """同类 3 台标冗余：只取前 2 台配主备，其余要点名告警。"""
+    p = build_project(_dante_backbone("DEVICE_BACKUP", n_mixer=3), name="T")
+    baks = [i for i in p.instances if i.is_backup]
+    assert len(baks) == 1, "3 台里只应有 1 台被标为备机"
+    warns = p.meta.get("redundancy_warnings", [])
+    assert any("只取前 2 台" in w for w in warns), warns
+
+
+def test_chinese_redundancy_values_are_recognized():
+    """清单「冗余」列写中文必须能识别——此前 `Redundancy(str(v).upper())`
+    遇到中文会 ValueError 崩掉整张清单（该列别名里就有「冗余」「主备」）。
+    """
+    assert normalize_redundancy("主备") == Redundancy.DEVICE_BACKUP
+    assert normalize_redundancy("调音台主备") == Redundancy.DEVICE_BACKUP
+    assert normalize_redundancy("处理器主备") == Redundancy.PROCESSOR_BACKUP
+    assert normalize_redundancy("链路冗余") == Redundancy.LINK_BACKUP
+    assert normalize_redundancy("全链路") == Redundancy.FULL_CHAIN
+    # 容忍空格/下划线，以及空值与无法识别的写法（降级为 NONE 而非抛异常）
+    assert normalize_redundancy("processor backup") == Redundancy.PROCESSOR_BACKUP
+    assert normalize_redundancy("") == Redundancy.NONE
+    assert normalize_redundancy(None) == Redundancy.NONE
+    assert normalize_redundancy("随便写的") == Redundancy.NONE
+    assert normalize_redundancy(Redundancy.FULL_CHAIN) == Redundancy.FULL_CHAIN
+
+
+def test_chinese_redundancy_end_to_end():
+    """端到端：清单写「主备」应真的配成一主一备并画 failover 线。"""
+    p = build_project(_dante_backbone("主备"), name="T")
+    baks = [i for i in p.instances if i.is_backup]
+    assert len(baks) == 1 and baks[0].category == "MIXER"
+    assert len(_failover_links(p)) == 1
 
 
 def test_no_orphan_left_when_capacity_is_enough():

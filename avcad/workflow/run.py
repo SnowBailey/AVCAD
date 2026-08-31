@@ -17,6 +17,7 @@ from typing import Optional
 
 from avcad.parse.bom_parser import parse_bom
 from avcad.core.build import build_project, _apply_redundancy
+from avcad.model.schema import redundancy_levels
 from avcad.workflow.module_confirm import confirm_modules
 from avcad.workflow.legend_store import LegendStore
 from avcad.workflow.architecture import recommended
@@ -57,16 +58,15 @@ def run_workflow(bom_text: Optional[str] = None, decisions: Optional[dict] = Non
 
     # 冗余注入（与 UI /api/export 一致）；redundancy 参数为唯一权威来源，
     # 应用前先清除条目自带冗余，避免与 BOM 已标注冗余叠加成双主备。
-    if redundancy in ("PROCESSOR_BACKUP", "LINK_BACKUP", "FULL_CHAIN"):
+    if redundancy in redundancy_levels():
         for e in filtered:
             e["redundancy"] = "NONE"
             e.pop("pair", None)
-        filtered = _apply_redundancy(filtered, {"MIXER": redundancy})
-        if redundancy == "FULL_CHAIN":
-            filtered = _apply_redundancy(filtered, {"PROCESSOR": redundancy})
+        filtered = _apply_redundancy(filtered, redundancy)
 
     # ⑤ 构建 + 校验（实例建成后按缓存图例回填端口）
-    proj = build_project(filtered, name=name or "AV System", legend_store=store)
+    proj = build_project(filtered, name=name or "AV System", legend_store=store,
+                         redundancy=redundancy)
 
     # ④ 参考架构选择
     arch = recommended(filtered, redundancy)

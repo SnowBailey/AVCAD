@@ -99,14 +99,40 @@ def test_slots_as_string_is_not_exploded():
 
 
 def test_candidates_redundancy():
+    """每档冗余一个候选，且**行为互不相同**。
+
+    回归背景：此前只有 3 个候选，且 T2/T3 走各写一份 mapping 的老路，
+    三档枚举值在出图里只被当作布尔用，产出完全相同的图。
+    """
     cands = generate_candidates(parse_bom(SAMPLE))
-    assert len(cands) == 3
-    t3 = cands[2][1]
-    assert t3 is not None
-    assert len(t3.switches) == 2
-    assert any(c.role == "backup" for c in t3.connections)
+    assert len(cands) == 5
+    t1, t2, t3, t4, t5 = [p for _, p in cands]
+    assert all(p is not None for p in (t1, t2, t3, t4, t5))
+
+    def dups(p):
+        return tuple(sorted({i.category for i in p.instances if i.is_backup}))
+
+    def fos(p):
+        return [c for c in p.connections if c.note == "主备failover"]
+
     # T1 无主备
-    assert all(c.role == "primary" for c in cands[0][1].connections)
+    assert dups(t1) == () and not fos(t1)
+    assert all(c.role == "primary" for c in t1.connections)
+
+    # T2 调音台主备：只复制 MIXER，画 failover 线
+    assert dups(t2) == ("MIXER",) and fos(t2)
+    # T3 处理器主备：只复制 PROCESSOR，画 failover 线
+    assert dups(t3) == ("PROCESSOR",) and fos(t3)
+    # T4 链路主备：不复制末端设备、**不画** failover 线，但要双交换机
+    assert dups(t4) == () and not fos(t4)
+    assert len(t4.switches) == 2
+    # T5 全链路：MIXER + PROCESSOR 都复制 + 双交换机 + failover 线
+    assert dups(t5) == ("MIXER", "PROCESSOR") and fos(t5)
+    assert len(t5.switches) == 2
+
+    # ★ 核心回归：五档必须产出五张不同的图
+    sigs = {(dups(p), bool(fos(p)), len(p.switches)) for p in (t1, t2, t3, t4, t5)}
+    assert len(sigs) == 5, f"存在行为重复的冗余档：{sigs}"
 
 
 def test_amp_match_prefer_independent():

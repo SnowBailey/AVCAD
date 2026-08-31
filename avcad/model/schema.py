@@ -104,9 +104,103 @@ def _signal_entry(sig):
 
 class Redundancy(str, Enum):
     NONE = "NONE"
+    DEVICE_BACKUP = "DEVICE_BACKUP"
     PROCESSOR_BACKUP = "PROCESSOR_BACKUP"
     LINK_BACKUP = "LINK_BACKUP"
     FULL_CHAIN = "FULL_CHAIN"
+
+
+# 冗余级别 → 行为定义。★ 三档（五档）冗余的**唯一权威**，调用点禁止各写一份 mapping。
+#   categories    : 需复制成主备的设备类别（SWITCH 不在此列，走 _make_switches）
+#   dual_switch   : 是否强制生成双交换机（链路冗余的物理体现）
+#   failover_link : 是否画「主 → 备」音频 failover 线
+#
+# 语义（2026-08-31 阳哥要求「你来判断最佳方案」后定）：
+#   DEVICE_BACKUP    调音台等**设备级**热备 —— 画主备直连音频线，单链路即可
+#   PROCESSOR_BACKUP 处理器热备 —— 处理器是系统核心，同样画主备直连线
+#   LINK_BACKUP      **链路**冗余 —— 冗余在网络层（Dante 主备网），冗余载体是
+#                    交换机本身；主备各走一台交换机，**不画**设备间 failover 线
+#   FULL_CHAIN       全链路 —— 设备级 + 链路级都要
+REDUNDANCY_SCOPE = {
+    "DEVICE_BACKUP": {
+        "categories": ("MIXER",),
+        "dual_switch": False,
+        "failover_link": True,
+    },
+    "PROCESSOR_BACKUP": {
+        "categories": ("PROCESSOR",),
+        "dual_switch": False,
+        "failover_link": True,
+    },
+    "LINK_BACKUP": {
+        "categories": ("SWITCH",),
+        "dual_switch": True,
+        "failover_link": False,
+    },
+    "FULL_CHAIN": {
+        "categories": ("MIXER", "PROCESSOR", "SWITCH"),
+        "dual_switch": True,
+        "failover_link": True,
+    },
+}
+
+_EMPTY_SCOPE = {"categories": (), "dual_switch": False, "failover_link": False}
+
+
+def redundancy_scope(level) -> dict:
+    """取冗余级别的行为定义；NONE / 未知值返回空定义（不复制、不双交换机、不画线）。"""
+    key = level.value if isinstance(level, Redundancy) else str(level or "NONE")
+    return REDUNDANCY_SCOPE.get(key, _EMPTY_SCOPE)
+
+
+def redundancy_levels() -> tuple:
+    """所有非 NONE 的冗余级别（供清单解析、UI 下拉、校验提示复用）。"""
+    return tuple(REDUNDANCY_SCOPE)
+
+
+# 清单里「冗余」列的中文写法 → 枚举。★ 该列的列名别名里就有「冗余」「主备」，
+# 中文用户自然会写中文值；而 `Redundancy(str(v).upper())` 遇到中文会直接
+# ValueError 崩掉整张清单，所以必须归一化。裸写「主备」= 设备级热备（最常见）。
+_REDUNDANCY_ALIASES = {
+    "无": "NONE", "无冗余": "NONE", "不冗余": "NONE", "单链路": "NONE",
+    "主备": "DEVICE_BACKUP", "设备主备": "DEVICE_BACKUP", "设备冗余": "DEVICE_BACKUP",
+    "设备级热备": "DEVICE_BACKUP", "调音台主备": "DEVICE_BACKUP",
+    "处理器主备": "PROCESSOR_BACKUP", "处理器冗余": "PROCESSOR_BACKUP",
+    "处理器热备": "PROCESSOR_BACKUP",
+    "链路主备": "LINK_BACKUP", "链路冗余": "LINK_BACKUP", "双链路": "LINK_BACKUP",
+    "双网": "LINK_BACKUP", "双交换机": "LINK_BACKUP",
+    "全链路": "FULL_CHAIN", "全链路主备": "FULL_CHAIN", "全冗余": "FULL_CHAIN",
+}
+
+_REDUNDANCY_ALIAS_FLAT = {
+    k.replace(" ", "").replace("_", "").replace("-", "").upper(): v
+    for k, v in _REDUNDANCY_ALIASES.items()
+}
+
+# 去下划线后的枚举名 → 原枚举名（容忍 "processor backup" / "fullchain" 这类写法）
+_REDUNDANCY_ENUM_FLAT = {k.replace("_", ""): k for k in Redundancy.__members__}
+
+
+def normalize_redundancy(val) -> Redundancy:
+    """把清单里的冗余写法（含中文）归一到 Redundancy 枚举。
+
+    无法识别的写法一律降级为 NONE 而不是抛异常——宁可「没设冗余」，
+    也不能让一行写错就崩掉整张清单。
+    """
+    if isinstance(val, Redundancy):
+        return val
+    raw = str(val or "").strip().upper()
+    if not raw:
+        return Redundancy.NONE
+    # ★ 先按原样匹配枚举名（FULL_CHAIN），再去空格/下划线做模糊匹配
+    #   （"full chain" / "fullchain"）。顺序反了会让正常英文值全部降级成 NONE。
+    if raw in Redundancy.__members__:
+        return Redundancy[raw]
+    flat = raw.replace(" ", "").replace("_", "").replace("-", "")
+    if flat in _REDUNDANCY_ENUM_FLAT:
+        return Redundancy[_REDUNDANCY_ENUM_FLAT[flat]]
+    lvl = _REDUNDANCY_ALIAS_FLAT.get(flat)
+    return Redundancy(lvl) if lvl else Redundancy.NONE
 
 
 @dataclass

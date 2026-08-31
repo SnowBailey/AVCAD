@@ -1,6 +1,7 @@
-"""工程编排：清单 -> 实例 -> 链路 -> 布局 -> 连线 -> 校验 -> 工程对象。含 3 候选拓扑。"""
+"""工程编排：清单 -> 实例 -> 链路 -> 布局 -> 连线 -> 校验 -> 工程对象。含冗余候选拓扑。"""
 from __future__ import annotations
-from avcad.model.schema import Project, DeviceInstance, Redundancy
+from avcad.model.schema import (Project, DeviceInstance, Redundancy,
+                                redundancy_scope, redundancy_levels)
 from avcad.model.specs import build_instances, load_specs, expand_instance
 from avcad.parse.product_resolver import enrich
 from avcad.topology.chain import build_chain, assign_stages, pair_redundancy
@@ -51,9 +52,15 @@ def _make_switches(instances, redundant: bool):
 
 
 def build_project(entries: list, name: str = "AV System",
-                  legend_store=None) -> Project:
+                  legend_store=None, redundancy: str = None) -> Project:
     """legend_store: 可选 LegendStore；若提供，实例建成后立即按缓存图例回填端口
-    （用户确认过的型号自动套用，未确认则保留规格默认）。"""
+    （用户确认过的型号自动套用，未确认则保留规格默认）。
+
+    redundancy: 工程级冗余级别（DEVICE_BACKUP / PROCESSOR_BACKUP / LINK_BACKUP /
+    FULL_CHAIN）。用于两件条目层面办不到的事：① 清单里没有交换机时仍要按级别
+    生成双交换机（LINK_BACKUP 的冗余载体就是交换机本身，条目里可能根本没有它）；
+    ② 记入 meta 供报告与告警使用。条目自带的 redundancy 与之叠加生效。
+    """
     entries = enrich(list(entries))
     entries = _ensure_wireless_dist(entries)
     instances = build_instances(entries)
@@ -61,12 +68,18 @@ def build_project(entries: list, name: str = "AV System",
         for inst in instances:
             legend_store.apply(inst)
     chain = build_chain(instances)
-    pair_redundancy(instances)
+    redundancy_warnings = pair_redundancy(instances)
     assign_stages(instances, chain)
 
     has_dante = any(p.signal.name == "DANTE" for i in instances for p in i.ports)
     redundant_dante = any(i.is_backup and any(p.signal.name == "DANTE" for p in i.ports)
                           for i in instances)
+    # 链路级冗余（LINK_BACKUP / FULL_CHAIN）要求双交换机，与「备机是否有 Dante 口」
+    # 无关——这是冗余级别本身的要求，不是备机端口的副作用。
+    # 工程级级别也要算进来：LINK_BACKUP 的冗余载体就是交换机，而清单里可能
+    # 根本没列交换机，此时只能靠工程级级别驱动。
+    level_dual = redundancy_scope(redundancy)["dual_switch"] or any(
+        redundancy_scope(i.redundancy)["dual_switch"] for i in instances)
     # 清单里明确配了交换机（如 VINGLOOP AIM-24MG6XF-UPoE、L-Acoustics LS10）时
     # 直接用清单的，不要再凭空造一台虚拟交换机——否则会出现
     # 「虚拟交换机连满、清单里的真交换机成了孤立节点」的怪图。
@@ -74,11 +87,19 @@ def build_project(entries: list, name: str = "AV System",
     if real_switches:
         switches = real_switches
     else:
-        switches = _make_switches(instances, redundant_dante) if has_dante else []
+        sw_redundant = redundant_dante or level_dual
+        switches = _make_switches(instances, sw_redundant) if has_dante else []
 
     proj = Project(name=name, instances=instances, chain=chain, switches=switches)
     size = place(instances, chain, switches)
     proj.meta.update(size)
+    # 工程级冗余级别要在 connect() 之前落 meta：连线阶段（_failover）需要知道
+    # 本方案是否属于「链路冗余」（该档不画设备间 failover 线）。
+    if redundancy:
+        proj.meta["redundancy"] = (redundancy.value if isinstance(redundancy, Redundancy)
+                                   else str(redundancy))
+    if redundancy_warnings:
+        proj.meta["redundancy_warnings"] = redundancy_warnings
     connect(proj)
     validate(proj)
     return proj
@@ -94,13 +115,21 @@ def _clone_entries(entries):
     return out
 
 
-def _apply_redundancy(es, mapping):
-    """按冗余映射，将目标类别复制为主/备两台并互指 pair（主备需成对设备）。"""
+def _apply_redundancy(es, level):
+    """按冗余级别把该级别管辖的设备类别各复制成主/备两台并互指 pair。
+
+    ★ 复制哪些类别由 `schema.REDUNDANCY_SCOPE` 决定，这里不再接受外部 mapping——
+    此前 app.py / run.py / generate_candidates 三处各写一份 `{"MIXER": lvl}`，
+    导致「T2 标调音台主备却用 PROCESSOR_BACKUP 这个枚举值」的命名错位。
+    """
+    cats = redundancy_scope(level)["categories"]
+    if not cats:
+        return list(es)
     out = []
     for e in es:
         cat = str(e.get("category", "")).upper()
-        if cat in mapping:
-            lvl = mapping[cat]
+        if cat in cats:
+            lvl = level.value if isinstance(level, Redundancy) else str(level)
             p = dict(e)
             p["params"] = dict(e.get("params", {}))
             p["features"] = list(e.get("features", []) or [])
@@ -119,22 +148,28 @@ def _apply_redundancy(es, mapping):
 
 
 def generate_candidates(entries: list, name: str = "AV System"):
-    """确定性生成 3 个候选拓扑（按冗余维度），供用户选择。"""
+    """确定性生成候选拓扑（按冗余维度），供用户选择。
+
+    ★ 每档冗余一个候选，标签与枚举语义一一对应（此前 T2 标「调音台主备」
+    却用 PROCESSOR_BACKUP，而该枚举按语义应复制处理器，属命名错位）。
+    """
     base = enrich(list(entries))
     base = _ensure_wireless_dist(base)
 
-    cand = []
-    cand.append(("T1 基础（无主备，单链路）", _clone_entries(base)))
-    cand.append(("T2 调音台主备（单点冗余）",
-                 _apply_redundancy(_clone_entries(base), {"MIXER": "PROCESSOR_BACKUP"})))
-    cand.append(("T3 全链路主备（Dante 冗余双交换机）",
-                 _apply_redundancy(_clone_entries(base),
-                                   {"MIXER": "FULL_CHAIN", "PROCESSOR": "FULL_CHAIN"})))
+    plans = [
+        ("T1 基础（无主备，单链路）", "NONE"),
+        ("T2 调音台主备（设备级热备）", "DEVICE_BACKUP"),
+        ("T3 处理器主备（核心热备）", "PROCESSOR_BACKUP"),
+        ("T4 链路主备（Dante 双交换机，不增末端设备）", "LINK_BACKUP"),
+        ("T5 全链路主备（调音台+处理器+双交换机）", "FULL_CHAIN"),
+    ]
 
     projects = []
-    for label, es in cand:
+    for label, lvl in plans:
+        es = _apply_redundancy(_clone_entries(base), lvl) if lvl != "NONE" \
+            else _clone_entries(base)
         try:
-            p = build_project(es, name=f"{name} · {label}")
+            p = build_project(es, name=f"{name} · {label}", redundancy=lvl)
             p.meta["candidate_label"] = label
             projects.append((label, p))
         except Exception:

@@ -37,6 +37,7 @@ import ezdxf  # C 扩展在可用时自动启用，无需手动开启
 
 from avcad.parse.bom_parser import parse_bom
 from avcad.core.build import build_project, _apply_redundancy
+from avcad.model.schema import redundancy_levels
 from avcad.render.draw import draw_devices, draw_wires, draw_ports, draw_wire_legend
 from avcad.render.primitives import Canvas
 from avcad.render.svg_render import render_svg
@@ -217,16 +218,14 @@ def _build_dxf_bytes(data: dict):
     if decisions:
         entries, _ = confirm_modules(entries, decisions)
     lvl = data.get("redundancy", "NONE")
-    if lvl in ("PROCESSOR_BACKUP", "LINK_BACKUP", "FULL_CHAIN"):
+    if lvl in redundancy_levels():
         for e in entries:
             e["redundancy"] = "NONE"
             e.pop("pair", None)
-        entries = _apply_redundancy(entries, {"MIXER": lvl})
-        if lvl == "FULL_CHAIN":
-            entries = _apply_redundancy(entries, {"PROCESSOR": lvl})
+        entries = _apply_redundancy(entries, lvl)
     # 与预览一致：同样应用第③步确认的图例
     proj = build_project(entries, name=data.get("name", "工作流系统"),
-                         legend_store=LegendStore())
+                         legend_store=LegendStore(), redundancy=lvl)
     c = Canvas()
     draw_devices(c, proj, anon=anon)
     draw_wires(c, proj, label_all=True)
