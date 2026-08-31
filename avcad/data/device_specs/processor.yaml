@@ -8,7 +8,7 @@ features_available: [dante, control, usb]
 #   - 强制前置：功放带DSP 或 处理器参与主备冗余
 # 此处不设默认 proc_func，使未指定时落到「默认前置」。
 #
-# 处理器关键参数（阳哥规则 2026-08-30）——只建模这 4 类，其余走自定义参数扩展：
+# 处理器关键参数（阳哥规则 2026-08-31）——只建模这 4 类，其余走自定义参数扩展：
 #   ① 模拟输入 / 输出路数          inputs / outputs
 #   ② 是否带 Dante 及接口数量       feature=dante + dante_ports
 #   ③ 是否带 USB 接口              feature=usb   + usb_ports
