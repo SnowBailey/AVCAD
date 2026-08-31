@@ -2,13 +2,23 @@ category: IO
 name: 音频 I/O 接口箱/扩展卡
 redundancy_allowed: false
 features_available: [dante, aes, analog, control, phantom]
-params: {}
+# 与 PROCESSOR 同用一套关键参数口径（阳哥规则 2026-08-31）：
+# 模拟输入/输出路数取 inputs / outputs，Dante 接口数取 dante_ports。
+# 默认 1 进 1 出，兼容早期未标注路数的接口箱/地插；
+# 主库显式写 0 表示该方向无端口（如 RY16-ML-SILK 16进0出、xIn 4 纯输入）。
+params:
+  inputs:
+    {min: 0, default: 1, label: 模拟输入路数, unit: "路"}
+  outputs:
+    {min: 0, default: 1, label: 模拟输出路数, unit: "路"}
+  dante_ports:
+    {min: 1, default: 1, label: Dante 接口数, unit: "个"}
 ports_template:
   # 所有音频 I/O 设备均含模拟输入输出；数字/控制接口按特性条件出现
   # 舞台接口箱/地插属「辅材」，一律左右结构出线：舞台侧(IN)在左，
   # FOH 侧(OUT+网络/控制)在右，不向顶部竖向出线。
-  - {name: IN, side: left, signal: XLR, role: in, count: 1, label: IN}
-  - {name: OUT, side: right, signal: XLR, role: out, count: 1, label: OUT}
-  - {name: DANTE, side: right, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: IN, side: left, signal: XLR, role: in, count: 1, count_from: inputs, label: IN}
+  - {name: OUT, side: right, signal: XLR, role: out, count: 1, count_from: outputs, label: OUT}
+  - {name: DANTE, side: right, signal: DANTE, role: in, count: 1, count_from: dante_ports, if_feature: dante, label: DANTE}
   - {name: AES, side: right, signal: AES, role: in, count: 1, if_feature: aes, label: AES}
   - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

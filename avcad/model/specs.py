@@ -141,7 +141,16 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
         role = t.get("role", "io")
         cnt = int(t.get("count", 1))
         if t.get("count_from"):
-            cnt = max(1, int(params.get(t["count_from"], cnt)))
+            # ★ 允许 0：主库用 ``inputs: 0`` / ``outputs: 0`` 表示「该方向无端口」
+            #   （如 YAMAHA RY16-ML-SILK 16进0出、Symetrix xIn 4 纯输入）。
+            #   此前 ``max(1, ...)`` 会把 0 抬成 1，凭空多画一个口。
+            #   参数值非法/缺失时回退到模板的 count，不做静默抬升。
+            try:
+                cnt = max(0, int(params.get(t["count_from"], cnt)))
+            except (TypeError, ValueError):
+                cnt = int(t.get("count", 1))
+        if cnt <= 0:
+            continue
         label = t.get("label", sig.value)
         for i in range(cnt):
             plabel = label + (str(i + 1) if cnt > 1 else "")

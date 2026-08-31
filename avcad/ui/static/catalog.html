@@ -148,7 +148,10 @@ function render(){
           <div class="rowbtn">
             <button class="mini" data-i="${i}" data-act="addp">+ 参数</button>
             <span class="params-hint">常用：channels / antennas / inputs / outputs / cascade_outs /
-              set_expand / ports_override / slots / note</span>
+              set_expand / ports_override / slots / note<br/>
+              处理器关键参数：inputs 模拟输入 · outputs 模拟输出 · dante_ports 网口数 ·
+              usb_ports USB 口数 · ctrl_ports 控制口数（填 0 = 无网口）<br/>
+              调音台级联：cascade 填 1（生成 LINK 级联口）；IO 某个方向无端口请**显式填 0**</span>
           </div>
         </div>
         <div class="k">备注 remark</div>

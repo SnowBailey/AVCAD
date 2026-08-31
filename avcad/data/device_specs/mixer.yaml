@@ -7,9 +7,15 @@ params:
     {min: 1, default: 16, label: 输入路数, unit: "路"}
   outputs:
     {min: 1, default: 8, label: 输出路数, unit: "路"}
+  # 级联口对数：>0 时生成 LINK_IN / LINK_OUT，多台同型号调音台串成扩展总线
+  # （如 IPS AM860 自动混音器：8 进 1 出，可级联）。默认 0 = 不画级联口。
+  cascade:
+    {min: 0, default: 0, label: 级联口对数, unit: "对"}
 ports_template:
   - {name: IN, side: left, signal: XLR, role: in, count_from: inputs, label: IN}
   - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: LINK_IN, side: left, signal: LINK, role: in, count_from: cascade, label: LINK}
   - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: OUT}
   - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
+  - {name: LINK_OUT, side: right, signal: LINK, role: out, count_from: cascade, label: LINK}
   - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}

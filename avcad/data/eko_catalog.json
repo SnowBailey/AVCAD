@@ -26946,23 +26946,23 @@
       "name": "智能自动混音器",
       "group": "音频处理器",
       "section": "智能自动混音器",
-      "category": "PROCESSOR",
+      "category": "MIXER",
       "defer_reason": null,
       "features": [
         "analog",
-        "control",
         "phantom"
       ],
       "active": true,
       "params": {
         "inputs": 8,
-        "outputs": 6
+        "outputs": 1,
+        "cascade": 1
       },
       "country": "中国",
       "unit": "台",
       "qty": 0,
       "price": 0.0,
-      "remark": "智能自动混音器；8 进 6 出（IPS 官网已无此型号资料，参数按命名习惯推断，待现场复核）",
+      "remark": "智能自动混音器；8 进 1 出，支持多台 LINK 级联扩展话筒数量（阳哥 2026-08-31 确认）",
       "sheet": "IPS爱普思",
       "no_draw": false
     },

@@ -245,7 +245,7 @@ def test_ips_catalog_round3_nodraw_and_reclass(tmp_path):
         ("线阵列扬声器飞行架", "IPS", "ML210FB", 2),       # 安装架
         ("鹅颈麦克风咪杆", "IPS", "CF2223", 10),         # 咪杆（配件）
         # —— 应保留且分类纠正 ——
-        ("智能自动混音器", "IPS", "AM860", 1),            # SOURCE -> PROCESSOR
+        ("智能自动混音器", "IPS", "AM860", 1),            # SOURCE -> MIXER
         ("单电脑DI盒", "IPS", "SI Box", 1),              # SOURCE -> IO
         ("双电脑DI盒", "IPS", "DI Box", 1),              # SOURCE -> IO
         # —— 占位项（无品牌无型号）——
@@ -264,7 +264,10 @@ def test_ips_catalog_round3_nodraw_and_reclass(tmp_path):
     assert any("自配" in n for n in dropped_names)
 
     # 分类纠正
-    assert got["AM860"]["category"] == "PROCESSOR"
+    # AM860 是**自动混音器**（阳哥 2026-08-31 订正：8 进 1 出，可级联），
+    # 不是音频处理器——此前按命名推断成了 PROCESSOR。
+    assert got["AM860"]["category"] == "MIXER"
+    assert (got["AM860"].get("params") or {}).get("cascade"), "AM860 应可级联"
     # DI 盒 = 电脑非平衡音频转平衡进调音台，属**音源侧**；
     # 归 IO 会被画成「调音台 -> DI盒」（chain 里 IO 在 MIXER 之后），方向反了。
     assert got["SI Box"]["category"] == "SOURCE"

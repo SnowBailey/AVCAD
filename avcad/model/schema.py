@@ -20,6 +20,8 @@ class Signal(str, Enum):
     OPTICAL = "OPTICAL"  # 光纤
     TRS = "TRS"          # 模拟音频 6.35mm（非平衡/混合输出）
     CONF = "CONF"        # 会议专用线（六芯主缆 / T 型线，手拉手）
+    USB = "USB"          # USB 音频接口（录音/播放/免驱声卡）
+    LINK = "LINK"        # 设备间级联/扩展总线（如自动混音器级联口）
 
 
 class Domain(str, Enum):
@@ -36,6 +38,8 @@ SIGNAL_DOMAIN = {
     Signal.POWER: Domain.POWER,     Signal.OPTICAL: Domain.AUDIO,
     Signal.TRS: Domain.AUDIO,
     Signal.CONF: Domain.AUDIO,
+    Signal.USB: Domain.AUDIO,
+    Signal.LINK: Domain.AUDIO,
 }
 
 # 信号配色（SVG hex）与 DXF 图层/线型映射；role 决定主/备线型。
@@ -55,6 +59,8 @@ SIGNAL_META = {
     Signal.OPTICAL: dict(color="#7fd1e8", dxf_color=4,  layer="WIRES_DIGITAL", ltype="solid"),
     Signal.TRS:     dict(color="#7fbf9a", dxf_color=4,  layer="WIRES_ANALOG",  ltype="solid"),
     Signal.CONF:    dict(color="#c9a227", dxf_color=2,  layer="WIRES_CONF",    ltype="solid"),
+    Signal.USB:     dict(color="#8f7ae6", dxf_color=6,  layer="WIRES_USB",     ltype="dotted"),
+    Signal.LINK:    dict(color="#8a93a8", dxf_color=6,  layer="WIRES_LINK",    ltype="solid"),
 }
 
 # 配色配置文件路径（全局共享，跨项目复用；用户可在清单确认环节点击更改）

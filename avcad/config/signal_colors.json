@@ -154,5 +154,31 @@
    "layer": "WIRES_CONF",
    "ltype": "dashed"
   }
+ },
+ "USB": {
+  "label": "USB 音频接口",
+  "primary": {
+   "color": "#8f7ae6",
+   "layer": "WIRES_USB",
+   "ltype": "dotted"
+  },
+  "backup": {
+   "color": "#6f5ac4",
+   "layer": "WIRES_USB",
+   "ltype": "dashed"
+  }
+ },
+ "LINK": {
+  "label": "级联/扩展总线",
+  "primary": {
+   "color": "#8a93a8",
+   "layer": "WIRES_LINK",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#6b7488",
+   "layer": "WIRES_LINK",
+   "ltype": "dashed"
+  }
  }
 }

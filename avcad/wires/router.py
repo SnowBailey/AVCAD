@@ -39,15 +39,18 @@ def connect(project):
         by_stage["SOURCE"] = [i for i in by_stage.get("SOURCE", [])
                               if i.uid not in conf_units]
 
+    # 0.5) 可级联调音台（如 IPS AM860 自动混音器）用 LINK 口串成扩展总线。
+    #      从机的 OUT 不参与后级连线（信号已随 LINK 汇总到主机）。
+    cascade_slaves = _mixer_cascade(project)
+
     # 1) 相邻阶段线缆（模拟/RF/扬声器）
     for a, b in zip(chain, chain[1:]):
         if b == "SPEAKER":
             # 只要下游是扬声器就拆开处理：
-            #   有源音箱 → _handle_speakers（不经过管理器、只取一路信号）；
+            #   有源音箱 → _handle_speakers（不经过管理器，模拟接前级空闲出口）；
             #   无源音箱 → 仍走通用相邻级配对（管理器 / 功放 → SPK 口）。
-            # 之前只有「功放→扬声器」才走专用规则，导致无功放级的方案里
-            # 有源音箱被通用配对连上模拟线、同时 _dante_pass 又补 Dante，
-            # 一台音箱两根线（EAW2：2 路 XLR + 14 路 Dante 混接）。
+            #   两者都必须用 fed（已有 SPEAKER 进线的 uid）过滤，
+            #   否则无源音箱会被连两遍（菏泽 40 → 66 根 SPK 线）。
             _handle_speakers(project, by_stage, a, b)
             # 功放→扬声器的匹配已在上面完成，别让通用配对再连一遍
             fed = {c.to_uid for c in project.connections
@@ -63,7 +66,8 @@ def connect(project):
         if b == "ANT_DIST":
             _antennas_to_first_dist(project, by_stage)
             continue
-        _generic_pair(project, by_stage.get(a, []), by_stage.get(b, []))
+        _generic_pair(project, by_stage.get(a, []), by_stage.get(b, []),
+                      skip_out_uids=cascade_slaves if a == "MIXER" else None)
 
     # 2) 音源级（SOURCE / WIRELESS_RX）显式接入首个核心级（调音台或处理器）
     _connect_sources_to_core(project, by_stage)
@@ -82,6 +86,11 @@ def connect(project):
 
 
 def _connect_sources_to_core(project, by_stage):
+    """音源级接入首个核心级。
+
+    级联调音台的从机也保留在目标列表里——它的 IN 口同样要接话筒
+    （级联的意义就是扩展输入路数）；从机的 OUT 由 connect() 单独跳过。
+    """
     target = None
     for c in project.chain:
         if c in (PROC_PRE, PROC_POST, "MIXER"):
@@ -251,9 +260,17 @@ def _dedup(project):
     project.connections = uniq
 
 
-def _generic_pair(project, a_devs, b_devs):
+def _generic_pair(project, a_devs, b_devs, skip_out_uids=None):
+    """通用相邻级配对：A 的出口按信号类型依次连 B 的进口。
+
+    ``skip_out_uids``：跳过这些设备的**出口**（级联从机的音频已随 LINK
+    汇总到主机，再出线就成了同一路信号画两根）。
+    """
     outs, ins = [], []
+    skip = skip_out_uids or set()
     for d in a_devs:
+        if d.uid in skip:
+            continue
         for p in d.ports:
             if p.role == "out" and p.signal in CABLE_SIGNALS and not p.air:
                 outs.append((d, p))
@@ -447,6 +464,51 @@ def _conf_box_port(host):
     return next((p for p in host.ports
                  if p.role == "in" and p.signal == sig
                  and p.id.rsplit(":", 1)[-1].startswith("BOX")), None)
+
+
+def _mixer_cascade(project):
+    """可级联调音台（如 IPS AM860 自动混音器）用 LINK 口串成扩展总线。
+
+    主库约定：MIXER 的 ``params.cascade`` > 0 时模板会生成一对 LINK_IN /
+    LINK_OUT。多台**同品牌同型号**的可级联调音台按 BOM 顺序串成一条链::
+
+        第1台(主机) LINK_OUT → 第2台 LINK_IN → 第3台 LINK_IN …
+
+    从机的音频已随 LINK 汇总到主机，因此从机的 OUT **不再参与后级连线**
+    （否则同一路信号会被画成两根线）。返回从机 uid 集合供 connect() 过滤。
+    """
+    groups = defaultdict(list)
+    for i in project.instances:
+        if i.stage != "MIXER":
+            continue
+        pr = getattr(i, "params", None) or {}
+        try:
+            if int(pr.get("cascade", 0) or 0) <= 0:
+                continue
+        except (TypeError, ValueError):
+            continue
+        if not any(p.role == "out" and p.signal == Signal.LINK for p in i.ports):
+            continue
+        groups[(i.brand or "", i.model or "")].append(i)
+
+    slaves = set()
+    for (_brand, _model), devs in groups.items():
+        if len(devs) < 2:
+            continue
+        prev = None
+        for d in sorted(devs, key=lambda x: x.uid):
+            if prev is not None:
+                p_out = next((p for p in prev.ports
+                              if p.role == "out" and p.signal == Signal.LINK), None)
+                p_in = next((p for p in d.ports
+                             if p.role == "in" and p.signal == Signal.LINK), None)
+                if p_out and p_in:
+                    project.connections.append(Connection(
+                        prev.uid, p_out.id, d.uid, p_in.id,
+                        Signal.LINK, "primary", note="级联扩展总线"))
+                    slaves.add(d.uid)
+            prev = d
+    return slaves
 
 
 def _conference_link(project, by_stage):

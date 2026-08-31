@@ -1,20 +1,40 @@
 category: PROCESSOR
 name: 音频处理器(DSP)
 redundancy_allowed: true
-features_available: [dante, control]
+features_available: [dante, control, usb]
 # 处理器相对调音台位置（阳哥规则 2026-08-29）：默认前置。
 #   - 显式 position 参数：position=前置(调音台前) / position=后置(调音台后)
 #   - 退化 proc_func 语义：automix=前置(会议) / system=后置(现场)
 #   - 强制前置：功放带DSP 或 处理器参与主备冗余
 # 此处不设默认 proc_func，使未指定时落到「默认前置」。
+#
+# 处理器关键参数（阳哥规则 2026-08-31）——只建模这 4 类，其余走自定义参数扩展：
+#   ① 模拟输入 / 输出路数          inputs / outputs
+#   ② 是否带 Dante 及接口数量       feature=dante + dante_ports
+#   ③ 是否带 USB 接口              feature=usb   + usb_ports
+#   ④ 控制接口基本都带              ctrl_ports（默认 1，无需逐条标 control）
+#   ⑤ 卡槽之类不默认建模——需要时走 params.slots / params.ports_override 自定义扩展。
+#
+# ★ 兼容性：dante_ports 默认 1、usb_ports 默认 0，与旧模板端口数一致；
+#   只有主库显式改参数才会变化，避免全库图纸端口数突变。
+# ★ count_from 允许 0（见 specs.expand_instance）：0 = 该方向无端口，不再被抬成 1。
 params:
   inputs:
-    {min: 1, default: 8, label: 输入路数, unit: "路"}
+    {min: 0, default: 8, label: 模拟输入路数, unit: "路"}
   outputs:
-    {min: 1, default: 8, label: 输出路数, unit: "路"}
+    {min: 0, default: 8, label: 模拟输出路数, unit: "路"}
+  dante_ports:
+    {min: 1, default: 1, label: Dante 接口数, unit: "个"}
+  usb_ports:
+    {min: 0, default: 1, label: USB 接口数, unit: "个"}
+  ctrl_ports:
+    {min: 0, default: 1, label: 控制接口数, unit: "个"}
 ports_template:
   - {name: IN, side: left, signal: XLR, role: in, count_from: inputs, label: IN}
-  - {name: DANTE_IN, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
+  - {name: DANTE_IN, side: left, signal: DANTE, role: in, count_from: dante_ports, if_feature: dante, label: DANTE}
+  - {name: USB, side: left, signal: USB, role: io, count_from: usb_ports, if_feature: usb, label: USB}
   - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: OUT}
-  - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
-  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count_from: dante_ports, if_feature: dante, label: DANTE}
+  # 控制接口「基本都带」：不依赖 if_feature，主库无需逐条标 control；
+  # 个别纯模拟处理器（无网口）设 ctrl_ports: 0 即可关掉。
+  - {name: CTRL, side: right, signal: IP, role: io, count_from: ctrl_ports, label: CTRL}
