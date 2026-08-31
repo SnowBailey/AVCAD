@@ -173,11 +173,49 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.ok{border-color:rgba(46,232,160,.5)}
 .toast.err{border-color:rgba(255,90,110,.5)}
+
+/* 跨库提示 banner——主库 ≠ 图例库 */
+.banner{margin:6px 0 14px;padding:12px 16px;border-radius:10px;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(90deg,rgba(0,229,255,.07),rgba(0,229,255,.02));
+  display:flex;gap:14px;align-items:stretch;font-size:12.5px;color:var(--txt);
+  letter-spacing:.02em}
+.banner .pane{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.banner .pane + .pane{border-left:1px solid var(--line);padding-left:14px}
+.banner .pane .hd{font-size:10.5px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase;font-weight:600}
+.banner .pane b{color:var(--acc)}
+.banner .pane code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
+  color:var(--mut);background:rgba(255,255,255,.04);padding:1px 6px;border-radius:5px;
+  border:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.banner .vs{align-self:center;font-size:10px;color:var(--mut);letter-spacing:.18em;
+  border:1px solid var(--line);padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.02);white-space:nowrap}
+
+/* 图例库命中徽章（卡顶元信息行） */
+.lg-hit{display:inline-flex;align-items:center;gap:3px;
+  font-size:10.5px;letter-spacing:.04em;padding:2px 9px;border-radius:999px;
+  border:1px solid var(--line);color:var(--mut);background:rgba(255,255,255,.03);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;margin-left:6px}
+.lg-hit.has{border-color:rgba(46,232,160,.5);color:var(--ok);background:rgba(46,232,160,.06)}
+.lg-hit .n{color:var(--txt);font-weight:600}
 </style>
 </head>
 <body>
 <h1>品牌主库校正 · AVCAD@Bailey@EZPRO</h1>
 <div class="sub" id="meta">加载中…</div>
+
+<div class="banner" id="banner">
+  <div class="pane">
+    <div class="hd">▶ 品牌主库（您正在改）</div>
+    <div>类别 / 特性 / 参数 / 备注，落盘 <code id="pathMaster">eko_catalog.json</code></div>
+    <div>字段含义：<b>型号默认属性</b>（不存信号、方向、端口数）</div>
+  </div>
+  <div class="vs">同 key<br>共享</div>
+  <div class="pane">
+    <div class="hd">↔ 图例库（第 3 步改）</div>
+    <div>信号 / 方向 / 侧 / 数量，落盘 <code id="pathLegend">legend_library.json</code></div>
+    <div>字段含义：<b>项目实例端口配置</b>（在工程里这台机器实际画什么口）</div>
+  </div>
+</div>
 
 <div class="bar">
   <label>品牌
@@ -224,6 +262,9 @@ const ALL_FEATURES = ["analog","aes","dante","control","wireless","phantom","dsp
 
 let META = {categories:[], features:[]};
 let ITEMS = [];
+/* 图例库命中索引：key → {ports 类数, total 端口数}；初次进入页面时拉取一次 */
+let LEGEND_BY_KEY = {};
+let LEGEND_PATH = "legend_library.json";
 let DIRTY = new Set();   // 已改动但未保存
 let SAVED = new Set();   // 本会话已落盘
 
@@ -242,6 +283,30 @@ function toast(m, kind){
 async function loadMeta(){
   META = await api("/api/catalog", {action:"meta"});
   $("meta").textContent = `主库 ${META.total} 条 · ${META.path}`;
+  $("pathMaster").textContent = (META.path || "").split("/").pop() || "主库.json";
+
+  /* 同步拉图例库清单（轻量，10K 级别）；命中存 LEGEND_BY_KEY 用于每张卡打徽章 */
+  try {
+    const lr = await api("/api/legend", {action:"list"});
+    LEGEND_PATH = (lr.library && lr.library.path && lr.library.path.split("/").pop()) || "legend_library.json";
+    $("pathLegend").textContent = LEGEND_PATH;
+    LEGEND_BY_KEY = {};
+    for (const lg of lr.legends || []) {
+      const ports = Array.isArray(lg.ports) ? lg.ports : [];
+      const total = ports.reduce((s,p)=>s + (Number(p.count)||0), 0);
+      LEGEND_BY_KEY[lg.key] = {ports: ports.length, total, rev: lg.revision || 0};
+    }
+    /* 顶部 .sub 追加图例库状态，让用户一眼看到 */
+    if (Object.keys(LEGEND_BY_KEY).length) {
+      const sub = $("meta");
+      const cur = sub.textContent;
+      sub.innerHTML = cur + '  ·  <span style="color:var(--ok)">图例库</span> '
+                    + Object.keys(LEGEND_BY_KEY).length + ' 条已落盘 · '
+                    + `<code style="font-family:ui-monospace;background:rgba(255,255,255,.04);padding:1px 6px;border-radius:5px;color:var(--mut)">${LEGEND_PATH}</code>`;
+    }
+  } catch (e) {
+    console.warn("[catalog] /api/legend list failed", e);
+  }
   const sel = $("brand");
   sel.innerHTML = META.brands.map(b =>
     `<option value="${b.brand}">${b.brand}（${b.count}）</option>`).join("");
@@ -294,20 +359,31 @@ function render(){
 function badgeFor(i){
   const it = ITEMS[i];
   const v = it.revision || 7;
+  const key = `${it.brand||""}::${it.model||""}::${it.category||""}`;
+  const hit = LEGEND_BY_KEY[key];
+  const lgTail = hit
+    ? ` · <span style="color:var(--ok);font-family:ui-monospace;font-size:10.5px">图例 ✓</span>`
+    : ` · <span style="color:var(--mut);font-family:ui-monospace;font-size:10.5px">图例 —</span>`;
   if(DIRTY.has(i))
-    return `<span class="cache dirty">◐ N 特性 / K 参数 待保存</span>`;
+    return `<span class="cache dirty">◐ 主库 待保存${lgTail}</span>`;
   if(SAVED.has(i))
-    return `<span class="cache hit">● 已落盘 · 备份 ${esc(it.last_backup || 1)}</span>`;
-  return `<span class="cache miss" id="bdg_${i}">○ 当前主库 v${v}</span>`;
+    return `<span class="cache hit">● 主库 已落盘 · 备份 ${esc(it.last_backup || 1)}${lgTail}</span>`;
+  return `<span class="cache miss" id="bdg_${i}">○ 主库 v${v}${lgTail}</span>`;
 }
 
 function metaLine(it){
   const pcount = Object.keys(it.params||{}).length;
   const rcount = (it.remark||"").length;
+  /* 图例库命中徽章：以 brand||""::model::category 为 key */
+  const key = `${it.brand||""}::${it.model||""}::${it.category||""}`;
+  const hit = LEGEND_BY_KEY[key];
+  const lgBadge = hit
+    ? `<span class="lg-hit has" title="图例库已落盘：${esc(key)}">↔ 图例 <b class="n">${hit.ports}</b> 类 <b class="n">${hit.total}</b> 口</span>`
+    : `<span class="lg-hit" title="图例库暂无 entry：${esc(key)}">↔ 图例 — 未落盘</span>`;
   return `类别 <b style="color:var(--txt)">${esc(it.category||"（不出图）")}</b> · ` +
          `特性 <b style="color:var(--txt)">${it.features.length}</b> · ` +
          `参数 <b style="color:var(--txt)">${pcount}</b> · ` +
-         `备注 <b style="color:var(--txt)">${rcount}</b> 字`;
+         `备注 <b style="color:var(--txt)">${rcount}</b> 字` + lgBadge;
 }
 
 /* ============================================================
