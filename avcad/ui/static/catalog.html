@@ -127,6 +127,12 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
   border:1px solid var(--line);border-radius:9px;background:rgba(4,7,14,.4);
   min-height:33px}
 .lg-rows .prow:hover{border-color:rgba(0,229,255,.25)}
+/* R15：图例校正页手工添加型号的知识库识别建议 */
+.kbhint{margin:8px 0 2px;font-size:12px;line-height:1.55;color:#9fb3c8;
+  background:rgba(255,255,255,.035);border-left:3px solid #3a4a5a;
+  padding:6px 9px;border-radius:5px}
+.kbhint.unknown{color:#ffc457;background:rgba(255,176,32,.10);border-left-color:#ffb020}
+.kbhint .mut{color:var(--mut);font-size:11px}
 .lg-rows .prow select,.lg-rows .prow input[type=text]{
   height:28px;font-size:11.5px;padding:0 7px;border-radius:7px;
   background:rgba(6,9,18,.85);color:var(--txt);border:1px solid var(--line);
@@ -440,6 +446,9 @@ function buildCard(i){
       '</div>' +
     '</div>' +
 
+    /* R15：知识库识别建议（手工添加型号时输入品牌/型号自动出现） */
+    '<div class="kbhint" id="kbh_' + i + '"></div>' +
+
     '<div class="section-label">端口（信号 / 方向 / 侧 / 标签 / 数量）</div>' +
     '<div class="lg-rows" id="port_rows_' + i + '"></div>' +
 
@@ -505,10 +514,11 @@ function wireCard(i, d){
   /* 手工新增的卡：品牌 / 型号是输入框，得同步回 ITEMS */
   const bi = d.querySelector("#brand_input_"+i);
   const mi = d.querySelector("#model_input_"+i);
-  if(bi) bi.addEventListener("input", ()=>{ ITEMS[i].brand = bi.value.trim(); mark(i); });
-  if(mi) mi.addEventListener("input", ()=>{ ITEMS[i].model = mi.value.trim(); mark(i); });
+  if(bi) bi.addEventListener("input", ()=>{ ITEMS[i].brand = bi.value.trim(); mark(i); identifySuggest(i); });
+  if(mi) mi.addEventListener("input", ()=>{ ITEMS[i].model = mi.value.trim(); mark(i); identifySuggest(i); });
   d.querySelector("#cat_sel_"+i).addEventListener("change", ()=>{
     ITEMS[i].category = d.querySelector("#cat_sel_"+i).value || "";
+    ITEMS[i]._catTouched = true;   // 用户手动改过类别后，识别建议不再自动覆盖
     mark(i);
   });
   d.querySelector("#addport_"+i).addEventListener("click", ()=>{
@@ -519,6 +529,37 @@ function wireCard(i, d){
     mark(i);
   });
   d.querySelector("#ok_"+i).addEventListener("click", ()=>saveOne(i));
+}
+
+/* R15：手工添加型号时，输入品牌/型号即调用知识库识别，预填类别 + 提示接法 */
+let _idTimer = null;
+async function identifySuggest(i){
+  clearTimeout(_idTimer);
+  _idTimer = setTimeout(async () => {
+    const it = ITEMS[i]; if(!it) return;
+    const brand = it.brand || "", model = it.model || "";
+    const el = $("kbh_"+i); if(!el) return;
+    if(!model && !brand){ el.className="kbhint"; el.innerHTML=""; return; }
+    let kb;
+    try { kb = await api("/api/identify", {brand, model, name:""}); }
+    catch(e){ el.innerHTML=""; return; }
+    if(!kb || !kb.identified){
+      el.className = "kbhint unknown";
+      el.innerHTML = "📖 知识库无法判定类别，请人工选类别（出图时该型号默认兜底成 IO）。";
+      return;
+    }
+    const conf = kb.confidence < 1
+      ? ' <span class="mut">（识别置信 ' + Math.round((kb.confidence||0)*100) + '%）</span>' : "";
+    const conn = (kb.upstream||[]).join("/") + " → " + (kb.cn||kb.category) + " → " + (kb.downstream||[]).join("/");
+    el.className = "kbhint";
+    el.innerHTML = "📖 知识库识别：" + kb.cn + "：" + kb.role +
+                   "<br>接法：" + conn + conf;
+    /* 用户手动改过类别后不再自动覆盖 */
+    const sel = $("cat_sel_"+i);
+    if(sel && !it._catTouched && kb.category){
+      sel.value = kb.category; it.category = kb.category;
+    }
+  }, 350);
 }
 
 /* 改动标记：刷新徽章 + 元信息 */

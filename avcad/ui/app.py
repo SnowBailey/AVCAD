@@ -448,6 +448,13 @@ def _dispatch(path, body):
                 "unknown": [f"{m.brand} {m.model}".strip()
                             for m in modules if m.source == "unknown"]}
 
+    if path == "/api/identify":
+        """图例校正页「+ 手工添加型号」：输入品牌/型号即返回知识库识别建议
+        （这是什么 + 怎么接 + 置信度），前端据此预填类别并提示人工确认。"""
+        data = json.loads(body or "{}")
+        return usage_hint(data.get("brand", "") or "", data.get("model", "") or "",
+                          data.get("name", "") or "")
+
     if path == "/api/legend-infer":
         """图例页端口初值：由**引擎规格模板**展开，取代前端硬编码模板。
 
