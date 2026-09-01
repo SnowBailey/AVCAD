@@ -26057,7 +26057,9 @@
         "set_expand": {
           "rx": 1,
           "tx": 2
-        }
+        },
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:36:18+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26090,8 +26092,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 1,
-        "synced_at": "2026-09-01T16:18:02+08:00"
+        "legend_rev": 8,
+        "synced_at": "2026-09-01T16:36:18+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26123,7 +26125,9 @@
         "set_expand": {
           "rx": 1,
           "tx": 2
-        }
+        },
+        "legend_rev": 5,
+        "synced_at": "2026-09-01T16:36:19+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26145,9 +26149,11 @@
       "active": false,
       "params": {
         "impedance_ohm": 50,
+        "cascade_outs": 2,
+        "legend_rev": 5,
+        "synced_at": "2026-09-01T16:36:19+08:00",
         "inputs": 2,
-        "outputs": 10,
-        "cascade_outs": 2
+        "outputs": 10
       },
       "country": "中国",
       "unit": "台",
@@ -26171,7 +26177,9 @@
       "active": true,
       "params": {
         "impedance_ohm": 50,
-        "bnc": 1
+        "bnc": 1,
+        "legend_rev": 5,
+        "synced_at": "2026-09-01T16:36:19+08:00"
       },
       "country": "中国",
       "unit": "对",
@@ -26195,7 +26203,9 @@
       "active": true,
       "params": {
         "impedance_ohm": 50,
-        "bnc": 1
+        "bnc": 1,
+        "legend_rev": 5,
+        "synced_at": "2026-09-01T16:36:19+08:00"
       },
       "country": "中国",
       "unit": "对",
@@ -26240,9 +26250,11 @@
       "active": false,
       "params": {
         "impedance_ohm": 50,
-        "inputs": 1,
-        "outputs": 2,
-        "cascade_outs": 0
+        "cascade_outs": 0,
+        "legend_rev": 5,
+        "synced_at": "2026-09-01T16:36:19+08:00",
+        "inputs": 2,
+        "outputs": 1
       },
       "country": "中国",
       "unit": "台",
