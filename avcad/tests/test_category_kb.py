@@ -34,6 +34,15 @@ KNOWN_CASES = [
     # 类别词模糊匹配（型号不含片段，但描述带别名）
     ("", "神秘设备 调音台 现场控制台", "MIXER"),
     ("", "天线分配器 射频分路", "ANT_DIST"),
+    # 扩充后的品牌系列片段命中（守护 KNOWN_MODELS 覆盖）
+    ("Yamaha", "CL5", "MIXER"),
+    ("L-Acoustics", "KARA", "SPEAKER"),
+    ("QSC", "Core 110f", "PROCESSOR"),
+    ("Powersoft", "X4", "AMP"),
+    ("Sennheiser", "ew300", "WIRELESS_RX"),
+    ("Audio-Technica", "ATW-3000", "WIRELESS_RX"),
+    ("Shure", "UA844SWB", "ANT_DIST"),
+    ("dbx", "DriveRack PA2", "SPEAKER_MGR"),
 ]
 
 
