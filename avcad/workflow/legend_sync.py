@@ -41,6 +41,16 @@ from avcad.data.catalog_resolver import DEFAULT_JSON as _CATALOG_JSON  # noqa: E
 DEFAULT_CATALOG = Path(os.environ.get("AVCAD_CATALOG") or _CATALOG_JSON)
 
 
+def catalog_writable(p) -> bool:
+    """主库**所在目录**是否可写。
+
+    ★ 2026-09-01 R13：打包版（.app / Program Files）里主库是随包的只读内置
+      基线。抽成函数是为了**守卫测试能稳定模拟只读** —— 用 chmod 造只读目录
+      在以 root 运行的 CI 里无效（root 无视权限位，os.access 恒为 True）。
+    """
+    return os.access(Path(p).parent, os.W_OK)
+
+
 def resolve_catalog_path(catalog_path=None) -> Path:
     """落盘路径解析：**调用时**才读 DEFAULT_CATALOG，便于测试 monkeypatch。
 
@@ -71,6 +81,10 @@ class ReverseResult:
     before_params: dict                 # 原 params（备份 + 给前端 diff 用）
     after_params: dict                  # 反推后 params（写入磁盘的版本）
     backup_path: Optional[str]          # 备份文件绝对路径（首次落盘时生成）
+    skipped: str = ""                   # ★ R13：非空 = **主动跳过**及原因
+    #   （与 matched=False 区分开：matched=False 是「主库里没这条」，
+    #    skipped 非空是「找到了但环境不允许写」。不区分的话打包版排障时
+    #    会把「主库只读」误判成「型号没收录」，越查越偏。）
 
 
 def _port_count(p) -> int:
@@ -258,8 +272,17 @@ def apply_reverse_to_catalog(legend, catalog_path: Optional[Path] = None) -> Rev
         5) 写回主库
 
     Returns ``ReverseResult``：让调用方决定要不要再触发前端 banner 刷新。
+
+    ★ 2026-09-01 R13 只读保护：主库**不可写时直接跳过**（返回 skipped 非空），
+      绝不抛异常。原因：这里是 ``/api/legend`` PUT 保存图例的必经之路，
+      而打包版（.app / Program Files）里 ``eko_catalog.json`` 是随包的只读
+      内置基线 —— 一写就是 PermissionError，表现成「图例明明存了，接口却 500」。
+      打包版里图例库本身就是唯一真相（R11 起主库对用户只读），跳过反推是对的。
     """
     p = resolve_catalog_path(catalog_path)
+    if not catalog_writable(p):
+        return ReverseResult(False, None, {}, {}, None,
+                             skipped=f"主库只读，跳过反推：{p}")
     if not p.exists():
         return ReverseResult(False, None, {}, {}, None)
 

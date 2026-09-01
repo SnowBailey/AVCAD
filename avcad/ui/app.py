@@ -49,6 +49,7 @@ from avcad.workflow.legend_builder import (  # 图例校正页 + 图例初值：
     infer_from_product, infer_from_entry)
 from avcad.workflow.legend_sync import (  # R10 反向同步：图例库 -> 主库
     apply_reverse_to_catalog, resolve_catalog_path, backup_catalog,
+    catalog_writable,
 )
 from avcad.workflow.architecture import select
 from avcad.workflow.importers import (  # CSV 路径也要走同一套归一化（R12）
@@ -102,7 +103,14 @@ def _save_catalog():
     ★ 备份走 ``legend_sync.backup_catalog``：那边有 MAX_BACKUPS=5 的轮转。
       此前这里自己拼 .bak.时间戳且**无任何清理**，UI 上每改一条主库就
       多一份，avcad/data/ 会被上百份备份淹没。
+
+    ★ 2026-09-01 R13：主库**不可写时抛 PermissionError**（而不是 OSError
+      里淹没的 "[Errno 30] Read-only file system"）。打包版里主库是随包的
+      只读内置基线，写它必然失败；这里是用户**主动**改主库，静默成功是骗人。
     """
+    if not catalog_writable(_CATALOG_PATH):
+        raise PermissionError(
+            f"主库只读，无法保存（打包版主库是内置基线，请改图例库）：{_CATALOG_PATH}")
     data = _load_catalog()
     bak = backup_catalog(_CATALOG_PATH)
     tmp = f"{_CATALOG_PATH}.tmp.{os.getpid()}"

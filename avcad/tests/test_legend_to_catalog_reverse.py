@@ -25,6 +25,7 @@ from pathlib import Path
 
 import pytest
 
+from avcad.data.catalog_resolver import DEFAULT_JSON as REAL_CATALOG
 from avcad.workflow.legend_sync import (
     PORT_AGG_KEYS,
     apply_reverse_to_catalog,
@@ -34,17 +35,29 @@ from avcad.workflow.legend_sync import (
 )
 
 
-CAT_PATH = Path("avcad/data/eko_catalog.json")
-
-
 @pytest.fixture
-def restore_catalog():
-    """每个 case 跑完恢复 eko_catalog.json 到测试前的状态。"""
-    bak = CAT_PATH.with_suffix(".json.legend_sync_bak")
-    shutil.copy(CAT_PATH, bak)
-    yield
-    shutil.copy(bak, CAT_PATH)
-    bak.unlink(missing_ok=True)
+def iso_catalog(tmp_path):
+    """真实主库的 **tmp 副本**，集成用例在它上面落盘。
+
+    ★ 2026-09-01 R13：此前这里用的是 ``CAT_PATH = Path("avcad/data/eko_catalog.json")``
+      —— **直接写真实主库**，靠 ``restore_catalog`` fixture 事后 copy 回来。
+      三个致命问题（出包前排查「打包会带进什么垃圾」时挖出来的）：
+
+        1. 测试中断 / 崩溃 → teardown 不跑 → 主库被**永久污染**。实测 14:37
+           那次主库多了 120 字节的 legend_rev/synced_at，git diff 冒出莫名其妙
+           的参数变化，最后靠 ``git checkout`` 才救回来。
+        2. ``backup_catalog`` 会在 ``avcad/data/`` 下生成 ``.bak.YYYYMMDDHHMMSS``，
+           而 ``restore_catalog`` **只恢复主库本体、不清理这些备份** —— 每跑
+           一次测试多一份 1.2MB。打包时 ``--add-data avcad/data:avcad/data``
+           会把这些垃圾一起塞进 .app。
+        3. ``CAT_PATH`` 是**相对路径**，cwd 不在仓库根就会写到别的地方去。
+
+      改成 tmp 副本后：不碰真库、备份随 tmp 自动消失、不依赖 cwd，
+      而且「真实落盘」的测试语义一点没丢（tmp 里也是真写）。
+    """
+    dst = tmp_path / "eko_catalog.json"
+    shutil.copy(REAL_CATALOG, dst)
+    return dst
 
 
 # ============================================================
@@ -265,7 +278,7 @@ def test_catalog_path_resolved_lazily(monkeypatch, tmp_path):
 # 集成层：apply_reverse_to_catalog（真实落盘）
 # ============================================================
 
-def test_apply_reverse_to_catalog_writes_disk(restore_catalog, tmp_path):
+def test_apply_reverse_to_catalog_writes_disk(iso_catalog):
     """反推端到端落盘：主库 GMN1208D params 被更新，备份文件生成。"""
     lg = {
         "brand": "IPS", "model": "GMN1208D", "category": "PROCESSOR",
@@ -276,14 +289,14 @@ def test_apply_reverse_to_catalog_writes_disk(restore_catalog, tmp_path):
             {"signal": "DANTE", "role": "out", "count": 2, "air": False},
         ],
     }
-    rr = apply_reverse_to_catalog(lg, CAT_PATH)
+    rr = apply_reverse_to_catalog(lg, iso_catalog)
     assert rr.matched is True
     assert isinstance(rr.product_index, int)
     assert rr.backup_path is not None
     assert Path(rr.backup_path).exists()
 
     # 主库确实改了
-    after = json.loads(CAT_PATH.read_text(encoding="utf-8"))
+    after = json.loads(iso_catalog.read_text(encoding="utf-8"))
     prod = after["products"][rr.product_index]
     assert prod["params"]["inputs"] == 12
     assert prod["params"]["outputs"] == 12   # 10 + 2
@@ -291,17 +304,17 @@ def test_apply_reverse_to_catalog_writes_disk(restore_catalog, tmp_path):
     assert "synced_at" in prod["params"]
 
 
-def test_apply_no_match_does_not_create_product(restore_catalog):
+def test_apply_no_match_does_not_create_product(iso_catalog):
     """主库里没有的型号 → 不创建新条目（避免污染原始产品清单）。"""
     lg = {
         "brand": "FAKE", "model": "DOES_NOT_EXIST", "category": "MIXER",
         "revision": 1,
         "ports": [{"signal": "XLR", "role": "in", "count": 8, "air": False}],
     }
-    before_count = len(json.loads(CAT_PATH.read_text(encoding="utf-8"))["products"])
-    rr = apply_reverse_to_catalog(lg, CAT_PATH)
+    before_count = len(json.loads(iso_catalog.read_text(encoding="utf-8"))["products"])
+    rr = apply_reverse_to_catalog(lg, iso_catalog)
     assert rr.matched is False
-    after_count = len(json.loads(CAT_PATH.read_text(encoding="utf-8"))["products"])
+    after_count = len(json.loads(iso_catalog.read_text(encoding="utf-8"))["products"])
     assert after_count == before_count
 
 
@@ -315,7 +328,7 @@ def test_find_product_index_returns_minus_one_for_missing():
     assert find_product_index(data["products"], "IPS", "GMN1208D", "") == -1
 
 
-def test_idempotent_reverse(restore_catalog):
+def test_idempotent_reverse(iso_catalog):
     """相同 legend 多次反推结果幂等（不影响备份以外的主库）。"""
     lg = {
         "brand": "IPS", "model": "GMN1208D", "category": "PROCESSOR",
@@ -325,11 +338,11 @@ def test_idempotent_reverse(restore_catalog):
             {"signal": "XLR", "role": "out", "count": 8, "air": False},
         ],
     }
-    rr1 = apply_reverse_to_catalog(lg, CAT_PATH)
-    rr2 = apply_reverse_to_catalog(lg, CAT_PATH)
+    rr1 = apply_reverse_to_catalog(lg, iso_catalog)
+    rr2 = apply_reverse_to_catalog(lg, iso_catalog)
     assert rr1.matched and rr2.matched
     # 两次反推后 params 完全相同（除 synced_at 时间戳）
-    after = json.loads(CAT_PATH.read_text(encoding="utf-8"))
+    after = json.loads(iso_catalog.read_text(encoding="utf-8"))
     prod = after["products"][rr1.product_index]
     assert prod["params"]["inputs"] == 12
     assert prod["params"]["outputs"] == 8
