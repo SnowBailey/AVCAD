@@ -51,6 +51,11 @@ KNOWN_INFO = {
                      "（importers.extract_params），不从主库取；主库这份只作人工参考",
     "true_diversity": "真分集标记。天线口数实际由 `antennas` 控制"
                       "（IPS=4 / AUDIX=2），这个键只是说明",
+    "legend_rev": "R10 反向同步标记：图例库 rev N 落盘时自动写入主库 params。"
+                  "前端主库卡顶部据此渲染「↘ 由图例 vN 反推」徽章。"
+                  "非业务字段，不参与建模",
+    "synced_at": "R10 反向同步时间戳：与 legend_rev 配对写入。"
+                 "非业务字段，不参与建模",
 }
 
 # 已核实为「规范统一前的遗留字段」：应清理主库，保持参数规范统一

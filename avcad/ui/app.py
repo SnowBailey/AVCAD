@@ -45,6 +45,9 @@ from avcad.render.dxf_render import render_dxf
 from avcad.workflow.module_confirm import build_module_list, confirm_modules
 from avcad.workflow.run import run_workflow, summarize
 from avcad.workflow.legend_store import LegendStore, Legend, LegendPort
+from avcad.workflow.legend_sync import (  # R10 反向同步：图例库 -> 主库
+    apply_reverse_to_catalog, resolve_catalog_path,
+)
 from avcad.workflow.architecture import select
 from avcad.workflow.importers import build_entries, to_bom_csv
 from scripts.check_overlap import check_svg
@@ -357,6 +360,9 @@ def _api_open_folder(data: dict):
 
 def _catalog_item(idx: int, p: dict) -> dict:
     """主库条目 -> 前端可编辑视图（只暴露需要人工校正的字段）。"""
+    params = p.get("params") or {}
+    # ★ R10 反向同步标记：从 params 里把 legend_rev / synced_at 抽到顶层
+    # 前端主库卡顶部元信息行据此渲染「↘ 由图例 vN 反推」徽章
     return {
         "idx": idx,
         "brand": p.get("brand") or "",
@@ -366,7 +372,9 @@ def _catalog_item(idx: int, p: dict) -> dict:
         "category": p.get("category"),
         "defer_reason": p.get("defer_reason") or "",
         "features": list(p.get("features") or []),
-        "params": p.get("params") or {},
+        "params": params,
+        "legend_rev": params.get("legend_rev"),     # R10：被图例库反推的 rev
+        "synced_at": params.get("synced_at"),       # R10：反推时间戳
         "remark": p.get("remark") or "",
         "unit": p.get("unit") or "",
     }
@@ -412,8 +420,32 @@ def _dispatch(path, body):
         # 永久文档：确认即落盘（revision 递增 + 保留维护历史）
         st.put(lg, source="user")
         st.save()
+        # ★ R10 反向同步：图例库 = 真相；落盘后立即把物理端口聚合数反推主库
+        # 保留主库非端口字段（dsp/impedance_ohm/...）；标 legend_rev + synced_at
+        rev_res = apply_reverse_to_catalog(lg)
+        catalog_synced_item = None
+        if rev_res.matched and isinstance(rev_res.product_index, int):
+            # mtime 变了，下一次 _load_catalog 自动重读；这里直接读一次
+            # 是为了把刚被反推的 params 打包给前端 banner 刷新徽章
+            try:
+                # ★ 必须从**刚写入的那份**主库回读，不能走 _load_catalog() 缓存：
+                #   反推路径可被重定向（测试隔离 / AVCAD_CATALOG），缓存只认
+                #   catalog_resolver.DEFAULT_JSON 这一份。走缓存会读到旧文件，
+                #   前端拿到的 params 与真正落盘的不是同一份。
+                with open(resolve_catalog_path(), encoding="utf-8") as _f:
+                    cat = json.load(_f)
+                prods = cat.get("products", [])
+                if 0 <= rev_res.product_index < len(prods):
+                    catalog_synced_item = _catalog_item(rev_res.product_index,
+                                                        prods[rev_res.product_index])
+            except Exception as _ex:
+                print(f"[AVCAD] R10 反推主库后回读失败: {_ex}", file=sys.stderr)
         return {"ok": True, "revision": lg.revision,
-                "updated_at": lg.updated_at, "library": st.info()}
+                "updated_at": lg.updated_at, "library": st.info(),
+                "catalog_synced": bool(rev_res.matched),
+                "catalog_item": catalog_synced_item,
+                "catalog_backup": (os.path.basename(rev_res.backup_path)
+                                   if rev_res.backup_path else None)}
 
     if path == "/api/architectures":
         data = json.loads(body or "{}")

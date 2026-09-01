@@ -197,6 +197,15 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;margin-left:6px}
 .lg-hit.has{border-color:rgba(46,232,160,.5);color:var(--ok);background:rgba(46,232,160,.06)}
 .lg-hit .n{color:var(--txt);font-weight:600}
+
+/* R10 反向同步徽章（主库 params 由图例库反推） */
+.auto-sync{display:inline-flex;align-items:center;gap:3px;
+  font-size:10.5px;letter-spacing:.04em;padding:2px 9px;border-radius:999px;
+  border:1px solid var(--line);color:var(--mut);background:rgba(255,255,255,.03);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;margin-left:6px}
+.auto-sync.has{border-color:rgba(168,85,247,.5);color:var(--acc2);background:rgba(168,85,247,.07)}
+.auto-sync .n{color:var(--txt);font-weight:600}
+.auto-sync .d{color:var(--mut);font-weight:400}
 </style>
 </head>
 <body>
@@ -210,6 +219,10 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
     <div>字段含义：<b>型号默认属性</b>（不存信号、方向、端口数）</div>
   </div>
   <div class="vs">同 key<br>共享</div>
+  <div class="pane" style="flex:1.2;border-left:1px solid var(--line);padding-left:14px;background:rgba(168,85,247,.05);border-radius:6px">
+    <div class="hd" style="color:var(--acc2)">↘ R10 反向同步</div>
+    <div style="font-size:11.5px">改图例库时，<b style="color:var(--acc2)">物理端口数自动反推主库</b>；<br/>主库非端口字段（阻抗/功率/级联）由人工单独维护</div>
+  </div>
   <div class="pane">
     <div class="hd">↔ 图例库（第 3 步改）</div>
     <div>信号 / 方向 / 侧 / 数量，落盘 <code id="pathLegend">legend_library.json</code></div>
@@ -380,10 +393,29 @@ function metaLine(it){
   const lgBadge = hit
     ? `<span class="lg-hit has" title="图例库已落盘：${esc(key)}">↔ 图例 <b class="n">${hit.ports}</b> 类 <b class="n">${hit.total}</b> 口</span>`
     : `<span class="lg-hit" title="图例库暂无 entry：${esc(key)}">↔ 图例 — 未落盘</span>`;
+  /* R10：图例库是真相，主库跟随。
+     两种状态必须分开显示，否则音箱/功放也挂「反推」却看不出反推了什么：
+       A. 反推（紫）— 规格模板认 inputs/outputs 的类别
+          （MIXER / PROCESSOR / IO / ANT_DIST / SPEAKER_MGR），
+          图例库端口数已真正写回主库 params
+       B. 已确认（灰）— 其余类别端口数由 channels / 固定模板决定，
+          只记同步标记，不写 inputs/outputs（写了也没人读 = 死数据） */
+  const pr = it.params || {};
+  const rev = pr.legend_rev || it.legend_rev;
+  const syn = pr.synced_at || it.synced_at;
+  const agg = ('inputs' in pr) || ('outputs' in pr);
+  let autoBadge;
+  if (!rev) {
+    autoBadge = `<span class="auto-sync" title="主库原始自动生成，图例库尚未确认过这个型号"><span class="d">↘</span> 主库原始（图例未确认）</span>`;
+  } else if (agg) {
+    autoBadge = `<span class="auto-sync has" title="图例库 rev ${rev} 于 ${esc(syn||'?')} 反推主库：inputs=${pr.inputs} outputs=${pr.outputs}"><span class="d">↘</span> 由图例 <b class="n">v${rev}</b> 反推 <span class="d">· 进出 ${pr.inputs}/${pr.outputs} · ${esc((syn||'').slice(0,16).replace('T',' '))}</span></span>`;
+  } else {
+    autoBadge = `<span class="auto-sync" title="图例库 rev ${rev} 已确认，但该类别端口数由 channels / 固定模板决定，主库不存 inputs/outputs"><span class="d">↘</span> 图例已确认 <b class="n">v${rev}</b> <span class="d">· 端口不聚合</span></span>`;
+  }
   return `类别 <b style="color:var(--txt)">${esc(it.category||"（不出图）")}</b> · ` +
          `特性 <b style="color:var(--txt)">${it.features.length}</b> · ` +
          `参数 <b style="color:var(--txt)">${pcount}</b> · ` +
-         `备注 <b style="color:var(--txt)">${rcount}</b> 字` + lgBadge;
+         `备注 <b style="color:var(--txt)">${rcount}</b> 字` + autoBadge + lgBadge;
 }
 
 /* ============================================================

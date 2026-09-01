@@ -8,6 +8,11 @@ import pytest
 import avcad.ui.app as app
 from avcad.workflow.importers import build_entries, to_bom_csv
 
+# ★ 模块级导入 = 在**任何 monkeypatch 之前**捕获真实路径，
+#   用例里要用真实文件做 md5 比对就得靠它（fixture 之后再 import 会拿到被改过的）
+from avcad.data.catalog_resolver import DEFAULT_JSON as REAL_CATALOG  # noqa: E402
+from avcad.workflow.legend_store import DEFAULT_CACHE as REAL_LEGEND  # noqa: E402
+
 SAMPLE = (
     "设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源\n"
     "SOURCE,,,,会议话筒,4,,,,\n"
@@ -20,6 +25,31 @@ SAMPLE = (
 
 def _call(path, body):
     return app._dispatch(path, json.dumps(body or {}))
+
+
+@pytest.fixture(autouse=True)
+def _isolate_writes(monkeypatch, tmp_path):
+    """★ 本模块直接调真实 handler，**两个**落盘路径都必须重定向到 tmp。
+
+    1. 图例库 ``legend_store.DEFAULT_CACHE`` —— 漏了它，PUT 会改真实图例库
+       （实测踩过：TF5 被写成 rev 36 / XLR in×5，图例库是永久文档，改坏要人救）
+    2. 主库 ``legend_sync.DEFAULT_CATALOG`` —— R10 起 PUT 会顺带反向写主库，
+       漏了它的表现是「跑完测试 git diff 里冒出莫名其妙的参数」
+
+    两者都要，缺一个就是「图例库改了主库没改」或反之，两边不一致极难排查。
+    指向尚不存在的文件即可：LegendStore 会新建，apply_reverse_to_catalog
+    找不到文件则返回 matched=False 不写盘。
+    需要验证「确实落盘了」的用例自己 copy 一份真实数据进去
+    （见 test_legend_put_reverse_syncs_catalog）。
+    """
+    import avcad.workflow.legend_sync as lsync
+    monkeypatch.setattr(lsync, "DEFAULT_CATALOG", tmp_path / "eko_catalog.json")
+    return tmp_path
+    # 注：图例库路径**不**在这里统一重定向 —— 本模块有若干用例依赖真实图例库
+    # 的内容（如 test_wire_legend_only_lists_used_signals 依赖 TF5 的图例覆盖
+    # BOM 推断值）。统一重定向会静默改变它们的出图结果，属于「为了防污染而
+    # 改掉测试前提」，比污染更危险。
+    # 图例库的防污染由 avcad/tests/conftest.py 的会话级 md5 总闸兜底。
 
 
 def test_parse_csv():
@@ -80,6 +110,47 @@ def test_legend_put_get(monkeypatch, tmp_path):
     assert k["ok"]
     g = _call("/api/legend", {"action": "get", "brand": "Yamaha", "model": "TF5"})
     assert g["legend"]["ports"][0]["signal"] == "DANTE"
+
+
+def test_legend_put_reverse_syncs_catalog(monkeypatch, tmp_path):
+    """R10：/api/legend PUT 必须把端口聚合数反推写进主库（用 tmp 副本验证）。
+
+    同时守两件事：
+      · 确实写了（图例库 = 真相，主库跟随）
+      · 写的是**副本**，真实主库 md5 不变（测试不得污染仓库数据）
+    """
+    import hashlib
+    import shutil
+    import avcad.workflow.legend_sync as lsync
+
+    import avcad.workflow.legend_store as lstore
+    real_md5 = hashlib.md5(open(REAL_CATALOG, "rb").read()).hexdigest()
+    legend_md5 = hashlib.md5(open(REAL_LEGEND, "rb").read()).hexdigest()
+    tmp_catalog = tmp_path / "eko_catalog_copy.json"
+    shutil.copy(REAL_CATALOG, tmp_catalog)
+    monkeypatch.setattr(lsync, "DEFAULT_CATALOG", tmp_catalog)
+    # 图例库**必须**也隔离：只 redirect 主库的话，PUT 会把 TF5 写进真实图例库
+    # （永久文档，升级 revision 且保留历史，脏数据会一直留着）
+    monkeypatch.setattr(lstore, "DEFAULT_CACHE", tmp_path / "legend_library.json")
+
+    r = _call("/api/legend", {"action": "put", "brand": "Yamaha", "model": "TF5",
+                              "category": "MIXER",
+                              "ports": [{"signal": "XLR", "role": "in", "side": "left",
+                                         "count": 5, "label": "IN", "air": False}]})
+    assert r["ok"]
+    assert r["catalog_synced"] is True, "PUT 后主库应被反推"
+    assert r["catalog_item"]["params"]["inputs"] == 5
+    assert r["catalog_item"]["params"]["legend_rev"] == r["revision"]
+
+    # 副本确实落盘了
+    saved = json.loads(tmp_catalog.read_text(encoding="utf-8"))
+    hit = [p for p in saved["products"]
+           if (p.get("model") or "").upper() == "TF5" and p.get("category") == "MIXER"]
+    assert hit and hit[0]["params"]["inputs"] == 5
+
+    # 真实主库 + 真实图例库都分毫未动
+    assert hashlib.md5(open(REAL_CATALOG, "rb").read()).hexdigest() == real_md5
+    assert hashlib.md5(open(REAL_LEGEND, "rb").read()).hexdigest() == legend_md5
 
 
 def test_legend_check_reports_missing_then_ok(monkeypatch, tmp_path):

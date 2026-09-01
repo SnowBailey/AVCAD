@@ -1011,8 +1011,10 @@
       "active": false,
       "params": {
         "channels_hint": 48,
-        "inputs": 32,
-        "outputs": 16
+        "inputs": 7,
+        "outputs": 3,
+        "legend_rev": 35,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "日本",
       "unit": "台",
@@ -21184,7 +21186,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 300
+        "power_w": 300,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -23573,7 +23577,9 @@
       "params": {
         "impedance_ohm": 8,
         "channels_hint": 2,
-        "channels": 2
+        "channels": 2,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -23598,7 +23604,9 @@
       "params": {
         "impedance_ohm": 8,
         "channels_hint": 2,
-        "channels": 2
+        "channels": 2,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -23623,7 +23631,9 @@
       "params": {
         "impedance_ohm": 8,
         "channels_hint": 4,
-        "channels": 4
+        "channels": 4,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -25710,7 +25720,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 600,
-        "channels_hint": 1
+        "channels_hint": 1,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -26944,7 +26956,9 @@
       "active": false,
       "params": {
         "inputs": 12,
-        "outputs": 8
+        "outputs": 10,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -27291,7 +27305,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 600
+        "power_w": 600,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:10+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -27313,7 +27329,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 600
+        "power_w": 600,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:10+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -27587,7 +27605,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 150
+        "power_w": 150,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -27653,7 +27673,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 200
+        "power_w": 200,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -27741,7 +27763,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 400
+        "power_w": 400,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:10+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -27829,7 +27853,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 650
+        "power_w": 650,
+        "legend_rev": 6,
+        "synced_at": "2026-09-01T09:47:11+08:00"
       },
       "country": "中国",
       "unit": "只",
