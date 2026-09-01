@@ -71,3 +71,33 @@ def test_expected_category_set_complete():
         "AMP", "SPEAKER", "IO", "SWITCH",
     }
     assert set(category_kb.list_categories()) == expected
+
+
+def test_usage_hint_known_model():
+    h = category_kb.usage_hint("IPS", "CF6300")
+    assert h["identified"] is True
+    assert h["cn"] == "话筒主机"
+    assert h["category"] == "MIC_HOST"
+    assert isinstance(h["upstream"], list) and h["upstream"]
+    assert isinstance(h["downstream"], list) and h["downstream"]
+
+
+def test_usage_hint_unknown_model():
+    h = category_kb.usage_hint("FOO", "BAR-99")
+    assert h["identified"] is False
+    assert h["category"] is None
+    assert h["confidence"] == 0.0
+
+
+def test_module_item_carries_kb_hint():
+    # 第②步模块序列化必须带 kb_hint，前端才能展示识别建议
+    from avcad.ui.app import _module_item  # 间接验证后端接线
+    from types import SimpleNamespace
+
+    m = SimpleNamespace(brand="IPS", model="CF6300", category="MIC_HOST",
+                        name="会议主机", quantity=1, decision="include",
+                        source="catalog", features=set(), params={})
+    item = _module_item(m)
+    assert "kb_hint" in item
+    assert item["kb_hint"]["identified"] is True
+    assert item["kb_hint"]["cn"] == "话筒主机"

@@ -138,6 +138,34 @@ def identify(brand: str = "", model: str = "", extra: str = "") -> dict:
     return _build(best, "类别词匹配", min(best_score / 3.0, 1.0))
 
 
+def usage_hint(brand: str = "", model: str = "", extra: str = "") -> dict:
+    """给一个型号，返回人能直接读的「这是什么 + 怎么接」。
+
+    返回 {category, cn, role, upstream, downstream, confidence, suggest, identified}。
+    identified=False 表示知识库没把握（category=None），需人工指定类别。
+    供第②步模块确认页在「主库未收录」徽章旁展示识别建议。
+    """
+    r = identify(brand, model, extra)
+    cat = r["category"]
+    if not cat:
+        return {
+            "category": None, "cn": "", "role": "",
+            "upstream": [], "downstream": [],
+            "confidence": 0.0, "suggest": r["suggest"], "identified": False,
+        }
+    kb = get_kb(cat)
+    return {
+        "category": cat,
+        "cn": r["cn"],
+        "role": r["role"],
+        "upstream": kb.get("upstream", []) or [],
+        "downstream": kb.get("downstream", []) or [],
+        "confidence": r["confidence"],
+        "suggest": r["suggest"],
+        "identified": True,
+    }
+
+
 if __name__ == "__main__":
     # 自测：几个新型号样例
     for b, m in [

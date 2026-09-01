@@ -282,6 +282,12 @@
   /* R12：主库未收录的型号。此前它跟正常型号长得一模一样，出图后是个孤立方块 */
   .chip.unknown{background:rgba(255,176,32,.16);color:#ffc457}
   .chip.deferred{background:rgba(255,255,255,.06);color:var(--mut)}
+  /* R15：第②步每模块卡的知识库识别建议（这是什么 + 怎么接） */
+  .kbhint{margin-top:7px;font-size:12px;line-height:1.55;color:#9fb3c8;
+    background:rgba(255,255,255,.035);border-left:3px solid #3a4a5a;
+    padding:6px 9px;border-radius:5px}
+  .kbhint.unknown{color:#ffc457;background:rgba(255,176,32,.10);border-left-color:#ffb020}
+  .kbhint .mut{color:var(--mut);font-size:11px}
 
   /* ============ 提示 / 杂项 ============ */
   .toast{
@@ -858,6 +864,24 @@ function renderUnknownNotice(){
     "\n\n它们的类别是靠名称猜的（猜不出就兜底成 IO），图上会变成孤立方块。" +
     "\n请在第③步把端口改对 —— 保存后落图例库，下次同型号自动套用。";
 }
+function kbHtml(m){
+  /* R15：第②步知识库识别建议。kb_hint 来自后端 category_kb.usage_hint()。
+     值（cn/role/upstream/downstream）取自 device_kb.yaml，非用户输入，无需转义。 */
+  const kb = m.kb_hint || {};
+  if(!kb.identified){
+    if(m.source === "unknown")
+      return '<div class="kbhint unknown">📖 知识库也无法判定类别，请人工指定 category（第③步补图例）。</div>';
+    return "";
+  }
+  const conn = (kb.upstream || []).join("/") + " → " + (kb.cn || kb.category) +
+               " → " + (kb.downstream || []).join("/");
+  const conf = kb.confidence < 1
+    ? ' <span class="mut">（识别置信 ' + Math.round((kb.confidence || 0) * 100) + '%）</span>' : "";
+  const cls = (m.source === "unknown") ? "kbhint unknown" : "kbhint";
+  return '<div class="' + cls + '">📖 ' + kb.cn + '：' + kb.role +
+         '<br>接法：' + conn + conf + '</div>';
+}
+
 function renderModules(){
   renderUnknownNotice();
   const box = $("modules"); box.innerHTML = "";
@@ -874,6 +898,7 @@ function renderModules(){
       '<div class="meta">' + [m.category, m.brand, m.model].filter(Boolean).join(" · ") +
       badge +
       ' <span class="chip">' + (m.decision || "include") + '</span></div>' +
+      kbHtml(m) +
       '<div class="row" style="margin-top:6px">' +
       '<button class="ghost mini-ex" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">不需要（移出本图）</button>' +
       '<button class="ghost mini-in hidden" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">恢复出图</button>' +

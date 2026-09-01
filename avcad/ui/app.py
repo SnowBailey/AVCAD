@@ -55,6 +55,7 @@ from avcad.workflow.architecture import select
 from avcad.workflow.importers import (  # CSV 路径也要走同一套归一化（R12）
     build_entries, to_bom_csv, apply_category_fallback)
 from avcad.parse.product_resolver import enrich as resolve_products
+from avcad.model.category_kb import usage_hint  # 设备类别知识库：第②步识别建议
 from scripts.check_overlap import check_svg
 
 STATIC = os.path.join(os.path.dirname(__file__), "static")
@@ -422,6 +423,9 @@ def _module_item(m) -> dict:
     return {"brand": m.brand, "model": m.model, "category": m.category,
             "name": m.name, "quantity": m.quantity, "decision": m.decision,
             "source": m.source,
+            # 设备类别知识库识别建议：第②步在「主库未收录」徽章旁展示
+            # 「这是什么 + 怎么接」，让阳哥一眼知道新型号该干什么
+            "kb_hint": usage_hint(m.brand, m.model, m.name),
             # 特性与参数：第③步图例页要用它们让引擎展开端口初值
             "features": list(m.features), "params": dict(m.params)}
 
