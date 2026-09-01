@@ -911,6 +911,21 @@ $("btnToStep3").addEventListener("click", ()=>goto(3));
 const SIGNALS = ["XLR","AES","DANTE","RS232","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK"];
 const ROLES = ["in","out","io"];
 const SIDES = ["left","right","top","bottom"];
+/* 端口类型中文说明：下拉选项旁显示，便于理解每个信号是什么 */
+const SIGNAL_HINT = {
+  XLR:"卡侬音频", AES:"数字音频", DANTE:"网络音频", RS232:"串口控制",
+  RF:"射频无线", SPEAKER:"扬声器", IP:"控制网络", GPIO:"通用IO",
+  POWER:"电源", OPTICAL:"光纤音频", TRS:"6.35mm", CONF:"会议总线",
+  USB:"USB", LINK:"级联"
+};
+/* 信号下拉：选项文本带中文说明（value 仍是信号码，提交不会错） */
+function sigOpts(val){
+  const arr = SIGNALS;
+  const opts = (val && arr.indexOf(val) < 0 && /^[\w-]+$/.test(String(val)))
+    ? [val].concat(arr) : arr;
+  const esc = s => String(s==null?"":s).replace(/[&<>\"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  return opts.map(o=>'<option value="'+esc(o)+'"' + (o === val ? " selected" : "") + '>' + esc(o) + ' · ' + esc(SIGNAL_HINT[o]||"") + '</option>').join("");
+}
 
 function defaultPorts(m){
   const c = (m.category || "").toUpperCase();
@@ -1168,7 +1183,7 @@ function renderPortRows(i, scope, setTa){
     };
     r.innerHTML =
       '<span class="idx">' + (k + 1) + '</span>' +
-      '<select class="sg">' + sel(SIGNALS, p.signal) + '</select>' +
+      '<select class="sg">' + sigOpts(p.signal) + '</select>' +
       '<select class="ro">' + sel(ROLES, p.role) + '</select>' +
       '<select class="sd">' + sel(SIDES, p.side) + '</select>' +
       '<input type="text" class="lb" value="' + (p.label || "") + '"/>' +

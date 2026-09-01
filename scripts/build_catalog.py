@@ -137,6 +137,8 @@ MANUAL_CAT = {
     # ALLEN&HEATH 仅 QU16 出图，其余型号后置
     ("ALLEN&HEATH", "QU16"): "MIXER",
     ("ALLEN & HEATH", "QU16"): "MIXER",
+    # EZACOUSTICS RDD12：双路 Dante 主备输入 + 12×XLR 输出，从 Dante 网络取信号
+    ("EZACOUSTICS", "RDD12"): "IO",
 }
 
 MANUAL_PARAMS = {
@@ -203,6 +205,13 @@ MANUAL_PARAMS = {
             {"name": "RS232", "side": "top", "signal": "RS232", "role": "in", "label": "RS232", "count": 1},
         ],
         note="无线会讨天线板；4×6P_DIN IN + 1×XLR IN；NET/UPDATE/RS485/RS232"),
+    # EZACOUSTICS RDD12 双路 Dante 接口主备：2×DANTE in(top, 主备) + 12×XLR out(right)
+    ("EZACOUSTICS", "RDD12"): dict(
+        ports_override=[
+            {"name": "DANTE", "side": "top", "signal": "DANTE", "role": "in", "label": "DANTE", "count": 2},
+            {"name": "OUT", "side": "right", "signal": "XLR", "role": "out", "label": "OUT", "count": 12},
+        ],
+        note="双路 Dante 主备输入 + 12×XLR 输出；从 Dante 网络取信号"),
 }
 
 

@@ -23974,27 +23974,41 @@
       "code": "1100000468",
       "brand": "ezacoustics",
       "model": "RDD12",
-      "name": "数字音频接入盒",
+      "name": "双路Dante接口主备（12路XLR输出）",
       "group": "五、其它设备",
       "section": null,
       "category": "IO",
       "defer_reason": null,
       "features": [
-        "analog",
-        "dante",
-        "control"
+        "dante"
       ],
-      "active": false,
+      "active": true,
       "params": {
-        "channels_hint": 12,
-        "inputs": 12,
-        "outputs": 12
+        "ports_override": [
+          {
+            "name": "DANTE",
+            "side": "top",
+            "signal": "DANTE",
+            "role": "in",
+            "label": "DANTE",
+            "count": 2
+          },
+          {
+            "name": "OUT",
+            "side": "right",
+            "signal": "XLR",
+            "role": "out",
+            "label": "OUT",
+            "count": 12
+          }
+        ],
+        "note": "双路 Dante 主备输入 + 12×XLR 输出；从 Dante 网络取信号"
       },
       "country": "中国",
       "unit": "台",
       "qty": 0,
       "price": 0.0,
-      "remark": "数字音频接入盒（Dante）；12 进 12 出（按型号推断，待官网复核）",
+      "remark": "双路 Dante 接口主备，12×XLR 输出，用于从 Dante 网络中取信号",
       "sheet": "eza艺科声",
       "no_draw": false
     },
