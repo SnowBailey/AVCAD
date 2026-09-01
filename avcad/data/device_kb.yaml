@@ -1,0 +1,447 @@
+# =============================================================================
+# AVCAD 设备类别语义知识库 (Device Category Knowledge Base)
+# -----------------------------------------------------------------------------
+# 用途：给一个「新型号」，系统能立刻判断它属于哪一类、在信号链里干什么、怎么接。
+# 与 device_specs/*.yaml（端口模板）是两层：
+#   - 端口模板：只定义「画哪些口、什么信号」，不知道「为什么这么接」。
+#   - 本文件：定义「设备是什么、上下游是谁、接法优劣、匹配规则、识别线索」，
+#             是端口模板之上的语义层，也是人工看图例 / AI 推断的参考。
+# 加载器见 avcad/model/category_kb.py（get_kb / identify）。
+#
+# 字段说明：
+#   cn              中文名
+#   aliases         别名 / 中英文常见叫法 / 识别关键词（identify() 据此模糊匹配型号）
+#   role            信号链中的角色定位（一句话）
+#   upstream         通常的上游设备类别（信号从哪来）
+#   downstream       通常的下游设备类别（信号到哪去）
+#   typical_ports    典型物理/信号接口（phys 物理口, signal 信号类型, dir 方向, note 说明）
+#   connectivity     接法：series 串联/级联, parallel 并联, single 单通道点对点
+#   matching         匹配要点（电平/阻抗/功率/通道数/协议/带载等）
+#   identification   识别线索（型号命名规律、参数特征、外观——看到新型号怎么归类）
+#   typical_models   典型真实型号（品牌+型号，供核对）
+#   pitfalls         常见接线/配置错误与后果
+#   notes            补充说明（含本项目 AVCAD 的特殊约定）
+# =============================================================================
+
+SOURCE:
+  cn: 音源
+  aliases: [音源, 播放器, 点歌机, CD机, 媒体播放器, 电脑声卡, 笔记本, 手机, 乐器, 垫场音乐, player, media, source, DJ]
+  role: 系统信号起点，提供节目源 / 背景音乐 / 播放内容，本身不产生信号只回放。
+  upstream: []
+  downstream: [MIXER, PROCESSOR, IO, SPEAKER_MGR]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: out, note: 平衡线路输出（专业设备主流）}
+    - {phys: TRS, signal: XLR, dir: out, note: 6.35mm 平衡线路（部分播放器/键盘）}
+    - {phys: RCA, signal: XLR, dir: out, note: 非平衡 -10dBV（消费级 DVD/机顶盒）}
+    - {phys: USB, signal: USB, dir: out, note: 数字音频（声卡/播控主机直连电脑）}
+    - {phys: Dante, signal: DANTE, dir: out, note: 网络音频（少数网络播放器）}
+    - {phys: 光纤/同轴, signal: OPTICAL, dir: out, note: 数字音频（S/PDIF/AES3）}
+  connectivity:
+    series: 不适用（音源是起点，无上游串联）。
+    parallel: 多台音源并联进同一输入=相位/阻抗叠加，易哼声与削波，须用调音台/分配器汇聚，禁止直接并接。
+    single: 最常用——单台音源 → 调音台/处理器一路输入（点对点线路电平）。
+  matching:
+    - 电平匹配：专业为 +4dBu，消费级为 -10dBV；跨级需衰减器(pad)或调音台输入灵敏度切换，否则削波。
+    - 阻抗：线路输出为低阻源，接高阻(>10kΩ)输入；勿接入低于 600Ω 负载。
+    - 平衡：长线一律用平衡 XLR/TRS + DI 盒，避免地环路哼声。
+    - 吉他/键盘高阻输出需 DI 盒转平衡再进系统。
+  identification:
+    - 清单描述含「播放/点歌/背景音乐/CD/电脑/笔记本/手机/DJ/乐器」。
+    - 型号多为 TASCAM / Pioneer DJ / DENON / FiiO / 各类声卡(MOTU/Focusrite)。
+    - 只有输出口、无功率输出，区别于功放。
+    - 型号片段关键词：CDJ / DN- / CD- / MOTU / Focusrite / UltraLite / 点歌 / 播放。
+  typical_models: [TASCAM CD-200BT, Pioneer DJ CDJ-3000, Denon DN-500BD, MOTU UltraLite, Yamaha MG 自带播放]
+  pitfalls:
+    - 笔记本耳机口(非平衡)直接进调音台导致底噪大、易过载 → 用 USB 声卡或 DI。
+    - 电平错配（-10 进 +4 输入）长期小幅削波损音质。
+    - 多音源并接同一 XLR 产生相位抵消。
+  notes: AVCAD 中音源常作信号起点推动后续；本类无冗余（redundancy_allowed=false）。
+
+WIRELESS_MIC:
+  cn: 无线话筒(发射端)
+  aliases: [无线话筒, 手持麦, 领夹麦, 头戴麦, 腰包发射机, 鹅颈无线, 发射机, wireless mic, transmitter, beltpack]
+  role: 声电转换 + 射频发射，把人声/乐器变成 UHF 射频经空中传给接收机。
+  upstream: []
+  downstream: [WIRELESS_RX]
+  typical_ports:
+    - {phys: 天线, signal: RF, dir: out, note: 仅射频发射口（air=true，不画物理线）}
+    - {phys: 充电座/IR, signal: GPIO, dir: io, note: 对频/充电，非音频信号}
+  connectivity:
+    series: 不适用（发射端单体，经空中与接收机配对）。
+    parallel: 不适用。
+    single: 单体使用，手持/腰包/鹅颈三种形态，一台话筒对一个接收信道。
+  matching:
+    - 频段须与接收机一致（UHF 610–670 / 740–820MHz 等分段），跨段无法配对。
+    - 频点规划：相邻频点须满足互调(IMD)间隔，避免同台多支互扰；用厂家频点表。
+    - 发射功率合规（国内 SRRC 核准），超功率违法且干扰邻台。
+  identification:
+    - 清单/型号含「无线/手持/领夹/头戴/WMIC/UM(发射)」，且只有 RF 天线口无音频口。
+    - 品牌 Shure(ULX/QLX/AX)/Sennheiser(ew)/Sony/MIPRO/得胜/博世。
+    - 与 WIRELESS_RX 区别：MIC 是发射(人拿着)，RX 是机架接收。
+  typical_models: [Shure ULXD1 腰包, Shure BLX24 手持, Sennheiser ew100 手持, MIPRO ACT]
+  pitfalls:
+    - 同频互调：相邻频点未留间隔 → 串音/断频。
+    - 天线被人体/金属遮挡 → 掉频（手持麦天线朝下时最弱）。
+    - 电池耗尽无提示。
+  notes: AVCAD 中 WIRELESS_MIC 只标 RF(air) 口，不连线；真正链路是「MIC --RF空中--> RX」。
+
+WIRELESS_RX:
+  cn: 无线接收机
+  aliases: [无线接收机, 接收机, 无线话筒接收, 天线分配接收, 接收主机, wireless receiver, RX, rack receiver]
+  role: 射频接收并解调为模拟线路音频，是无线话筒系统的落地设备。
+  upstream: [WIRELESS_MIC, ANT_DIST, ANT_COMBINE]
+  downstream: [MIXER, PROCESSOR, MIC_HOST]
+  typical_ports:
+    - {phys: BNC×2, signal: RF, dir: in, note: 分集接收天线（真分集两路）}
+    - {phys: XLR, signal: XLR, dir: out, note: 音频输出（MIC 或 LINE 电平，可切换）}
+    - {phys: TRS, signal: XLR, dir: out, note: 非平衡音频输出（少数）}
+    - {phys: NET, signal: IP, dir: io, note: 网络/中控（Dante 机型另有 Dante 口）}
+    - {phys: Dante, signal: DANTE, dir: in, note: 数字音频型号}
+  connectivity:
+    series: 不适用（接收机落地为音频，不再射频级联）。
+    parallel: 多台接收机共用天线 → 上游接 ANT_DIST/ANT_COMBINE（天线系统并联），非接收机互连。
+    single: 单台接收机 → 调音台一路输入（最常见）。
+  matching:
+    - 与发射同频段、同频点；分集两路天线间距 > λ/4（约 18cm@600MHz）避免衰落。
+    - 天线系统：>2 台接收机必须用 ANT_DIST 共享天线，否则各插一根天线覆盖不一致。
+    - 输出电平 MIC/LINE 须与下游输入匹配。
+  identification:
+    - 机架式、前面板双 BNC 天线、XLR 音频输出 → 典型接收机。
+    - 型号 Shure UA / Sennheiser EM / 与同系发射配对。
+    - 区别于 ANT_DIST：接收机有音频输出(XLR)，分配器只有射频口。
+  typical_models: [Shure ULXD4, Shure UA874 一体, Sennheiser EW100 接收, IPS UM2000 接收单元]
+  pitfalls:
+    - 天线直插不加分集 → 距离短、易掉频。
+    - 多接收机各插天线 → 覆盖不一致、互调。
+    - 输出电平设错（MIC 当 LINE）削波或过小。
+  notes: AVCAD 中接收机天线口接 ANT_DIST/ANTENNA（RF 链路）；音频口接调音台/处理器。
+
+ANTENNA:
+  cn: 天线
+  aliases: [天线, 指向天线, 有源天线, 鞭状天线, 对数周期天线, 板状天线, antenna, antenna paddle, paddle]
+  role: 空中射频 ↔ 线缆射频的换能器，把接收机/发射机的射频引到空中或收回。
+  upstream: [WIRELESS_RX, WIRELESS_MIC, ANT_COMBINE]
+  downstream: [WIRELESS_RX, ANT_DIST, ANT_COMBINE]
+  typical_ports:
+    - {phys: RF, signal: RF, dir: in, note: 空中口（air=true，不画物理线）}
+    - {phys: BNC, signal: RF, dir: out, note: 线缆射频输出（接接收机/分配器）}
+  connectivity:
+    series: 不适用（天线是换能端点）。
+    parallel: 多天线覆盖不同区域 → 各接独立接收机或汇入 ANT_DIST。
+    single: 单天线 → 单接收机（或经馈线进分配器），点对点。
+  matching:
+    - 频段覆盖发射频段（宽频天线优先，避免频段外增益塌陷）。
+    - 阻抗 50Ω；有源天线需供电(bias tee / 分配器馈电)。
+    - 增益与方向性：指向天线对准覆盖区，全向天线用于近场。
+  identification:
+    - 清单含「天线/指向/有源/对数周期」，外形为鞭状/板状/碟形。
+    - 型号 Shure HA-809X / Sennheiser A2003 / 各类 paddle。
+    - 与设备区别：只有 RF 口、无音频口。
+  typical_models: [Shure HA-809X, Sennheiser A2003-UHF, Audio-Technica ATW-A49]
+  pitfalls:
+    - 有源天线忘记供电 → 无信号。
+    - 无源天线长馈线损耗（>10m 显著衰减）。
+    - 指向天线朝向错 → 覆盖盲区。
+  notes: AVCAD 中天线 RF 为空中口(air)；与接收机/分配器之间画 BNC 射频线。
+
+ANT_DIST:
+  cn: 天线分配器
+  aliases: [天线分配器, 射频分配器, 天线分配, 射频分路器, 天线扩展, antenna distributor, splitter, dist]
+  role: 1 路射频输入分配多路输出，让多台接收机共享一副/一对天线，覆盖一致且省天线。
+  upstream: [ANTENNA, WIRELESS_RX]
+  downstream: [WIRELESS_RX]
+  typical_ports:
+    - {phys: BNC, signal: RF, dir: in, note: 天线输入（inputs 路，常 1–2）}
+    - {phys: BNC, signal: RF, dir: out, note: 射频输出（outputs 口，给接收机）}
+    - {phys: BNC, signal: RF, dir: out, note: 级联口（cascade_outs，给下一台分配器）}
+  connectivity:
+    series: 级联——末台之前的分配器从末尾扣 cascade_outs 口级联下一台，扩展带载接收机数。
+    parallel: 一台分配器的多路输出并联给多台接收机（天线系统并联）。
+    single: 单分配器点对点服务一组接收机。
+  matching:
+    - 分配损耗：每多分配一倍约 -3dB，需内置放大补偿；级联深度一般 ≤2 级，插损累积。
+    - 50Ω；给有源天线馈电须开启 bias。
+    - 输出口数须 ≥ 接收机数；级联口数决定扩展级数。
+  identification:
+    - 清单含「分配/分路/扩展」，只有射频 BNC 口、无音频口。
+    - 型号 Shure UA844 / IPS UM2000ATD（2 级联口）/ AUDIX ADS48（无级联）。
+    - 区别于 ANT_COMBINE：分配器是「一入多出」，合路器是「多入一出」。
+  typical_models: [Shure UA844SWB, IPS UM2000ATD, AUDIX ADS48]
+  pitfalls:
+    - 级联过深 → 插损大、远端接收机灵敏度下降。
+    - 忘记给有源天线供电。
+    - 输出口数 < 接收机数 → 部分接收机无天线。
+  notes: AVCAD 中 UM2000ATD cascade_outs=2（可级联），ADS48=0（不级联）；端口由 params 动态生成。
+
+ANT_COMBINE:
+  cn: 天线合路器
+  aliases: [天线合路器, 射频合路器, 合路器, 多合一天线, combiner, antenna combiner]
+  role: 多路发射射频合成 1 路输出到一副天线，让多发射机/多天线系统共用天线、避免互激。
+  upstream: [WIRELESS_RX, WIRELESS_MIC, SOURCE]
+  downstream: [ANTENNA]
+  typical_ports:
+    - {phys: BNC, signal: RF, dir: in, note: 多路射频输入（各发射机/天线系统）}
+    - {phys: BNC, signal: RF, dir: out, note: 合成输出（1 路，接天线）}
+  connectivity:
+    series: 不适用（合路为终点，多入一出）。
+    parallel: 不适用。
+    single: 多发射机 → 合路器 → 单天线（点对点射频合成）。
+  matching:
+    - 频段规划：合路各路须频段隔离或加滤波，否则互调自激。
+    - 插损补偿与隔离度；合路后总功率勿超天线额定。
+    - 方向严禁反接（输出当输入会损坏放大链路）。
+  identification:
+    - 清单含「合路/多合一/Combiner」，多入一出射频结构。
+    - 型号 IPS UM2000ASD（2入1出）。
+    - 区别于 ANT_DIST：合路器多入一出（发射侧），分配器一入多出（接收侧）。
+  typical_models: [IPS UM2000ASD, Shure UA874 不适用(那是天线)]
+  pitfalls:
+    - 频段未隔离 → 互调自激、系统啸叫。
+    - 合路功率超天线额定 → 烧天线。
+    - 方向反接损坏内部放大。
+  notes: AVCAD 中 UM2000ASD=ANT_COMBINE（2入1出）；与 ANT_DIST 端口模板相同但语义相反，靠 category 区分（R13 已修）。
+
+MIXER:
+  cn: 调音台
+  aliases: [调音台,  mixer, 数字调音台, 模拟调音台, 现场控制台, console, FOH]
+  role: 多路信号混合/增益/均衡/母线分配，系统核心切换与混音枢纽。
+  upstream: [SOURCE, WIRELESS_RX, MIC_HOST, IO, PROCESSOR]
+  downstream: [PROCESSOR, SPEAKER_MGR, AMP, IO]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: in, note: MIC/LINE 输入（多路，可幻象 48V）}
+    - {phys: TRS, signal: XLR, dir: in, note: 线路/乐器输入（insert 合用）}
+    - {phys: XLR, signal: XLR, dir: out, note: 主输出 LR / subgroup / AUX}
+    - {phys: Dante, signal: DANTE, dir: io, note: 数字台网络音频（进交换机）}
+    - {phys: NET, signal: IP, dir: io, note: 控制/远程}
+    - {phys: TRS, signal: XLR, dir: io, note: INSERT 插入点（外部处理器）}
+  connectivity:
+    series: 数字台可经 Dante 网络级联多台；模拟台少用级联。
+    parallel: 多总线并行（主混/监听/录音各自独立母线）。
+    single: 多入 → 主输出母线（点对点混音），最典型。
+  matching:
+    - 输入增益/幻象 48V 给电容麦；动圈麦误开幻象不损但注意。
+    - 输出电平 +4dBu；Dante 通道数与交换机带宽匹配。
+    - 母线数决定分组/返送能力。
+  identification:
+    - 清单含「调音台/console/mixer」，多路 XLR 输入 + 主输出。
+    - 型号 Yamaha(TF/QL/CL/DM)/A&H(SQ/dLive)/Behringer X32/Midas。
+    - 区别于 PROCESSOR：调音台以「人工混音母线」为核心；处理器以「可编程矩阵/算法」为核心。
+  typical_models: [Yamaha TF5, A&H SQ7, Behringer X32, Midas M32, IPS QU16]
+  pitfalls:
+    - 幻象电源误开接动圈/话筒虽不损，但接非平衡设备可能烧。
+    - 输入过载（增益过高）削波。
+    - 数字台 IP 冲突导致 Dante 掉线。
+  notes: AVCAD 中 QU-16=MIXER（XLR，无 Dante）；调音台主输出通常进处理器/音箱管理器。
+
+PROCESSOR:
+  cn: 音频处理器
+  aliases: [音频处理器, 数字处理器, DSP, 矩阵, 数字音频矩阵, 处理器, processor, DSP, matrix]
+  role: 系统「大脑」：路由/矩阵/均衡/反馈抑制/自动混音/分频/限幅/延时，全链路处理。
+  upstream: [MIXER, MIC_HOST, SOURCE, IO]
+  downstream: [SPEAKER_MGR, AMP, IO]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: in, note: 模拟输入（多路，可幻象给会议麦）}
+    - {phys: XLR, signal: XLR, dir: out, note: 模拟输出（多路，接功放/管理器）}
+    - {phys: Dante, signal: DANTE, dir: io, note: 网络音频（进交换机）}
+    - {phys: AES, signal: AES, dir: io, note: 数字音频（AES3）}
+    - {phys: NET, signal: IP, dir: io, note: 控制/中控}
+    - {phys: GPIO, signal: GPIO, dir: io, note: 通用 IO（静音/触发）}
+  connectivity:
+    series: Dante 网络级联多台处理器/扩展。
+    parallel: 矩阵路由把同一输入并行送到多输出（多房间分区）。
+    single: 多入 → 多出矩阵（任意入到任意出，点对点路由）。
+  matching:
+    - 输入幻象给会议鹅颈麦；输出接功放前需音箱管理器或自带分频。
+    - Dante 通道带宽（如 Core 110f 128×128）；交换机千兆。
+    - 电平 +4dBu；限幅阈值匹配下游功放/箱。
+  identification:
+    - 清单含「处理器/DSP/矩阵/周边」，多路 XLR + Dante + 控制网口。
+    - 型号 Biamp Tesira / QSC Core / Xilica / BSS / dbx / Symetrix。
+    - 与 SPEAKER_MGR 判别（最关键）：处理器做全系统路由/会议处理/房间均衡；音箱管理器专管「分频+限幅+保护」，输出直接进功放。
+  typical_models: [Biamp TesiraFORTE, QSC Core 110f, Xilica Neutrino, BSS BLU, dbx DriveRack(亦属管理器边界)]
+  pitfalls:
+    - 与音箱管理器混淆：处理器输出直接接无源音箱 → 无分频烧高音。
+    - 限幅未设 → 突发大信号烧箱。
+    - 矩阵路由错 → 某区无声或串音。
+  notes: AVCAD 中 PROCESSOR 含 dante/control 特性；与 SPEAKER_MGR 靠 category 严格区分（R13 规则 13）。
+
+SPEAKER_MGR:
+  cn: 音箱管理器
+  aliases: [音箱管理器, 扬声器管理器, 扬声器处理器, 分频器, 系统处理器, LMS, speaker manager, loudspeaker processor]
+  role: 专用于音箱：分频 + 限幅 + 延时 + EQ，保护并优化音箱，输出直接进功放。
+  upstream: [PROCESSOR, MIXER]
+  downstream: [AMP]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: in, note: 全频输入（2–8 路）}
+    - {phys: XLR, signal: XLR, dir: out, note: 分频段输出（对应低/中/高，进各功放）}
+    - {phys: NET, signal: IP, dir: io, note: 控制/中控}
+  connectivity:
+    series: 不适用（管理器为音箱前最后一级处理）。
+    parallel: 分频输出多路并行进多功放（双功放/三功放驱动一只箱）。
+    single: 处理器 → 管理器 → 功放（点对点，最常见）。
+  matching:
+    - 分频点须精确匹配音箱单元（如 500/3000Hz，L-R 24dB/oct）。
+    - 限幅启动电平匹配功放/箱额定，防止过载。
+    - 功率余量；阻抗匹配功放。
+  identification:
+    - 清单含「音箱管理/扬声器处理/分频/LMS」，输出直接标「进功放」。
+    - 型号 dbx DriveRack / Xilica(纯管理器型) / LAKE / Powersoft Armonía(功放内置)。
+    - 与 PROCESSOR 判别：管理器不接话筒、不做全系统路由，只服务「这一组音箱」。
+  typical_models: [dbx DriveRack PA2, Xilica XP, Lake LM26, Powersoft Armonía(内置)]
+  pitfalls:
+    - 与处理器混淆：管理器不接话筒/不做路由，错当处理器用会丢失会议处理。
+    - 分频点错 → 高音单元过载烧掉。
+    - 限幅阈值错 → 失去保护意义。
+  notes: AVCAD 中 SPEAKER_MGR 只服务无源链路；有源音箱自带 DSP、不经过管理器（阳哥规则 5）。
+
+MIC_HOST:
+  cn: 话筒主机
+  aliases: [会议主机, 讨论主机, 同传主机, 手拉手主机, 会议系统主机, 主席机, mic host, conference host, CU]
+  role: 手拉手会议系统核心：管理主席/代表单元、讨论/表决/同传，融合有线无线会议。
+  upstream: [WIRELESS_RX, WIRELESS_MIC]
+  downstream: [MIXER, PROCESSOR, WIRELESS_RX]
+  typical_ports:
+    - {phys: 6芯DIN, signal: CONF, dir: in, note: CH 手拉手链（主席/代表单元级联）}
+    - {phys: 6芯DIN, signal: CONF, dir: in, note: BOX 天线盒专用口（与 CF6300WB.HOST 对接）}
+    - {phys: XLR, signal: XLR, dir: out, note: PHX 翻译/音频输出（同传通道）}
+    - {phys: XLR, signal: XLR, dir: out, note: MIX 系统音频输出（进调音台/处理器）}
+    - {phys: CONF, signal: CONF, dir: out, note: HOST 天线盒侧（CF6300WB）}
+    - {phys: RF, signal: RF, dir: in, note: 无线单元空中口（air，不连线）}
+  connectivity:
+    series: 手拉手串联——主席/代表单元经 6芯DIN 菊花链级联（daisy-chain），一台链一串。
+    parallel: 多天线盒经 BOX↔HOST 并联到主机；无线单元经空中并联接入。
+    single: 主机 BOX 口 ←→ 单天线盒 HOST 口（点对点六芯），无线单元经空中单点接入。
+  matching:
+    - 带载单元数受主机规格限制（超带载须加扩展机/拆分链路）。
+    - 六芯缆长度限制（过长衰减压降）。
+    - 频段匹配无线单元；同传通道数匹配翻译系统。
+  identification:
+    - 清单含「会议主机/讨论/同传/手拉手/CF63/TAIDEN」，有 CH/BOX/MIX/PHX/HOST 多类口。
+    - 型号 IPS CF6300 / 台电 TAIDEN HCS / 博世 CCS / 铁力河。
+    - 与 WIRELESS_RX 区别：主机有 CONF 链与音频输出，接收机只有射频+音频。
+  typical_models: [IPS CF6300, TAIDEN HCS-4100, Bosch CCS-900, IPS CF6300WB(天线盒)]
+  pitfalls:
+    - BOX 口误接会议单元（历史缺陷：把天线盒链当手拉手链）→ 拓扑错乱。
+    - 级联超带载 → 末端单元无声。
+    - 无线单元强行画物理线（应只认 RF 空中口）。
+  notes: AVCAD 中 CF6300.BOX(left,CONF,in) ↔ CF6300WB.HOST(right,CONF,out) 用六芯；无线单元只认 RF(air) 不连线（阳哥规则）。
+
+AMP:
+  cn: 功率放大器
+  aliases: [功放, 功率放大器, 后级, 专业功放, 数字功放, 网络功放, amplifier, power amp, amp]
+  role: 把线路信号放大为驱动音箱的大电流，系统「肌肉」。
+  upstream: [SPEAKER_MGR, PROCESSOR, MIXER, IO]
+  downstream: [SPEAKER]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: in, note: 模拟输入（每通道或总线）}
+    - {phys: Dante, signal: DANTE, dir: in, note: 数字功放网络音频（进交换机）}
+    - {phys: NET, signal: IP, dir: io, note: 控制/监控}
+    - {phys: Phoenix/Neutrik, signal: SPEAKER, dir: out, note: 音箱输出（每通道）}
+  connectivity:
+    series: 不适用（功放是放大终点）。
+    parallel: 多功放并联驱动阵列；单机多通道可桥接(bridge)两通道→1 低音（阻抗减半）。
+    single: 每通道 → 1 只音箱（点对点），最常见。
+  matching:
+    - 功率余量：功放额定 ≈ 2× 音箱额定（headroom，防削波烧箱）。
+    - 阻抗：额定 4/8Ω；桥接后负载减半（如 8Ω→4Ω），勿低于最低负载。
+    - Dante 通道数与交换机；低阻音箱长线用 Speakon 防脱落。
+  identification:
+    - 清单含「功放/后级/amp」，只有输入(XLR/Dante) + 音箱输出(SPK/Phoenix)。
+    - 型号 Crown / Powersoft / Lab.gruppen / IPS / LOWELL。
+    - 与 SPEAKER 区别：功放是功率源、只有小信号输入；音箱是换能终点。
+  typical_models: [Crown XLS, Powersoft X4, Lab.gruppen D 系列, IPS 功放]
+  pitfalls:
+    - 功放功率 << 音箱 → 长期削波烧箱。
+    - 并联阻抗低于额定 → 过热保护/损坏。
+    - 桥接接错 → 短路烧机。
+    - 反相（±接反）声波抵消。
+  notes: AVCAD 中 AMP 输出标 SPK（WIRE_LABEL_ALIAS 映射 SPEAKER→SPK）；数字功放走交换机(Dante)。
+
+SPEAKER:
+  cn: 扬声器
+  aliases: [扬声器, 音箱, 音响, 线阵列, 监听, 低音炮, 主扩, speaker, loudspeaker, PA]
+  role: 电声转换最终发声，系统终点。
+  upstream: [AMP]
+  downstream: []
+  typical_ports:
+    - {phys: Speakon/Phoenix, signal: SPEAKER, dir: in, note: 无源箱功率输入}
+    - {phys: XLR, signal: XLR, dir: in, note: 有源箱线路输入}
+    - {phys: Dante, signal: DANTE, dir: in, note: 有源箱网络音频}
+    - {phys: NET, signal: IP, dir: io, note: 有源箱控制}
+  connectivity:
+    series: 不适用（发声终点）。
+    parallel: 多箱并联（阻抗注意：8Ω 并联→4Ω，再并→2Ω，勿低于功放额定）。
+    single: 功放一通道 → 一箱（点对点），最常见。
+  matching:
+    - 阻抗 8Ω（并联减半）；功率承受 ≥ 功放额定/2（headroom）。
+    - 覆盖角与吊挂；分频由上游管理器定。
+    - 有源箱：内置 DSP/功放，模拟+Dante 双接入（前级空闲+网络）。
+  identification:
+    - 清单含「音箱/扬声器/线阵/监听/低音炮/主扩」，只有输入无输出（除返送）。
+    - 型号 L-Acoustics / d&b / JBL / EAW / IPS / B-EAW(国产)。
+    - 与 AMP 区别：音箱是终点、只有输入。
+  typical_models: [L-Acoustics K2, d&b V 系列, JBL VTX, EAW KF, IPS 音箱]
+  pitfalls:
+    - 无源箱直接插调音台（无功率）→ 无声。
+    - 并联阻抗过低 → 烧功放。
+    - 相位反（±接反）→ 声波抵消、低频塌陷。
+  notes: AVCAD 中无源箱经 AMP；有源箱模拟+Dante 双接入（阳哥规则 6）；SPEAKER_MGR 不服务有源箱。
+
+IO:
+  cn: 音频接口箱
+  aliases: [接口箱, 舞台箱, 地插, I/O 箱, 扩展箱, 音频接口, stage box, I/O, breakout]
+  role: 模拟↔数字/Dante 边界：远端多路模拟汇聚成 Dante 网络传回机房，或反向分发。
+  upstream: [SOURCE, WIRELESS_RX, MIXER]
+  downstream: [SWITCH, PROCESSOR, AMP]
+  typical_ports:
+    - {phys: XLR, signal: XLR, dir: in, note: 模拟输入（舞台侧 IN，left）}
+    - {phys: XLR, signal: XLR, dir: out, note: 模拟输出（FOH 侧 OUT，right）}
+    - {phys: Dante, signal: DANTE, dir: io, note: 网络音频（right，进交换机）}
+    - {phys: AES, signal: AES, dir: io, note: 数字音频}
+    - {phys: NET, signal: IP, dir: io, note: 控制}
+  connectivity:
+    series: Dante 网络级联多台接口箱（扩展通道）。
+    parallel: 舞台多箱并行汇聚到同一交换机。
+    single: 舞台侧 IN(left) ↔ FOH 侧 OUT+Dante(right)（左右结构，最常见）。
+  matching:
+    - Dante 通道数（如 16×16、32×32）；模拟路数（inputs/outputs）。
+    - Phantom 给舞台电容麦；与调音台 stage box 协议一致（Yamaha RIO / A&H DX 互不通用）。
+    - 网络延迟与冗余。
+  identification:
+    - 清单含「接口箱/舞台箱/地插/I-O/扩展」，左右结构 IN/OUT + Dante。
+    - 型号 Yamaha RIO / A&H DX / Midas DL / Riedel / SHURE 接口箱。
+    - 与 PROCESSOR 区别：接口箱是「远端 I/O 边界」，不做算法处理。
+  typical_models: [Yamaha RIO3224-D, A&H DX168, Midas DL16, Riedel 接口箱]
+  pitfalls:
+    - IN/OUT 方向反（舞台当 FOH）→ 无声或回授。
+    - Dante 路由未连 → 机房收不到。
+    - Phantom 误开烧动圈。
+  notes: AVCAD 中 IO 平级化（DIO/SI/DI Box = SIDE 虚拟 stage）：只经 Dante 互通，XLR 按工程单独连，不画 XLR 串联（阳哥规则 11）。
+
+SWITCH:
+  cn: 网络交换机
+  aliases: [交换机, 网络交换机, Dante 交换机, 网络音频交换机, switch, ethernet switch, NET]
+  role: Dante/网络音频与控制的交换中枢，把多台 Dante 设备星型联网。
+  upstream: [PROCESSOR, AMP, IO, WIRELESS_RX, SPEAKER]
+  downstream: [PROCESSOR, AMP, IO, WIRELESS_RX, SPEAKER]
+  typical_ports:
+    - {phys: RJ45, signal: DANTE, dir: io, note: Dante/网络音频口（仅标数字 1/2/3…）}
+    - {phys: RJ45, signal: IP, dir: io, note: 控制网口（中控/监控）}
+  connectivity:
+    series: 交换机级联上联（核心/接入层），一般不环回。
+    parallel: 星型——所有 Dante 设备并行接到交换机各口。
+    single: 单设备 → 单口（点对点接入）。
+  matching:
+    - 千兆以太网（百兆跑 Dante 卡顿）；Dante 带宽按通道数（每 48kHz/24bit 通道 ~？ 实际 ~数 Mbps）。
+    - VLAN 隔离音频/控制；PoE 给有源天线/面板。
+    - 冗余：主备双交换机（AVCAD 克隆备机 uid {主}_bak）。
+  identification:
+    - 清单含「交换机/网络/Dante/NET」，多 RJ45 口、无音频模拟口。
+    - 任意支持 Dante 的网管型交换机（Cisco/Netgear/专用音频交换机）。
+    - 端口只标数字（阳哥规则 7）。
+  typical_models: [Cisco SG 系列, Netgear AV Line, Luminex, 任意千兆网管交换机]
+  pitfalls:
+    - 百兆交换机跑 Dante → 卡顿/掉包。
+    - VLAN 错隔离 → 控制与音频不通。
+    - 环形拓扑广播风暴（除非启 STP）。
+  notes: AVCAD 中交换机端口只标数字（不写 DANTE1）；冗余双交换机克隆备机（阳哥规则 + R12）。
