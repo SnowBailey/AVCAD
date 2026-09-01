@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 
 import pytest
@@ -87,8 +88,34 @@ def test_reverse_skips_when_catalog_readonly(isolate, monkeypatch):
     assert not list(Path(cat).parent.glob("*.bak.*")), "只读时连备份都不该尝试生成"
 
 
+def test_reverse_skips_when_frozen_even_if_dir_writable(isolate, monkeypatch):
+    """★ 打包版一律不回写主库 —— **目录可写也不写**。
+
+    第一版只判目录权限，实测不够：``dist/`` 可写 → 判据放行 → 反推真的写进
+    .app 包内（主库 md5 变了 + 留 .bak 残留）。四个后果：
+      1. 改 .app 内容 → ad-hoc 签名失效，Gatekeeper 可能报「应用已损坏」
+      2. 升级装新版 → 用户改动被静默覆盖（用户以为存住了）
+      3. .bak 残留在包内越用越大
+      4. 多用户共用一台 Mac 时互相污染
+    """
+    cat = isolate([dict(TF5)])
+    assert os.access(Path(cat).parent, os.W_OK), "前提：该目录本来是可写的"
+    monkeypatch.setattr(sys, "frozen", True, raising=False)
+    before = Path(cat).read_text(encoding="utf-8")
+
+    rr = lsync.apply_reverse_to_catalog({
+        "brand": "Yamaha", "model": "TF5", "category": "MIXER",
+        "ports": LEGEND_PORTS,
+    })
+
+    assert rr.matched is False
+    assert "frozen" in rr.skipped or "打包" in rr.skipped, rr.skipped
+    assert Path(cat).read_text(encoding="utf-8") == before, "打包版不该动主库"
+    assert not list(Path(cat).parent.glob("*.bak.*")), "打包版不该产生备份残留"
+
+
 def test_reverse_writes_when_catalog_writable(isolate):
-    """★ 回归保护：可写时必须照常反推，别把 R10 的功能顺手关死。"""
+    """★ 回归保护：源码版 + 可写目录时必须照常反推，别把 R10 的功能关死。"""
     cat = isolate([dict(TF5)])
 
     rr = lsync.apply_reverse_to_catalog({

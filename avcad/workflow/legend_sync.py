@@ -26,6 +26,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import sys
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -42,12 +43,29 @@ DEFAULT_CATALOG = Path(os.environ.get("AVCAD_CATALOG") or _CATALOG_JSON)
 
 
 def catalog_writable(p) -> bool:
-    """主库**所在目录**是否可写。
+    """主库**是否可以回写**。
 
-    ★ 2026-09-01 R13：打包版（.app / Program Files）里主库是随包的只读内置
-      基线。抽成函数是为了**守卫测试能稳定模拟只读** —— 用 chmod 造只读目录
-      在以 root 运行的 CI 里无效（root 无视权限位，os.access 恒为 True）。
+    ★ 2026-09-01 R13：打包版（``sys.frozen``）**一律不可写**，不看目录权限。
+
+      第一版只判 ``os.access(dir, W_OK)``，实测**不够**：``dist/`` 在我这台
+      机器上是可写的，判据放行 → 反推真的写进了 ``.app`` 包内（主库 md5 变了，
+      还留下一份 .bak）。这比直接崩更隐蔽，四个后果：
+
+        1. 改 .app 内容 → **ad-hoc 签名失效**，Gatekeeper 可能报「应用已损坏」
+        2. 升级装新版 → 用户改动被**静默覆盖**（用户以为存住了）
+        3. ``.bak`` 残留在包内，越用越大
+        4. 多用户共用一台 Mac 时互相污染
+
+      所以判据用 ``sys.frozen``：打包版里主库是**随包的内置基线**，语义上
+      就该只读（R11 已定「主库对用户只读」），图例库才是用户文档 ——
+      它走 ``AVCAD_LEGEND_LIBRARY`` 重定向到用户目录，不受影响。
+
+      源码版才看目录权限（装在只读位置时同样不写）。
+      抽成函数也是为了守卫测试能稳定模拟 —— 用 chmod 造只读目录在以 root
+      运行的 CI 里无效（root 无视权限位，os.access 恒为 True）。
     """
+    if getattr(sys, "frozen", False):
+        return False
     return os.access(Path(p).parent, os.W_OK)
 
 
@@ -281,8 +299,10 @@ def apply_reverse_to_catalog(legend, catalog_path: Optional[Path] = None) -> Rev
     """
     p = resolve_catalog_path(catalog_path)
     if not catalog_writable(p):
+        reason = ("打包版主库是随包内置基线（sys.frozen），跳过反推"
+                  if getattr(sys, "frozen", False) else "主库只读")
         return ReverseResult(False, None, {}, {}, None,
-                             skipped=f"主库只读，跳过反推：{p}")
+                             skipped=f"{reason}：{p}")
     if not p.exists():
         return ReverseResult(False, None, {}, {}, None)
 
