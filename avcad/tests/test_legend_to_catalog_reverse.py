@@ -334,3 +334,47 @@ def test_idempotent_reverse(restore_catalog):
     assert prod["params"]["inputs"] == 12
     assert prod["params"]["outputs"] == 8
     assert prod["params"]["legend_rev"] == 50
+
+
+# ============================================================
+# 备份轮转（2026-09-01）
+# ============================================================
+
+def test_backup_catalog_prunes_to_max(tmp_path):
+    """backup_catalog 只保留最近 MAX_BACKUPS 份 .bak。
+
+    此前 app.py 的 _save_catalog 自己拼 .bak.时间戳且无清理，
+    每改一条主库多一份，avcad/data/ 会被上百份备份淹没。
+    """
+    from avcad.workflow.legend_sync import MAX_BACKUPS, backup_catalog
+    cat = tmp_path / "eko_catalog.json"
+    cat.write_text("{}", encoding="utf-8")
+    # 手工造 8 份历史备份（时间戳递增）；时间戳是秒级的，不能靠循环快速调用生成
+    for i in range(8):
+        (tmp_path / f"eko_catalog.json.bak.2026010{i}000000").write_text("{}",
+                                                                        encoding="utf-8")
+    backup_catalog(cat)          # 再落一份 -> 共 9 份
+    left = sorted(cat.parent.glob(cat.name + ".bak.*"))
+    assert len(left) == MAX_BACKUPS, f"备份应只留 {MAX_BACKUPS} 份，实际 {len(left)}"
+    # 保留的是最新的：新落的一份 + 07/06/05/04
+    assert left[0].name.endswith("20260104000000"), left[0].name
+
+
+def test_ui_save_catalog_uses_same_rotation(tmp_path, monkeypatch):
+    """UI 主库页保存走同一套轮转，不再无限堆积备份。"""
+    import avcad.ui.app as app
+    from avcad.workflow.legend_sync import MAX_BACKUPS
+
+    cat = tmp_path / "eko_catalog.json"
+    cat.write_text(json.dumps({"products": [
+        {"brand": "IPS", "model": "X", "category": "PROCESSOR", "params": {}},
+    ]}, ensure_ascii=False), encoding="utf-8")
+    for i in range(8):
+        (tmp_path / f"eko_catalog.json.bak.2026010{i}000000").write_text("{}",
+                                                                        encoding="utf-8")
+    monkeypatch.setattr(app, "_CATALOG_PATH", str(cat))
+    monkeypatch.setattr(app, "_CATALOG", {"data": None, "mtime": 0})
+
+    app._save_catalog()
+    left = sorted(cat.parent.glob(cat.name + ".bak.*"))
+    assert len(left) == MAX_BACKUPS, f"UI 保存也应只留 {MAX_BACKUPS} 份，实际 {len(left)}"

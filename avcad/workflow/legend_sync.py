@@ -174,6 +174,12 @@ def find_product_index(products: list, brand: str, model: str, category: str) ->
     防御：
       - brand/model/category 任一为 None / 空字符串 → 不匹配（避免误覆盖）
       - products 元素不是 dict → 跳过
+
+    ★ 类别漂移回退（2026-09-01）：人工在图例校正页把某型号改成了与主库
+      推导值不同的类别时，精确匹配会落空，R10 反推就**静默不生效**（主库
+      永远停留在旧的错误端口数上，UI 上却显示「已保存」）。此时若该
+      (brand, model) 在主库里只有一条，就认这一条 —— 与
+      ``LegendStore.get`` 的回退规则保持一致（多条则仍要求类别精确）。
     """
     b = _norm(brand).upper()
     m = _norm(model).upper()
@@ -187,7 +193,11 @@ def find_product_index(products: list, brand: str, model: str, category: str) ->
                 and _norm(p.get("model")).upper() == m
                 and _norm(p.get("category")).upper() == c):
             return i
-    return -1
+    same_bm = [i for i, p in enumerate(products)
+               if isinstance(p, dict)
+               and _norm(p.get("brand")).upper() == b
+               and _norm(p.get("model")).upper() == m]
+    return same_bm[0] if len(same_bm) == 1 else -1
 
 
 # 备份保留份数。图例库每确认一次就反推一次主库，不设上限的话

@@ -104,3 +104,52 @@ def test_apply_no_hit_leaves_instance_untouched():
     st.apply(inst)  # 缓存无命中
     assert len(inst.ports) == 1
     assert inst.ports[0].label == "KEEP"
+
+
+# ---------------- 类别回退规则（2026-09-01 收紧） ----------------
+# 判据：同型号跨类别设备（会议主机 vs 处理器）不能互相串号；
+# 但单一类别的型号在主库类别漂移时不能整体失效。
+
+
+def test_single_legend_cross_category_fallback_kept():
+    """同型号只有一条图例 -> 允许跨类别命中（主库类别漂移时图例仍生效）。"""
+    st = LegendStore(path=os.path.join(tempfile.gettempdir(), "lg_test_cat1.json"))
+    st.put(_mk_legend())                       # YAMAHA::RIO3224-D::IO
+    got = st.get("YAMAHA", "RIO3224-D", "PROCESSOR")
+    assert got is not None and got.category == "IO"
+
+
+def test_multi_legend_requires_exact_category():
+    """同型号有多条图例 -> 必须类别精确匹配，防止跨类别串号。"""
+    st = LegendStore(path=os.path.join(tempfile.gettempdir(), "lg_test_cat2.json"))
+    st.put(_mk_legend())                       # ::IO
+    host = _mk_legend()
+    host.category = "MIC_HOST"
+    host.ports = [LegendPort(signal="CONF", role="out", side="right", count=1,
+                             label="MIX")]
+    st.put(host)                               # ::MIC_HOST
+    assert st.get("YAMAHA", "RIO3224-D", "MIC_HOST").category == "MIC_HOST"
+    assert st.get("YAMAHA", "RIO3224-D", "IO").category == "IO"
+    # 第四种类别 -> 不再静默回退到任意一条
+    assert st.get("YAMAHA", "RIO3224-D", "PROCESSOR") is None
+    assert not st.has("YAMAHA", "RIO3224-D", "PROCESSOR")
+
+
+def test_apply_does_not_rewrite_category_on_multi_legend_miss():
+    """跨类别未命中时，实例的 category 不能被别的类别图例改掉。"""
+    st = LegendStore(path=os.path.join(tempfile.gettempdir(), "lg_test_cat3.json"))
+    st.put(_mk_legend())                       # ::IO
+    host = _mk_legend()
+    host.category = "MIC_HOST"
+    st.put(host)
+    inst = _mk_inst()                          # category=IO
+    inst.category = "PROCESSOR"
+    st.apply(inst)
+    assert inst.category == "PROCESSOR"        # 未被 IO / MIC_HOST 顶掉
+
+
+def test_no_category_query_still_matches_any():
+    """未传 category 的旧调用方式：保持「取一条」的原行为。"""
+    st = LegendStore(path=os.path.join(tempfile.gettempdir(), "lg_test_cat4.json"))
+    st.put(_mk_legend())
+    assert st.get("YAMAHA", "RIO3224-D") is not None

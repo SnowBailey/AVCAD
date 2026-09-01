@@ -3,11 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AVCAD · 品牌主库校正</title>
+<title>AVCAD · 图例库校正</title>
 <style>
 /* ============================================================
    设计令牌（与 index.html 同源：深空 / 霓虹 / 影院感）
-   品牌主库卡与图例卡同语言：.legend + .lg-rows + .prow
+   图例库校正页与图例确认卡同语言：.legend + .lg-rows + .prow
+
+   ★ 语义（阳哥 2026-09-01）：
+     这页只改**图例库**；主库（eko_catalog）的类别 / 特性 / 参数在此**只读展示**。
+     列表 = 图例库已有 ∪ 主库里尚未被图例覆盖的可出图产品。
+     每条保存走 /api/legend，落完由 R10 自动把物理端口数反推回主库。
    ============================================================ */
 :root{
   --bg:#03050b; --panel:rgba(255,255,255,.028); --panel2:rgba(255,255,255,.045);
@@ -146,6 +151,11 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
   color:var(--mut);font-size:11px;letter-spacing:.03em;padding-left:4px;
   border-left:1px solid var(--line);margin-left:2px}
 .lg-rows .prow .role .v{color:var(--txt);font-weight:600}
+/* 端口数量（− N ＋）：与图例确认页 renderPortRows 同一语言 */
+.lg-rows .prow span.n{min-width:20px;text-align:center;font-variant-numeric:tabular-nums;color:var(--txt);font-weight:600;font-size:12px}
+/* 主库只读信息行：与可编辑行区分开 */
+.cat-ro{margin:2px 0 6px;font-size:11.5px;color:var(--mut);line-height:1.7}
+.cat-ro code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.04);padding:1px 5px;border-radius:4px}
 
 /* 底部操作行（与图例卡同位） */
 .row{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
@@ -209,24 +219,20 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
 </style>
 </head>
 <body>
-<h1>品牌主库校正 · AVCAD@Bailey@EZPRO</h1>
+<h1>图例库校正 · AVCAD@Bailey@EZPRO</h1>
 <div class="sub" id="meta">加载中…</div>
 
 <div class="banner" id="banner">
-  <div class="pane">
-    <div class="hd">▶ 品牌主库（您正在改）</div>
-    <div>类别 / 特性 / 参数 / 备注，落盘 <code id="pathMaster">eko_catalog.json</code></div>
-    <div>字段含义：<b>型号默认属性</b>（不存信号、方向、端口数）</div>
+  <div class="pane" style="flex:1.3;background:rgba(46,232,160,.05);border-radius:6px">
+    <div class="hd" style="color:var(--ok)">▶ 图例库（您正在改 · 落盘）</div>
+    <div>信号 / 方向 / 侧 / 数量 / 类别，落盘 <code id="pathLegend">legend_library.json</code></div>
+    <div style="font-size:11.5px">出图时<b style="color:var(--ok)">优先级最高</b>，整体覆盖引擎推断的端口</div>
   </div>
-  <div class="vs">同 key<br>共享</div>
-  <div class="pane" style="flex:1.2;border-left:1px solid var(--line);padding-left:14px;background:rgba(168,85,247,.05);border-radius:6px">
-    <div class="hd" style="color:var(--acc2)">↘ R10 反向同步</div>
-    <div style="font-size:11.5px">改图例库时，<b style="color:var(--acc2)">物理端口数自动反推主库</b>；<br/>主库非端口字段（阻抗/功率/级联）由人工单独维护</div>
-  </div>
+  <div class="vs">保存后<br>自动反推</div>
   <div class="pane">
-    <div class="hd">↔ 图例库（第 3 步改）</div>
-    <div>信号 / 方向 / 侧 / 数量，落盘 <code id="pathLegend">legend_library.json</code></div>
-    <div>字段含义：<b>项目实例端口配置</b>（在工程里这台机器实际画什么口）</div>
+    <div class="hd">↘ 品牌主库（这里不用改）</div>
+    <div>类别 / 参数 / 特性，<code id="pathMaster">eko_catalog.json</code></div>
+    <div style="font-size:11.5px">程序从厂商资料推导，<b>仅供参考</b>；<br/>改端口后物理端口数会自动反推过去</div>
   </div>
 </div>
 
@@ -235,9 +241,9 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
     <select id="brand"></select>
   </label>
   <label class="grow">搜索
-    <input type="text" id="q" placeholder="型号或名称关键词（白名单：analog/dante/wireless）"/>
+    <input type="text" id="q" placeholder="型号或名称关键词"/>
   </label>
-  <span class="feat" id="fWireless">只看无线相关</span>
+  <span class="feat" id="fMissing">只看未确认</span>
   <span class="count" id="count"></span>
 </div>
 
@@ -248,38 +254,19 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
 <script>
 const $ = id => document.getElementById(id);
 
-/* ============================================================
-   类别 → 常用特性 / 参数（每个 ID 直接借用 index.html 数据）
-   ============================================================ */
-const CAT_FEAT_PRESETS = {
-  SOURCE:["analog"], WIRELESS_MIC:["wireless"], ANTENNA:["active"],
-  WIRELESS_RX:["dante","control"], PROCESSOR:["dsp","dante"], MIXER:[],
-  AMP:["dante"], SPEAKER:["active"], SPEAKER_MGR:["dante"],
-  IO:["dante"], MIC_HOST:["phantom"], SWITCH:["control"],
-  RIGGING:["rigging"], POWER:["aux"],
-};
-const CAT_PARAM_PRESETS = {
-  SOURCE:["count=1"], WIRELESS_MIC:["channels=1"], ANTENNA:["polar=有源指向"],
-  WIRELESS_RX:["channels=4","antennas=2"],
-  PROCESSOR:["inputs=12","outputs=8","dante_ports=0","usb_ports=0","ctrl_ports=0"],
-  MIXER:["inputs=16","outputs=8","dante_ports=8","usb_ports=1","ctrl_ports=1"],
-  AMP:["inputs=2","outputs=2","set_expand=并行"],
-  SPEAKER:["active=true"],
-  SPEAKER_MGR:["inputs=4","outputs=4","dante_ports=0"],
-  IO:["inputs=4","outputs=4"],
-  MIC_HOST:["phantom_inputs=4","audio_outputs=1","aux_inputs=2"],
-  SWITCH:["lan_ports=8"],
-};
-
-const ALL_FEATURES = ["analog","aes","dante","control","wireless","phantom","dsp","active","mix_out","trs_out"];
+/* 端口枚举：与 index.html 图例确认页**完全一致**。
+   ★ 改这里必须同步那边——两边各有一份是有守卫测试兜底的
+     （test_signal_registry.py / test_port_geometry.py）。 */
+const SIGNALS = ["XLR","AES","DANTE","RS232","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK"];
+const ROLES = ["in","out","io"];
+const SIDES = ["left","right","top","bottom"];
 
 let META = {categories:[], features:[]};
 let ITEMS = [];
-/* 图例库命中索引：key → {ports 类数, total 端口数}；初次进入页面时拉取一次 */
-let LEGEND_BY_KEY = {};
-let LEGEND_PATH = "legend_library.json";
-let DIRTY = new Set();   // 已改动但未保存
+let DIRTY = new Set();   // 已改动未保存
 let SAVED = new Set();   // 本会话已落盘
+let LEGEND_PATH = "legend_library.json";
+let CATALOG_PATH = "eko_catalog.json";
 
 async function api(path, body){
   const r = await fetch(path, {method:"POST",
@@ -292,75 +279,50 @@ function toast(m, kind){
   t.className="toast show " + (kind||"");
   clearTimeout(tt); tt=setTimeout(()=>t.className="toast", 2200);
 }
-
-async function loadMeta(){
-  META = await api("/api/catalog", {action:"meta"});
-  $("meta").textContent = `主库 ${META.total} 条 · ${META.path}`;
-  $("pathMaster").textContent = (META.path || "").split("/").pop() || "主库.json";
-
-  /* 同步拉图例库清单（轻量，10K 级别）；命中存 LEGEND_BY_KEY 用于每张卡打徽章 */
-  try {
-    const lr = await api("/api/legend", {action:"list"});
-    LEGEND_PATH = (lr.library && lr.library.path && lr.library.path.split("/").pop()) || "legend_library.json";
-    $("pathLegend").textContent = LEGEND_PATH;
-    LEGEND_BY_KEY = {};
-    for (const lg of lr.legends || []) {
-      const ports = Array.isArray(lg.ports) ? lg.ports : [];
-      const total = ports.reduce((s,p)=>s + (Number(p.count)||0), 0);
-      LEGEND_BY_KEY[lg.key] = {ports: ports.length, total, rev: lg.revision || 0};
-    }
-    /* 顶部 .sub 追加图例库状态，让用户一眼看到 */
-    if (Object.keys(LEGEND_BY_KEY).length) {
-      const sub = $("meta");
-      const cur = sub.textContent;
-      sub.innerHTML = cur + '  ·  <span style="color:var(--ok)">图例库</span> '
-                    + Object.keys(LEGEND_BY_KEY).length + ' 条已落盘 · '
-                    + `<code style="font-family:ui-monospace;background:rgba(255,255,255,.04);padding:1px 6px;border-radius:5px;color:var(--mut)">${LEGEND_PATH}</code>`;
-    }
-  } catch (e) {
-    console.warn("[catalog] /api/legend list failed", e);
-  }
-  const sel = $("brand");
-  sel.innerHTML = META.brands.map(b =>
-    `<option value="${b.brand}">${b.brand}（${b.count}）</option>`).join("");
-  const url = new URL(location.href);
-  const init = url.searchParams.get("brand");
-  sel.value = (init && META.brands.find(b=>b.brand===init)) ? init : (META.brands[0]||{}).brand || "";
-}
-async function loadItems(){
-  const res = await api("/api/catalog", {
-    action:"list", brand:$("brand").value, q:$("q").value,
-    wireless_only: $("fWireless").classList.contains("on")});
-  ITEMS = res.items || [];
-  DIRTY.clear();
-  $("count").innerHTML = `共 <b>${ITEMS.length}</b> 条`;
-  render();
-}
-
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
-
-/* 兜底：当前值不在候选里，把它补成首项（与图例卡 sel() 完全一致逻辑） */
+/* 兜底：当前值不在候选列表里时补成首项并选中，否则一编辑就把原值静默改成首项
+   （RS232 曾漏在 SIGNALS 之外，图例里 4 个 RS232 端口一编辑就变成 XLR）。 */
 function selOpts(arr, val){
   const opts = (val && arr.indexOf(val) < 0 && /^[\w-]+$/.test(String(val)))
     ? [val].concat(arr) : arr;
   return opts.map(o=>'<option' + (o === val ? " selected" : "") + '>' + o + '</option>').join("");
 }
-function tryJson(s){
-  if(!s) return undefined;
-  s = String(s).trim();
-  if(!(s.startsWith("{")||s.startsWith("["))) return undefined;
-  try{ return JSON.parse(s); }catch(e){ return undefined; }
+
+/* ============================================================
+   载入：meta（品牌清单 + 两库路径）/ list（图例库 ∪ 主库未覆盖）
+   ============================================================ */
+async function loadMeta(){
+  META = await api("/api/legend-catalog", {action:"meta"});
+  const lib = META.library || {};
+  LEGEND_PATH  = (lib.path || "legend_library.json").split("/").pop();
+  CATALOG_PATH = (META.path || "eko_catalog.json").split("/").pop();
+  $("pathLegend").textContent  = LEGEND_PATH;
+  $("pathMaster").textContent  = CATALOG_PATH;
+  $("meta").innerHTML =
+    '主库 <b style="color:var(--txt)">' + (META.total||0) + '</b> 条（其中可出图待筛） · '
+    + '<span style="color:var(--ok)">图例库</span> <b style="color:var(--txt)">' + (META.legend_count||0) + '</b> 条已确认';
+  const sel = $("brand");
+  sel.innerHTML = (META.brands||[]).map(b =>
+    `<option value="${esc(b.brand)}">${esc(b.brand)}（${b.count}${b.confirmed?" · 已确认 "+b.confirmed:""}）</option>`).join("");
+  const url = new URL(location.href);
+  const init = url.searchParams.get("brand");
+  sel.value = (init && (META.brands||[]).find(b=>b.brand===init))
+    ? init : ((META.brands||[]).find(b=>b.confirmed) || META.brands[0] || {}).brand || "";
 }
-function coerce(v){
-  if(v==="") return "";
-  if(v==="true") return true; if(v==="false") return false;
-  const n = Number(v);
-  return (!isNaN(n) && String(v).trim()!=="") ? n : v;
+async function loadItems(){
+  const res = await api("/api/legend-catalog", {
+    action:"list", brand:$("brand").value, q:$("q").value,
+    only_missing: $("fMissing").classList.contains("on"), limit: 300});
+  ITEMS = res.items || [];
+  DIRTY.clear(); SAVED.clear();
+  const nConf = ITEMS.filter(i=>i.source==="legend").length;
+  $("count").innerHTML = `共 <b>${ITEMS.length}</b> 条 · 已确认 <b style="color:var(--ok)">${nConf}</b> · 待确认 <b style="color:var(--warn)">${ITEMS.length-nConf}</b>`;
+  render();
 }
 
 /* ============================================================
-   render() ── 与图例卡 .legend 100% 同构
+   render() ── 与图例卡 .legend 同构
    ============================================================ */
 function render(){
   const box = $("list");
@@ -371,51 +333,37 @@ function render(){
 
 function badgeFor(i){
   const it = ITEMS[i];
-  const v = it.revision || 7;
-  const key = `${it.brand||""}::${it.model||""}::${it.category||""}`;
-  const hit = LEGEND_BY_KEY[key];
-  const lgTail = hit
-    ? ` · <span style="color:var(--ok);font-family:ui-monospace;font-size:10.5px">图例 ✓</span>`
-    : ` · <span style="color:var(--mut);font-family:ui-monospace;font-size:10.5px">图例 —</span>`;
-  if(DIRTY.has(i))
-    return `<span class="cache dirty">◐ 主库 待保存${lgTail}</span>`;
-  if(SAVED.has(i))
-    return `<span class="cache hit">● 主库 已落盘 · 备份 ${esc(it.last_backup || 1)}${lgTail}</span>`;
-  return `<span class="cache miss" id="bdg_${i}">○ 主库 v${v}${lgTail}</span>`;
+  if(DIRTY.has(i))  return `<span class="cache dirty">◐ 图例 待保存</span>`;
+  if(SAVED.has(i))  return `<span class="cache hit">● 图例 v${it.revision||1} 已落盘</span>`;
+  if(it.source === "legend")
+    return `<span class="cache hit" id="bdg_${i}">● 图例 v${it.revision||1} · ${esc((it.updated_at||"").slice(0,10))}</span>`;
+  if(!it.inferred)
+    return `<span class="cache miss" id="bdg_${i}">✕ 无法推断 · 需手工添加端口</span>`;
+  return `<span class="cache miss" id="bdg_${i}">○ 引擎推断 · 待确认</span>`;
 }
 
+/* 主库侧只读信息 + R10 反推徽章 */
 function metaLine(it){
-  const pcount = Object.keys(it.params||{}).length;
-  const rcount = (it.remark||"").length;
-  /* 图例库命中徽章：以 brand||""::model::category 为 key */
-  const key = `${it.brand||""}::${it.model||""}::${it.category||""}`;
-  const hit = LEGEND_BY_KEY[key];
-  const lgBadge = hit
-    ? `<span class="lg-hit has" title="图例库已落盘：${esc(key)}">↔ 图例 <b class="n">${hit.ports}</b> 类 <b class="n">${hit.total}</b> 口</span>`
-    : `<span class="lg-hit" title="图例库暂无 entry：${esc(key)}">↔ 图例 — 未落盘</span>`;
-  /* R10：图例库是真相，主库跟随。
-     两种状态必须分开显示，否则音箱/功放也挂「反推」却看不出反推了什么：
-       A. 反推（紫）— 规格模板认 inputs/outputs 的类别
-          （MIXER / PROCESSOR / IO / ANT_DIST / SPEAKER_MGR），
-          图例库端口数已真正写回主库 params
-       B. 已确认（灰）— 其余类别端口数由 channels / 固定模板决定，
-          只记同步标记，不写 inputs/outputs（写了也没人读 = 死数据） */
-  const pr = it.params || {};
-  const rev = pr.legend_rev || it.legend_rev;
-  const syn = pr.synced_at || it.synced_at;
+  const cd = it.catalog || null;
+  const pr = (cd && cd.params) || {};
+  const rev = pr.legend_rev || 0;
+  const syn = pr.synced_at || "";
   const agg = ('inputs' in pr) || ('outputs' in pr);
   let autoBadge;
-  if (!rev) {
-    autoBadge = `<span class="auto-sync" title="主库原始自动生成，图例库尚未确认过这个型号"><span class="d">↘</span> 主库原始（图例未确认）</span>`;
-  } else if (agg) {
-    autoBadge = `<span class="auto-sync has" title="图例库 rev ${rev} 于 ${esc(syn||'?')} 反推主库：inputs=${pr.inputs} outputs=${pr.outputs}"><span class="d">↘</span> 由图例 <b class="n">v${rev}</b> 反推 <span class="d">· 进出 ${pr.inputs}/${pr.outputs} · ${esc((syn||'').slice(0,16).replace('T',' '))}</span></span>`;
+  if(!rev){
+    autoBadge = `<span class="auto-sync" title="主库原始自动生成，图例库尚未确认过这个型号">↘ 主库原始（图例未确认）</span>`;
+  } else if(agg){
+    autoBadge = `<span class="auto-sync has" title="图例库 rev ${rev} 于 ${esc(syn)} 反推主库">↘ 由图例 <b class="n">v${rev}</b> <span class="d">· 进出 ${pr.inputs}/${pr.outputs} · ${esc(syn.slice(0,16).replace('T',' '))}</span></span>`;
   } else {
-    autoBadge = `<span class="auto-sync" title="图例库 rev ${rev} 已确认，但该类别端口数由 channels / 固定模板决定，主库不存 inputs/outputs"><span class="d">↘</span> 图例已确认 <b class="n">v${rev}</b> <span class="d">· 端口不聚合</span></span>`;
+    autoBadge = `<span class="auto-sync" title="图例库 rev ${rev} 已确认；该类别端口数由 channels / 固定模板决定，主库不存 inputs/outputs">↘ 图例已确认 <b class="n">v${rev}</b> <span class="d">· 端口不聚合</span></span>`;
   }
-  return `类别 <b style="color:var(--txt)">${esc(it.category||"（不出图）")}</b> · ` +
-         `特性 <b style="color:var(--txt)">${it.features.length}</b> · ` +
-         `参数 <b style="color:var(--txt)">${pcount}</b> · ` +
-         `备注 <b style="color:var(--txt)">${rcount}</b> 字` + autoBadge + lgBadge;
+  const ro = cd
+    ? `<div class="cat-ro">主库（只读）：类别 <code>${esc(cd.category||"—")}</code> · 特性 <code>${esc((cd.features||[]).join(",")||"—")}</code> · 参数 <code>${esc(Object.keys(pr).length ? JSON.stringify(pr) : "—")}</code></div>`
+    : `<div class="cat-ro">主库（只读）：<code>图例库该类别在主库里没有对应条目</code></div>`;
+  const total = (it.ports||[]).reduce((s,p)=>s+(Number(p.count)||0),0);
+  return `${ro}<div style="margin-top:2px">端口 <b style="color:var(--txt)">${(it.ports||[]).length}</b> 类 / <b style="color:var(--txt)">${total}</b> 口`
+       + `${(it.slots||[]).length ? ` · 卡槽 <b style="color:var(--txt)">${it.slots.length}</b>` : ""}`
+       + autoBadge + `</div>`;
 }
 
 /* ============================================================
@@ -430,312 +378,149 @@ function buildCard(i){
     '<div class="th">' +
       '<div class="left">' +
         '<b>' + esc(it.model || it.name) + '</b>' +
-        '<span class="mut">· ' + esc([it.brand, it.section].filter(Boolean).join(" / ")) + '</span>' +
-        (it.defer_reason ? `<span class="badge miss">后置：${esc(it.defer_reason)}</span>` : "") +
+        '<span class="mut">· ' + esc(it.brand || "") + '</span>' +
+        (it.source === "legend"
+          ? `<span class="badge hit" style="font-size:10px">图例库</span>`
+          : `<span class="badge mut" style="font-size:10px">主库未覆盖</span>`) +
       '</div>' +
       badgeFor(i) +
     '</div>' +
 
     '<div class="kv" id="kv_' + i + '">' + metaLine(it) + '</div>' +
 
-    /* 类别行（占满宽度） */
+    /* 类别行（存图例库：同一型号跨类别时以此区分类别） */
     '<div class="lg-rows" style="grid-template-columns:1fr;margin-top:2px">' +
       '<div class="prow">' +
         '<span class="idx">类</span>' +
-        '<select class="cat" id="cat_sel_' + i + '">' +
-          META.categories.map(c =>
-            `<option value="${c}"${c===(it.category||"")?" selected":""}>${c||"（不出图）"}</option>`).join("") +
+        '<select class="cat" id="cat_sel_' + i + '" title="图例按 brand::model::类别 存；改类别会以新类别另建一条图例，原条目保留">' +
+          (META.categories||[]).map(c =>
+            `<option value="${esc(c)}"${c===(it.category||"")?" selected":""}>${esc(c)||"（无）"}</option>`).join("") +
         '</select>' +
-        '<span class="mut" style="font-size:11px">→ 系统图类别归属</span>' +
+        '<span class="mut" style="font-size:11px">→ 图例归属类别（出图时以图例为准）</span>' +
       '</div>' +
     '</div>' +
 
-    /* 特性段（每行一个特性，可加减） */
-    sectionHTML("特性", i, "feat", it.features, ALL_FEATURES, function(j){
-      return '<div class="prow">' +
-        '<span class="idx">' + (j+1) + '</span>' +
-        '<select class="feat" data-row="' + j + '">' +
-          selOpts(ALL_FEATURES, it.features[j]) +
-        '</select>' +
-        '<span class="role">↳ 用作：' + esc(it.features[j] || "—") + '</span>' +
-        '<button class="mini del" data-row="' + j + '" title="删除">×</button>' +
-      '</div>';
-    }, "feat") +
-
-    /* 参数段（每行一对 key/value） */
-    sectionHTML("参数", i, "param", Object.entries(it.params||{}).map(([k,v])=>[k,coerceToStr(v)]), null, function(j){
-      const [k, v] = Object.entries(it.params||{})[j] || ["", ""];
-      return '<div class="prow">' +
-        '<span class="idx">' + (j+1) + '</span>' +
-        '<input type="text" class="key" data-row="' + j + '" value="' + esc(k) + '" placeholder="参数名"/>' +
-        '<span style="color:var(--mut)">=</span>' +
-        '<input type="text" class="val" data-row="' + j + '" value="' + esc(v) + '" placeholder="值"/>' +
-        '<button class="mini del" data-row="' + j + '" title="删除">×</button>' +
-      '</div>';
-    }, "param") +
-
-    /* 备注段（单行 input） */
-    sectionHTML("备注", i, "remark", [it.remark||""], null, function(){
-      return '<div class="prow">' +
-        '<span class="idx">字</span>' +
-        '<input type="text" class="remark" value="' + esc(it.remark||"") + '" placeholder="一句话备注（可选）"/>' +
-      '</div>';
-    }, "remark") +
+    '<div class="section-label">端口（信号 / 方向 / 侧 / 标签 / 数量）</div>' +
+    '<div class="lg-rows" id="port_rows_' + i + '"></div>' +
 
     '<div class="row">' +
-      '<button class="ghost" data-act="addfeat" id="addfeat_' + i + '" style="margin-top:0;padding:5px 12px;font-size:11.5px">+ 新增特性</button>' +
-      '<button class="ghost" data-act="addparam" id="addparam_' + i + '" style="margin-top:0;padding:5px 12px;font-size:11.5px">+ 新增参数</button>' +
+      '<button class="ghost" id="addport_' + i + '" style="margin-top:0;padding:5px 12px;font-size:11.5px">+ 新增端口</button>' +
       '<span class="grow"></span>' +
       '<span class="lg-status" id="st_' + i + '"></span>' +
       '<button class="sec" id="ok_' + i + '" style="margin-top:0;padding:6px 18px;font-size:12.5px"' +
-        (DIRTY.has(i) ? '' : ' disabled') + '>✓ 保存并落盘</button>' +
+        (DIRTY.has(i) ? '' : ' disabled') + '>✓ 保存并落图例库</button>' +
     '</div>';
 
+  renderPortRows(i, d);
   wireCard(i, d);
   return d;
 }
 
-/* coerceToStr：渲染参数值时安全序列化（与 mark 内 tryJson/coerce 互逆） */
-function coerceToStr(v){
-  if(v===null||v===undefined) return "";
-  if(typeof v === "object") return JSON.stringify(v, null, 0);
-  return String(v);
-}
-
-/* sectionHTML：根据类型生成「段标题 + 行容器 + 快捷工具」块 */
-function sectionHTML(title, i, kind, rowsData, options, rowRenderer, kindKey){
-  let html =
-    '<div class="section-label">' + esc(title) + '</div>' +
-    '<div class="lg-rows" id="' + kind + '_rows_' + i + '">';
-  if(rowsData.length === 0){
-    html += '<div class="prow" style="opacity:.55">'
-         + '<span class="idx">—</span>'
-         + '<span class="mut" style="font-size:11.5px;font-style:italic">未设置 · 点下方「+ 新增' + (kind==="param"?"参数":"特性") + '」添加</span>'
-         + '</div>';
-  } else {
-    rowsData.forEach((_, j) => {
-      html += rowRenderer(j);
-    });
+function renderPortRows(i, d){
+  const it = ITEMS[i];
+  const box = d.querySelector("#port_rows_" + i);
+  box.innerHTML = "";
+  const ports = it.ports || [];
+  if(!ports.length){
+    box.innerHTML = '<div class="prow" style="opacity:.55">'
+      + '<span class="idx">—</span>'
+      + '<span class="mut" style="font-size:11.5px;font-style:italic">未定义端口'
+      + (it.inferred ? '' : '（引擎无法推断，请手工添加）') + '</span></div>';
+    return;
   }
-  html += '</div>';
-
-  /* 段下快捷 preset chip（仅特性 / 参数） */
-  if(kind === "feat" || kind === "param"){
-    const it = ITEMS[i];
-    const presets = kind === "feat" ? (CAT_FEAT_PRESETS[it.category] || []) :
-                                    (CAT_PARAM_PRESETS[it.category] || []);
-    if(presets.length){
-      html += '<div class="section-tools">' +
-        '<span class="mut" style="font-size:10.5px;letter-spacing:.1em">常用</span>' +
-        presets.map(p => kind === "feat"
-          ? `<span class="preset" data-f="${esc(p)}">+ ${esc(p)}</span>`
-          : `<span class="preset" data-p="${esc(p)}">+ ${esc(p)}</span>`).join("") +
-      '</div>';
-    }
-  }
-  return html;
-}
-
-/* ============================================================
-   wireCard() ── 行内 in-place 编辑，无「展开/折叠」
-   ============================================================ */
-function wireCard(i, d){
-  /* 类别 select 触发 mark 即可 */
-  d.querySelector("#cat_sel_"+i).addEventListener("change", ()=>mark(i));
-
-  /* 特性段：select onChange + × 删除 + preset 快捷插入 */
-  wireSection(i, d, "feat", {
-    onChange: (row, val) => {},
-    onDelete: (row) => {},
-    onPresetClick: (val) => {},
-  });
-
-  /* 参数段 */
-  wireSection(i, d, "param", {});
-
-  /* 备注 */
-  const rmkEl = d.querySelector(".remark");
-  if(rmkEl){ rmkEl.addEventListener("input", ()=>mark(i)); }
-
-  /* 新增按钮 */
-  d.querySelector("#addfeat_"+i).addEventListener("click", ()=>{
-    const wrap = d.querySelector("#feat_rows_"+i);
-    /* 去掉「未设置」占位 */
-    const empty = wrap.querySelector(".prow[style*=opacity]");
-    if(empty) empty.remove();
-    const div = document.createElement("div"); div.className="prow";
-    const j = wrap.children.length;
-    div.innerHTML =
-      '<span class="idx">' + (j+1) + '</span>' +
-      '<select class="feat" data-row="' + j + '">' + selOpts(ALL_FEATURES, "") + '</select>' +
-      '<span class="role">↳ 新增</span>' +
-      '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
-    wrap.appendChild(div);
-    wireSection(i, d, "feat", {});
-    mark(i);
-  });
-  d.querySelector("#addparam_"+i).addEventListener("click", ()=>{
-    const wrap = d.querySelector("#param_rows_"+i);
-    const empty = wrap.querySelector(".prow[style*=opacity]");
-    if(empty) empty.remove();
-    const div = document.createElement("div"); div.className="prow";
-    const j = wrap.children.length;
-    div.innerHTML =
-      '<span class="idx">' + (j+1) + '</span>' +
-      '<input type="text" class="key" data-row="' + j + '" placeholder="参数名"/>' +
-      '<span style="color:var(--mut)">=</span>' +
-      '<input type="text" class="val" data-row="' + j + '" placeholder="值（数字自动转）"/>' +
-      '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
-    wrap.appendChild(div);
-    wireSection(i, d, "param", {});
-    mark(i);
-  });
-
-  /* preset chip 一键插入 */
-  d.querySelectorAll(".section-tools .preset").forEach(c=>{
-    c.addEventListener("click", ()=>{
-      if(c.dataset.f){
-        /* 特性 preset */
-        const wrap = d.querySelector("#feat_rows_"+i);
-        const empty = wrap.querySelector(".prow[style*=opacity]");
-        if(empty) empty.remove();
-        const div = document.createElement("div"); div.className="prow";
-        const j = wrap.children.length;
-        div.innerHTML =
-          '<span class="idx">' + (j+1) + '</span>' +
-          '<select class="feat" data-row="' + j + '">' + selOpts(ALL_FEATURES, c.dataset.f) + '</select>' +
-          '<span class="role">↳ '+esc(c.dataset.f)+'</span>' +
-          '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
-        wrap.appendChild(div);
-        wireSection(i, d, "feat", {});
-      } else if(c.dataset.p){
-        /* 参数 preset (k=v) */
-        const txt = c.dataset.p;
-        const eq = txt.indexOf("=");
-        const k = txt.slice(0, eq), v = txt.slice(eq+1);
-        const wrap = d.querySelector("#param_rows_"+i);
-        const empty = wrap.querySelector(".prow[style*=opacity]");
-        if(empty) empty.remove();
-        const div = document.createElement("div"); div.className="prow";
-        const j = wrap.children.length;
-        div.innerHTML =
-          '<span class="idx">' + (j+1) + '</span>' +
-          '<input type="text" class="key" data-row="' + j + '" value="'+esc(k)+'"/>' +
-          '<span style="color:var(--mut)">=</span>' +
-          '<input type="text" class="val" data-row="' + j + '" value="'+esc(v)+'"/>' +
-          '<button class="mini del" data-row="' + j + '" title="删除">×</button>';
-        wrap.appendChild(div);
-        wireSection(i, d, "param", {});
-      }
+  ports.forEach((p, k)=>{
+    const r = document.createElement("div"); r.className = "prow";
+    r.innerHTML =
+      '<span class="idx">' + (k + 1) + '</span>' +
+      '<select class="sg">' + selOpts(SIGNALS, p.signal) + '</select>' +
+      '<select class="ro">' + selOpts(ROLES, p.role) + '</select>' +
+      '<select class="sd">' + selOpts(SIDES, p.side) + '</select>' +
+      '<input type="text" class="lb" value="' + esc(p.label || "") + '" placeholder="标签"/>' +
+      '<button class="mini" title="减少">−</button><span class="n">' + (p.count || 1) + '</span>' +
+      '<button class="mini" title="增加">＋</button>' +
+      '<button class="mini del" title="删除">✕</button>';
+    const sync = ()=>{
+      p.signal = r.querySelector(".sg").value;
+      p.role   = r.querySelector(".ro").value;
+      p.side   = r.querySelector(".sd").value;
+      p.label  = r.querySelector(".lb").value;
       mark(i);
+    };
+    r.querySelectorAll("select").forEach(s=>s.addEventListener("change", sync));
+    r.querySelector(".lb").addEventListener("input", sync);
+    r.querySelectorAll("button.mini")[0].addEventListener("click", ()=>{
+      p.count = Math.max(1, (p.count || 1) - 1); renderPortRows(i, d); mark(i);
     });
+    r.querySelectorAll("button.mini")[1].addEventListener("click", ()=>{
+      p.count = (p.count || 1) + 1; renderPortRows(i, d); mark(i);
+    });
+    r.querySelector("button.mini.del").addEventListener("click", ()=>{
+      it.ports.splice(k, 1); renderPortRows(i, d); mark(i);
+    });
+    box.appendChild(r);
   });
+}
 
-  /* 保存 */
+function wireCard(i, d){
+  d.querySelector("#cat_sel_"+i).addEventListener("change", ()=>{
+    ITEMS[i].category = d.querySelector("#cat_sel_"+i).value || "";
+    mark(i);
+  });
+  d.querySelector("#addport_"+i).addEventListener("click", ()=>{
+    const it = ITEMS[i];
+    it.ports = it.ports || [];
+    it.ports.push({signal:"XLR", role:"in", side:"left", count:1, label:"", air:false});
+    renderPortRows(i, d);
+    mark(i);
+  });
   d.querySelector("#ok_"+i).addEventListener("click", ()=>saveOne(i));
 }
 
-/* 在特性 / 参数 段内 bind select.onchange / input.oninput / ×.click */
-function wireSection(i, d, kind /* "feat" or "param" */, _){
-  const wrap = d.querySelector("#" + kind + "_rows_" + i);
-  if(!wrap) return;
-  /* 已有行的 select onChange */
-  wrap.querySelectorAll("select."+kind).forEach(sel=>{
-    sel.addEventListener("change", ()=>mark(i));
-  });
-  /* 已有行的 input onInput */
-  wrap.querySelectorAll("input.key, input.val").forEach(inp=>{
-    inp.addEventListener("input", ()=>mark(i));
-  });
-  /* × 按钮 */
-  wrap.querySelectorAll("button.del").forEach(b=>{
-    b.addEventListener("click", ()=>{
-      b.closest(".prow").remove();
-      /* 重排 idx */
-      [...wrap.querySelectorAll(".prow")].forEach((p, k)=>{
-        p.querySelector(".idx").textContent = (k+1);
-      });
-      mark(i);
-    });
-  });
-}
-
-/* ============================================================
-   mark() ── 实时同步 ITEMS[i]，刷新徽章 + 元信息行
-   ============================================================ */
+/* 改动标记：刷新徽章 + 元信息 */
 function mark(i){
   DIRTY.add(i);
   const c = $("cat_"+i);
   if(!c) return;
   c.classList.add("changed");
-  c.querySelector("#ok_"+i).disabled = false;
-
-  const it = ITEMS[i];
-
-  /* 类别 */
-  it.category = c.querySelector("#cat_sel_"+i).value || "";
-
-  /* 特性 */
-  it.features = [];
-  c.querySelectorAll("#feat_rows_"+i+" select.feat").forEach(sel=>{
-    const v = sel.value; if(v) it.features.push(v);
-  });
-
-  /* 参数 */
-  it.params = {};
-  c.querySelectorAll("#param_rows_"+i+" .prow").forEach(p=>{
-    const k = p.querySelector(".key").value.trim();
-    if(!k) return;
-    let v = p.querySelector(".val").value.trim();
-    const jp = tryJson(v);
-    it.params[k] = (jp !== undefined) ? jp : coerce(v);
-  });
-
-  /* 备注 */
-  const r = c.querySelector(".remark");
-  it.remark = r ? r.value : "";
-
-  /* 同步徽章 */
+  const ok = c.querySelector("#ok_"+i); if(ok) ok.disabled = false;
   const bdg = c.querySelector(".cache");
-  if(bdg){
-    bdg.className = "cache dirty";
-    bdg.textContent = `◐ ${it.features.length} 特性 / ${Object.keys(it.params).length} 参数 待保存`;
-  }
-  /* 同步元信息 */
+  if(bdg) bdg.outerHTML = badgeFor(i);
   const kv = c.querySelector(".kv");
-  if(kv) kv.innerHTML = metaLine(it);
+  if(kv) kv.innerHTML = metaLine(ITEMS[i]);
 }
 
+/* ============================================================
+   saveOne() ── 落图例库（/api/legend），落完由 R10 自动反推主库
+   ============================================================ */
 async function saveOne(i){
   const card = $("cat_"+i);
   if(!card) return;
-  /* mark() 已经把 ITEMS[i] 同步过了，直接拿 */
-  mark(i);
   const it = ITEMS[i];
   const st = $("st_"+i);
   st.className="lg-status"; st.textContent="保存中…";
-  const payload = {
-    action:"put", idx: it.idx,
-    category: it.category || "",
-    features: it.features || [],
-    params: it.params || {},
-    remark: it.remark || "",
-  };
-  const res = await api("/api/catalog", payload);
+  const res = await api("/api/legend", {
+    brand: it.brand || "", model: it.model || "", category: it.category || "",
+    ports: it.ports || [], slots: it.slots || [], note: it.note || "",
+  });
   if(res.error){
     st.className="lg-status err"; st.textContent="失败："+res.error;
     toast("保存失败：" + res.error, "err"); return;
   }
-  DIRTY.delete(i);
-  SAVED.add(i);
+  DIRTY.delete(i); SAVED.add(i);
+  it.revision = res.revision || 1;
+  it.updated_at = res.updated_at || "";
+  it.source = "legend";
   card.classList.remove("changed");
-  card.querySelector("#ok_"+i).disabled = true;
+  const ok = card.querySelector("#ok_"+i); if(ok) ok.disabled = true;
   const bdg = card.querySelector(".cache");
-  bdg.className = "cache hit";
-  bdg.textContent = "● 已落盘 · 备份 " + (res.backup || 1);
+  if(bdg) bdg.outerHTML = badgeFor(i);
+  const kv = card.querySelector(".kv");
+  if(kv && res.catalog_item) kv.innerHTML = metaLine(res.catalog_item);
   st.className="lg-status ok";
-  st.textContent = "✓ 已落盘 · 备份 " + (res.backup || 1);
-  toast("✓ 已保存 " + (it.model||it.name), "ok");
+  st.textContent = res.catalog_synced
+    ? "✓ 图例 v" + it.revision + " 已落盘 · 主库已反推" + (res.catalog_backup ? "（备份 "+esc(res.catalog_backup)+"）" : "")
+    : "✓ 图例 v" + it.revision + " 已落盘（主库无对应型号，未反推）";
+  toast("✓ 已保存 " + (it.model || it.name), "ok");
 }
 
 /* ============================================================
@@ -744,8 +529,8 @@ async function saveOne(i){
 $("brand").addEventListener("change", loadItems);
 $("q").addEventListener("input", ()=>{ clearTimeout(window._qt);
   window._qt = setTimeout(loadItems, 280); });
-$("fWireless").addEventListener("click", ()=>{
-  $("fWireless").classList.toggle("on"); loadItems();
+$("fMissing").addEventListener("click", ()=>{
+  $("fMissing").classList.toggle("on"); loadItems();
 });
 
 (async ()=>{ await loadMeta(); await loadItems(); })();

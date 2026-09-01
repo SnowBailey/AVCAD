@@ -45,8 +45,9 @@ from avcad.render.dxf_render import render_dxf
 from avcad.workflow.module_confirm import build_module_list, confirm_modules
 from avcad.workflow.run import run_workflow, summarize
 from avcad.workflow.legend_store import LegendStore, Legend, LegendPort
+from avcad.workflow.legend_builder import infer_from_product  # 图例校正页：引擎推断初值
 from avcad.workflow.legend_sync import (  # R10 反向同步：图例库 -> 主库
-    apply_reverse_to_catalog, resolve_catalog_path,
+    apply_reverse_to_catalog, resolve_catalog_path, backup_catalog,
 )
 from avcad.workflow.architecture import select
 from avcad.workflow.importers import build_entries, to_bom_csv
@@ -60,7 +61,9 @@ _ENTRY_CACHE: dict = {}
 
 # ---------------- 产品主库（eko_catalog.json）读写 ----------------
 # 与 catalog_resolver 共用同一份路径定义，避免出现第二个「主库副本」
-from avcad.data.catalog_resolver import DEFAULT_JSON as _CATALOG_PATH  # noqa: E402
+from avcad.data.catalog_resolver import (  # noqa: E402
+    DEFAULT_JSON as _CATALOG_PATH, CAT_SPEC, DRAW_EXCLUDE_BRANDS,
+)
 _CATALOG = {"data": None, "mtime": 0}
 
 # 可编辑字段与取值提示（前端据此渲染控件）
@@ -91,13 +94,14 @@ def _load_catalog():
 
 
 def _save_catalog():
-    """原子写回主库：先备份再落盘，失败不破坏原文件。"""
+    """原子写回主库：先备份再落盘，失败不破坏原文件。
+
+    ★ 备份走 ``legend_sync.backup_catalog``：那边有 MAX_BACKUPS=5 的轮转。
+      此前这里自己拼 .bak.时间戳且**无任何清理**，UI 上每改一条主库就
+      多一份，avcad/data/ 会被上百份备份淹没。
+    """
     data = _load_catalog()
-    bak = f"{_CATALOG_PATH}.bak.{time.strftime('%Y%m%d%H%M%S')}"
-    try:
-        shutil.copy2(_CATALOG_PATH, bak)
-    except OSError:
-        pass
+    bak = backup_catalog(_CATALOG_PATH)
     tmp = f"{_CATALOG_PATH}.tmp.{os.getpid()}"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
@@ -447,6 +451,119 @@ def _dispatch(path, body):
                 "catalog_backup": (os.path.basename(rev_res.backup_path)
                                    if rev_res.backup_path else None)}
 
+    if path == "/api/legend-catalog":
+        """图例校正页数据源：**图例库** ∪ **主库中图例库尚未覆盖的产品**。
+
+        语义（阳哥 2026-09-01）：
+          - 这个页面只改**图例库**；主库的类别 / 参数 / 特性在此**只读展示**，
+            用户没有必要动（要动也是脚本侧 build_catalog.py 的 MANUAL_* 表）。
+          - 每条保存走 /api/legend，落图例库后由 R10 自动反推主库端口数。
+          - 图例库没有的型号，端口初值由引擎按主库 params / ports_override
+            推断（``infer_from_product``）；推断不出来就返回空端口让人工填。
+        """
+        data = json.loads(body or "{}")
+        act = data.get("action") or "list"
+        st = LegendStore()
+        legends = st.all()
+        by_key = {LegendStore.key(lg.brand, lg.model, lg.category): lg
+                  for lg in legends}
+
+        cat_data = _load_catalog()
+        products = cat_data.get("products", [])
+        brand_q = str(data.get("brand") or "").strip()
+        kw = str(data.get("q") or "").strip().lower()
+        only_missing = bool(data.get("only_missing"))
+        try:
+            limit = int(data.get("limit") or 300)
+        except (TypeError, ValueError):
+            limit = 300
+
+        def _match(p, b, m):
+            if brand_q and str(p.get("brand") or "").strip() != brand_q:
+                return False
+            if kw and kw not in f"{m} {p.get('name','')}".lower():
+                return False
+            return True
+
+        items = []
+        # ① 图例库已有的（人工确认过，排前面）
+        for lg in legends:
+            m = (lg.model or "").strip()
+            if brand_q and (lg.brand or "").strip() != brand_q:
+                continue
+            if kw and kw not in f"{m} {lg.model}".lower():
+                continue
+            if only_missing:
+                continue
+            items.append({
+                "key": LegendStore.key(lg.brand, lg.model, lg.category),
+                "brand": lg.brand, "model": m, "category": lg.category,
+                "name": "", "source": "legend",
+                "revision": lg.revision, "updated_at": lg.updated_at,
+                "ports": [p.to_dict() for p in lg.ports],
+                "slots": list(lg.slots), "note": lg.note or "",
+                "inferred": False,
+            })
+        # ② 主库里图例库尚未覆盖的
+        for i, p in enumerate(products):
+            if not isinstance(p, dict):
+                continue
+            b = (p.get("brand") or "").strip()
+            m = (p.get("model") or "").strip()
+            c = (p.get("category") or "").strip()
+            if not b or not m:
+                continue
+            # 只列**可能出图**的型号：类别为空 / 无对应设备模板 / 品牌被排除
+            # 的（配件、线缆、停产型号、Green-GO 等）列出来也不能建图例，
+            # 只会把「未确认」列表淹掉（IPS 285 条里就有 200+ 条这类）。
+            if c.upper() not in CAT_SPEC:
+                continue
+            if b.upper() in DRAW_EXCLUDE_BRANDS:
+                continue
+            if not _match(p, b, m):
+                continue
+            k = LegendStore.key(b, m, c)
+            if k in by_key:
+                continue
+            if only_missing is False and len(items) >= limit:
+                break
+            lg = infer_from_product(p)
+            items.append({
+                "key": k, "brand": b, "model": m, "category": c,
+                "name": p.get("name") or "", "source": "catalog",
+                "revision": 0, "updated_at": "",
+                "ports": [q.to_dict() for q in lg.ports] if lg else [],
+                "slots": list(lg.slots) if lg else [], "note": "",
+                "inferred": lg is not None,
+                "catalog": _catalog_item(i, p),
+            })
+            if len(items) >= limit:
+                break
+
+        if act == "meta":
+            counts = {}
+            for p in products:
+                if not isinstance(p, dict):
+                    continue
+                b = str(p.get("brand") or "").strip() or "(空)"
+                counts[b] = counts.get(b, 0) + 1
+            confirmed = {}
+            for lg in legends:
+                b = str(lg.brand or "").strip() or "(空)"
+                confirmed[b] = confirmed.get(b, 0) + 1
+            return {
+                "total": len(products),
+                "legend_count": len(legends),
+                "library": st.info(),
+                "path": str(_CATALOG_PATH),
+                "brands": [{"brand": b, "count": c, "confirmed": confirmed.get(b, 0)}
+                           for b, c in sorted(counts.items(),
+                                              key=lambda x: (-x[1], x[0]))],
+                "categories": CATEGORY_CHOICES,
+            }
+        return {"items": items, "total": len(items),
+                "legend_count": len(legends), "library": st.info()}
+
     if path == "/api/architectures":
         data = json.loads(body or "{}")
         entries = _entries_from_bom(data.get("bom", ""))
@@ -542,8 +659,9 @@ def _dispatch(path, body):
                 prod["params"] = data["params"] or {}
             if "remark" in data:
                 prod["remark"] = data["remark"] or ""
-            bak = _save_catalog()
-            return {"ok": True, "backup": os.path.basename(bak),
+            bak = _save_catalog()   # 备份可能被轮转/失败 -> 允许为 None
+            return {"ok": True,
+                    "backup": os.path.basename(bak) if bak else None,
                     "item": _catalog_item(idx, products[idx])}
 
         # 默认 list：按品牌 + 关键字过滤

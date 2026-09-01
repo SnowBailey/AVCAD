@@ -50,6 +50,45 @@ def ensure(inst, store: LegendStore) -> Legend:
     return lg
 
 
+def infer_from_product(product) -> Optional[Legend]:
+    """从**主库产品条目**引擎推断默认图例（给「图例库尚未覆盖」的型号做初值）。
+
+    与前端 ``defaultPorts(category)`` 的差别：这里读主库 ``params`` /
+    ``ports_override`` / ``features``，因此 CF6300（人工校正的 4×PHX + 1×MIX）、
+    CS-R10（HY/MY 卡槽）这类型号能拿到正确初值；前端模板只能按类别给出
+    固定的「MIXER 8进4出」这类猜测值。
+
+    返回 None = 类别不可出图（无对应规格模板）或推断失败；
+    调用方应提示「请手工添加端口」，而不是给出一套错的默认端口。
+    """
+    if not isinstance(product, dict):
+        return None
+    cat = (product.get("category") or "").strip().upper()
+    if not cat:
+        return None
+    try:
+        from avcad.model.specs import expand_instance, load_specs
+        spec = (load_specs() or {}).get(cat)
+        if spec is None:
+            return None
+        entry = {
+            "category": cat,
+            "brand": product.get("brand") or "",
+            "model": product.get("model") or "",
+            "name": product.get("name") or "",
+            "params": dict(product.get("params") or {}),
+            "features": list(product.get("features") or []),
+        }
+        inst = expand_instance(spec, entry, 0)
+        lg = from_instance(inst)
+    except Exception:
+        # 主库 params 里可能有历史脏数据（字符串化的 list、非法枚举值等），
+        # 推断失败不应让整页 500 —— 交给调用方降级为「手工填写」。
+        return None
+    lg.category = cat
+    return lg
+
+
 def replace_ports(legend: Legend, port_defs: List[dict]) -> Legend:
     """用 port_defs 整体替换图例端口（UI 定义/修改端口数量与朝向）。"""
     legend.ports = [

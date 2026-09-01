@@ -531,7 +531,7 @@
     <a href="/catalog" target="_blank" rel="noopener"
        style="display:inline-block;margin-left:12px;color:var(--acc);text-decoration:none;
               border:1px solid rgba(0,229,255,.35);border-radius:999px;padding:2px 11px">
-      品牌主库校正 →</a>
+      图例库校正 →</a>
   </div>
 </header>
 
@@ -950,8 +950,12 @@ async function initLegends(){
     return {
       brand: b, model: mo, category: c, name: m.name || "", quantity: m.quantity || 1,
       ports: sv ? sv.ports : defaultPorts(m),
+      /* ★ 卡槽必须随图例一起带上：此前保存时前端固定传 slots: []，
+         一旦编辑过图例，CS-R10 / RPio622 的 HY/MY 卡槽就被静默抹掉。 */
+      slots: sv ? (sv.slots || []) : [],
       saved: !!sv, revision: sv ? (sv.revision || 1) : 0,
       hist: sv ? ((sv.history || []).length) : 0, source: sv ? (sv.source || "user") : "",
+      note: sv ? (sv.note || "") : "",
     };
   });
   renderLegendLibInfo();
@@ -1157,7 +1161,8 @@ async function saveLegend(i){
   }
   const res = await api("/api/legend", {
     brand: it.brand, model: it.model, category: it.category,
-    ports: ports, slots: [], note: "",
+    /* ★ 回传原 slots，不再固定清空（见 initLegends 里 slots 的取值） */
+    ports: ports, slots: it.slots || [], note: it.note || "",
   });
   if(res.error){ setLgStatus(i, "保存失败：" + res.error, "err"); return false; }
   it.ports = ports;

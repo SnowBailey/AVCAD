@@ -124,14 +124,29 @@ class LegendStore:
 
     # ---- 读写内存 ----
     def get(self, brand: str, model: str, category: str = "") -> Optional[Legend]:
+        """按 brand::model::category 取图例。
+
+        ★ 类别回退规则（2026-09-01 收紧）：
+          - 精确键命中 -> 直接返回
+          - 未传 category -> 取该型号下键名最小的一条（原行为，兼容旧调用）
+          - **同型号在图例库里只有一条** -> 允许跨类别命中
+            （主库类别漂移时图例不至于整体失效，实例类别随之被图例纠正）
+          - **同型号有多条（同型号跨类别设备）** -> 必须类别精确匹配
+            此前无条件回退到「任意类别的第一条」，会把会议主机的图例套到
+            同型号处理器上，且 ``apply()`` 还会把实例 category 一起改错。
+        """
         k = self.key(brand, model, category)
         if k in self._mem:
             return self._mem[k]
-        # 回退：按 brand/model 匹配任意类别的第一条（兼容旧数据 / 类别不同的图例）
         prefix = self.key(brand, model)
-        for kk, v in self._mem.items():
-            if kk == prefix or kk.startswith(prefix + "::"):
-                return v
+        cands = sorted((kk, v) for kk, v in self._mem.items()
+                       if kk == prefix or kk.startswith(prefix + "::"))
+        if not cands:
+            return None
+        if not (category or "").strip():
+            return cands[0][1]
+        if len(cands) == 1:
+            return cands[0][1]
         return None
 
     def has(self, brand: str, model: str, category: str = "") -> bool:
