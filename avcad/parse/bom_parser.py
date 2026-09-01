@@ -145,8 +145,29 @@ def read_xlsx(path: str) -> list:
     return out
 
 
+def read_xls(path: str) -> list:
+    """读 .xls（Excel 97-2003，openpyxl 不支持），取首个工作表。"""
+    from avcad.parse.excel_io import read_workbook_sheets
+    sheets = read_workbook_sheets(path)
+    if not sheets:
+        return []
+    rows = next(iter(sheets.values()))  # 首个工作表（等价于 xlsx 的 active）
+    if not rows:
+        return []
+    header = [str(h) if h is not None else "" for h in rows[0]]
+    out = []
+    for r in rows[1:]:
+        if all(c is None for c in r):
+            continue
+        out.append(_map_row({header[i]: (r[i] if i < len(r) else None)
+                             for i in range(len(header))}))
+    return out
+
+
 def parse_bom(path: str) -> list:
     ext = os.path.splitext(path)[1].lower()
     if ext in (".xlsx", ".xlsm"):
         return read_xlsx(path)
+    if ext == ".xls":
+        return read_xls(path)
     return read_csv(path)

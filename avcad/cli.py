@@ -74,7 +74,7 @@ def _report(proj):
 def cmd_workflow(args):
     """清单驱动 5 步工作流：解析→模块确认→图例回填→架构选择→构建→校验→出图。"""
     ext = os.path.splitext(args.input)[1].lower()
-    if ext in (".xlsx", ".xlsm"):
+    if ext in (".xlsx", ".xlsm", ".xls"):
         # Excel 清单：经富集层（类别推断/吊架排除/参数抽取）转为规范化 BOM
         from avcad.workflow.importers import build_entries, to_bom_csv
         entries, dropped = build_entries(args.input)

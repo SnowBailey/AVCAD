@@ -45,6 +45,7 @@ python -m PyInstaller --noconfirm --clean --windowed ^
   --add-data "%ROOT%\avcad\config;avcad\config" ^
   --hidden-import scripts.check_overlap ^
   --hidden-import openpyxl ^
+  --hidden-import xlrd ^
   --hidden-import yaml ^
   --hidden-import ezdxf ^
   --collect-submodules encodings ^

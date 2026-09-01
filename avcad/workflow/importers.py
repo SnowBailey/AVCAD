@@ -6,7 +6,8 @@
 - 主库未覆盖或延迟（deferred，如 QU-16）的型号：用设备名关键词兜底分类 + 指标参数正则抽取。
 - 功放归一化：主库给 channels_hint，需映射为 channels，并从指标参数补 power_w_per_ch 电气功率。
 
-纯标准库 + openpyxl（已是 avcad 依赖）。不引入新依赖。
+标准库 + openpyxl（xlsx/xlsm，已是 avcad 依赖）+ xlrd（仅 .xls 老格式读取，
+见 avcad.parse.excel_io）。
 """
 from __future__ import annotations
 import csv
@@ -218,9 +219,9 @@ def _normalize_header(header) -> dict:
     return m
 
 
-def _sheet_rows(ws):
-    """单个工作表 -> 归一化行 dict 列表；非配置清单（无表头/价目表）返回 None。"""
-    rows = list(ws.iter_rows(values_only=True))
+def _sheet_rows(rows):
+    """单个工作表（原始行 list[list]）-> 归一化行 dict 列表；
+    非配置清单（无表头/价目表）返回 None。"""
     if not rows:
         return None
     hi = _find_header_row(rows)
@@ -234,7 +235,8 @@ def _sheet_rows(ws):
     cn = next(i for i, k in hmap.items() if k == "设备名称")
     cq = next((i for i, k in hmap.items() if k == "数量"), None)
     # 价目表识别：列数爆炸，或数量列几乎全空/零
-    if ws.max_column > PRICELIST_MAX_COLS:
+    max_col = max((len(r) for r in rows), default=0)
+    if max_col > PRICELIST_MAX_COLS:
         return None
     named = [r for r in rows[hi + 1:]
              if cn < len(r) and r[cn] is not None and str(r[cn]).strip()]
@@ -269,11 +271,14 @@ def _sheet_rows(ws):
 
 
 def read_xlsx_sheets(path: str) -> dict:
-    """返回 {工作表名: 归一化行列表}，已排除价目表/无表头 sheet。"""
-    from openpyxl import load_workbook
-    wb = load_workbook(path, data_only=True)
-    return {ws.title: r for ws in wb.worksheets
-            if (r := _sheet_rows(ws))}
+    """返回 {工作表名: 归一化行列表}，已排除价目表/无表头 sheet。
+
+    支持 .xls / .xlsx / .xlsm（.xls 经 xlrd 读取，见 avcad.parse.excel_io）。
+    """
+    from avcad.parse.excel_io import read_workbook_sheets as _read_sheets
+    sheets = _read_sheets(path)
+    return {name: r for name, rows in sheets.items()
+            if (r := _sheet_rows(rows))}
 
 
 def read_xlsx_rows(path: str, sheet=None) -> list:
