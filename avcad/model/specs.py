@@ -134,7 +134,7 @@ def expand_instance(spec: DeviceSpec, entry: dict, idx: int = 0) -> DeviceInstan
         if "if_active" in t and bool(t["if_active"]) != active:
             continue
         # feature_ports=False 时跳过「依赖插卡/网络特性」的模板端口
-        # （如 CS-R10 的 DANTE/CTRL 由 HY/MY 卡槽提供，未插卡则不画）
+        # （如 CS-R10 的 DANTE/NET 由 HY/MY 卡槽提供，未插卡则不画）
         if not params.get("feature_ports", True) and t.get("if_feature"):
             continue
         sig = Signal(t["signal"])

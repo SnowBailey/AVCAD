@@ -23,11 +23,11 @@ def test_from_instance_groups_ports_with_count():
     legend = lb.from_instance(inst)
     assert legend.brand == "YAMAHA" and legend.model == "RIO3224-D"
     by_label = {p.label: p for p in legend.ports}
-    # io.yaml: IN(left) / OUT(right) / DANTE(right) / AES(right) / CTRL(right)
+    # io.yaml: IN(left) / OUT(right) / DANTE(right) / AES(right) / NET(right)
     assert by_label["IN"].side == "left"
     assert by_label["OUT"].side == "right"
     assert by_label["DANTE"].signal == "DANTE"
-    assert by_label["CTRL"].signal == "IP"
+    assert by_label["NET"].signal == "IP"
     assert len(legend.ports) == 5
 
 
@@ -50,17 +50,17 @@ def test_replace_ports_overrides_definition():
     st = _store()
     inst = _io_inst()
     lg = lb.ensure(inst, st)
-    # 用户重新定义：全部改为右侧、增加一路 CTRL
+    # 用户重新定义：全部改为右侧、增加一路 NET
     lg = lb.replace_ports(lg, [
         {"signal": "XLR", "role": "in", "side": "left", "count": 1, "label": "IN"},
         {"signal": "XLR", "role": "out", "side": "right", "count": 1, "label": "OUT"},
         {"signal": "DANTE", "role": "in", "side": "right", "count": 1, "label": "DANTE"},
-        {"signal": "IP", "role": "in", "side": "right", "count": 2, "label": "CTRL"},
+        {"signal": "IP", "role": "in", "side": "right", "count": 2, "label": "NET"},
     ])
     st.put(lg)
     st.save()
     reloaded = st.get("YAMAHA", "RIO3224-D")
-    ctrl = [p for p in reloaded.ports if p.label == "CTRL"]
+    ctrl = [p for p in reloaded.ports if p.label == "NET"]
     assert len(ctrl) == 1 and ctrl[0].count == 2
 
 

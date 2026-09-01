@@ -20994,7 +20994,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 50
+        "power_w": 50,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -21018,7 +21020,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 80
+        "power_w": 80,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -21164,7 +21168,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 200
+        "power_w": 200,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -21300,7 +21306,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 400
+        "power_w": 400,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -21322,7 +21330,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 4,
-        "power_w": 350
+        "power_w": 350,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -23772,7 +23782,9 @@
         ],
         "power_w": 2400,
         "channels_hint": 2,
-        "channels": 2
+        "channels": 2,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -24444,7 +24456,9 @@
           }
         ],
         "note": "手拉手会议主机；4×凤凰端子分区输出 + 1×XLR MIX 输出",
-        "conf_chain_max": 20
+        "conf_chain_max": 20,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -24486,11 +24500,11 @@
             "count": 1
           },
           {
-            "name": "RJ45",
+            "name": "NET",
             "side": "top",
             "signal": "IP",
             "role": "in",
-            "label": "RJ45",
+            "label": "NET",
             "count": 1
           },
           {
@@ -24535,9 +24549,11 @@
             "air": true
           }
         ],
-        "note": "无线会讨天线板；4×6P_DIN IN + 1×XLR IN；RJ45/UPDATE/RS485/RS232",
+        "note": "无线会讨天线板；4×6P_DIN IN + 1×XLR IN；NET/UPDATE/RS485/RS232",
         "conf_box": true,
-        "host": "CF6300"
+        "host": "CF6300",
+        "legend_rev": 4,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -24998,7 +25014,9 @@
             "count": 1,
             "air": true
           }
-        ]
+        ],
+        "legend_rev": 2,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -26058,8 +26076,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 9,
-        "synced_at": "2026-09-01T16:52:26+08:00"
+        "legend_rev": 11,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26092,8 +26110,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 10,
-        "synced_at": "2026-09-01T16:52:26+08:00"
+        "legend_rev": 12,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26126,8 +26144,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 7,
-        "synced_at": "2026-09-01T16:52:26+08:00"
+        "legend_rev": 9,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26150,8 +26168,8 @@
       "params": {
         "impedance_ohm": 50,
         "cascade_outs": 2,
-        "legend_rev": 7,
-        "synced_at": "2026-09-01T16:52:26+08:00",
+        "legend_rev": 9,
+        "synced_at": "2026-09-01T18:20:58+08:00",
         "inputs": 2,
         "outputs": 10
       },
@@ -26178,8 +26196,8 @@
       "params": {
         "impedance_ohm": 50,
         "bnc": 1,
-        "legend_rev": 7,
-        "synced_at": "2026-09-01T16:52:26+08:00"
+        "legend_rev": 9,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "对",
@@ -26969,10 +26987,10 @@
       ],
       "active": false,
       "params": {
+        "legend_rev": 9,
+        "synced_at": "2026-09-01T18:20:58+08:00",
         "inputs": 12,
-        "outputs": 10,
-        "legend_rev": 6,
-        "synced_at": "2026-09-01T09:47:11+08:00"
+        "outputs": 10
       },
       "country": "中国",
       "unit": "台",
@@ -27000,7 +27018,9 @@
           51,
           102
         ],
-        "inputs": 4,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00",
+        "inputs": 5,
         "outputs": 8
       },
       "country": "中国",
@@ -27088,7 +27108,9 @@
           8,
           16
         ],
-        "channels": 4
+        "channels": 4,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -28116,7 +28138,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 80
+        "power_w": 80,
+        "legend_rev": 3,
+        "synced_at": "2026-09-01T18:20:58+08:00"
       },
       "country": "中国",
       "unit": "只",

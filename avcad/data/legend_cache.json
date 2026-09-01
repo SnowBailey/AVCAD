@@ -418,7 +418,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         }
       ],
@@ -500,7 +500,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         }
       ],
@@ -533,7 +533,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         },
         {

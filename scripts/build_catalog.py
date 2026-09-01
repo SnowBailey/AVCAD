@@ -192,17 +192,17 @@ MANUAL_PARAMS = {
             {"name": "MIX", "side": "right", "signal": "XLR", "role": "out", "label": "MIX", "count": 1},
         ],
         note="手拉手会议主机；4×凤凰端子分区输出 + 1×XLR MIX 输出"),
-    # IPS CF6300WB 无线会讨天线板：4×6P_DIN 音频输入 + 1×XLR 输入；通信口 RJ45/UPDATE/RS485/RS232
+    # IPS CF6300WB 无线会讨天线板：4×6P_DIN 音频输入 + 1×XLR 输入；通信口 NET/UPDATE/RS485/RS232
     ("IPS", "CF6300WB"): dict(
         ports_override=[
             {"name": "DIN", "side": "left", "signal": "XLR", "role": "in", "label": "DIN", "count": 4},
             {"name": "XLR", "side": "left", "signal": "XLR", "role": "in", "label": "IN", "count": 1},
-            {"name": "RJ45", "side": "top", "signal": "IP", "role": "in", "label": "RJ45", "count": 1},
+            {"name": "NET", "side": "top", "signal": "IP", "role": "in", "label": "NET", "count": 1},
             {"name": "UPDATE", "side": "top", "signal": "GPIO", "role": "in", "label": "UPDATE", "count": 1},
             {"name": "RS485", "side": "top", "signal": "RS232", "role": "in", "label": "RS485", "count": 1},
             {"name": "RS232", "side": "top", "signal": "RS232", "role": "in", "label": "RS232", "count": 1},
         ],
-        note="无线会讨天线板；4×6P_DIN IN + 1×XLR IN；RJ45/UPDATE/RS485/RS232"),
+        note="无线会讨天线板；4×6P_DIN IN + 1×XLR IN；NET/UPDATE/RS485/RS232"),
 }
 
 

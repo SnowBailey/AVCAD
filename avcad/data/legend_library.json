@@ -1,8 +1,8 @@
 {
   "schema": "avcad.legend-library/1",
   "kind": "永久图例库（非缓存；图例库优先级高于引擎推断）",
-  "updated_at": "2026-09-01T17:01:00+08:00",
-  "count": 37,
+  "updated_at": "2026-09-01T18:20:58+08:00",
+  "count": 50,
   "legends": [
     {
       "brand": "IPS",
@@ -1413,15 +1413,15 @@
           "air": false
         },
         {
-          "signal": "RS232",
+          "signal": "IP",
           "role": "io",
           "side": "right",
           "count": 2,
-          "label": "ETHERNET",
+          "label": "IP",
           "air": false
         },
         {
-          "signal": "OPTICAL",
+          "signal": "USB",
           "role": "io",
           "side": "right",
           "count": 1,
@@ -1432,157 +1432,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 6,
+      "revision": 9,
       "created_at": "2026-08-30T02:15:18+08:00",
-      "updated_at": "2026-08-30T08:47:41+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-08-30T02:15:18+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 12,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 8,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "DANTE",
-              "air": false
-            },
-            {
-              "signal": "RS232",
-              "role": "io",
-              "side": "right",
-              "count": 2,
-              "label": "ETHERNET",
-              "air": false
-            },
-            {
-              "signal": "OPTICAL",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "USB",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 2,
-          "updated_at": "2026-08-30T07:21:55+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 12,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 8,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "DANTE",
-              "air": false
-            },
-            {
-              "signal": "RS232",
-              "role": "io",
-              "side": "right",
-              "count": 2,
-              "label": "ETHERNET",
-              "air": false
-            },
-            {
-              "signal": "OPTICAL",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "USB",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 3,
-          "updated_at": "2026-08-30T07:47:57+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 12,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 8,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "DANTE",
-              "air": false
-            },
-            {
-              "signal": "RS232",
-              "role": "io",
-              "side": "right",
-              "count": 2,
-              "label": "ETHERNET",
-              "air": false
-            },
-            {
-              "signal": "OPTICAL",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "USB",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 4,
           "updated_at": "2026-08-30T08:04:38+08:00",
@@ -1670,6 +1523,153 @@
             },
             {
               "signal": "OPTICAL",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "USB",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-08-30T08:47:41+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 12,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "DANTE",
+              "air": false
+            },
+            {
+              "signal": "RS232",
+              "role": "io",
+              "side": "right",
+              "count": 2,
+              "label": "ETHERNET",
+              "air": false
+            },
+            {
+              "signal": "OPTICAL",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "USB",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 7,
+          "updated_at": "2026-09-01T18:18:12+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 12,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "DANTE",
+              "air": false
+            },
+            {
+              "signal": "IP",
+              "role": "io",
+              "side": "right",
+              "count": 2,
+              "label": "IP",
+              "air": false
+            },
+            {
+              "signal": "USB",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "USB",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 12,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "DANTE",
+              "air": false
+            },
+            {
+              "signal": "IP",
+              "role": "io",
+              "side": "right",
+              "count": 2,
+              "label": "IP",
+              "air": false
+            },
+            {
+              "signal": "USB",
               "role": "io",
               "side": "right",
               "count": 1,
@@ -2243,7 +2243,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         }
       ],
@@ -2519,7 +2519,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         }
       ],
@@ -2558,7 +2558,7 @@
           "role": "in",
           "side": "right",
           "count": 1,
-          "label": "CTRL",
+          "label": "NET",
           "air": false
         },
         {
@@ -3866,60 +3866,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 9,
+      "revision": 11,
       "created_at": "2026-09-01T16:15:52+08:00",
-      "updated_at": "2026-09-01T16:52:26+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 4,
-          "updated_at": "2026-09-01T16:34:17+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 5,
-          "updated_at": "2026-09-01T16:35:43+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 6,
           "updated_at": "2026-09-01T16:36:16+08:00",
@@ -3994,6 +3944,56 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 9,
+          "updated_at": "2026-09-01T16:52:26+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 10,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -4023,60 +4023,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 10,
+      "revision": 12,
       "created_at": "2026-09-01T16:18:02+08:00",
-      "updated_at": "2026-09-01T16:52:26+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 5,
-          "updated_at": "2026-09-01T16:34:17+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 6,
-          "updated_at": "2026-09-01T16:35:40+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 7,
           "updated_at": "2026-09-01T16:35:43+08:00",
@@ -4151,6 +4101,56 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 10,
+          "updated_at": "2026-09-01T16:52:26+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 11,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -4172,44 +4172,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 7,
+      "revision": 9,
       "created_at": "2026-09-01T16:32:04+08:00",
-      "updated_at": "2026-09-01T16:52:26+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 2,
-          "updated_at": "2026-09-01T16:33:37+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "RF",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 3,
-          "updated_at": "2026-09-01T16:34:18+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "RF",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
@@ -4247,6 +4213,40 @@
         {
           "revision": 6,
           "updated_at": "2026-09-01T16:40:15+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 7,
+          "updated_at": "2026-09-01T16:52:26+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T18:19:23+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4555,60 +4555,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 7,
+      "revision": 9,
       "created_at": "2026-09-01T16:32:57+08:00",
-      "updated_at": "2026-09-01T16:52:26+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 2,
-          "updated_at": "2026-09-01T16:33:37+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 3,
-          "updated_at": "2026-09-01T16:34:17+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
@@ -4662,6 +4612,56 @@
         {
           "revision": 6,
           "updated_at": "2026-09-01T16:40:15+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 7,
+          "updated_at": "2026-09-01T16:52:26+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T18:19:23+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4712,60 +4712,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 7,
+      "revision": 9,
       "created_at": "2026-09-01T16:33:03+08:00",
-      "updated_at": "2026-09-01T16:52:26+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
       "history": [
-        {
-          "revision": 2,
-          "updated_at": "2026-09-01T16:33:37+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 2,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 10,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 3,
-          "updated_at": "2026-09-01T16:34:17+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 2,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 10,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
@@ -4835,6 +4785,1010 @@
               "count": 10,
               "label": "OUT",
               "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 7,
+          "updated_at": "2026-09-01T16:52:26+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 10,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 10,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "FIRM4×8",
+      "category": "SPEAKER_MGR",
+      "key": "IPS::FIRM4×8::SPEAKER_MGR",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 8,
+          "label": "OUT",
+          "air": false
+        },
+        {
+          "signal": "IP",
+          "role": "in",
+          "side": "right",
+          "count": 1,
+          "label": "NET",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:20+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:20+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "IP",
+              "role": "in",
+              "side": "right",
+              "count": 1,
+              "label": "NET",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "IP",
+              "role": "in",
+              "side": "right",
+              "count": 1,
+              "label": "NET",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "DA250Q",
+      "category": "AMP",
+      "key": "IPS::DA250Q::AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 4,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:21+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:21+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "SPEAKER",
+              "role": "out",
+              "side": "right",
+              "count": 4,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "SPEAKER",
+              "role": "out",
+              "side": "right",
+              "count": 4,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "EDA750",
+      "category": "AMP",
+      "key": "ezacoustics::EDA750::AMP",
+      "ports": [
+        {
+          "signal": "XLR",
+          "role": "in",
+          "side": "left",
+          "count": 2,
+          "label": "IN",
+          "air": false
+        },
+        {
+          "signal": "SPEAKER",
+          "role": "out",
+          "side": "right",
+          "count": 2,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:24+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:24+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "SPEAKER",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "SPEAKER",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "CI600",
+      "category": "SPEAKER",
+      "key": "IPS::CI600::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:27+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:27+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "IMC-6",
+      "category": "SPEAKER",
+      "key": "ezacoustics::IMC-6::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:28+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:28+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "IMC-4",
+      "category": "SPEAKER",
+      "key": "ezacoustics::IMC-4::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:30+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:30+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "W8M",
+      "category": "SPEAKER",
+      "key": "ezacoustics::W8M::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:31+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:31+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "AQUA-S28",
+      "category": "SPEAKER",
+      "key": "ezacoustics::AQUA-S28::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:33+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:33+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "ezacoustics",
+      "model": "AQUA-1008",
+      "category": "SPEAKER",
+      "key": "ezacoustics::AQUA-1008::SPEAKER",
+      "ports": [
+        {
+          "signal": "SPEAKER",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "SPK",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:34+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:34+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "华为",
+      "model": "MateStationS",
+      "category": "IO",
+      "key": "华为::MateStationS::IO",
+      "ports": [
+        {
+          "signal": "USB",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "USB",
+          "air": false
+        },
+        {
+          "signal": "TRS",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "RCA",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T17:58:37+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T17:58:37+08:00",
+          "ports": [
+            {
+              "signal": "USB",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "USB",
+              "air": false
+            },
+            {
+              "signal": "TRS",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RCA",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "USB",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "USB",
+              "air": false
+            },
+            {
+              "signal": "TRS",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RCA",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "CF6300WB",
+      "category": "ANTENNA",
+      "key": "IPS::CF6300WB::ANTENNA",
+      "ports": [
+        {
+          "signal": "CONF",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "HOST",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 4,
+      "created_at": "2026-09-01T18:00:07+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T18:00:07+08:00",
+          "ports": [
+            {
+              "signal": "CONF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "HOST",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "io",
+              "side": "top",
+              "count": 1,
+              "label": "RF",
+              "air": true
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:10:56+08:00",
+          "ports": [
+            {
+              "signal": "CONF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "HOST",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 3,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "CONF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "HOST",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "CF6300",
+      "category": "MIC_HOST",
+      "key": "IPS::CF6300::MIC_HOST",
+      "ports": [
+        {
+          "signal": "CONF",
+          "role": "in",
+          "side": "left",
+          "count": 4,
+          "label": "CH",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 4,
+          "label": "out",
+          "air": false
+        },
+        {
+          "signal": "XLR",
+          "role": "out",
+          "side": "right",
+          "count": 1,
+          "label": "MIX",
+          "air": false
+        },
+        {
+          "signal": "CONF",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "BOX",
+          "air": false
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 3,
+      "created_at": "2026-09-01T18:10:52+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T18:10:52+08:00",
+          "ports": [
+            {
+              "signal": "CONF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "CH",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 4,
+              "label": "out",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "MIX",
+              "air": false
+            },
+            {
+              "signal": "CONF",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "BOX",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 2,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "CONF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "CH",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 4,
+              "label": "out",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "MIX",
+              "air": false
+            },
+            {
+              "signal": "CONF",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "BOX",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        }
+      ]
+    },
+    {
+      "brand": "IPS",
+      "model": "CF6350",
+      "category": "SOURCE",
+      "key": "IPS::CF6350::SOURCE",
+      "ports": [
+        {
+          "signal": "RF",
+          "role": "out",
+          "side": "top",
+          "count": 1,
+          "label": "RF",
+          "air": true
+        }
+      ],
+      "slots": [],
+      "note": "",
+      "source": "user",
+      "revision": 2,
+      "created_at": "2026-09-01T18:19:23+08:00",
+      "updated_at": "2026-09-01T18:20:58+08:00",
+      "history": [
+        {
+          "revision": 1,
+          "updated_at": "2026-09-01T18:19:23+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "top",
+              "count": 1,
+              "label": "RF",
+              "air": true
             }
           ],
           "slots": [],

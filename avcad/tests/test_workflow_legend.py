@@ -17,7 +17,7 @@ def _mk_legend(brand="YAMAHA", model="RIO3224-D"):
             LegendPort(signal="XLR", role="in", side="left", count=1, label="IN"),
             LegendPort(signal="XLR", role="out", side="right", count=1, label="OUT"),
             LegendPort(signal="DANTE", role="in", side="right", count=1, label="DANTE"),
-            LegendPort(signal="IP", role="in", side="right", count=1, label="CTRL"),
+            LegendPort(signal="IP", role="in", side="right", count=1, label="NET"),
         ],
         slots=[{"type": "HY", "count": 4, "label": "HY"}],
     )
@@ -78,7 +78,7 @@ def test_apply_expands_ports_and_slots():
     assert by_label["IN"].side == "left"
     assert by_label["OUT"].side == "right"
     assert by_label["DANTE"].signal == Signal.DANTE
-    assert by_label["CTRL"].signal == Signal.IP
+    assert by_label["NET"].signal == Signal.IP
     assert inst.slots[0]["type"] == "HY"
 
 

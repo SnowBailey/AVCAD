@@ -21,4 +21,4 @@ ports_template:
   - {name: OUT, side: right, signal: XLR, role: out, count: 1, count_from: outputs, label: OUT}
   - {name: DANTE, side: right, signal: DANTE, role: in, count: 1, count_from: dante_ports, if_feature: dante, label: DANTE}
   - {name: AES, side: right, signal: AES, role: in, count: 1, if_feature: aes, label: AES}
-  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: NET, side: right, signal: IP, role: in, count: 1, if_feature: control, label: NET}

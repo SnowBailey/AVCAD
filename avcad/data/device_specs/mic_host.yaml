@@ -10,4 +10,4 @@ ports_template:
   - {name: MIC, side: left, signal: XLR, role: in, count: 1, label: MIC}
   - {name: OUT, side: right, signal: XLR, role: out, count: 1, label: OUT}
   - {name: DANTE, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
-  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: NET, side: right, signal: IP, role: in, count: 1, if_feature: control, label: NET}

@@ -38,4 +38,4 @@ ports_template:
   - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count_from: dante_ports, if_feature: dante, label: DANTE}
   # 控制接口「基本都带」：不依赖 if_feature，主库无需逐条标 control；
   # 个别纯模拟处理器（无网口）设 ctrl_ports: 0 即可关掉。
-  - {name: CTRL, side: right, signal: IP, role: io, count_from: ctrl_ports, label: CTRL}
+  - {name: NET, side: right, signal: IP, role: io, count_from: ctrl_ports, label: NET}

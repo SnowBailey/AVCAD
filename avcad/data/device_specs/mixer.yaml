@@ -18,4 +18,4 @@ ports_template:
   - {name: OUT, side: right, signal: XLR, role: out, count_from: outputs, label: OUT}
   - {name: DANTE_OUT, side: right, signal: DANTE, role: out, count: 1, if_feature: dante, label: DANTE}
   - {name: LINK_OUT, side: right, signal: LINK, role: out, count_from: cascade, label: LINK}
-  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: NET, side: right, signal: IP, role: in, count: 1, if_feature: control, label: NET}

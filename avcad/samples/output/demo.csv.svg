@@ -25,7 +25,7 @@
 <circle cx="619.0" cy="87.5" r="2.4" fill="#378add"/>
 <text x="623.0" y="90.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
 <circle cx="569.5" cy="40.0" r="2.4" fill="#b07cd9"/>
-<text x="569.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<text x="569.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">NET</text>
 <rect x="840.0" y="40.0" width="99.0" height="382.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
 <text x="889.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">数字调音台 TF5</text>
 <circle cx="840.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
@@ -127,7 +127,7 @@
 <circle cx="939.0" cy="241.5" r="2.4" fill="#378add"/>
 <text x="943.0" y="244.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
 <circle cx="889.5" cy="40.0" r="2.4" fill="#b07cd9"/>
-<text x="889.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<text x="889.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">NET</text>
 <rect x="1000.0" y="40.0" width="99.0" height="129.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
 <text x="1049.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">音频处理器 BLU-806</text>
 <circle cx="1000.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
@@ -167,7 +167,7 @@
 <circle cx="1099.0" cy="153.5" r="2.4" fill="#378add"/>
 <text x="1103.0" y="156.5" fill="#cfcdc2" font-size="7" text-anchor="start">DANTE</text>
 <circle cx="1049.5" cy="40.0" r="2.4" fill="#b07cd9"/>
-<text x="1049.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<text x="1049.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">NET</text>
 <rect x="1160.0" y="40.0" width="99.0" height="85.0" fill="#26261f" stroke="#b4b2a9" stroke-width="1.4" rx="3"/>
 <text x="1209.5" y="53.0" fill="#f1efe8" font-size="9" text-anchor="middle" font-weight="bold">功率放大器 Quattrocanali 48</text>
 <circle cx="1160.0" cy="65.5" r="2.4" fill="#5dcaa5"/>
@@ -181,7 +181,7 @@
 <circle cx="1160.0" cy="109.5" r="2.4" fill="#378add"/>
 <text x="1156.0" y="112.5" fill="#cfcdc2" font-size="7" text-anchor="end">DANTE</text>
 <circle cx="1209.5" cy="40.0" r="2.4" fill="#b07cd9"/>
-<text x="1209.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">CTRL</text>
+<text x="1209.5" y="51.0" fill="#cfcdc2" font-size="7" text-anchor="middle">NET</text>
 <circle cx="1259.0" cy="65.5" r="2.4" fill="#e8655a"/>
 <text x="1263.0" y="68.5" fill="#cfcdc2" font-size="7" text-anchor="start">SPK1</text>
 <circle cx="1259.0" cy="76.5" r="2.4" fill="#e8655a"/>

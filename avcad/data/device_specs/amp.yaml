@@ -11,5 +11,5 @@ electrical:
 ports_template:
   - {name: IN_A, side: left, signal: XLR, role: in, count_from: channels, if_feature: analog, label: IN}
   - {name: IN_D, side: left, signal: DANTE, role: in, count: 1, if_feature: dante, label: DANTE}
-  - {name: CTRL, side: right, signal: IP, role: in, count: 1, if_feature: control, label: CTRL}
+  - {name: NET, side: right, signal: IP, role: in, count: 1, if_feature: control, label: NET}
   - {name: OUT, side: right, signal: SPEAKER, role: out, count_from: channels, label: SPK}
