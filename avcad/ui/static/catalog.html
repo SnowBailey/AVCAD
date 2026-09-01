@@ -271,7 +271,7 @@ const $ = id => document.getElementById(id);
 /* 端口枚举：与 index.html 图例确认页**完全一致**。
    ★ 改这里必须同步那边——两边各有一份是有守卫测试兜底的
      （test_signal_registry.py / test_port_geometry.py）。 */
-const SIGNALS = ["XLR","AES","DANTE","RS232","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK"];
+const SIGNALS = ["XLR","AES","DANTE","RS232","RF","SPEAKER","IP","GPIO","POWER","OPTICAL","TRS","CONF","USB","LINK","WCLK"];
 const ROLES = ["in","out","io"];
 const SIDES = ["left","right","top","bottom"];
 
@@ -280,7 +280,7 @@ const SIGNAL_HINT = {
   XLR:"卡侬音频", AES:"数字音频", DANTE:"网络音频", RS232:"串口控制",
   RF:"射频无线", SPEAKER:"扬声器", IP:"控制网络", GPIO:"通用IO",
   POWER:"电源", OPTICAL:"光纤音频", TRS:"6.35mm", CONF:"会议总线",
-  USB:"USB", LINK:"级联"
+  USB:"USB", LINK:"级联", WCLK:"字时钟"
 };
 /* signal 下拉：选项文本带中文，但 value 仍是信号码（提交用） */
 function sigOpts(val){

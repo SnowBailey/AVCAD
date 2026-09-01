@@ -22,6 +22,7 @@ class Signal(str, Enum):
     CONF = "CONF"        # 会议专用线（六芯主缆 / T 型线，手拉手）
     USB = "USB"          # USB 音频接口（录音/播放/免驱声卡）
     LINK = "LINK"        # 设备间级联/扩展总线（如自动混音器级联口）
+    WCLK = "WCLK"        # 字时钟（Word Clock）数字音频同步基准，BNC 接口
 
 
 class Domain(str, Enum):
@@ -40,6 +41,7 @@ SIGNAL_DOMAIN = {
     Signal.CONF: Domain.AUDIO,
     Signal.USB: Domain.AUDIO,
     Signal.LINK: Domain.AUDIO,
+    Signal.WCLK: Domain.AUDIO,
 }
 
 # 信号配色（SVG hex）与 DXF 图层/线型映射；role 决定主/备线型。
@@ -61,6 +63,7 @@ SIGNAL_META = {
     Signal.CONF:    dict(color="#c9a227", dxf_color=2,  layer="WIRES_CONF",    ltype="solid"),
     Signal.USB:     dict(color="#8f7ae6", dxf_color=6,  layer="WIRES_USB",     ltype="dotted"),
     Signal.LINK:    dict(color="#8a93a8", dxf_color=6,  layer="WIRES_LINK",    ltype="solid"),
+    Signal.WCLK:    dict(color="#d65db1", dxf_color=215, layer="WIRES_WCLK",   ltype="solid"),
 }
 
 # 配色配置文件路径（全局共享，跨项目复用；用户可在清单确认环节点击更改）

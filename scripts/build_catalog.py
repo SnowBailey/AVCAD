@@ -170,7 +170,7 @@ MANUAL_PARAMS = {
             {"name": "MADI_OUT_BNC", "side": "right", "signal": "AES", "role": "out", "label": "MADI-OUT-BNC"},
             {"name": "MADI_IN_OPT", "side": "right", "signal": "OPTICAL", "role": "in", "label": "MADI-IN-OPT"},
             {"name": "MADI_OUT_OPT", "side": "right", "signal": "OPTICAL", "role": "out", "label": "MADI-OUT-OPT"},
-            {"name": "WCLK", "side": "top", "signal": "IP", "role": "in", "label": "WCLK"},
+            {"name": "WCLK", "side": "top", "signal": "WCLK", "role": "in", "label": "WCLK"},
         ],
         note="Dante/MADI 格式转换器；64×64 通道"),
     # EAW UX3600 扬声器处理器：3 模拟输入 / 6 模拟输出（固定 I/O，不走 zones 模板）

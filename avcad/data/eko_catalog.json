@@ -1153,7 +1153,7 @@
           {
             "name": "WCLK",
             "side": "top",
-            "signal": "IP",
+            "signal": "WCLK",
             "role": "in",
             "label": "WCLK"
           }

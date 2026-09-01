@@ -896,12 +896,13 @@ _SIGNAL_CN = {
     Signal.CONF:    "会议总线（CONF）",
     Signal.USB:     "USB 数据",
     Signal.LINK:    "设备级联（LINK）",
+    Signal.WCLK:    "字时钟（Word Clock）",
 }
 # ★ 末尾追加新信号，不要插到中间——这张表决定图幅底部说明表的行序，
 #   插队会改变已有图纸的 DXF 输出。
 _SIGNAL_ORDER = [Signal.XLR, Signal.AES, Signal.DANTE, Signal.RF, Signal.SPEAKER,
                  Signal.RS232, Signal.IP, Signal.GPIO, Signal.OPTICAL, Signal.POWER,
-                 Signal.TRS, Signal.CONF, Signal.USB, Signal.LINK]
+                 Signal.TRS, Signal.CONF, Signal.USB, Signal.LINK, Signal.WCLK]
 
 _LEG_SAMPLE = 30.0     # 线型样例长度
 _LEG_ROW_H = 14.0      # 行高

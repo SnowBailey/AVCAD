@@ -180,5 +180,18 @@
    "layer": "WIRES_LINK",
    "ltype": "dashed"
   }
+ },
+ "WCLK": {
+  "label": "字时钟 (Word Clock)",
+  "primary": {
+   "color": "#d65db1",
+   "layer": "WIRES_WCLK",
+   "ltype": "solid"
+  },
+  "backup": {
+   "color": "#b04d92",
+   "layer": "WIRES_WCLK",
+   "ltype": "dashed"
+  }
  }
 }

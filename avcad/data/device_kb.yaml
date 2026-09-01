@@ -244,6 +244,7 @@ PROCESSOR:
     - {phys: XLR, signal: XLR, dir: out, note: 模拟输出（多路，接功放/管理器）}
     - {phys: Dante, signal: DANTE, dir: io, note: 网络音频（进交换机）}
     - {phys: AES, signal: AES, dir: io, note: 数字音频（AES3）}
+    - {phys: BNC, signal: WCLK, dir: io, note: 字时钟同步（部分处理器/矩阵带 BNC Word Clock，接系统时钟主）}
     - {phys: NET, signal: IP, dir: io, note: 控制/中控}
     - {phys: GPIO, signal: GPIO, dir: io, note: 通用 IO（静音/触发）}
   connectivity:
@@ -263,6 +264,7 @@ PROCESSOR:
     - 与音箱管理器混淆：处理器输出直接接无源音箱 → 无分频烧高音。
     - 限幅未设 → 突发大信号烧箱。
     - 矩阵路由错 → 某区无声或串音。
+    - 字时钟(WCLK) BNC 口误标为 IP/网络 → 实为数字音频同步基准，应走 WCLK 信号（AVCAD 已建模）。
   notes: AVCAD 中 PROCESSOR 含 dante/control 特性；与 SPEAKER_MGR 靠 category 严格区分（R13 规则 13）。
 
 SPEAKER_MGR:
@@ -398,6 +400,7 @@ IO:
     - {phys: XLR, signal: XLR, dir: out, note: 模拟输出（FOH 侧 OUT，right）}
     - {phys: Dante, signal: DANTE, dir: io, note: 网络音频（right，进交换机）}
     - {phys: AES, signal: AES, dir: io, note: 数字音频}
+    - {phys: BNC, signal: WCLK, dir: io, note: 字时钟同步（Word Clock，BNC；Dante/MADI 转换器常备，接时钟主，勿误标为 IP/网络）}
     - {phys: NET, signal: IP, dir: io, note: 控制}
   connectivity:
     series: Dante 网络级联多台接口箱（扩展通道）。
@@ -411,12 +414,14 @@ IO:
     - 清单含「接口箱/舞台箱/地插/I-O/扩展」，左右结构 IN/OUT + Dante。
     - 型号 Yamaha RIO / A&H DX / Midas DL / Riedel / SHURE 接口箱。
     - 与 PROCESSOR 区别：接口箱是「远端 I/O 边界」，不做算法处理。
-  typical_models: [Yamaha RIO3224-D, A&H DX168, Midas DL16, Riedel 接口箱]
+    - 型号片段：rio / rpio / rmio64 / dx168 / dl16 / dl32 / rdd（AVCAD 已建）。
+  typical_models: [Yamaha RIO3224-D, Yamaha RMio64-D, A&H DX168, Midas DL16, Riedel 接口箱]
   pitfalls:
     - IN/OUT 方向反（舞台当 FOH）→ 无声或回授。
     - Dante 路由未连 → 机房收不到。
     - Phantom 误开烧动圈。
-  notes: AVCAD 中 IO 平级化（DIO/SI/DI Box = SIDE 虚拟 stage）：只经 Dante 互通，XLR 按工程单独连，不画 XLR 串联（阳哥规则 11）。
+    - 字时钟(WCLK) BNC 口误标成 IP / 网络 → 实为数字音频同步基准，应走 WCLK 信号（AVCAD 已建模 WCLK，转换器类如 RMio64-D 的 WCLK 口即此）。
+  notes: AVCAD 中 IO 平级化（DIO/SI/DI Box = SIDE 虚拟 stage）：只经 Dante 互通，XLR 按工程单独连，不画 XLR 串联（阳哥规则 11）。转换器常带 Word Clock(BNC) 与主时钟同步，属 WCLK 信号而非 IP。
 
 SWITCH:
   cn: 网络交换机
