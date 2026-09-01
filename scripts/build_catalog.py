@@ -15,7 +15,8 @@ import argparse, json, os, re, sys
 
 import openpyxl
 
-AUDIO_CATS = ["SOURCE", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "WIRELESS_RX",
+AUDIO_CATS = ["SOURCE", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "ANT_COMBINE",
+              "WIRELESS_RX",
               "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH", "IO"]
 
 HEADER_ALIASES = {
@@ -130,6 +131,9 @@ MANUAL_CAT = {
     # IPS 手拉手会议主机/天线板：按音频 I/O 出图
     ("IPS", "CF6300"): "IO",
     ("IPS", "CF6300WB"): "IO",
+    # IPS UM2000ASD：位于天线与 UM2000ATD(十通道分配器)之间，
+    # 把两路天线 RF 合成为一路 -> 天线信号合路器（Combiner），非分配器
+    ("IPS", "UM2000ASD"): "ANT_COMBINE",
     # ALLEN&HEATH 仅 QU16 出图，其余型号后置
     ("ALLEN&HEATH", "QU16"): "MIXER",
     ("ALLEN & HEATH", "QU16"): "MIXER",

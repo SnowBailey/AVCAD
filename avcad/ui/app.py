@@ -72,7 +72,7 @@ _CATALOG = {"data": None, "mtime": 0}
 
 # 可编辑字段与取值提示（前端据此渲染控件）
 CATEGORY_CHOICES = [
-    "SOURCE", "WIRELESS_MIC", "WIRELESS_RX", "ANTENNA", "ANT_DIST",
+    "SOURCE", "WIRELESS_MIC", "WIRELESS_RX", "ANTENNA", "ANT_DIST", "ANT_COMBINE",
     "MIXER", "PROCESSOR", "SPEAKER_MGR", "AMP", "SPEAKER", "SWITCH",
     "IO", "MIC_HOST", "",
 ]
@@ -739,7 +739,7 @@ def _dispatch(path, body):
             if kw and kw not in f"{p.get('model','')} {p.get('name','')}".lower():
                 continue
             if only_wireless and str(p.get("category")) not in (
-                    "WIRELESS_RX", "WIRELESS_MIC", "ANTENNA", "ANT_DIST"):
+                    "WIRELESS_RX", "WIRELESS_MIC", "ANTENNA", "ANT_DIST", "ANT_COMBINE"):
                 continue
             items.append(_catalog_item(i, p))
         return {"items": items, "total": len(items)}

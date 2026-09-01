@@ -181,6 +181,48 @@ def test_wireless_plan_ok_when_enough_dists():
     assert plan.get("ok") is True
 
 
+# ---------------- 天线合路器（ANT_COMBINE，2026-09-01 阳哥确认） ----------------
+def test_ant_combine_has_2in_1out():
+    """UM2000ASD 合路器：2 路天线 RF 入 + 1 路 RF 出（无级联）。"""
+    from avcad.model.schema import Signal
+    entries = [{
+        "category": "ANT_COMBINE", "brand": "IPS", "model": "UM2000ASD",
+        "name": "天线信号合路器", "quantity": 1,
+        "params": {"inputs": 2, "outputs": 1},
+    }]
+    p = build_project(entries, name="combiner")
+    d = [i for i in p.instances if i.category == "ANT_COMBINE"][0]
+    rins = [pt for pt in d.ports if pt.signal == Signal.RF and pt.role == "in"]
+    routs = [pt for pt in d.ports if pt.signal == Signal.RF and pt.role == "out"]
+    assert len(rins) == 2, [pt.id for pt in d.ports]
+    assert len(routs) == 1, [pt.id for pt in d.ports]
+
+
+def test_ant_combiner_wires_antennas_then_distributor():
+    """IPS UM2000ASD：2 天线(OUT) → 合路器(IN)，合路器(OUT) → 分配器(IN)。
+
+    阳哥 2026-09-01：合路器把两路天线信号合并成一路给 UM2000ATD。
+    有合路器时，天线不应直连分配器（不再出现「天线→分配器」连线）。
+    """
+    entries = [
+        {"category": "ANTENNA", "brand": "IPS", "model": "UM2000AP",
+         "name": "全指向天线", "quantity": 2},
+        {"category": "ANT_COMBINE", "brand": "IPS", "model": "UM2000ASD",
+         "name": "天线信号合路器", "quantity": 1,
+         "params": {"inputs": 2, "outputs": 1}},
+        {"category": "ANT_DIST", "brand": "IPS", "model": "UM2000ATD",
+         "name": "十通道天线分配器", "quantity": 1,
+         "params": {"inputs": 2, "outputs": 10}},
+        _rx(quantity=1),
+    ]
+    p = build_project(entries, name="combiner-chain")
+    notes = {c.note for c in p.connections}
+    assert "天线→合路器" in notes, notes
+    assert "合路器→分配器" in notes, notes
+    assert "天线分配" in notes, notes            # 分配器 → 接收机
+    assert "天线→分配器" not in notes, notes     # 有合路器时天线不直进分配器
+
+
 # ---------------- 6.35 混合输出 ----------------
 def test_mix_out_port_present_when_feature_set():
     """UM2002 带 mix_out 特性时应多出 1 路 TRS 混合输出。"""

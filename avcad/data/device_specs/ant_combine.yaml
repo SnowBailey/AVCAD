@@ -1,0 +1,12 @@
+category: ANT_COMBINE
+name: 天线信号合路器
+redundancy_allowed: false
+features_available: []
+params:
+  inputs:
+    {min: 1, default: 2, label: 天线输入路数, unit: "路"}
+  outputs:
+    {min: 1, default: 1, label: 输出端口数, unit: "口"}
+ports_template:
+  - {name: RF_IN, side: left, signal: RF, role: in, count_from: inputs, label: ANT}
+  - {name: RF_OUT, side: right, signal: RF, role: out, count_from: outputs, label: OUT}

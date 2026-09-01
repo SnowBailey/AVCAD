@@ -237,8 +237,9 @@ def test_port_agg_categories_matches_spec_yaml():
     反推覆盖范围变了，逼人工确认是不是有意为之。
     """
     cats = _cats_consuming_port_agg()
-    # 当前基线（2026-09-01）：这 5 个类别的规格模板声明了 inputs/outputs
-    assert cats == {"MIXER", "PROCESSOR", "IO", "ANT_DIST", "SPEAKER_MGR"}, \
+    # 当前基线（2026-09-01）：这 6 个类别的规格模板声明了 inputs/outputs
+    # （ANT_COMBINE 为新增：合路器用 inputs=2/outputs=1 定义端口，阳哥 2026-09-01 确认）
+    assert cats == {"MIXER", "PROCESSOR", "IO", "ANT_DIST", "ANT_COMBINE", "SPEAKER_MGR"}, \
         f"消费 inputs/outputs 的类别变了：{sorted(cats)}。确认是有意改动后请更新本基线"
 
 

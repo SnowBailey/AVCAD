@@ -21,6 +21,7 @@ STAGE_LABELS = {
     "WIRELESS_RX": "无线接收机",
     "ANTENNA": "天线",
     "ANT_DIST": "天线信号分配",
+    "ANT_COMBINE": "天线信号合路",
     "MIC_HOST": "话筒主机",
     "MIXER": "调音台",
     "SIDE": "侧层设备",
@@ -88,7 +89,7 @@ def build_chain(instances: list) -> list:
     wchain = []
     if wireless:
         # 无线接收机（WIRELESS_RX）属于音源输出端，与 SOURCE 同列
-        wchain = ["WIRELESS_MIC", "ANTENNA", "ANT_DIST"]
+        wchain = ["WIRELESS_MIC", "ANTENNA", "ANT_COMBINE", "ANT_DIST"]
         wchain = [c for c in wchain if c in cats or c == "ANT_DIST"]  # ANT_DIST 缺失时自动补
 
     chain = list(wchain)

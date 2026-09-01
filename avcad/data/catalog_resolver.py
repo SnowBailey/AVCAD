@@ -22,7 +22,7 @@ DEFAULT_JSON = os.path.join(_HERE, "eko_catalog.json")
 # 类别 -> 设备模板 yaml（与 model/specs.py 加载路径一致）
 CAT_SPEC = {
     "SOURCE": "source", "WIRELESS_MIC": "wireless_mic", "ANTENNA": "antenna",
-    "ANT_DIST": "ant_dist", "WIRELESS_RX": "wireless_rx", "MIXER": "mixer",
+    "ANT_DIST": "ant_dist", "ANT_COMBINE": "ant_combine", "WIRELESS_RX": "wireless_rx", "MIXER": "mixer",
     "PROCESSOR": "processor", "SPEAKER_MGR": "speaker_mgr", "AMP": "amp",
     "SPEAKER": "speaker", "SWITCH": "switch", "IO": "io",
     "MIC_HOST": "mic_host",

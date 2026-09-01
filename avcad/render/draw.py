@@ -12,14 +12,14 @@ FRAME = {"primary": "#378add", "backup": "#5dcaa5", "single": "#b4b2a9"}
 #   与调音台的 "MIX" 只差一个字母，图上极易混淆；中文名也退化成原始英文。
 CATEGORY_CN = {
     "SOURCE": "音源", "WIRELESS_MIC": "无线话筒", "WIRELESS_RX": "无线接收机",
-    "ANTENNA": "天线", "ANT_DIST": "天线分配器", "MIXER": "调音台",
+    "ANTENNA": "天线", "ANT_DIST": "天线分配器", "ANT_COMBINE": "天线合路器", "MIXER": "调音台",
     "PROCESSOR": "音频处理器", "SPEAKER_MGR": "音箱管理器", "AMP": "功率放大器",
     "SPEAKER": "扬声器", "IO": "音频接口箱", "SWITCH": "网络交换机",
     "MIC_HOST": "话筒主机",
 }
 CATEGORY_CODE = {
     "SOURCE": "SRC", "WIRELESS_MIC": "WMIC", "WIRELESS_RX": "WRX",
-    "ANTENNA": "ANT", "ANT_DIST": "ADIST", "MIXER": "MIX",
+    "ANTENNA": "ANT", "ANT_DIST": "ADIST", "ANT_COMBINE": "ACMB", "MIXER": "MIX",
     "PROCESSOR": "DSP", "SPEAKER_MGR": "SMGR", "AMP": "AMP",
     "SPEAKER": "SPK", "IO": "IO", "SWITCH": "SW",
     # 用 MH 不用 MIC：MIC 与 MIX（调音台）只差一个字母，图上分不清

@@ -29,7 +29,7 @@ TEMPLATES = [
     ArchTemplate("B_wireless", "无线话筒系统（真分集）",
                  "发射 → 天线 → 天线分配 → 接收 → 处理器。",
                  required=["WIRELESS_MIC", "WIRELESS_RX", "PROCESSOR"],
-                 optional=["ANTENNA", "ANT_DIST"], redundancy_fit=["NONE"]),
+                 optional=["ANTENNA", "ANT_DIST", "ANT_COMBINE"], redundancy_fit=["NONE"]),
     ArchTemplate("C_foh", "演出 FOH",
                  "音源 → 舞台接口箱(IO) → 处理器 → 功放 → 主扩。",
                  required=["SOURCE", "IO", "PROCESSOR", "SPEAKER"],

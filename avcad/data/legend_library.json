@@ -1,7 +1,7 @@
 {
   "schema": "avcad.legend-library/1",
   "kind": "永久图例库（非缓存；图例库优先级高于引擎推断）",
-  "updated_at": "2026-09-01T16:36:19+08:00",
+  "updated_at": "2026-09-01T17:01:00+08:00",
   "count": 37,
   "legends": [
     {
@@ -2063,27 +2063,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 25,
+      "revision": 26,
       "created_at": "2026-08-30T02:15:18+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:00:59+08:00",
       "history": [
-        {
-          "revision": 20,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 21,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -2138,6 +2121,23 @@
         {
           "revision": 24,
           "updated_at": "2026-08-30T09:17:28+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 25,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "XLR",
@@ -2265,7 +2265,7 @@
           "signal": "XLR",
           "role": "in",
           "side": "left",
-          "count": 7,
+          "count": 32,
           "label": "IN",
           "air": false
         },
@@ -2273,7 +2273,7 @@
           "signal": "XLR",
           "role": "out",
           "side": "right",
-          "count": 3,
+          "count": 15,
           "label": "OUT",
           "air": false
         },
@@ -2284,81 +2284,23 @@
           "count": 1,
           "label": "DANTE",
           "air": false
+        },
+        {
+          "signal": "USB",
+          "role": "io",
+          "side": "right",
+          "count": 1,
+          "label": "P4",
+          "air": false
         }
       ],
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 35,
+      "revision": 37,
       "created_at": "2026-08-30T02:15:18+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:00:59+08:00",
       "history": [
-        {
-          "revision": 30,
-          "updated_at": "2026-08-30T08:07:37+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 7,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 3,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "DANTE",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 31,
-          "updated_at": "2026-08-30T09:17:01+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 7,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 3,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "DANTE",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 32,
           "updated_at": "2026-08-30T09:17:09+08:00",
@@ -2451,6 +2393,80 @@
               "side": "right",
               "count": 1,
               "label": "DANTE",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 35,
+          "updated_at": "2026-08-30T09:17:30+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 7,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 3,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "DANTE",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 36,
+          "updated_at": "2026-09-01T17:00:45+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 32,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 15,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "DANTE",
+              "air": false
+            },
+            {
+              "signal": "USB",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "P4",
               "air": false
             }
           ],
@@ -2580,27 +2596,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 25,
+      "revision": 26,
       "created_at": "2026-08-30T02:15:18+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 20,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "SPEAKER",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "SPK",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 21,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -2655,6 +2654,23 @@
         {
           "revision": 24,
           "updated_at": "2026-08-30T09:17:29+08:00",
+          "ports": [
+            {
+              "signal": "SPEAKER",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 25,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "SPEAKER",
@@ -2759,43 +2775,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:00:59+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 8,
-              "label": "OUT",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "io",
-              "side": "right",
-              "count": 1,
-              "label": "DANTE",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -2898,6 +2881,39 @@
         {
           "revision": 23,
           "updated_at": "2026-08-30T09:17:28+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "io",
+              "side": "right",
+              "count": 1,
+              "label": "DANTE",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "XLR",
@@ -2948,27 +2964,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "top",
-              "count": 1,
-              "label": "RF",
-              "air": true
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3023,6 +3022,23 @@
         {
           "revision": 23,
           "updated_at": "2026-08-30T09:17:28+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "top",
+              "count": 1,
+              "label": "RF",
+              "air": true
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -3065,35 +3081,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "top",
-              "count": 2,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3172,6 +3163,31 @@
         {
           "revision": 23,
           "updated_at": "2026-08-30T09:17:28+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "top",
+              "count": 2,
+              "label": "ANT",
+              "air": true
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -3222,35 +3238,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 1,
-              "label": "IN",
-              "air": true
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 4,
-              "label": "OUT",
-              "air": true
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3350,6 +3341,31 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "IN",
+              "air": true
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 4,
+              "label": "OUT",
+              "air": true
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -3379,35 +3395,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 1,
-              "label": "IN",
-              "air": true
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "OUT",
-              "air": true
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3486,6 +3477,31 @@
         {
           "revision": 23,
           "updated_at": "2026-08-30T09:17:29+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 1,
+              "label": "IN",
+              "air": true
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "OUT",
+              "air": true
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -3536,35 +3552,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "XLR",
-              "role": "in",
-              "side": "left",
-              "count": 2,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "SPEAKER",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "SPK",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3643,6 +3634,31 @@
         {
           "revision": 23,
           "updated_at": "2026-08-30T09:17:29+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "SPEAKER",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "SPK",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
           "ports": [
             {
               "signal": "XLR",
@@ -3693,35 +3709,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 24,
+      "revision": 25,
       "created_at": "2026-08-30T07:06:48+08:00",
-      "updated_at": "2026-08-30T09:17:30+08:00",
+      "updated_at": "2026-09-01T17:01:00+08:00",
       "history": [
-        {
-          "revision": 19,
-          "updated_at": "2026-08-30T08:07:36+08:00",
-          "ports": [
-            {
-              "signal": "DANTE",
-              "role": "io",
-              "side": "left",
-              "count": 8,
-              "label": "IN",
-              "air": false
-            },
-            {
-              "signal": "DANTE",
-              "role": "io",
-              "side": "right",
-              "count": 8,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 20,
           "updated_at": "2026-08-30T08:07:37+08:00",
@@ -3821,6 +3812,31 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 24,
+          "updated_at": "2026-08-30T09:17:30+08:00",
+          "ports": [
+            {
+              "signal": "DANTE",
+              "role": "io",
+              "side": "left",
+              "count": 8,
+              "label": "IN",
+              "air": false
+            },
+            {
+              "signal": "DANTE",
+              "role": "io",
+              "side": "right",
+              "count": 8,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -3850,60 +3866,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 7,
+      "revision": 9,
       "created_at": "2026-09-01T16:15:52+08:00",
-      "updated_at": "2026-09-01T16:36:18+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 2,
-          "updated_at": "2026-09-01T16:33:11+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 3,
-          "updated_at": "2026-09-01T16:33:37+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:34:17+08:00",
@@ -3978,6 +3944,56 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 7,
+          "updated_at": "2026-09-01T16:36:18+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T16:40:14+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -4007,60 +4023,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 8,
+      "revision": 10,
       "created_at": "2026-09-01T16:18:02+08:00",
-      "updated_at": "2026-09-01T16:36:18+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 3,
-          "updated_at": "2026-09-01T16:33:30+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
-        {
-          "revision": 4,
-          "updated_at": "2026-09-01T16:33:37+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": true
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 5,
           "updated_at": "2026-09-01T16:34:17+08:00",
@@ -4135,6 +4101,56 @@
           "slots": [],
           "note": "",
           "source": "user"
+        },
+        {
+          "revision": 8,
+          "updated_at": "2026-09-01T16:36:18+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 9,
+          "updated_at": "2026-09-01T16:40:14+08:00",
+          "ports": [
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
         }
       ]
     },
@@ -4156,27 +4172,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 5,
+      "revision": 7,
       "created_at": "2026-09-01T16:32:04+08:00",
-      "updated_at": "2026-09-01T16:36:19+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-09-01T16:32:04+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "RF",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 2,
           "updated_at": "2026-09-01T16:33:37+08:00",
@@ -4214,6 +4213,40 @@
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 5,
+          "updated_at": "2026-09-01T16:36:19+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-09-01T16:40:15+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4248,27 +4281,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 5,
+      "revision": 7,
       "created_at": "2026-09-01T16:32:09+08:00",
-      "updated_at": "2026-09-01T16:36:19+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-09-01T16:32:09+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "RF",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 2,
           "updated_at": "2026-09-01T16:33:37+08:00",
@@ -4306,6 +4322,40 @@
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 5,
+          "updated_at": "2026-09-01T16:36:19+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "RF",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-09-01T16:40:15+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4348,35 +4398,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 5,
+      "revision": 7,
       "created_at": "2026-09-01T16:32:31+08:00",
-      "updated_at": "2026-09-01T16:36:19+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-09-01T16:32:31+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 2,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 1,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 2,
           "updated_at": "2026-09-01T16:33:37+08:00",
@@ -4430,6 +4455,56 @@
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 5,
+          "updated_at": "2026-09-01T16:36:19+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 1,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-09-01T16:40:15+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4480,35 +4555,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 5,
+      "revision": 7,
       "created_at": "2026-09-01T16:32:57+08:00",
-      "updated_at": "2026-09-01T16:36:19+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-09-01T16:32:57+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 4,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "XLR",
-              "role": "out",
-              "side": "right",
-              "count": 2,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 2,
           "updated_at": "2026-09-01T16:33:37+08:00",
@@ -4562,6 +4612,56 @@
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 5,
+          "updated_at": "2026-09-01T16:36:19+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 4,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "XLR",
+              "role": "out",
+              "side": "right",
+              "count": 2,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-09-01T16:40:15+08:00",
           "ports": [
             {
               "signal": "RF",
@@ -4612,35 +4712,10 @@
       "slots": [],
       "note": "",
       "source": "user",
-      "revision": 5,
+      "revision": 7,
       "created_at": "2026-09-01T16:33:03+08:00",
-      "updated_at": "2026-09-01T16:36:19+08:00",
+      "updated_at": "2026-09-01T16:52:26+08:00",
       "history": [
-        {
-          "revision": 1,
-          "updated_at": "2026-09-01T16:33:03+08:00",
-          "ports": [
-            {
-              "signal": "RF",
-              "role": "in",
-              "side": "left",
-              "count": 2,
-              "label": "ANT",
-              "air": false
-            },
-            {
-              "signal": "RF",
-              "role": "out",
-              "side": "right",
-              "count": 10,
-              "label": "OUT",
-              "air": false
-            }
-          ],
-          "slots": [],
-          "note": "",
-          "source": "user"
-        },
         {
           "revision": 2,
           "updated_at": "2026-09-01T16:33:37+08:00",
@@ -4694,6 +4769,56 @@
         {
           "revision": 4,
           "updated_at": "2026-09-01T16:35:43+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 10,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 5,
+          "updated_at": "2026-09-01T16:36:19+08:00",
+          "ports": [
+            {
+              "signal": "RF",
+              "role": "in",
+              "side": "left",
+              "count": 2,
+              "label": "ANT",
+              "air": false
+            },
+            {
+              "signal": "RF",
+              "role": "out",
+              "side": "right",
+              "count": 10,
+              "label": "OUT",
+              "air": false
+            }
+          ],
+          "slots": [],
+          "note": "",
+          "source": "user"
+        },
+        {
+          "revision": 6,
+          "updated_at": "2026-09-01T16:40:15+08:00",
           "ports": [
             {
               "signal": "RF",

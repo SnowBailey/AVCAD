@@ -43,6 +43,10 @@ def connect(project):
     #      从机的 OUT 不参与后级连线（信号已随 LINK 汇总到主机）。
     cascade_slaves = _mixer_cascade(project)
 
+    # 0.8) 天线合路器优先：天线(OUT) → 合路器(IN)（专属规则，避免被相邻 stage
+    #      通用配对在 (ANTENNA, ANT_COMBINE) 上重复连线后被 _dedup 覆盖掉正确 note）。
+    _wire_antennas_to_combiner(project, by_stage)
+
     # 1) 相邻阶段线缆（模拟/RF/扬声器）
     for a, b in zip(chain, chain[1:]):
         if b == "SPEAKER":
@@ -65,6 +69,10 @@ def connect(project):
             continue
         if b == "ANT_DIST":
             _antennas_to_first_dist(project, by_stage)
+            continue
+        if a == "ANT_COMBINE" or b == "ANT_COMBINE":
+            # 合路器相邻对走专属规则：天线→合路器已在 0.8 连好；
+            # 合路器→分配器在 b==ANT_DIST 分支处理。跳过通用配对避免重复。
             continue
         # ★ MIC_HOST（会议主机）走专用规则：只画 1 路 MIX→核心级，PHX 分区
         #   凤凰端出图不连。否则会被相邻阶段配对成「5 条 XLR 全连到首个核心级」。
@@ -216,19 +224,53 @@ def _rf_ports(devs, role):
     return out
 
 
-def _antennas_to_first_dist(project, by_stage):
-    """外置天线 → **首台**天线分配器的输入。
+def _wire_antennas_to_combiner(project, by_stage):
+    """有天线合路器（ANT_COMBINE）时：天线(OUT) → 合路器(IN)。
 
-    不能星型分发到所有分配器：第 2 台起的进口由上一台的级联出口供信号。
+    合路器把多副天线的 RF 信号合并成一路（阳哥 2026-09-01 确认，IPS UM2000ASD）。
+    合并后的信号由 _antennas_to_first_dist 在「合路器(OUT) → 分配器(IN)」段接出。
+
+    必须在相邻 stage 通用配对**之前**调用：否则 (ANTENNA, ANT_COMBINE) 这对会被
+    _generic_pair 当成普通相邻对连一次（空 note），与这里的连线端口对重复，
+    经 _dedup 去重后保留空 note 版本，正确的 note 反而被丢弃。
+    """
+    combiners = by_stage.get("ANT_COMBINE", [])
+    if not combiners:
+        return
+    aouts = _rf_ports(by_stage.get("ANTENNA", []), "out")
+    cins = _rf_ports(combiners, "in")
+    for (ad, ap), (cd, cp) in zip(aouts, cins):
+        project.connections.append(Connection(
+            ad.uid, ap.id, cd.uid, cp.id, Signal.RF, "primary", note="天线→合路器"))
+
+
+def _antennas_to_first_dist(project, by_stage):
+    """合路器(OUT) → **首台**天线分配器(IN)；无合路器时 天线(OUT) → 首台分配器(IN)。
+
+    - 有合路器（ANT_COMBINE）：合并后的信号（合路器 OUT）进首台分配器。
+      天线→合路器 一段已由 _wire_antennas_to_combiner 在相邻配对前连好。
+    - 无合路器：天线(OUT) → 首台分配器(IN)（原逻辑）。
+
+    第 2 台起的分配器进口由上一台的级联出口供信号，不在此处理。
     """
     dists = by_stage.get("ANT_DIST", [])
     if not dists:
         return
-    ins = _rf_ports([dists[0]], "in")
-    outs = _rf_ports(by_stage.get("ANTENNA", []), "out")
-    for (ad, ap), (dd, dp) in zip(outs, ins):
-        project.connections.append(Connection(
-            ad.uid, ap.id, dd.uid, dp.id, Signal.RF, "primary", note="天线→分配器"))
+    combiners = by_stage.get("ANT_COMBINE", [])
+    if combiners:
+        # 合路器(OUT) -> 首台分配器(IN)：合并后的信号进分配器
+        couts = _rf_ports(combiners, "out")
+        dins = _rf_ports([dists[0]], "in")
+        for (cd, cp), (dd, dp) in zip(couts, dins):
+            project.connections.append(Connection(
+                cd.uid, cp.id, dd.uid, dp.id, Signal.RF, "primary", note="合路器→分配器"))
+    else:
+        # 无合路器：天线直接进首台分配器
+        ins = _rf_ports([dists[0]], "in")
+        outs = _rf_ports(by_stage.get("ANTENNA", []), "out")
+        for (ad, ap), (dd, dp) in zip(outs, ins):
+            project.connections.append(Connection(
+                ad.uid, ap.id, dd.uid, dp.id, Signal.RF, "primary", note="天线→分配器"))
 
 
 def _antenna_distribution(project, by_stage):

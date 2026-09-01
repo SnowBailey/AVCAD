@@ -1011,10 +1011,10 @@
       "active": false,
       "params": {
         "channels_hint": 48,
-        "inputs": 7,
-        "outputs": 3,
-        "legend_rev": 35,
-        "synced_at": "2026-09-01T09:47:11+08:00"
+        "legend_rev": 37,
+        "synced_at": "2026-09-01T17:00:59+08:00",
+        "inputs": 32,
+        "outputs": 15
       },
       "country": "日本",
       "unit": "台",
@@ -26058,8 +26058,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 7,
-        "synced_at": "2026-09-01T16:36:18+08:00"
+        "legend_rev": 9,
+        "synced_at": "2026-09-01T16:52:26+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26092,8 +26092,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 8,
-        "synced_at": "2026-09-01T16:36:18+08:00"
+        "legend_rev": 10,
+        "synced_at": "2026-09-01T16:52:26+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26126,8 +26126,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 5,
-        "synced_at": "2026-09-01T16:36:19+08:00"
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:52:26+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26150,8 +26150,8 @@
       "params": {
         "impedance_ohm": 50,
         "cascade_outs": 2,
-        "legend_rev": 5,
-        "synced_at": "2026-09-01T16:36:19+08:00",
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:52:26+08:00",
         "inputs": 2,
         "outputs": 10
       },
@@ -26178,8 +26178,8 @@
       "params": {
         "impedance_ohm": 50,
         "bnc": 1,
-        "legend_rev": 5,
-        "synced_at": "2026-09-01T16:36:19+08:00"
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:52:26+08:00"
       },
       "country": "中国",
       "unit": "对",
@@ -26204,8 +26204,8 @@
       "params": {
         "impedance_ohm": 50,
         "bnc": 1,
-        "legend_rev": 5,
-        "synced_at": "2026-09-01T16:36:19+08:00"
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:52:26+08:00"
       },
       "country": "中国",
       "unit": "对",
@@ -26241,18 +26241,18 @@
       "code": "1100001251",
       "brand": "IPS",
       "model": "UM2000ASD",
-      "name": "天线信号分线器",
+      "name": "天线信号合路器",
       "group": "其他会议系统（前级）",
       "section": "天线分配系统",
-      "category": "ANT_DIST",
+      "category": "ANT_COMBINE",
       "defer_reason": null,
       "features": [],
       "active": false,
       "params": {
         "impedance_ohm": 50,
         "cascade_outs": 0,
-        "legend_rev": 5,
-        "synced_at": "2026-09-01T16:36:19+08:00",
+        "legend_rev": 7,
+        "synced_at": "2026-09-01T16:52:26+08:00",
         "inputs": 2,
         "outputs": 1
       },
