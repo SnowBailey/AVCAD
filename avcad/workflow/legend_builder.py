@@ -50,6 +50,49 @@ def ensure(inst, store: LegendStore) -> Legend:
     return lg
 
 
+def infer_from_entry(entry) -> Optional[Legend]:
+    """从**任意条目**（category + params + features）用引擎规格模板推断图例。
+
+    ★ 这是图例端口初值的**唯一权威**——前端 ``defaultPorts(category)`` 是硬编码
+    模板，漏了 IO 与 MIC_HOST 两类（都落 default 分支 = XLR 4进4出），
+    与引擎实际口径不一致：
+
+      - IO       : ``io.yaml`` 默认 1 进 1 出，有 dante 特性才多一个 DANTE 口
+      - MIC_HOST : 靠主库 ``ports_override`` 才是 CF6300 的 4×CH+4×PHX+1×MIX+1×BOX
+
+    用户在第③步看到的初值如果跟实际出图不一样，等于让他照着错的数去改。
+    所以只要类别有对应规格模板，一律走这里；前端模板只作推断失败时的兜底。
+
+    返回 None = 类别不可出图（无规格模板）或推断失败；
+    调用方应回落到前端模板并提示「请手工核对端口」。
+    """
+    if not isinstance(entry, dict):
+        return None
+    cat = (entry.get("category") or "").strip().upper()
+    if not cat:
+        return None
+    try:
+        from avcad.model.specs import expand_instance, load_specs
+        spec = (load_specs() or {}).get(cat)
+        if spec is None:
+            return None
+        inst = expand_instance(spec, {
+            "category": cat,
+            "brand": entry.get("brand") or "",
+            "model": entry.get("model") or "",
+            "name": entry.get("name") or "",
+            "params": dict(entry.get("params") or {}),
+            "features": list(entry.get("features") or []),
+        }, 0)
+        lg = from_instance(inst)
+    except Exception:
+        # 主库 params 里可能有历史脏数据（字符串化的 list、非法枚举值等），
+        # 推断失败不应让整页 500 —— 交给调用方降级。
+        return None
+    lg.category = cat
+    return lg
+
+
 def infer_from_product(product) -> Optional[Legend]:
     """从**主库产品条目**引擎推断默认图例（给「图例库尚未覆盖」的型号做初值）。
 
@@ -66,27 +109,15 @@ def infer_from_product(product) -> Optional[Legend]:
     cat = (product.get("category") or "").strip().upper()
     if not cat:
         return None
-    try:
-        from avcad.model.specs import expand_instance, load_specs
-        spec = (load_specs() or {}).get(cat)
-        if spec is None:
-            return None
-        entry = {
-            "category": cat,
-            "brand": product.get("brand") or "",
-            "model": product.get("model") or "",
-            "name": product.get("name") or "",
-            "params": dict(product.get("params") or {}),
-            "features": list(product.get("features") or []),
-        }
-        inst = expand_instance(spec, entry, 0)
-        lg = from_instance(inst)
-    except Exception:
-        # 主库 params 里可能有历史脏数据（字符串化的 list、非法枚举值等），
-        # 推断失败不应让整页 500 —— 交给调用方降级为「手工填写」。
-        return None
-    lg.category = cat
-    return lg
+    entry = {
+        "category": cat,
+        "brand": product.get("brand") or "",
+        "model": product.get("model") or "",
+        "name": product.get("name") or "",
+        "params": dict(product.get("params") or {}),
+        "features": list(product.get("features") or []),
+    }
+    return infer_from_entry(entry)
 
 
 def replace_ports(legend: Legend, port_defs: List[dict]) -> Legend:

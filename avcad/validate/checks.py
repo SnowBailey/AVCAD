@@ -58,6 +58,43 @@ def validate(project) -> list:
                 issues.append(Issue("INFO", "UNCONNECTED",
                                     f"{i.name} 端口 {p.label}({p.signal.value}) 未连接（余量）", i.uid))
 
+    # 孤立设备：整台设备**一个端口都没连上**
+    # ★ 与 UNCONNECTED 的区别：那条是「端口有余量」（INFO，正常），
+    #   这条是「这台设备根本没进系统」——出图后是个孤立方块。
+    #
+    #   真实触发场景：配单里出现主库没有的新型号时，它会被兜底成 IO 类别
+    #   （importers.py:409），IO 又被 assign_stages 扔到 SIDE 层不参与主链路
+    #   配对（chain.py:137），于是连线数为 0。此前**完全静默**——既没有
+    #   ERROR 也没有 WARN，混在几十条 INFO:UNCONNECTED 里看不出来。
+    #
+    #   ★ 按 (名称, 型号, 类别) **聚合**成一条，不逐台报：
+    #     B-EAW4 有 24 台音箱因为清单缺前端设备而全孤——逐台报 24 条是噪音，
+    #     聚合成 1 条「×24」既准确又可读。新型号那种 1 台的则原样单独一条。
+    #
+    #   豁免：WIRELESS_MIC（无线发射端设计上不产生线缆连接，只画本体与空中 RF 口）。
+    ORPHAN_EXEMPT = ("WIRELESS_MIC",)
+    orphans = [i for i in project.instances
+               if i.category not in ORPHAN_EXEMPT
+               and not any((i.uid, p.id) in used for p in i.ports)]
+    if orphans:
+        # 清单里连一台前端设备都没有时，孤立是清单不完整所致、非程序缺陷，
+        # 措辞要跟「某台设备没接上」区分开（与 validate_projects.py 同一口径）
+        front = {"AMP", "MIXER", "PROCESSOR", "SPEAKER_MGR", "SOURCE",
+                 "WIRELESS_RX", "MIC_HOST", "SWITCH", "IO"}
+        has_front = any(i.category in front for i in project.instances)
+        head = "清单只含后端设备（缺调音台/处理器/功放等前端），" if not has_front else ""
+        groups: dict = {}
+        for i in orphans:
+            k = (i.name, i.model, i.category)
+            g = groups.setdefault(k, {"n": 0, "ports": len(i.ports), "uid": i.uid})
+            g["n"] += 1
+        for (nm, mdl, cat), g in groups.items():
+            n = f"×{g['n']} " if g["n"] > 1 else ""
+            issues.append(Issue(
+                "WARN", "ISOLATED_DEVICE",
+                f"{head}{nm}（{mdl or cat}）{n}未接入系统："
+                f"{g['ports']} 个端口全部未连接", g["uid"]))
+
     # 相邻阶段通道数匹配
     chain = project.chain
     by_stage = defaultdict(list)

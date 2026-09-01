@@ -45,12 +45,15 @@ from avcad.render.dxf_render import render_dxf
 from avcad.workflow.module_confirm import build_module_list, confirm_modules
 from avcad.workflow.run import run_workflow, summarize
 from avcad.workflow.legend_store import LegendStore, Legend, LegendPort
-from avcad.workflow.legend_builder import infer_from_product  # 图例校正页：引擎推断初值
+from avcad.workflow.legend_builder import (  # 图例校正页 + 图例初值：引擎推断
+    infer_from_product, infer_from_entry)
 from avcad.workflow.legend_sync import (  # R10 反向同步：图例库 -> 主库
     apply_reverse_to_catalog, resolve_catalog_path, backup_catalog,
 )
 from avcad.workflow.architecture import select
-from avcad.workflow.importers import build_entries, to_bom_csv
+from avcad.workflow.importers import (  # CSV 路径也要走同一套归一化（R12）
+    build_entries, to_bom_csv, apply_category_fallback)
+from avcad.parse.product_resolver import enrich as resolve_products
 from scripts.check_overlap import check_svg
 
 STATIC = os.path.join(os.path.dirname(__file__), "static")
@@ -111,6 +114,20 @@ def _save_catalog():
 
 
 def _entries_from_bom(bom: str) -> list:
+    """CSV / 文本清单 -> 规范化条目。
+
+    ★ 2026-09-01 R12：``parse_bom`` 只做「读表」，不做任何归一化。此前
+      xlsx 走 ``build_entries``（会 resolve 主库 + 类别兜底 IO + 抽特性参数），
+      CSV / 文本走这里什么都不做 —— 同一个清单两种下场：
+      文本 BOM 里「设备类型」列留空的未知型号，出图时 category 是空串，
+      变成 **0 端口 + ERROR:UNKNOWN_TYPE**，而 xlsx 路径是 IO 1进1出。
+
+      现在补齐两步，跟 ``build_entries`` 保持一致：
+        1. ``resolve_products`` —— 主库 / 内置库补类别、特性、参数
+        2. ``apply_category_fallback`` —— 认不出的兜底成 IO（后置型号排除）
+
+      顺序不能反：enrich 只在 category 为空时才填，先兜底就把主库覆盖死了。
+    """
     h = hashlib.sha1(bom.encode("utf-8")).hexdigest()
     if h in _ENTRY_CACHE:
         return _ENTRY_CACHE[h]
@@ -121,6 +138,8 @@ def _entries_from_bom(bom: str) -> list:
         entries = parse_bom(tmp)
     finally:
         os.unlink(tmp)
+    resolve_products(entries)
+    entries, _dropped = apply_category_fallback(entries)
     if len(_ENTRY_CACHE) < 128:
         _ENTRY_CACHE[h] = entries
     return entries
@@ -384,26 +403,63 @@ def _catalog_item(idx: int, p: dict) -> dict:
     }
 
 
+def _module_item(m) -> dict:
+    """模块条目 -> 前端视图。
+
+    ★ ``source`` 是 R12 新增的收录状态（catalog/builtin/deferred/unknown）。
+      unknown = 主库与内置库都没有这个型号，类别是名称关键词猜的、或兜底成 IO，
+      出图后很可能是个孤立方块。第②步据此打「主库未收录」徽章，
+      让阳哥一眼看到哪些型号需要先补图例。
+    """
+    return {"brand": m.brand, "model": m.model, "category": m.category,
+            "name": m.name, "quantity": m.quantity, "decision": m.decision,
+            "source": m.source,
+            # 特性与参数：第③步图例页要用它们让引擎展开端口初值
+            "features": list(m.features), "params": dict(m.params)}
+
+
 def _dispatch(path, body):
     if path == "/api/parse":
         data = json.loads(body or "{}")
         entries, csv, dropped, notes = _decode_upload(data)
         modules = build_module_list(entries)
-        return {"csv": csv, "modules": [
-            {"brand": m.brand, "model": m.model, "category": m.category,
-             "name": m.name, "quantity": m.quantity, "decision": m.decision}
-            for m in modules
-        ], "dropped": dropped, "notes": notes}
+        return {"csv": csv, "modules": [_module_item(m) for m in modules],
+                "dropped": dropped, "notes": notes,
+                "unknown": [f"{m.brand} {m.model}".strip()
+                            for m in modules if m.source == "unknown"]}
 
     if path == "/api/modules":
         data = json.loads(body or "{}")
         entries = _entries_from_bom(data.get("bom", ""))
         modules = build_module_list(entries)
-        return {"modules": [
-            {"brand": m.brand, "model": m.model, "category": m.category,
-             "name": m.name, "quantity": m.quantity, "decision": m.decision}
-            for m in modules
-        ]}
+        return {"modules": [_module_item(m) for m in modules],
+                "unknown": [f"{m.brand} {m.model}".strip()
+                            for m in modules if m.source == "unknown"]}
+
+    if path == "/api/legend-infer":
+        """图例页端口初值：由**引擎规格模板**展开，取代前端硬编码模板。
+
+        ★ R12：前端 ``defaultPorts(category)`` 的 switch 里没有 IO、也没有
+        MIC_HOST 的 case，两者都落 default 分支 = XLR 4进4出。而引擎实际是
+        IO 按 io.yaml 只有 1进1出（有 dante 特性才多一个 DANTE 口）、MIC_HOST
+        按主库 ports_override 展开。同一个类别两套真相 = 用户在第③步看到的
+        初值不是实际出图的样子，会照着错的数去改。
+
+        只要类别有对应规格模板，一律以引擎为准；推断不出来才回落到前端模板。
+        """
+        data = json.loads(body or "{}")
+        out, failed = {}, []
+        for it in (data.get("items") or []):
+            if not isinstance(it, dict):
+                continue
+            k = LegendStore.key(it.get("brand", ""), it.get("model", ""),
+                                it.get("category", ""))
+            lg = infer_from_entry(it)
+            if lg is None:
+                failed.append(k)
+            else:
+                out[k] = [p.to_dict() for p in lg.ports]
+        return {"ports": out, "failed": failed}
 
     if path == "/api/legend":
         data = json.loads(body or "{}")

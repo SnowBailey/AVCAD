@@ -137,6 +137,13 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
 .lg-rows .prow input.key{flex:1;min-width:90px;max-width:140px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .lg-rows .prow input.val{flex:1;min-width:60px;max-width:120px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-align:right}
 .lg-rows .prow input.remark{flex:1;min-width:120px}
+/* R12 手工添加型号：标题行的品牌 / 型号输入框 */
+input.inp-mini{background:rgba(0,0,0,.25);border:1px solid var(--line);color:var(--txt);
+  border-radius:6px;padding:3px 7px;font-size:12.5px;font-family:inherit}
+input.inp-mini:focus{outline:none;border-color:var(--acc)}
+input.inp-mini#brand_input_0,input.inp-mini[id^=brand_input_]{width:96px}
+input.inp-mini[id^=model_input_]{width:150px;font-weight:600}
+.legend.flash{box-shadow:0 0 0 2px var(--acc)}
 .lg-rows .prow button.mini{
   padding:2px 9px;margin:0;font-size:11px;font-weight:700;border-radius:999px;
   background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--txt);
@@ -244,6 +251,7 @@ button.sec:hover{filter:brightness(1.07);border-color:var(--ok)}
     <input type="text" id="q" placeholder="型号或名称关键词"/>
   </label>
   <span class="feat" id="fMissing">只看未确认</span>
+  <span class="feat" id="btnAdd" title="配单里出现主库没有的型号时，在这里手工给它建一条图例">+ 手工添加型号</span>
   <span class="count" id="count"></span>
 </div>
 
@@ -333,8 +341,13 @@ function render(){
 
 function badgeFor(i){
   const it = ITEMS[i];
-  if(DIRTY.has(i))  return `<span class="cache dirty">◐ 图例 待保存</span>`;
-  if(SAVED.has(i))  return `<span class="cache hit">● 图例 v${it.revision||1} 已落盘</span>`;
+  /* ★ 四条分支都要带 id="bdg_i"：mark() / saveOne() 是用 outerHTML 整块替换的，
+     少了 id 的话徽章一变（待保存 → 已落盘）就再没有 #bdg_i 这个锚点，
+     后续按 id 定位徽章的代码（含 e2e）会静默拿到 null。 */
+  if(DIRTY.has(i))  return `<span class="cache dirty" id="bdg_${i}">◐ 图例 待保存</span>`;
+  if(SAVED.has(i))  return `<span class="cache hit" id="bdg_${i}">● 图例 v${it.revision||1} 已落盘</span>`;
+  if(it.source === "new")
+    return `<span class="cache miss" id="bdg_${i}">✕ 未建档 · 填品牌/型号 + 加端口后保存</span>`;
   if(it.source === "legend")
     return `<span class="cache hit" id="bdg_${i}">● 图例 v${it.revision||1} · ${esc((it.updated_at||"").slice(0,10))}</span>`;
   if(!it.inferred)
@@ -371,18 +384,28 @@ function metaLine(it){
    ============================================================ */
 function buildCard(i){
   const it = ITEMS[i];
+  const isNew = it.source === "new";
   const d = document.createElement("div");
   d.className = "legend"; d.id = "cat_" + i;
 
+  /* ★ 手工添加的型号：品牌 / 型号改成输入框。
+     主库没有的型号两边都搜不到（列表 = 图例库 ∪ 主库），
+     此前唯一的补救口是第③步图例确认页——但那要等它在实际配单里出现。
+     现在可以直接在这里建档，下次配单遇到就自动套用。 */
+  const titleInner = isNew
+    ? '<input type="text" class="inp-mini" id="brand_input_' + i + '" placeholder="品牌" value="' + esc(it.brand || "") + '"/>' +
+      '<input type="text" class="inp-mini" id="model_input_' + i + '" placeholder="型号（必填）" value="' + esc(it.model || "") + '"/>'
+    : '<b>' + esc(it.model || it.name) + '</b>' +
+      '<span class="mut">· ' + esc(it.brand || "") + '</span>';
+  const srcBadge = isNew
+    ? `<span class="badge mut" style="font-size:10px">手工新增</span>`
+    : (it.source === "legend"
+        ? `<span class="badge hit" style="font-size:10px">图例库</span>`
+        : `<span class="badge mut" style="font-size:10px">主库未覆盖</span>`);
+
   d.innerHTML =
     '<div class="th">' +
-      '<div class="left">' +
-        '<b>' + esc(it.model || it.name) + '</b>' +
-        '<span class="mut">· ' + esc(it.brand || "") + '</span>' +
-        (it.source === "legend"
-          ? `<span class="badge hit" style="font-size:10px">图例库</span>`
-          : `<span class="badge mut" style="font-size:10px">主库未覆盖</span>`) +
-      '</div>' +
+      '<div class="left">' + titleInner + srcBadge + '</div>' +
       badgeFor(i) +
     '</div>' +
 
@@ -462,6 +485,11 @@ function renderPortRows(i, d){
 }
 
 function wireCard(i, d){
+  /* 手工新增的卡：品牌 / 型号是输入框，得同步回 ITEMS */
+  const bi = d.querySelector("#brand_input_"+i);
+  const mi = d.querySelector("#model_input_"+i);
+  if(bi) bi.addEventListener("input", ()=>{ ITEMS[i].brand = bi.value.trim(); mark(i); });
+  if(mi) mi.addEventListener("input", ()=>{ ITEMS[i].model = mi.value.trim(); mark(i); });
   d.querySelector("#cat_sel_"+i).addEventListener("change", ()=>{
     ITEMS[i].category = d.querySelector("#cat_sel_"+i).value || "";
     mark(i);
@@ -497,6 +525,19 @@ async function saveOne(i){
   if(!card) return;
   const it = ITEMS[i];
   const st = $("st_"+i);
+  /* 手工新增的型号必须填型号：图例键是 brand::model::category，
+     型号为空会存成 "品牌::_::类别" 这种半截键，永远匹配不上真实设备。 */
+  if(!String(it.model || "").trim()){
+    st.className="lg-status err"; st.textContent="请先填型号";
+    toast("型号不能为空（图例按 品牌::型号::类别 存键）", "err");
+    const mi = $("model_input_"+i); if(mi) mi.focus();
+    return;
+  }
+  if(!(it.ports || []).length){
+    st.className="lg-status err"; st.textContent="至少加一个端口";
+    toast("请先用「+ 新增端口」加至少一个端口", "err");
+    return;
+  }
   st.className="lg-status"; st.textContent="保存中…";
   const res = await api("/api/legend", {
     brand: it.brand || "", model: it.model || "", category: it.category || "",
@@ -531,6 +572,37 @@ $("q").addEventListener("input", ()=>{ clearTimeout(window._qt);
   window._qt = setTimeout(loadItems, 280); });
 $("fMissing").addEventListener("click", ()=>{
   $("fMissing").classList.toggle("on"); loadItems();
+});
+
+/* ============================================================
+   + 手工添加型号 ── 给「主库和图例库都没有」的型号建档
+   列表 = 图例库 ∪ 主库，两边都没有的型号搜不到，而配单里一旦出现
+   它会被兜底成 IO、出图成孤立方块。这里补上最后一个入口。
+   ============================================================ */
+$("btnAdd").addEventListener("click", ()=>{
+  /* 默认类别必须是 IO，不能用 categories[0]（现在是 SOURCE）。
+     ★ 理由：引擎对「两库都没有」的型号兜底成 IO（importers.py 的 CATEGORY_KW
+       都没命中时），出图时那台设备就是 IO 类别。手工建档要想在下次配单里
+       自动套用，类别得跟引擎的兜底一致，否则图例存了也匹配不上。 */
+  const cat = (META.categories || []).includes("IO") ? "IO" : ((META.categories || [])[0] || "");
+  ITEMS.unshift({
+    brand: $("brand").value || "", model: "", name: "", category: cat,
+    source: "new", inferred: false, ports: [], slots: [], note: "",
+    revision: 0, catalog: null,
+  });
+  /* 插在最前面 → 其余卡索引整体 +1，DIRTY / SAVED 要跟着平移，
+     否则「待保存」标记会错位到别的卡上。 */
+  DIRTY = new Set([...DIRTY].map(x => x + 1));
+  SAVED = new Set([...SAVED].map(x => x + 1));
+  render();
+  const el = $("cat_0");
+  if(el){
+    el.scrollIntoView({behavior:"smooth", block:"center"});
+    el.classList.add("flash");
+    setTimeout(()=>el.classList.remove("flash"), 1600);
+  }
+  const mi = $("model_input_0"); if(mi) mi.focus();
+  toast("已插入一条空白图例：填品牌 / 型号 / 类别，加端口后保存", "ok");
 });
 
 (async ()=>{ await loadMeta(); await loadItems(); })();

@@ -278,6 +278,10 @@
   }
   .summary.okbox{border-color:rgba(46,232,160,.42);background:rgba(46,232,160,.07);color:#d3f5e8}
   .summary.errbox{border-color:rgba(255,90,110,.42);background:rgba(255,90,110,.08);color:#ffd6db}
+  .summary.warnbox{border-color:rgba(255,176,32,.42);background:rgba(255,176,32,.08);color:#ffe3ac}
+  /* R12：主库未收录的型号。此前它跟正常型号长得一模一样，出图后是个孤立方块 */
+  .chip.unknown{background:rgba(255,176,32,.16);color:#ffc457}
+  .chip.deferred{background:rgba(255,255,255,.06);color:var(--mut)}
 
   /* ============ 提示 / 杂项 ============ */
   .toast{
@@ -573,6 +577,7 @@
     <section class="card hidden" id="panel2">
       <h3>② 模块确认</h3>
       <div class="muted">系统按「类别 + 品牌 + 型号」去重汇总。确认无误后进入图例定义。</div>
+      <div id="unknownBox" class="summary warnbox hidden" style="margin-top:10px"></div>
       <div id="modules" style="margin-top:12px"></div>
       <div class="row"><span class="grow"></span><button id="btnToStep3" class="primary">下一步：定义图例</button></div>
     </section>
@@ -832,16 +837,42 @@ async function uploadFile(f){
 }
 
 /* ==================== ② 模块确认 ==================== */
+/* R12 收录状态 -> 徽章。unknown = 主库与内置库都没有，类别是靠名称关键词
+   猜的、或兜底成 IO；出图后很可能是个孤立方块（校验层还不会报警）。
+   第②步标出来，让阳哥在第③步补图例前就能看到。 */
+const SOURCE_BADGE = {
+  unknown:  ['unknown',  '主库未收录'],
+  deferred: ['deferred', '主库后置'],
+  builtin:  ['',         '内置库'],
+  catalog:  ['',         ''],
+};
+function renderUnknownNotice(){
+  const box = $("unknownBox"); if(!box) return;
+  const bad = (STATE.modules || []).filter(m=>m.source === "unknown");
+  if(!bad.length){ box.classList.add("hidden"); return; }
+  box.classList.remove("hidden");
+  box.textContent =
+    "⚠ 有 " + bad.length + " 个型号主库里没有：\n" +
+    bad.map(m=>"  · " + [m.brand, m.model].filter(Boolean).join(" ") +
+             "（判为 " + (m.category || "?") + "）").join("\n") +
+    "\n\n它们的类别是靠名称猜的（猜不出就兜底成 IO），图上会变成孤立方块。" +
+    "\n请在第③步把端口改对 —— 保存后落图例库，下次同型号自动套用。";
+}
 function renderModules(){
+  renderUnknownNotice();
   const box = $("modules"); box.innerHTML = "";
   STATE.modules.forEach((m, i)=>{
     const d = document.createElement("div");
     const excluded = (m.decision || "include") === "exclude";
     d.className = "dev" + (excluded ? " excluded" : "");
+    const src = SOURCE_BADGE[m.source] || SOURCE_BADGE.catalog;
+    const badge = src[1]
+      ? ' <span class="chip ' + src[0] + '">' + src[1] + '</span>' : "";
     d.innerHTML =
       '<div class="t"><span>' + (m.name || m.model || m.category) + '</span>' +
       '<span class="tag c">×' + (m.quantity || 1) + '</span></div>' +
       '<div class="meta">' + [m.category, m.brand, m.model].filter(Boolean).join(" · ") +
+      badge +
       ' <span class="chip">' + (m.decision || "include") + '</span></div>' +
       '<div class="row" style="margin-top:6px">' +
       '<button class="ghost mini-ex" data-i="' + i + '" style="margin-top:0;padding:5px 12px;font-size:12px">不需要（移出本图）</button>' +
@@ -936,20 +967,40 @@ function aggregatePorts(ports){
 function moduleDecisionKey(m){
   return (m.brand || "") + "::" + (m.model || "");
 }
+/* ★ R12：端口初值由**引擎规格模板**展开，不靠前端 defaultPorts()。
+   defaultPorts 是硬编码模板，漏了 IO / MIC_HOST 两类，都落 default 分支
+   = XLR 4进4出；而引擎实际是 IO 1进1出、MIC_HOST 按主库 ports_override。
+   用户在第③步看到的初值必须等于实际出图的端口，否则等于照着错的数去改。
+   引擎也推断不出来（类别无模板）时才回落到 defaultPorts。 */
+async function inferPorts(mods){
+  if(!mods.length) return {};
+  try{
+    const res = await api("/api/legend-infer", {items: mods.map(m=>({
+      brand: m.brand || "", model: m.model || "", category: m.category || "",
+      name: m.name || "", features: m.features || [], params: m.params || {},
+    }))});
+    return (res && res.ports) || {};
+  }catch(e){
+    console.warn("[AVCAD] 引擎推断端口初值失败，回落到前端模板", e);
+    return {};
+  }
+}
 async function initLegends(){
   const list = await api("/api/legend", {action: "list"});
   STATE.library = list.library || null;
   const saved = {};
   (list.legends || []).forEach(lg=>{ saved[lg.key] = lg; });
   // 第二步点「不需要」的模块，不参与第三步图例确认
-  STATE.legendItems = STATE.modules.filter(m=>{
+  const mods = STATE.modules.filter(m=>{
     return STATE.decisions[moduleDecisionKey(m)] !== "exclude";
-  }).map(m=>{
+  });
+  const inferred = await inferPorts(mods);
+  STATE.legendItems = mods.map(m=>{
     const b = m.brand || "", mo = m.model || "", c = m.category || "";
     const sv = saved[legendKey(b, mo, c)];
     return {
       brand: b, model: mo, category: c, name: m.name || "", quantity: m.quantity || 1,
-      ports: sv ? sv.ports : defaultPorts(m),
+      ports: sv ? sv.ports : (inferred[legendKey(b, mo, c)] || defaultPorts(m)),
       /* ★ 卡槽必须随图例一起带上：此前保存时前端固定传 slots: []，
          一旦编辑过图例，CS-R10 / RPio622 的 HY/MY 卡槽就被静默抹掉。 */
       slots: sv ? (sv.slots || []) : [],

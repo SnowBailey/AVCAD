@@ -338,6 +338,41 @@ def _expand_sets(av: list) -> list:
     return out
 
 
+def apply_category_fallback(entries: list):
+    """给缺类别的条目补类别；主库后置且名称也认不出的直接排除。
+
+    返回 ``(kept, dropped_rows)``。**就地改**传入的条目（补 ``category``）。
+
+    ★ 2026-09-01 R12：这个函数此前是 ``build_entries`` 里的一段内联代码，
+      只有 **xlsx 路径**会跑到。而 Web 端第⑤步是把 `/api/parse` 归一化的 CSV
+      文本回传给 ``/api/run`` → ``parse_bom`` → **原始行**，压根不走这里。
+      实测后果：文本 BOM 里「设备类型」列留空的未知型号，出图时
+      ``category = ""`` → 0 个端口 + ``ERROR:UNKNOWN_TYPE``，
+      而不是 xlsx 路径下的 IO 兜底。**同一个清单两种下场**，取决于入口。
+
+    顺序很重要：必须在 ``resolve_products`` **之后**调用。主库/内置库命中时
+    ``enrich`` 只在 ``category`` 为空时才填（``if not entry.get("category")``），
+    先跑本函数会把未知型号一律填成 IO，之后 enrich 就再也不覆盖它了。
+    """
+    kept, dropped = [], []
+    for e in entries:
+        cat = e.get("category")
+        if not cat:
+            cat = classify_category(e.get("name", ""))
+            if not cat:
+                # 主库明确后置（配件/线缆/非音频，如充电箱、中继器、主缆）
+                # 且名称也命中不到任何音频类别 -> 与吊架同等处理：排除出图。
+                # ★ 注意不能一刀切：QU-16 这类「主库延迟」型号要靠名称兜底成 MIXER，
+                #   只有名称也识别不了时才排除；未命中主库的条目仍保留 IO 兜底。
+                if str(e.get("_resolved", "")).startswith("eko-deferred"):
+                    dropped.append({"设备名称": e.get("name") or e.get("model") or ""})
+                    continue
+                cat = "IO"
+            e["category"] = cat
+        kept.append(e)
+    return kept, dropped
+
+
 def build_entries(path: str, sheet=None):
     """读 xlsx -> 规范化条目（已排除吊架/占位项/不出图型号）。返回 (entries, dropped_rows)。
 
@@ -393,23 +428,8 @@ def build_entries(path: str, sheet=None):
         if e.get("_no_draw"):
             dropped.append({"设备名称": e.get("name") or e.get("model") or ""})
     av = [e for e in av if not e.get("_no_draw")]
-    kept = []
-    for e in av:
-        cat = e.get("category")
-        if not cat:
-            cat = classify_category(e.get("name", ""))
-            if not cat:
-                # 主库明确后置（配件/线缆/非音频，如充电箱、中继器、主缆）
-                # 且名称也命中不到任何音频类别 -> 与吊架同等处理：排除出图。
-                # ★ 注意不能一刀切：QU-16 这类「主库延迟」型号要靠名称兜底成 MIXER，
-                #   只有名称也识别不了时才排除；未命中主库的条目仍保留 IO 兜底。
-                if str(e.get("_resolved", "")).startswith("eko-deferred"):
-                    dropped.append({"设备名称": e.get("name") or e.get("model") or ""})
-                    continue
-                cat = "IO"
-            e["category"] = cat
-        kept.append(e)
-    av = kept
+    av, dropped2 = apply_category_fallback(av)
+    dropped.extend(dropped2)
     for e in av:
         cat = e.get("category")
         spec = e.get("spec", "")

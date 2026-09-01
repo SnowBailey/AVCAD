@@ -29,6 +29,22 @@ def _md5(p: Path) -> str:
     return hashlib.md5(p.read_bytes()).hexdigest()
 
 
+@pytest.fixture(autouse=True)
+def _fresh_entry_cache():
+    """每个用例前清空 ``app._ENTRY_CACHE``。
+
+    ★ 2026-09-01 R12 踩的坑：``_ENTRY_CACHE`` 是模块级、按 BOM 文本 sha1 缓存的
+      **解析结果**，而解析结果取决于``当时``生效的主库（测试用 monkeypatch 换库）。
+      跨用例不清 → 前一个用例在空主库下解析出的条目（类别被兜底成 IO）
+      会被后一个用例直接命中缓存复用，哪怕后者换了一份含该型号的主库。
+      表现是「单跑绿、整轮跑红」，且报错信息（category='IO'）指向完全错误的方向。
+    """
+    import avcad.ui.app as _app
+    _app._ENTRY_CACHE.clear()
+    yield
+    _app._ENTRY_CACHE.clear()
+
+
 @pytest.fixture(scope="session", autouse=True)
 def _no_real_data_writes():
     repo = Path(__file__).resolve().parents[2]
