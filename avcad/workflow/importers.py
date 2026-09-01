@@ -294,17 +294,30 @@ def read_xlsx_rows(path: str, sheet=None) -> list:
     return out
 
 
+# ★ 2026-09-01：这些品牌的「无线话筒套装」整体出图、**不拆分**内部话筒。
+# 阳哥确认 IPS 按「套」只画一台接收机本体（含 MIX/XLR 出与 RF 入），
+# 不再把内部话筒展开成独立 WIRELESS_MIC 设备。其余品牌（AUDIX / SENNHEISER 等）
+# 仍照常拆分。新增「不拆分」品牌时在此加一行即可，并补一条守卫测试。
+SET_EXPAND_SKIP_BRANDS = {"IPS"}
+
+
 def _expand_sets(av: list) -> list:
     """把「套装」条目拆成图上应有的独立设备。
 
     触发条件：主库 params 含 ``set_expand``，形如 ``{"rx": 1, "tx": 2}``
     （1 台接收机 + 2 支发射端）。数量按套数成倍展开：
-    清单 4 套 UM2002 → 4 台 WIRELESS_RX + 8 支 WIRELESS_MIC。
+    清单 4 套 AUDIX AP62 → 4 台 WIRELESS_RX + 8 支 WIRELESS_MIC。
 
     发射端是无线设备，图上只画本体与空中 RF 口，不产生线缆连接。
+
+    ``SET_EXPAND_SKIP_BRANDS`` 中的品牌整体出图，不做拆分。
     """
     out = []
     for e in av:
+        if str(e.get("brand", "")).upper() in SET_EXPAND_SKIP_BRANDS:
+            # IPS 等品牌：套装整体作为一台接收机出图，不展开内部话筒
+            out.append(e)
+            continue
         se = (e.get("params") or {}).get("set_expand")
         if not isinstance(se, dict):
             out.append(e)
@@ -420,7 +433,7 @@ def build_entries(path: str, sheet=None):
         if str(e.get("_unit", "")).strip().lower() in PAIR_UNITS:
             e["quantity"] = int(e.get("quantity", 1) or 1) * PAIR_UNIT_FACTOR
     # 套装拆分：清单按「套」计价，图上要分别画出接收机与发射端
-    # （IPS UM2002 系列 remark：「套装型号，里面包含 1 台接收机和 2 台麦克风」）
+    # （AUDIX / SENNHEISER 等）。★ IPS 套装整体出图、不拆分（见 _expand_sets / SET_EXPAND_SKIP_BRANDS）
     av = _expand_sets(av)
     # 主库显式标记 drawable=false（停产型号 / 视频网传 / 线缆等）：直接排除，
     # 不再走下面的名称兜底——否则「天线延长线」会被兜底成 ANTENNA。

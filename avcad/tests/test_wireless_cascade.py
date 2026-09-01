@@ -201,14 +201,14 @@ def test_mix_out_port_present_when_feature_set():
 
 # ---------------- 套装拆分 ----------------
 def test_set_expand_splits_receiver_and_transmitters(tmp_path):
-    """UM2002「1 台接收机 + 2 支话筒」应拆成 1×WIRELESS_RX + 2×WIRELESS_MIC。"""
+    """AUDIX AP61 OM2「1 台接收机 + 1 支话筒」应拆成 1×WIRELESS_RX + 1×WIRELESS_MIC。"""
     import openpyxl
     from avcad.workflow.importers import build_entries
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.append(["设备名称", "品牌", "型号", "数量"])
-    ws.append(["无线双手持麦克风", "IPS", "UM2002", 4])
-    path = tmp_path / "um2002.xlsx"
+    ws.append(["无线单指向话筒", "AUDIX", "AP61 OM2", 4])
+    path = tmp_path / "audix_set.xlsx"
     wb.save(path)
     entries, _ = build_entries(str(path))
     by_cat = {}
@@ -216,7 +216,29 @@ def test_set_expand_splits_receiver_and_transmitters(tmp_path):
         by_cat.setdefault(e["category"], 0)
         by_cat[e["category"]] += int(e.get("quantity", 1) or 1)
     assert by_cat.get("WIRELESS_RX") == 4, by_cat   # 4 套 -> 4 台接收机
-    assert by_cat.get("WIRELESS_MIC") == 8, by_cat  # 4 套 -> 8 支话筒
+    assert by_cat.get("WIRELESS_MIC") == 4, by_cat  # 4 套 -> 4 支话筒
+
+
+def test_ips_set_not_expanded(tmp_path):
+    """IPS 无线话筒套装整体出图、不拆分内部话筒（阳哥 2026-09-01 确认）。
+
+    4 套 UM2002 应只产出 4 台 WIRELESS_RX，**不应**出现 WIRELESS_MIC。
+    """
+    import openpyxl
+    from avcad.workflow.importers import build_entries
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(["设备名称", "品牌", "型号", "数量"])
+    ws.append(["无线双手持麦克风", "IPS", "UM2002", 4])
+    path = tmp_path / "ips_set.xlsx"
+    wb.save(path)
+    entries, _ = build_entries(str(path))
+    by_cat = {}
+    for e in entries:
+        by_cat.setdefault(e["category"], 0)
+        by_cat[e["category"]] += int(e.get("quantity", 1) or 1)
+    assert by_cat.get("WIRELESS_RX") == 4, by_cat   # 4 套 -> 4 台接收机（整体）
+    assert "WIRELESS_MIC" not in by_cat, by_cat     # 不展开内部话筒
 
 
 # ---------------- AUDIX（跨品牌差异） ----------------

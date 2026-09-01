@@ -26089,7 +26089,9 @@
         "set_expand": {
           "rx": 1,
           "tx": 2
-        }
+        },
+        "legend_rev": 1,
+        "synced_at": "2026-09-01T16:18:02+08:00"
       },
       "country": "中国",
       "unit": "套",
