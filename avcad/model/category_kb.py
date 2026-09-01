@@ -76,9 +76,11 @@ KNOWN_MODELS = [
     # —— 补充真实品牌/型号片段（深化识别覆盖，重点覆盖手动添加型号时易漏的品牌） ——
     ("rmio64", "IO"), ("rpio", "IO"), ("atterotech", "IO"),
     ("apart", "SPEAKER"),
+    ("avantis", "MIXER"), ("mg", "MIXER"),
     ("ahm", "PROCESSOR"), ("qsc", "PROCESSOR"), ("symetrix", "PROCESSOR"),
     ("xilica", "PROCESSOR"), ("bss", "PROCESSOR"),
     ("svx", "WIRELESS_RX"), ("ew-d", "WIRELESS_RX"), ("ewd", "WIRELESS_RX"),
+    ("blx", "WIRELESS_RX"),
     ("netgear", "SWITCH"), ("m4250", "SWITCH"),
     ("televic", "MIC_HOST"), ("confidea", "MIC_HOST"),
     ("astro", "SPEAKER_MGR"), ("a3d", "SPEAKER_MGR"),

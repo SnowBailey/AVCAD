@@ -266,6 +266,7 @@ PROCESSOR:
     - 矩阵路由错 → 某区无声或串音。
     - 字时钟(WCLK) BNC 口误标为 IP/网络 → 实为数字音频同步基准，应走 WCLK 信号（AVCAD 已建模）。
   notes: AVCAD 中 PROCESSOR 含 dante/control 特性；与 SPEAKER_MGR 靠 category 严格区分（R13 规则 13）。
+    ★ 处理器/矩阵常带 BNC 口，须按功能归类：字时钟同步=WCLK（接系统时钟主），MADI/AES3 同轴=AES，控制触发/级联=未建模。勿把 BNC 同步口误标成 IP/网络。
 
 SPEAKER_MGR:
   cn: 音箱管理器
@@ -422,6 +423,7 @@ IO:
     - Phantom 误开烧动圈。
     - 字时钟(WCLK) BNC 口误标成 IP / 网络 → 实为数字音频同步基准，应走 WCLK 信号（AVCAD 已建模 WCLK，转换器类如 RMio64-D 的 WCLK 口即此）。
   notes: AVCAD 中 IO 平级化（DIO/SI/DI Box = SIDE 虚拟 stage）：只经 Dante 互通，XLR 按工程单独连，不画 XLR 串联（阳哥规则 11）。转换器常带 Word Clock(BNC) 与主时钟同步，属 WCLK 信号而非 IP。
+    ★ BNC 接口不是一种信号：同是 BNC 接头，语义取决于设备功能——字时钟=WCLK、MADI/AES3 同轴=AES、天线射频=RF、视频 Genlock/中控触发=本系统未建模。见到 BNC 先判它是哪种同步/接口，勿一律当网络(IP)或字时钟。主库 params.bnc 只是「带 BNC 口」的标记（78 条，含 FURMAN 电源时序器触发口、Modulo Pi 视频 Genlock 等），绝不能整批映射成 WCLK。
 
 SWITCH:
   cn: 网络交换机
