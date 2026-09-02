@@ -5556,14 +5556,22 @@
           "count": 1,
           "label": "HOST",
           "air": false
+        },
+        {
+          "signal": "CONF",
+          "role": "in",
+          "side": "left",
+          "count": 1,
+          "label": "CASCADE",
+          "air": false
         }
       ],
       "slots": [],
-      "note": "",
+      "note": "无线会讨天线盒；仅 HOST 接 CF6300 主机 BOX 口，CASCADE 为天线盒间级联",
       "source": "user",
-      "revision": 4,
+      "revision": 5,
       "created_at": "2026-09-01T18:00:07+08:00",
-      "updated_at": "2026-09-01T18:20:58+08:00",
+      "updated_at": "2026-09-02T22:50:00+08:00",
       "history": [
         {
           "revision": 1,

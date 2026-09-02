@@ -17,6 +17,7 @@ import re
 
 from avcad.parse.bom_parser import dump_params
 from avcad.parse.product_resolver import enrich as resolve_products
+from avcad.model.category_kb import identify as kb_identify  # R18：知识库三级识别接入类别兜底
 
 # 非信号设备：机械/结构件，不出系统图
 RIGGING = ["吊架", "飞行架", "桁架"]
@@ -338,7 +339,16 @@ def apply_category_fallback(entries: list):
     for e in entries:
         cat = e.get("category")
         if not cat:
-            cat = classify_category(e.get("name", ""))
+            # ★ R18：知识库三级识别（KNOWN_MODELS 型号片段 + aliases 类别词）优先于
+            # 纯名称关键词兜底。主库/内置库未命中时，名称分类器（CATEGORY_KW）会把
+            # 「音箱管理器」误判成 SPEAKER（因含「音箱」），而知识库按型号片段
+            # driverack/lm26/... 能正确识别为 SPEAKER_MGR。只在 KB 高置信（型号片段
+            # 匹配，conf≥0.8）时采用，模糊类别词（aliases）不覆盖名称分类器，避免双源冲突。
+            kb_r = kb_identify(e.get("brand", ""), e.get("model", ""), e.get("name", ""))
+            if kb_r.get("category") and kb_r.get("confidence", 0) >= 0.8:
+                cat = kb_r["category"]
+            else:
+                cat = classify_category(e.get("name", ""))
             if not cat:
                 # 主库明确后置（配件/线缆/非音频，如充电箱、中继器、主缆）
                 # 且名称也命中不到任何音频类别 -> 与吊架同等处理：排除出图。

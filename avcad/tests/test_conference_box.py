@@ -41,8 +41,11 @@ def _uids_by_model(p, model):
     return {i.uid for i in p.instances if i.model == model}
 
 
-def test_wireless_units_reach_box_over_rf():
-    """4 只无线单元 → 天线盒 RF 进口，信号必须是 RF。"""
+def test_wireless_units_not_wired_to_box():
+    """阳哥 2026-09-02 定：无线话筒不接线（RF 为空中口），单元与天线盒之间无物理线。
+
+    回归：此前曾画「单元 RF → 天线盒 RF」的线，方向/信号都错，已删。
+    """
     p = build_project([_ips("CF6300", "有线无线融合会议主机"),
                        _ips("CF6300WB", "无线会讨天线盒"),
                        _ips("CF6350", "无线数字会议单元", 4)], name="T")
@@ -50,21 +53,14 @@ def test_wireless_units_reach_box_over_rf():
     unit_uids = _uids_by_model(p, "CF6350")
     assert box_uids and len(unit_uids) == 4
 
+    # 无线话筒不接线：单元与天线盒之间不应有任何连线
     rf = [c for c in p.connections
           if c.from_uid in unit_uids and c.to_uid in box_uids]
-    assert len(rf) == 4, f"4 只无线单元应各 1 条 RF 线，实为 {len(rf)}"
-    assert all(c.signal == Signal.RF for c in rf)
-
-    # 落点必须是天线盒的 RF 空中口，不能退化到 DIN/XLR 有线口
+    assert len(rf) == 0, f"无线话筒不连线，不应有单元→天线盒连线，实为 {len(rf)}"
+    # 天线盒端口已精简为只剩 HOST+CASCADE（阳哥：只有 HOST 即可），无 RF 空中口
     box = next(i for i in p.instances if i.model == "CF6300WB")
-    rf_ports = {q.id for q in box.ports if q.signal == Signal.RF}
-    assert rf_ports, "天线盒未建模 RF 空中口"
-    for c in rf:
-        assert c.to_port in rf_ports, f"无线单元落到了非 RF 口：{c.to_port}"
-    for c in rf:
-        src = next(i for i in p.instances if i.uid == c.from_uid)
-        up = next(q for q in src.ports if q.id == c.from_port)
-        assert up.signal == Signal.RF, f"起点不是 RF 口而是 {up.signal}"
+    assert {q.signal for q in box.ports} == {Signal.CONF}, \
+        f"天线盒端口应只有 CONF（HOST+CASCADE），实为 {[q.signal for q in box.ports]}"
 
 
 def test_box_uses_host_box_port_only():
@@ -109,13 +105,10 @@ def test_multiple_boxes_cascade_and_share_units():
     assert len(casc) == 1, f"两台天线盒应有 1 条级联线，实为 {len(casc)}"
 
     unit_uids = _uids_by_model(p, "CF6350")
+    # 阳哥 2026-09-02 定：无线话筒不接线，单元与天线盒之间无物理线
     rf = [c for c in p.connections
           if c.from_uid in unit_uids and c.to_uid in box_uids]
-    assert len(rf) == 6
-    per_box = collections.Counter(c.to_uid for c in rf)
-    # 分摊：不能 6 条全落同一台（历史上是写死 boxes[0]）
-    assert len(per_box) == 2, f"无线单元没有分摊到两台天线盒：{dict(per_box)}"
-    assert max(per_box.values()) <= 3, f"分摊不均：{dict(per_box)}"
+    assert len(rf) == 0, f"无线话筒不连线，不应有单元→天线盒连线，实为 {len(rf)}"
     # 级联口是 CONF（六芯主缆），不是 RF
     assert casc[0].signal == Signal.CONF
 

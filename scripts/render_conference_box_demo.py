@@ -105,31 +105,30 @@ def main():
               "signal": c.signal.value, "note": c.note or ""}
              for c in proj.connections]
 
-    rf = [c for c in conns if c["signal"] == "RF"
-          and "CF6300WB" in c["to"]]
+    rf = [c for c in conns if c["signal"] == "RF"]
     conf = [c for c in conns if c["signal"] == "CONF"]
     to_host = [c for c in conns if "CF6300:" in c["to"] and "CF6300WB" not in c["to"]]
     box_to_host = [c for c in to_host if c["from"].startswith("IPS CF6300WB")]
+    # 天线盒级联：盒→盒 的 CONF 线（CASCADE 级联口，阳哥 2026-09-02 定）
+    box_cascade = [c for c in conf
+                   if c["from"].startswith("IPS CF6300WB")
+                   and c["to"].startswith("IPS CF6300WB")]
 
-    per_box = {}
-    for c in rf:
-        per_box[c["to"]] = per_box.get(c["to"], 0) + 1
-
-    ok_rf = (len(rf) == 6 and len(per_box) == 2
-             and max(per_box.values()) == 3)
+    ok_rf = (len(rf) == 0)  # 无线话筒不接线（RF 为空中口）
     ok_box = len(box_to_host) == 1 and all("BOX" in c["to"] for c in box_to_host)
+    ok_cascade = len(box_cascade) == 1  # 2 台天线盒级联 1 条 CONF
 
     status = [
         f'<span class="badge">设备 {len(proj.instances)}</span>',
         f'<span class="badge">连线 {len(conns)}</span>',
-        f'<span class="badge {"ok" if len(rf) == 6 else "bad"}">'
-        f'RF 无线链路 {len(rf)} 条（6 只单元期望 6 条）</span>',
         f'<span class="badge {"ok" if ok_rf else "bad"}">'
-        f'天线盒分摊 {dict(sorted(per_box.items()))}（期望每台 3 条）</span>',
+        f'RF 无线链路 {len(rf)} 条（无线话筒不接线，期望 0）</span>',
         f'<span class="badge {"ok" if ok_box else "bad"}">'
         f'天线盒→主机 BOX 口 {len(box_to_host)} 条</span>',
+        f'<span class="badge {"ok" if ok_cascade else "bad"}">'
+        f'天线盒级联（盒↔盒） {len(box_cascade)} 条（2 台期望 1 条）</span>',
     ]
-    if not ok_rf or not ok_box:
+    if not ok_rf or not ok_box or not ok_cascade:
         status.append('<span class="badge bad">拓扑异常，见下方明细</span>')
 
     def table(title, rows, extra_col=False):

@@ -110,3 +110,48 @@ def test_module_item_carries_kb_hint():
     assert "kb_hint" in item
     assert item["kb_hint"]["identified"] is True
     assert item["kb_hint"]["cn"] == "话筒主机"
+
+
+def test_normalize_cat_maps_stage_keys():
+    # 内部 stage 键必须归一化到知识库类别码，否则 PROC_PRE→PROCESSOR 等
+    # 配对会被 is_valid_link 误判越界（R19）。
+    assert category_kb.normalize_cat("PROC_PRE") == "PROCESSOR"
+    assert category_kb.normalize_cat("PROC_POST") == "PROCESSOR"
+    assert category_kb.normalize_cat("SIDE") == "IO"
+    assert category_kb.normalize_cat("MIXER") == "MIXER"   # 未知原样返回
+
+
+def test_is_valid_link_known_pairs():
+    # ★ R19 接语义：router.py 的通用配对以 is_valid_link 为权威闸门。
+    #   这些「应当能接」的类别对必须返回 valid=True（含 stage 归一化情形）。
+    valid_pairs = [
+        ("SOURCE", "MIXER"),
+        ("SOURCE", "PROC_PRE"),        # PROC_PRE 归一为 PROCESSOR，SOURCE.downstream 含 PROCESSOR
+        ("PROC_PRE", "MIXER"),         # PROCESSOR 在 MIXER.upstream
+        ("PROC_POST", "SPEAKER_MGR"),  # PROCESSOR.downstream 含 SPEAKER_MGR
+        ("MIC_HOST", "MIXER"),         # MIC_HOST.downstream 含 MIXER
+        ("MIC_HOST", "PROC_PRE"),      # MIC_HOST.downstream 含 PROCESSOR
+        ("SPEAKER_MGR", "AMP"),
+        ("AMP", "SPEAKER"),
+        ("WIRELESS_RX", "MIXER"),
+        ("WIRELESS_RX", "PROC_PRE"),
+        ("ANTENNA", "ANT_COMBINE"),    # ANTENNA.upstream 含 ANT_COMBINE
+        ("SWITCH", "SPEAKER"),         # SWITCH.downstream 含 SPEAKER（Dante 供电箱）
+    ]
+    for a, b in valid_pairs:
+        ok, reason = category_kb.is_valid_link(a, b)
+        assert ok, f"{a}→{b} 应为合法链路，却判越界：{reason}"
+
+
+def test_is_valid_link_invalid_pairs():
+    # 这些「不该直连」的类别对必须返回 valid=False， Gates 才会跳过并告警。
+    invalid_pairs = [
+        ("PROCESSOR", "MIC_HOST"),   # 处理器不反向喂会议主机
+        ("SPEAKER", "AMP"),          # 扬声器是终点，不反向喂功放
+        ("MIXER", "SOURCE"),         # 调音台不反向喂音源
+    ]
+    for a, b in invalid_pairs:
+        ok, reason = category_kb.is_valid_link(a, b)
+        assert not ok, f"{a}→{b} 应为越界链路，却判合法：{reason}"
+        assert "不在 KB 上下游" in reason
+

@@ -5,6 +5,7 @@ from avcad.model.schema import (
     Signal, Redundancy, Connection, DeviceInstance,
     signal_color, signal_layer, signal_ltype, redundancy_scope,
 )
+from avcad.model import category_kb
 from avcad.wires.amp_match import match_speakers_to_amp
 from avcad.topology.chain import PROC_PRE, PROC_POST
 
@@ -408,6 +409,14 @@ def _generic_pair(project, a_devs, b_devs, skip_out_uids=None):
                 # 冗余场景：共享上游设备只向主设备送模拟线，备设备通过 Dante 交换机取信号
                 if td.is_backup and d.redundant_group != td.redundant_group:
                     continue
+                # ★ R19 接语义：以 device_kb.yaml 的上下游为权威闸门。
+                #   这对类别没有上下游关系就跳过，避免画出语义错乱的线
+                #   （如处理器→无线话筒这类反向/越界连接）。
+                ok, reason = category_kb.is_valid_link(d.category, td.category)
+                if not ok:
+                    project.meta.setdefault("kb_warnings", []).append(
+                        f"跳过语义越界连线：{d.name}({d.category})→{td.name}({td.category})：{reason}")
+                    continue
                 role = _role(d, td)
                 project.connections.append(Connection(
                     d.uid, p.id, td.uid, tp.id, sig, role,
@@ -547,6 +556,11 @@ def _orphan_sources_rescue(project, by_stage):
     for d, p in orphans:
         for k, (td, tp) in enumerate(free):
             if tp.signal != p.signal:
+                continue
+            ok, reason = category_kb.is_valid_link(d.category, td.category)
+            if not ok:
+                project.meta.setdefault("kb_warnings", []).append(
+                    f"跳过语义越界连线(救援)：{d.name}({d.category})→{td.name}({td.category})：{reason}")
                 continue
             role = _role(d, td)
             project.connections.append(Connection(
@@ -755,26 +769,9 @@ def _conference_box_link(project, by_stage, conf_units):
             note="六芯主缆→主机"))
         linked.add(box.uid)
 
-    # 无线会议单元：无物理端口，用 UHF 打到天线盒
-    wl = [i for i in project.instances
-          if (getattr(i, "params", None) or {}).get("conf_wireless")]
-    if not wl or not boxes:
-        return linked
-    for idx, u in enumerate(wl):
-        box = boxes[idx % len(boxes)]
-        # ★ 只认 RF 空中口：找不到就跳过，绝不退化到 DIN/XLR 等有线口，
-        #   否则会画出「单元 XLR OUT → 天线盒 RF」这类方向/信号都错的线。
-        rp = next((p for p in box.ports
-                   if p.role == "in" and p.signal == Signal.RF), None)
-        up = next((p for p in u.ports
-                   if p.role == "out" and p.signal == Signal.RF), None)
-        if rp is None or up is None:
-            continue
-        project.connections.append(Connection(
-            u.uid, up.id, box.uid, rp.id, Signal.RF, "primary",
-            note="无线会议单元"))
-        linked.add(u.uid)
-        conf_units.add(u.uid)
+    # ★ 无线话筒/单元不画物理线（阳哥 2026-09-02 定）：RF 为空中接口，
+    #   话筒经无线打到天线盒、天线盒再经无线连接收端，全程无线，图上线。
+    #   此前这里曾画「单元 RF → 天线盒 RF」的线，属方向/信号都错的误连，已删。
     return linked
 
 

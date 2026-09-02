@@ -201,6 +201,25 @@ def test_real_theatre_xlsx_end_to_end():
     assert by_model.get("CF6300WB", 0) > 0
 
 
+def test_kb_link_gate_agrees_with_real_projects():
+    """★ R19 接语义：router.py 通用配对现已以 device_kb.yaml 上下游为权威闸门。
+
+    真实项目里所有被画出的相邻级连线必须都在 KB 关系内，否则闸门会跳过并
+    记 kb_warnings。本测试保证：闸门在真实数据上是 no-op（不丢任何线），
+    即 KB 语义与既有布线规则完全一致——以后谁改了 KB 上下游或布线规则，
+    只要两者漂移，这里立刻报越界告警。
+    """
+    import pytest
+    from avcad.core.build import build_project
+    for path in (REAL_XLSX, THEATRE_XLSX):
+        if not os.path.exists(path):
+            pytest.skip(f"{os.path.basename(path)} 不在本机")
+        entries, _ = build_entries(path)
+        proj = build_project(entries, os.path.basename(path))
+        warns = proj.meta.get("kb_warnings") or []
+        assert not warns, f"{path} 触发 KB 越界告警（语义与布线不一致）：{warns}"
+
+
 def test_build_entries_real_xlsx():
     if not os.path.exists(REAL_XLSX):
         import pytest
@@ -221,6 +240,21 @@ def test_build_entries_real_xlsx():
     assert spk == 28
     # ML210FB 不在条目内
     assert "ML210FB" not in by_model
+
+
+def test_load_sample_xlsx_endpoint():
+    """前端「载入样例清单」（含页面默认）走 /api/load-sample-xlsx，
+    直接把桌面 测试.xlsx 解析成规范化 CSV 回填，而不是内置 SAMPLE_BOM。"""
+    if not os.path.exists(REAL_XLSX):
+        import pytest
+        pytest.skip("真实清单 测试.xlsx 不在本机")
+    from avcad.ui.app import _dispatch
+    res = _dispatch("/api/load-sample-xlsx", "{}")
+    assert not res.get("error"), res.get("error")
+    assert res["csv"].strip().startswith("设备类型,品牌,型号")
+    # 与 build_entries 直出一致：13 条设备 + 排除 1 项吊架
+    assert len(res["csv"].splitlines()) == 14
+    assert any("吊架" in n for n in res["dropped"])
 
 
 def _xlsx(tmp_path, rows):
@@ -317,7 +351,7 @@ def test_ips_discontinued_units_nodraw_and_cf6300wb_antenna(tmp_path):
         ("数字会议单元", "IPS", "CF6110L", 2),       # CF61  主机停产
         ("数字会议单元", "IPS", "CF6310", 4),        # CF63  在产 -> 保留
         ("鹅颈数字会议单元", "IPS", "CF6319L", 4),    # CF63  在产 -> 保留
-        ("无线会讨天线盒", "IPS", "CF6300WB", 1),     # -> ANTENNA
+        ("无线会讨天线盒", "IPS", "CF6300WB", 1),     # -> ANTENNA（无线天线盒：只画 HOST 连 CF6300）
         ("有线无线融合会议主机", "IPS", "CF6300", 1),  # -> MIC_HOST
     ])
     entries, _ = build_entries(path)

@@ -130,7 +130,9 @@ MANUAL_CAT = {
     ("YAMAHA", "RY16-AE"): "IO",
     # IPS 手拉手会议主机/天线板：按音频 I/O 出图
     ("IPS", "CF6300"): "IO",
-    ("IPS", "CF6300WB"): "IO",
+    # IPS CF6300WB 无线天线盒：只画 HOST(CONF) 连 CF6300 会议主机 BOX 口，
+    # 无线话筒不接线（RF 为空中口）。category 归 ANTENNA（R17 错归 MIC_HOST，已回退）。
+    ("IPS", "CF6300WB"): "ANTENNA",
     # IPS UM2000ASD：位于天线与 UM2000ATD(十通道分配器)之间，
     # 把两路天线 RF 合成为一路 -> 天线信号合路器（Combiner），非分配器
     ("IPS", "UM2000ASD"): "ANT_COMBINE",
@@ -194,17 +196,16 @@ MANUAL_PARAMS = {
             {"name": "MIX", "side": "right", "signal": "XLR", "role": "out", "label": "MIX", "count": 1},
         ],
         note="手拉手会议主机；4×凤凰端子分区输出 + 1×XLR MIX 输出"),
-    # IPS CF6300WB 无线会讨天线板：4×6P_DIN 音频输入 + 1×XLR 输入；通信口 NET/UPDATE/RS485/RS232
+    # IPS CF6300WB 无线会讨天线盒（ANTENNA）：阳哥 2026-09-02 定「只有 HOST 即可」。
+    #   端口精简为 HOST(CONF out, 接 CF6300 主机 BOX 口) + CASCADE(CONF in, 多台级联)；
+    #   DIN/XLR/NET/UPDATE/RS/RF 等管理口与空中口均不画物理线（无线话筒经 RF 空中口、
+    #   不连线）。CASCADE 与 HOST 同为 CONF 会讨总线，仅命名区分方向，避免端口 id 冲突。
     ("IPS", "CF6300WB"): dict(
         ports_override=[
-            {"name": "DIN", "side": "left", "signal": "XLR", "role": "in", "label": "DIN", "count": 4},
-            {"name": "XLR", "side": "left", "signal": "XLR", "role": "in", "label": "IN", "count": 1},
-            {"name": "NET", "side": "top", "signal": "IP", "role": "in", "label": "NET", "count": 1},
-            {"name": "UPDATE", "side": "top", "signal": "GPIO", "role": "in", "label": "UPDATE", "count": 1},
-            {"name": "RS485", "side": "top", "signal": "RS232", "role": "in", "label": "RS485", "count": 1},
-            {"name": "RS232", "side": "top", "signal": "RS232", "role": "in", "label": "RS232", "count": 1},
+            {"name": "HOST", "side": "right", "signal": "CONF", "role": "out", "label": "HOST", "count": 1},
+            {"name": "CASCADE", "side": "left", "signal": "CONF", "role": "in", "label": "CASCADE", "count": 1},
         ],
-        note="无线会讨天线板；4×6P_DIN IN + 1×XLR IN；NET/UPDATE/RS485/RS232"),
+        note="无线会讨天线盒：HOST 接主机 BOX 口，多台经 CASCADE 级联；无线话筒不接线"),
     # EZACOUSTICS RDD12 双路 Dante 接口主备：2×DANTE in(top, 主备) + 12×XLR out(right)
     ("EZACOUSTICS", "RDD12"): dict(
         ports_override=[

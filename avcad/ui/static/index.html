@@ -835,7 +835,18 @@ async function doParse(){
   }
 }
 $("btnParse").addEventListener("click", doParse);
-$("btnSample").addEventListener("click", ()=>{ $("bom").value = SAMPLE_BOM; toast("已载入样例清单"); });
+$("btnSample").addEventListener("click", async ()=>{
+  try{
+    const res = await api("/api/load-sample-xlsx", {});
+    if(res.error){ toast("载入样例失败：" + res.error); return; }
+    $("bom").value = res.csv;
+    let msg = res.notes[0] || "已载入样例清单";
+    if(res.dropped && res.dropped.length){ msg += `，已排除 ${res.dropped.length} 项`; }
+    toast(msg);
+  }catch(e){
+    toast("载入样例失败：" + (e && e.message ? e.message : String(e)));
+  }
+});
 $("btnClear").addEventListener("click", ()=>{ $("bom").value = ""; });
 $("btnReimport").addEventListener("click", ()=>{
   /* 仅切回导入操作区，已解析的数据保留（第②步之后的流程不受影响） */
@@ -1621,8 +1632,15 @@ $("btnExport").addEventListener("click", async ()=>{
 })();
 
 /* ==================== 初始化 ==================== */
-$("bom").value = SAMPLE_BOM;      // 打开即带样例，可直接点「解析清单」
-updateStep1Summary();
+// 默认载入桌面测试.xlsx；后端不可用（直接双击打开）时退回内置样例
+(async ()=>{
+  try{
+    const res = await api("/api/load-sample-xlsx", {});
+    if(!res.error && res.csv){ $("bom").value = res.csv; }
+    else { $("bom").value = SAMPLE_BOM; }
+  }catch(e){ $("bom").value = SAMPLE_BOM; }
+  updateStep1Summary();
+})();
 goto(1);
 </script>
 </body>

@@ -36,8 +36,8 @@ KNOWN_MODELS = [
     ("ua844", "ANT_DIST"), ("ua845", "ANT_DIST"), ("ua84", "ANT_DIST"),
     ("ads48", "ANT_DIST"), ("ads", "ANT_DIST"),
     # —— 天线（空中换能）——
-    ("cf6300wb", "ANTENNA"),
     ("ha-", "ANTENNA"), ("a2003", "ANTENNA"), ("atw-a", "ANTENNA"),
+    ("cf6300wb", "ANTENNA"),  # 无线天线盒：只画 HOST(CONF) 连 CF6300 会议主机，无线不接线
     # —— 会议主机（手拉手/同传）——
     ("cf6300", "MIC_HOST"),
     ("hcs-", "MIC_HOST"), ("ccs-", "MIC_HOST"), ("taiden", "MIC_HOST"),
@@ -199,6 +199,52 @@ def usage_hint(brand: str = "", model: str = "", extra: str = "") -> dict:
         "suggest": r["suggest"],
         "identified": True,
     }
+
+
+# 内部 stage 键 → 知识库类别码 的归一化。
+# build_chain/assign_stages 用 PROC_PRE/PROC_POST 区分处理器前后置，
+# 用 SIDE 表示 IO 接口箱（与调音台/处理器平级），用 SWITCH 表示交换机侧层；
+# 而 device_kb.yaml 只认 PROCESSOR / IO / SWITCH 这几个类别码。
+# 接语义（R19）时，判断上下游关系必须先归一化，否则 PROC_PRE→PROCESSOR 等
+# 配对会被误判为「越界」。
+_STAGE_TO_CAT = {
+    "PROC_PRE": "PROCESSOR",
+    "PROC_POST": "PROCESSOR",
+    "SIDE": "IO",
+}
+
+
+def normalize_cat(cat: str) -> str:
+    """把内部 stage 键归一化到知识库类别码（未知原样返回）。"""
+    return _STAGE_TO_CAT.get(cat, cat)
+
+
+def is_valid_link(from_cat: str, to_cat: str):
+    """判断「类别 A 的输出能否接到类别 B 的输入」是否符合知识库语义。
+
+    权威依据：device_kb.yaml 中每类的 ``downstream``（A 喂给谁）与
+    ``upstream``（B 由谁喂）。任一方向成立即合法（对称性处理 A/B 倒置）。
+
+    返回 ``(valid: bool, reason: str)``。
+    valid=False 表示这对类别在知识库里没有上下游关系——自动布线应跳过，
+    并把它记成告警，避免画出「调音台→功放→调音台」这类语义错乱的线。
+
+    用途（R19）：router.py 的通用相邻级配对（_generic_pair / 音源救援）
+    在落线前调用本函数，以 KB 语义为权威闸门；专门的会议/天线/级联/
+    Dante/主备规则不在此列（它们处理的是非相邻或专用拓扑）。
+    """
+    a = normalize_cat(from_cat)
+    b = normalize_cat(to_cat)
+    kb = _load()
+    da = kb.get(a, {}).get("downstream", []) or []
+    ub = kb.get(b, {}).get("upstream", []) or []
+    if b in da:
+        return True, f"{a}→{b} 符合 KB 下游[{','.join(da)}]"
+    if a in ub:
+        return True, f"{a}→{b} 符合 KB 上游[{','.join(ub)}]"
+    return (False,
+            f"{a}→{b} 不在 KB 上下游关系内"
+            f"（{a}.downstream={da or '无'}；{b}.upstream={ub or '无'}）")
 
 
 if __name__ == "__main__":

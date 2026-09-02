@@ -161,6 +161,35 @@ def test_csv_path_resolves_before_fallback(isolate):
         "resolve 与 fallback 的顺序反了")
 
 
+def test_kb_model_fragment_overrides_name_classifier():
+    """★ R18：KB 高置信型号片段必须优先于名称分类器。
+
+    实测事故：``CATEGORY_KW`` 把「音箱管理器」(含「音箱」)误判成 SPEAKER，
+    但设备知识库按型号片段 driverack/lm26/... 识别为 SPEAKER_MGR。R18 把
+    ``category_kb.identify`` 接入 ``apply_category_fallback``，型号片段匹配
+    (conf≥0.8) 直接接管，避免出图把管理器画成发声终点。
+    """
+    from avcad.workflow.importers import apply_category_fallback
+    ents = [{"brand": "dbx", "model": "DriveRackPA2", "name": "音箱管理器",
+             "quantity": 1}]
+    kept, _ = apply_category_fallback(ents)
+    assert kept[0]["category"] == "SPEAKER_MGR", (
+        f"KB 应接管音箱管理器→SPEAKER_MGR，实际 {kept[0]['category']!r}")
+
+
+def test_kb_low_conf_keeps_name_classifier():
+    """R18：KB 低置信(仅 aliases 模糊词)不应覆盖名称分类器，保留原有广覆盖兜底。
+
+    型号无片段命中、名称含「调音台」→ 仍由名称分类器判 MIXER。
+    """
+    from avcad.workflow.importers import apply_category_fallback
+    ents = [{"brand": "Foo", "model": "FOO-TT", "name": "数字调音台",
+             "quantity": 1}]
+    kept, _ = apply_category_fallback(ents)
+    assert kept[0]["category"] == "MIXER", (
+        f"名称分类器应判 MIXER，实际 {kept[0]['category']!r}")
+
+
 def test_api_parse_returns_source(isolate, tmp_path):
     """★ /api/parse 必须把 source 透出去，否则前端拿不到。"""
     isolate([])

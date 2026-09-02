@@ -24498,54 +24498,6 @@
       "params": {
         "ports_override": [
           {
-            "name": "DIN",
-            "side": "left",
-            "signal": "CONF",
-            "role": "in",
-            "label": "DIN",
-            "count": 4
-          },
-          {
-            "name": "XLR",
-            "side": "left",
-            "signal": "XLR",
-            "role": "in",
-            "label": "IN",
-            "count": 1
-          },
-          {
-            "name": "NET",
-            "side": "top",
-            "signal": "IP",
-            "role": "in",
-            "label": "NET",
-            "count": 1
-          },
-          {
-            "name": "UPDATE",
-            "side": "top",
-            "signal": "GPIO",
-            "role": "in",
-            "label": "UPDATE",
-            "count": 1
-          },
-          {
-            "name": "RS485",
-            "side": "top",
-            "signal": "RS232",
-            "role": "in",
-            "label": "RS485",
-            "count": 1
-          },
-          {
-            "name": "RS232",
-            "side": "top",
-            "signal": "RS232",
-            "role": "in",
-            "label": "RS232",
-            "count": 1
-          },
-          {
             "name": "HOST",
             "side": "right",
             "signal": "CONF",
@@ -24554,16 +24506,15 @@
             "count": 1
           },
           {
-            "name": "RF",
-            "side": "top",
-            "signal": "RF",
+            "name": "CASCADE",
+            "side": "left",
+            "signal": "CONF",
             "role": "in",
-            "label": "RF",
-            "count": 1,
-            "air": true
+            "label": "CASCADE",
+            "count": 1
           }
         ],
-        "note": "无线会讨天线板；4×6P_DIN IN + 1×XLR IN；NET/UPDATE/RS485/RS232",
+        "note": "无线会讨天线盒；仅 HOST 接 CF6300 主机 BOX 口，CASCADE 为天线盒间级联（CONF 总线）；无线话筒走 UHF 不画图上线",
         "conf_box": true,
         "host": "CF6300",
         "legend_rev": 4,

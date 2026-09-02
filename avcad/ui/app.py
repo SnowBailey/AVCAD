@@ -431,6 +431,19 @@ def _module_item(m) -> dict:
 
 
 def _dispatch(path, body):
+    if path == "/api/load-sample-xlsx":
+        """载入桌面测试文件作为样例清单，前端「载入样例清单」按钮专用。"""
+        sample_path = "/Users/mac/Desktop/测试.xlsx"
+        if not os.path.exists(sample_path):
+            return {"error": f"样例文件不存在：{sample_path}"}
+        entries, dropped = build_entries(sample_path)
+        csv = to_bom_csv(entries)
+        dropped_names = [d.get("设备名称") or d.get("名称") or "(未命名)" for d in dropped]
+        notes = [f"已从 测试.xlsx 解析 {len(entries)} 个设备条目"]
+        if dropped_names:
+            notes.append(f"已排除非信号设备 {len(dropped_names)} 项：{', '.join(dropped_names)}")
+        return {"csv": csv, "dropped": dropped_names, "notes": notes}
+
     if path == "/api/parse":
         data = json.loads(body or "{}")
         entries, csv, dropped, notes = _decode_upload(data)

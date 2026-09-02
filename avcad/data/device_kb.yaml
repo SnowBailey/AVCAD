@@ -322,7 +322,7 @@ MIC_HOST:
     - 清单含「会议主机/讨论/同传/手拉手/CF63/TAIDEN」，有 CH/BOX/MIX/PHX/HOST 多类口。
     - 型号 IPS CF6300 / 台电 TAIDEN HCS / 博世 CCS / 铁力河。
     - 与 WIRELESS_RX 区别：主机有 CONF 链与音频输出，接收机只有射频+音频。
-  typical_models: [IPS CF6300, TAIDEN HCS-4100, Bosch CCS-900, IPS CF6300WB(天线盒)]
+  typical_models: [IPS CF6300, TAIDEN HCS-4100, Bosch CCS-900]
   pitfalls:
     - BOX 口误接会议单元（历史缺陷：把天线盒链当手拉手链）→ 拓扑错乱。
     - 级联超带载 → 末端单元无声。
