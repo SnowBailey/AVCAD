@@ -181,9 +181,10 @@ CASCADE_OUTS = 2
 def _cascade_outs(dist):
     """取该分配器的级联预留出口数。
 
-    只有明确支持级联的型号才 >0：
+    天线分配器（ANT_DIST）一般均可级联：CASCADE_OUTS 默认 2，
+    型号可在 params 显式覆盖（合路器 UM2000ASD = 0 不级联）：
       - IPS UM2000ATD = 2（官网：「级联端口能够以链式形式连接多套天线分配系统」）
-      - AUDIX ADS48   = 0（官方资料只说「合并 4 套系统」，未提级联）
+      - AUDIX ADS48   = 2（阳哥 2026-09-01 确认：每 2 路输出给下一台输入，可级联）
     """
     try:
         v = int((dist.params or {}).get("cascade_outs", CASCADE_OUTS))

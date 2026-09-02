@@ -8,9 +8,10 @@ params:
   outputs:
     {min: 1, default: 4, label: 输出端口数, unit: "口"}
   # 级联预留出口数：非末台从末尾扣掉这么多口去级联下一台。
-  # 只有明确支持级联的型号才 >0（IPS UM2000ATD = 2；AUDIX ADS48 无级联 = 0）。
+  # 天线分配器（ANT_DIST）一般均可级联，默认 2（阳哥 2026-09-01 确认：
+  # ADS48 每 2 路输出给下一台输入；合路器 UM2000ASD 例外 = 0）。
   cascade_outs:
-    {min: 0, default: 0, label: 级联预留出口, unit: "口"}
+    {min: 0, default: 2, label: 级联预留出口, unit: "口"}
 ports_template:
   - {name: RF_IN, side: left, signal: RF, role: in, count_from: inputs, label: ANT}
   - {name: RF_OUT, side: right, signal: RF, role: out, count_from: outputs, label: OUT}

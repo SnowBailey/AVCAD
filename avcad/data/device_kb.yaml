@@ -164,14 +164,14 @@ ANT_DIST:
     - 输出口数须 ≥ 接收机数；级联口数决定扩展级数。
   identification:
     - 清单含「分配/分路/扩展」，只有射频 BNC 口、无音频口。
-    - 型号 Shure UA844 / IPS UM2000ATD（2 级联口）/ AUDIX ADS48（无级联）。
+    - 型号 Shure UA844 / IPS UM2000ATD（2 级联口）/ AUDIX ADS48（2 级联口）。
     - 区别于 ANT_COMBINE：分配器是「一入多出」，合路器是「多入一出」。
   typical_models: [Shure UA844SWB, IPS UM2000ATD, AUDIX ADS48]
   pitfalls:
     - 级联过深 → 插损大、远端接收机灵敏度下降。
     - 忘记给有源天线供电。
     - 输出口数 < 接收机数 → 部分接收机无天线。
-  notes: AVCAD 中 UM2000ATD cascade_outs=2（可级联），ADS48=0（不级联）；端口由 params 动态生成。
+  notes: AVCAD 中天线分配器（ANT_DIST）一般均可级联：UM2000ATD cascade_outs=2、ADS48 cascade_outs=2（阳哥 2026-09-01 确认每 2 路输出给下一台输入，可级联）；合路器 UM2000ASD 例外 = 0（多入一出，不级联）。级联口数由 params.cascade_outs 动态生成，末台之前从末尾扣 cascade_outs 口级联下一台。
 
 ANT_COMBINE:
   cn: 天线合路器
