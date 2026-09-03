@@ -156,21 +156,28 @@ def _apply_redundancy(es, level):
     if not cats:
         return list(es)
     out = []
+    seen = {}
     for e in es:
         cat = str(e.get("category", "")).upper()
         if cat in cats:
+            # ★ 同类多行必撞车修复：按类别出现序号后缀，保证 uid 唯一。
+            #   此前 p/b 写死 {cat}_MAIN / {cat}_BAK，BOM 里两条同类（如 2 台 MIXER）
+            #   会拿到完全相同的 uid，expand_instance 直接覆盖前一台 → 主备分组与连线
+            #   全指错设备且零报错。序号随类别独立计数，pair 互指仍自洽。
+            idx = seen.get(cat, 0)
+            seen[cat] = idx + 1
             lvl = level.value if isinstance(level, Redundancy) else str(level)
             p = dict(e)
             p["params"] = dict(e.get("params", {}))
             p["features"] = list(e.get("features", []) or [])
             p["quantity"] = 1
             p["redundancy"] = lvl
-            p["uid"] = f"{cat.lower()}_MAIN"
-            p["pair"] = f"{cat.lower()}_BAK"
+            p["uid"] = f"{cat.lower()}_{idx}_MAIN"
+            p["pair"] = f"{cat.lower()}_{idx}_BAK"
             b = dict(p)
             b["name"] = (e.get("name") or cat) + "(备)"
-            b["uid"] = f"{cat.lower()}_BAK"
-            b["pair"] = f"{cat.lower()}_MAIN"
+            b["uid"] = f"{cat.lower()}_{idx}_BAK"
+            b["pair"] = f"{cat.lower()}_{idx}_MAIN"
             out += [p, b]
         else:
             out.append(e)

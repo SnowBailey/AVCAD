@@ -5,6 +5,7 @@
 """
 from __future__ import annotations
 from avcad.model.schema import Redundancy
+from avcad.validate.checks import dante_primary_backup_switch_overlap
 
 
 def review_project(proj) -> list:
@@ -26,8 +27,8 @@ def review_project(proj) -> list:
     if has_dante and not has_red:
         out.append(("建议", "系统含 Dante 网络但无主备。关键会议/演出场景建议对调音台或处理器做主备，"
                           "并采用冗余 Dante 双交换机（Primary/Secondary 两网绝不互连）。"))
-    if has_dante and len(proj.switches) == 1 and has_red:
-        out.append(("提示", "已配置主备但仅 1 台 Dante 交换机，存在 SPOF。建议增设备用交换机做冗余 Dante。"))
+    if has_dante and has_red and dante_primary_backup_switch_overlap(proj):
+        out.append(("提示", "主备 Dante 设备共用同一台交换机，存在 SPOF。建议增设备用交换机做冗余 Dante，主备分别接入 Primary/Secondary 两网。"))
     if not has_red and ("MIXER" in cats or "PROCESSOR" in cats):
         out.append(("可选", "若本系统为重要固定安装，可考虑 PROCESSOR_BACKUP / FULL_CHAIN 冗余策略提升可用性。"))
 
@@ -43,7 +44,8 @@ def review_project(proj) -> list:
 
     # 功放扬声器匹配
     for w in proj.meta.get("amp_warnings", []):
-        out.append(("建议", f"功放匹配：{w}。建议调整扬声器分组或功放通道阻抗/功率配置。"))
+        msg = w[2] if isinstance(w, tuple) and len(w) == 3 else str(w)
+        out.append(("建议", f"功放匹配：{msg}。建议调整扬声器分组或功放通道阻抗/功率配置。"))
 
     # 余量提示
     spare = [i for i in infos if i.code == "UNMET_IN"]

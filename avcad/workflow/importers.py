@@ -206,6 +206,33 @@ def is_section_heading(row: dict) -> bool:
             and _empty(row.get("数量")))
 
 
+def is_header_row(row: dict) -> bool:
+    """表头残留行判定：清单偶发把表头行当成数据行混入。
+
+    真实客户清单（如菏泽曹州古城广场演出系统）里，表头行会被重复粘贴到
+    数据区，表现为：品牌列=「品牌」、型号列=「型号\\nmodel number」、甚至
+    设备名称列=「设备名称」。这类行的**品牌/型号恰好等于 ``HEADER_ALIASES``
+    里的表头别名**，据此识别并排除。
+
+    ★ 不修的后果（实测）：幽灵行被 ``build_entries`` 解析成一台默认端口模板的
+    设备（如 MIXER），其输出会挤占下游端口，把清单里**真实的第二台同型号设备**
+    挤成孤立节点（菏泽：第二台 QU-16 因此孤立）。真实设备绝不会用「品牌/型号」
+    当自己的品牌型号，故本判定零误杀。
+    """
+    def _norm(v):
+        return str(v or "").strip().lower()
+    brand = _norm(row.get("品牌") or row.get("brand"))
+    model = _norm(row.get("型号") or row.get("model"))
+    name = _norm(row.get("设备名称") or row.get("名称") or row.get("name"))
+    if brand in set(HEADER_ALIASES["品牌"]):
+        return True
+    if model in set(HEADER_ALIASES["型号"]):
+        return True
+    if name in set(HEADER_ALIASES["设备名称"]):
+        return True
+    return False
+
+
 def _normalize_header(header) -> dict:
     """返回 {原始列下标: 标准列名}；无法识别的列忽略。"""
     m = {}
@@ -364,7 +391,7 @@ def apply_category_fallback(entries: list):
 
 
 def build_entries(path: str, sheet=None):
-    """读 xlsx -> 规范化条目（已排除吊架/占位项/不出图型号）。返回 (entries, dropped_rows)。
+    """读 xlsx -> 规范化条目（已排除吊架/占位项/表头残留行/不出图型号）。返回 (entries, dropped_rows)。
 
     sheet 为 None 时合并全部有效配置 sheet（多房间 / 多方案清单）；指定时只读该表。
 
@@ -380,6 +407,11 @@ def build_entries(path: str, sheet=None):
             continue
         # 占位项（无品牌无型号的「自配 / 按需保留」等）：直接排除，不进第②步
         if is_placeholder(name, r):
+            dropped.append(r)
+            continue
+        # 表头残留行：品牌/型号列正好是表头别名（「品牌」/「型号\nmodel number」），
+        # 被误当数据行混入。排除掉，否则会生成幽灵设备挤占下游端口（菏泽曹州古城）。
+        if is_header_row(r):
             dropped.append(r)
             continue
         # 分组标题行：清单常用「扬声器系统」「处理及周边设备」「3F会议室」

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<html lang="zh-CN" data-page-node-id="eocrHzEXLw30ZFfNIMfF16">
+<head data-page-node-id="b0DfATSs1GrALWE8Xdlcjm">
+<meta charset="utf-8" data-page-node-id="7qBYeBAeIv3OsExpHsoCc2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="Q75ZuzuwSC757CzSymDfqG"/>
 <title>AVCAD · 图例库校正</title>
 <style>
 /* ============================================================
@@ -229,41 +229,119 @@ input.inp-mini[id^=model_input_]{width:150px;font-weight:600}
 .auto-sync.has{border-color:rgba(168,85,247,.5);color:var(--acc2);background:rgba(168,85,247,.07)}
 .auto-sync .n{color:var(--txt);font-weight:600}
 .auto-sync .d{color:var(--mut);font-weight:400}
+
+/* ============================================================
+   资料查询：右侧浮动按钮 + 抽屉（汇总音频知识，可模糊搜索）
+   与整页深空 / 霓虹主题同源
+   ============================================================ */
+.kb-fab{position:fixed;right:0;top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;padding:16px 9px;border-radius:12px 0 0 12px;
+  background:linear-gradient(180deg,rgba(0,229,255,.20),rgba(168,85,247,.20));
+  border:1px solid var(--line-strong);border-right:none;color:var(--txt);
+  font-size:12.5px;letter-spacing:.22em;font-weight:600;cursor:pointer;z-index:80;
+  backdrop-filter:blur(8px);box-shadow:var(--shadow-card);
+  display:flex;flex-direction:column;align-items:center;gap:7px}
+.kb-fab:hover{border-color:var(--acc);color:#fff}
+.kb-fab .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);
+  box-shadow:0 0 8px var(--acc)}
+.kb-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:84;
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+.kb-backdrop.show{opacity:1;pointer-events:auto}
+.kb-drawer{position:fixed;top:0;right:0;height:100vh;width:400px;max-width:92vw;
+  background:rgba(6,9,18,.97);border-left:1px solid var(--line-strong);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  z-index:85;display:flex;flex-direction:column;box-shadow:-30px 0 80px -40px #000}
+.kb-drawer.open{transform:translateX(0)}
+.kb-head{position:relative;padding:16px 16px 10px;border-bottom:1px solid var(--line)}
+.kb-head h2{margin:0;font-size:15px;font-weight:700;letter-spacing:.08em;
+  background:linear-gradient(92deg,#9beeff,#d9b6ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.kb-head .sub2{color:var(--mut);font-size:11px;margin-top:3px;letter-spacing:.03em}
+.kb-close{position:absolute;top:12px;right:12px;width:28px;height:28px;
+  border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--mut);cursor:pointer;font-size:16px;line-height:1}
+.kb-close:hover{border-color:var(--acc);color:#fff}
+.kb-search{padding:10px 16px 6px}
+.kb-search input{width:100%;height:34px;font-size:13px;padding:0 12px;
+  background:rgba(6,9,18,.7);color:var(--txt);border:1px solid var(--line);
+  border-radius:10px;outline:none;font-family:inherit}
+.kb-search input:focus{border-color:var(--acc)}
+.kb-chips{display:flex;gap:6px;flex-wrap:wrap;padding:6px 16px 10px}
+.kb-chip{padding:4px 11px;border-radius:999px;border:1px solid var(--line);
+  font-size:11.5px;color:var(--mut);cursor:pointer;user-select:none;background:rgba(255,255,255,.03)}
+.kb-chip.on{background:rgba(0,229,255,.14);border-color:var(--acc);color:var(--acc)}
+.kb-list{flex:1;overflow-y:auto;padding:6px 14px 24px}
+.kb-cat{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+  margin:12px 2px 4px}
+.kb-item{border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  margin-bottom:8px;background:var(--panel2);cursor:pointer;transition:border-color .2s}
+.kb-item:hover{border-color:var(--line-strong)}
+.kb-item .t{font-size:13px;font-weight:600;color:var(--txt);
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.kb-item .lv{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:999px;letter-spacing:.04em}
+.kb-item .lv.ERROR{color:var(--err);border:1px solid rgba(255,90,110,.5);background:rgba(255,90,110,.08)}
+.kb-item .lv.WARN{color:var(--warn);border:1px solid rgba(240,180,95,.5);background:rgba(240,180,95,.08)}
+.kb-item .lv.INFO{color:var(--acc);border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.07)}
+.kb-item .tags{margin-top:5px;display:flex;gap:5px;flex-wrap:wrap}
+.kb-item .tag{font-size:10px;color:var(--mut);background:rgba(255,255,255,.04);
+  border:1px solid var(--line);padding:1px 7px;border-radius:6px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.kb-item .sum{margin-top:6px;font-size:12px;color:#9fb3c8;line-height:1.5}
+.kb-item .det{margin-top:8px;font-size:12px;color:var(--mut);line-height:1.65;
+  border-top:1px dashed var(--line);padding-top:8px;display:none}
+.kb-item.open .det{display:block}
+.kb-empty{color:var(--mut);text-align:center;padding:30px;font-size:12.5px;letter-spacing:.03em}
 </style>
 </head>
-<body>
-<h1>图例库校正 · AVCAD@Bailey@EZPRO</h1>
-<div class="sub" id="meta">加载中…</div>
+<body data-page-node-id="j5fHQslOLZa5zxSzIMPDho">
+<h1 data-page-node-id="ZIXMlZdR60mZGAfTGJjiiC">图例库校正 · AVCAD@Bailey@EZPRO</h1>
+<div class="sub" id="meta" data-page-node-id="Dhe0FJrm3rYnE6iKrRGxpn">加载中…</div>
 
-<div class="banner" id="banner">
-  <div class="pane" style="flex:1.3;background:rgba(46,232,160,.05);border-radius:6px">
-    <div class="hd" style="color:var(--ok)">▶ 图例库（您正在改 · 落盘）</div>
-    <div>信号 / 方向 / 侧 / 数量 / 类别，落盘 <code id="pathLegend">legend_library.json</code></div>
-    <div style="font-size:11.5px">出图时<b style="color:var(--ok)">优先级最高</b>，整体覆盖引擎推断的端口</div>
+<div class="banner" id="banner" data-page-node-id="6AV5hauFUEPFtjLpPaY6NG">
+  <div class="pane" style="flex:1.3;background:rgba(46,232,160,.05);border-radius:6px" data-page-node-id="ccMxl63GnClXxH2ViDCrwQ">
+    <div class="hd" style="color:var(--ok)" data-page-node-id="tjKG0rlUoeOFH0FcITy74U">▶ 图例库（您正在改 · 落盘）</div>
+    <div data-page-node-id="xUCCqRGAdvXzPJ1DQOVIEL">信号 / 方向 / 侧 / 数量 / 类别，落盘 <code id="pathLegend" data-page-node-id="4PhpYtCjDFFNuOJSOaQF1Y">legend_library.json</code></div>
+    <div style="font-size:11.5px" data-page-node-id="qJXNL41wsYpOPRroPJ6wmn">出图时<b style="color:var(--ok)" data-page-node-id="M5BP0ic2NBSnCkzKyplDub">优先级最高</b>，整体覆盖引擎推断的端口</div>
   </div>
-  <div class="vs">保存后<br>自动反推</div>
-  <div class="pane">
-    <div class="hd">↘ 品牌主库（这里不用改）</div>
-    <div>类别 / 参数 / 特性，<code id="pathMaster">eko_catalog.json</code></div>
-    <div style="font-size:11.5px">程序从厂商资料推导，<b>仅供参考</b>；<br/>改端口后物理端口数会自动反推过去</div>
+  <div class="vs" data-page-node-id="CWlKHJ6TntbB1bSpBB3PaY">保存后<br data-page-node-id="YQlvhTgP8HQjW8tegPpTF5">自动反推</div>
+  <div class="pane" data-page-node-id="kiEdkyYSMLSoPVDpCrgpFE">
+    <div class="hd" data-page-node-id="hNRIPSRcvPe69omCnBaSNY">↘ 品牌主库（这里不用改）</div>
+    <div data-page-node-id="wux9BcvTbMB596FUcmUMwx">类别 / 参数 / 特性，<code id="pathMaster" data-page-node-id="9aSPbN2rm6o1LlpVEgeedR">eko_catalog.json</code></div>
+    <div style="font-size:11.5px" data-page-node-id="BPb8I0pGZrOZU8G8YNoKtZ">程序从厂商资料推导，<b data-page-node-id="6ky7YKkwUO02E4SiKhxwtd">仅供参考</b>；<br data-page-node-id="L98nMmWScwYIrdgMF5hsFP"/>改端口后物理端口数会自动反推过去</div>
   </div>
 </div>
 
-<div class="bar">
-  <label>品牌
-    <select id="brand"></select>
+<div class="bar" data-page-node-id="qGuCJseOwA2ASD4byxTMi0">
+  <label data-page-node-id="ZPcrX8We8ngc48qM8OOUz0">品牌
+    <select id="brand" data-page-node-id="Xb7gsai5Ux32muoWvc3KBq"></select>
   </label>
-  <label class="grow">搜索
-    <input type="text" id="q" placeholder="型号或名称关键词"/>
+  <label class="grow" data-page-node-id="qHckbumyv4qz3bvxDsgJd6">搜索
+    <input type="text" id="q" placeholder="型号或名称关键词" data-page-node-id="5zy5o140MYgbjMa3i9aMy7"/>
   </label>
-  <span class="feat" id="fMissing">只看未确认</span>
-  <span class="feat" id="btnAdd" title="配单里出现主库没有的型号时，在这里手工给它建一条图例">+ 手工添加型号</span>
-  <span class="count" id="count"></span>
+  <span class="feat" id="fMissing" data-page-node-id="UCvQrL7xyZlyoRCxWabSuY">只看未确认</span>
+  <span class="feat" id="btnAdd" title="配单里出现主库没有的型号时，在这里手工给它建一条图例" data-page-node-id="z9iHIlYOAELZo4nhD0dZyB">+ 手工添加型号</span>
+  <span class="count" id="count" data-page-node-id="P5EOU6VQJbZ2T7L4QleNrM"></span>
 </div>
 
-<div id="list"></div>
+<div id="list" data-page-node-id="r9qdMVjFwz9iugEEvZfCmX"></div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" data-page-node-id="l1Z14e4uEkKwABx2ruLrlW"></div>
+
+<!-- 资料查询：右侧浮动按钮 + 抽屉（汇总音频知识，可模糊搜索） -->
+<button class="kb-fab" id="kbFab" title="音频知识库：信号 / 概念 / 常见坑 / 校验码速查" data-page-node-id="nMA0B8uDuoEeCIks8cWF3q"><span class="dot" data-page-node-id="sks66AkldjiHMXCbLFo7Jz"></span>资料查询</button>
+<div class="kb-backdrop" id="kbBackdrop" data-page-node-id="C9kS1FsnFeNZbcP4NkrxL1"></div>
+<aside class="kb-drawer" id="kbDrawer" aria-hidden="true" data-page-node-id="bx9GTEo8hnhzdMEgixq19k">
+  <div class="kb-head" data-page-node-id="YHFWTLXhq4RtlJkKGf6BE0">
+    <button class="kb-close" id="kbClose" title="关闭" data-page-node-id="GHQFsRtX7TOLEawOhnDFuv">×</button>
+    <h2 data-page-node-id="0PGxsiAWIXlN5zrNpKzDj7">资料查询</h2>
+    <div class="sub2" id="kbMeta" data-page-node-id="SYHyrzUfBRCqrZLq3cDHfk">音频知识库 · 加载中…</div>
+  </div>
+  <div class="kb-search" data-page-node-id="vuTq9yUVmCWMjVMp8tNTFu">
+    <input type="text" id="kbQ" placeholder="搜索：幻象 / 定压 / AEC / DANTE / 分频 / 电平 …" data-page-node-id="L3gSiIDxjKxTQoj6JYjVEM"/>
+  </div>
+  <div class="kb-chips" id="kbChips" data-page-node-id="dTBE1jM8hkKlyMZewuUc1B"></div>
+  <div class="kb-list" id="kbList" data-page-node-id="coWk1bcEc62wmDWZGZpHAg"></div>
+</aside>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -662,6 +740,108 @@ $("btnAdd").addEventListener("click", ()=>{
   const mi = $("model_input_0"); if(mi) mi.focus();
   toast("已插入一条空白图例：填品牌 / 型号 / 类别，加端口后保存", "ok");
 });
+
+/* ============================================================
+   资料查询抽屉：加载音频知识库 + 分类筛选 + 模糊搜索
+   ============================================================ */
+const KB = { data:null, loaded:false, filter:"all", q:"" };
+
+async function kbLoad(){
+  if(KB.loaded){ return; }
+  try{
+    const r = await api("/api/kb");
+    KB.data = r; KB.loaded = true;
+    const n = (r.entries || []).length;
+    $("kbMeta").textContent = (r.title || "音频知识库") + " · 共 " + n + " 条";
+    const cats = [{id:"all", name:"全部"}].concat(r.categories || []);
+    $("kbChips").innerHTML = cats.map(c =>
+      `<span class="kb-chip${c.id==="all"?" on":""}" data-cat="${esc(c.id)}">${esc(c.name)}</span>`).join("");
+    $("kbChips").querySelectorAll(".kb-chip").forEach(ch=>{
+      ch.addEventListener("click", ()=>{
+        KB.filter = ch.dataset.cat;
+        $("kbChips").querySelectorAll(".kb-chip").forEach(x=>x.classList.remove("on"));
+        ch.classList.add("on"); kbRender();
+      });
+    });
+  }catch(e){
+    $("kbMeta").textContent = "知识库加载失败（/api/kb）";
+  }
+  kbRender();
+}
+
+/* 模糊评分：整串命中 > 分词命中 > 中文逐字（标题+标签）宽松命中 */
+function kbScore(e, q){
+  const hay = (e.title + " " + (e.tags||[]).join(" ") + " " + e.summary + " " + e.detail).toLowerCase();
+  let s = 0;
+  if(hay.indexOf(q) >= 0) s += 60;
+  q.split(/\s+/).filter(Boolean).forEach(tok=>{ if(hay.indexOf(tok) >= 0) s += 20; });
+  const head = (e.title + " " + (e.tags||[]).join(" ")).toLowerCase();
+  for(const ch of q){ if(ch.trim() && head.indexOf(ch) >= 0) s += 3; }
+  return s;
+}
+
+function kbItem(e){
+  const d = document.createElement("div");
+  d.className = "kb-item";
+  const lvl = (e.tags || []).find(t => t === "ERROR" || t === "WARN" || t === "INFO");
+  const lvlHtml = lvl ? ` <span class="lv ${lvl}">${lvl}</span>` : "";
+  d.innerHTML =
+    '<div class="t">' + esc(e.title) + lvlHtml + '</div>' +
+    '<div class="tags">' + (e.tags||[]).slice(0,8).map(t =>
+      '<span class="tag">' + esc(t) + '</span>').join("") + '</div>' +
+    '<div class="sum">' + esc(e.summary) + '</div>' +
+    '<div class="det">' + esc(e.detail) + '</div>';
+  d.addEventListener("click", ()=> d.classList.toggle("open"));
+  return d;
+}
+
+function kbRender(){
+  const box = $("kbList");
+  if(!KB.data){ box.innerHTML = '<div class="kb-empty">未加载</div>'; return; }
+  const q = (KB.q || "").trim().toLowerCase();
+  let items = (KB.data.entries || []).filter(e => KB.filter === "all" || e.cat === KB.filter);
+  if(q){
+    items = items.map(e => ({e, s: kbScore(e, q)})).filter(x => x.s > 0)
+                 .sort((a,b)=> b.s - a.s).map(x => x.e);
+  }
+  if(!items.length){ box.innerHTML = '<div class="kb-empty">没有匹配的知识，换个关键词试试</div>'; return; }
+  box.innerHTML = "";
+  if(!q && KB.filter !== "all"){
+    items.forEach(e => box.appendChild(kbItem(e))); return;
+  }
+  if(!q && KB.filter === "all"){
+    const byCat = {}; (KB.data.categories || []).forEach(c => byCat[c.id] = c.name);
+    let last = null;
+    items.forEach(e=>{
+      const cn = byCat[e.cat] || e.cat;
+      if(cn !== last){
+        const h = document.createElement("div"); h.className = "kb-cat"; h.textContent = cn;
+        box.appendChild(h); last = cn;
+      }
+      box.appendChild(kbItem(e));
+    });
+    return;
+  }
+  items.forEach(e => box.appendChild(kbItem(e)));
+}
+
+function kbClose(){
+  $("kbDrawer").classList.remove("open");
+  $("kbBackdrop").classList.remove("show");
+  $("kbDrawer").setAttribute("aria-hidden", "true");
+}
+
+$("kbFab").addEventListener("click", ()=>{
+  $("kbDrawer").classList.add("open");
+  $("kbBackdrop").classList.add("show");
+  $("kbDrawer").setAttribute("aria-hidden", "false");
+  kbLoad();
+  setTimeout(()=>{ try{ $("kbQ").focus(); }catch(_){} }, 280);
+});
+$("kbClose").addEventListener("click", kbClose);
+$("kbBackdrop").addEventListener("click", kbClose);
+$("kbQ").addEventListener("input", ()=>{ KB.q = $("kbQ").value; kbRender(); });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape") kbClose(); });
 
 (async ()=>{ await loadMeta(); await loadItems(); })();
 </script>

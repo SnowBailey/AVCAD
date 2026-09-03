@@ -31,6 +31,10 @@ def connect(project):
     by_stage = defaultdict(list)
     for i in instances:
         by_stage[i.stage].append(i)
+    # 输入口占用表：(to_uid, to_port) → 占用标签。所有「向输入口落线」的助手都经
+    # _claim_input 占用，从源头拦截「两个不同信号源接入同一输入口」的物理不可能
+    # （_dedup 只按完整 from/to 元组去重，抓不到「不同源 → 同一输入口」）。
+    project._used_in = {}
 
     # 0) 会讨手拉手优先：会议单元串到主机后，由主机统一汇出，
     #    不再走 SOURCE 的星型配对（否则会画成「每台话筒直连处理器」）。
@@ -165,13 +169,15 @@ def _connect_mic_host(project, host, by_stage):
     if target_dev is None:
         return
 
-    # 取目标的第一个空闲 XLR in
+    # 取目标第一个**空闲** XLR in：相邻级通用配对可能已占用前面的输入口
+    # （如 1F 拓扑 GMN1208D 已占 QU-16 的 IN1~IN4），必须顺延到下一个空闲口，
+    # 否则 _claim_input 拦截双源后会整体放弃连接、被孤立救援错接成 PHX→处理器。
     for p in target_dev.ports:
         if p.role == "in" and p.signal == Signal.XLR and not p.air:
-            project.connections.append(Connection(
-                host.uid, out_port.id, target_dev.uid, p.id, Signal.XLR,
-                "primary", note="会议主机 MIX→核心级"))
-            return
+            if _claim_input(project, Connection(
+                    host.uid, out_port.id, target_dev.uid, p.id, Signal.XLR,
+                    "primary", note="会议主机 MIX→核心级")):
+                return
 
 
 # ---- 无线天线链路（真分集 + 天线分配器级联） ----
@@ -315,15 +321,20 @@ def _antenna_distribution(project, by_stage):
         while pending and i < len(usable):
             rx = pending[0]
             rins = _rf_ports([rx], "in")
-            pending.pop(0)
             if not rins:
                 # 接收机未建模 RF 天线口（主库 ports_override 缺省或纯数字接口），
                 # 无法接分配器——跳过而不是硬凑 1 口（否则 rins[k] 越界崩溃）。
+                # 必须先 pop 再跳过，否则会卡死在 while 里反复处理同一台。
+                pending.pop(0)
                 no_rf_port.add(rx.uid)
                 continue
             need = len(rins)
             if i + need > len(usable):
-                break          # 本台剩余出口不够，交给下一台分配器
+                # 本台剩余出口不够这台接收机：留在 pending 交给下一台分配器。
+                # 关键：绝不能先 pop 再 break——否则这台接收机会从 pending 消失，
+                # 既不连线、也不触发末尾「出口不足」告警，静默丢失（S1 修复）。
+                break
+            pending.pop(0)
             for k, (sd, sp) in enumerate(usable[i:i + need]):
                 td, tp = rins[k]
                 project.connections.append(Connection(
@@ -377,6 +388,25 @@ def _dedup(project):
     project.connections = uniq
 
 
+def _claim_input(project, conn):
+    """占用目标输入口后追加连线；同一输入口被第二个信号源占用时跳过并告警。
+
+    双源冲突（两个不同信号源接入同一设备输入口）在物理上不可行，且 ``_dedup``
+    仅按完整 from/to 元组去重，抓不到「不同源 → 同一输入口」，所以这里用全局
+    输入口占用表在落线源头拦截（覆盖 _generic_pair / _connect_mic_host / _failover）。
+    """
+    key = (conn.to_uid, conn.to_port)
+    prev = project._used_in.get(key)
+    if prev is not None:
+        project.meta.setdefault("double_source_warnings", []).append(
+            f"输入口双源冲突：{conn.to_uid}:{conn.to_port} 已接 {prev}，"
+            f"{conn.from_uid}:{conn.from_port}({conn.signal}) 接入被跳过")
+        return False
+    project._used_in[key] = f"{conn.from_uid}:{conn.from_port}({conn.signal})"
+    project.connections.append(conn)
+    return True
+
+
 def _generic_pair(project, a_devs, b_devs, skip_out_uids=None):
     """通用相邻级配对：A 的出口按信号类型依次连 B 的进口。
 
@@ -418,7 +448,7 @@ def _generic_pair(project, a_devs, b_devs, skip_out_uids=None):
                         f"跳过语义越界连线：{d.name}({d.category})→{td.name}({td.category})：{reason}")
                     continue
                 role = _role(d, td)
-                project.connections.append(Connection(
+                _claim_input(project, Connection(
                     d.uid, p.id, td.uid, tp.id, sig, role,
                     note="" if role == "primary" else "备路径",
                 ))
@@ -456,7 +486,7 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
         for amp, grp in zip(amps, buckets):
             res = match_speakers_to_amp(amp, grp)
             spk_by_uid = {s.uid: s for s in grp}
-            for ci, suids, mode, total, ok, note in res:
+            for ci, suids, mode, total, ok, note, power_ok in res:
                 if not suids:
                     continue
                 amp_port = _channel_port(amp, ci)
@@ -472,8 +502,21 @@ def _handle_speakers(project, by_stage, amp_stage, spk_stage):
                                    Signal.SPEAKER, role, note=f"{mode} {total}Ω")
                     project.connections.append(c)
                     if not ok:
+                        # A 批前置改造：计算层直出 (level, code, msg) 三元组，
+                        # 不再把定级推给校验层用中文子串嗅探（findings/37 §4.1）。
                         project.meta.setdefault("amp_warnings", []).append(
-                            f"功放{amp.name}通道{ci+1}: {note}")
+                            ("ERROR", "IMPEDANCE",
+                             f"功放{amp.name}通道{ci+1}: {note}"))
+                    if not power_ok:
+                        # AMP_ 功率裕量不足：advisory WARN，不阻断出图。
+                        # 此前只塞进 note 字符串、随阻抗 ERROR 文案一起被吞掉，
+                        # 正常阻抗（ok=True）下则彻底无从报出 —— 现独立成码。
+                        sp_power = sum(s.params.get("power_w", 200) for s in grp)
+                        amp_power = amp.electrical.get("power_w_per_ch", 1000)
+                        project.meta.setdefault("amp_warnings", []).append(
+                            ("WARN", "AMP_UNDERPOWERED",
+                             f"功放{amp.name}通道{ci+1}: 功率裕量不足"
+                             f"(功放{amp_power}W < 扬声器总额定{sp_power}W×1.2)"))
     # 有源：从前一线路级接入。
     # ★ 阳哥规则 2026-08-30：**有源音箱不经过音响管理器**——
     #   自带功放的音箱直接从调音台/处理器取信号，SPEAKER_MGR 只服务
@@ -872,7 +915,7 @@ def _failover(project):
             ap = _first_out(a, Signal.XLR) or _first_out(a, Signal.AES)
             bp = _first_in(b, Signal.XLR) or _first_in(b, Signal.AES)
             if ap and bp:
-                project.connections.append(Connection(
+                _claim_input(project, Connection(
                     a.uid, ap.id, b.uid, bp.id, ap.signal, "backup", note="主备failover"))
 
 

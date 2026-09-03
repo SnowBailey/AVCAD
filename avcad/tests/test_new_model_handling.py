@@ -161,6 +161,23 @@ def test_csv_path_resolves_before_fallback(isolate):
         "resolve 与 fallback 的顺序反了")
 
 
+def test_entry_cache_returns_independent_copies():
+    """★ 缓存命中必须返回独立副本：下游原地改条目不应污染缓存/后续请求。
+
+    回归：_entries_from_bom 命中缓存时原样返回共享列表，run.py / _build_dxf_bytes
+    会原地改条目（redundancy="NONE"、pop("pair")），导致下一次同 BOM 请求拿到被
+    污染的脏状态。修复后命中返回深拷贝。
+    """
+    app._ENTRY_CACHE.clear()
+    csv = ("设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源\n"
+           "IO,,X1,测试设备,1,,,,,\n")
+    a = app._entries_from_bom(csv)
+    b = app._entries_from_bom(csv)
+    assert a is not b, "缓存两次返回了同一对象"
+    a[0]["_probe"] = "mutated"
+    assert "_probe" not in b[0], "缓存返回共享可变列表，调用方改动互相污染"
+
+
 def test_kb_model_fragment_overrides_name_classifier():
     """★ R18：KB 高置信型号片段必须优先于名称分类器。
 

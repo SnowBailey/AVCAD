@@ -23,7 +23,9 @@
 from __future__ import annotations
 
 from avcad.core.build import build_project
-from avcad.model.schema import Signal, Redundancy, normalize_redundancy
+from avcad.model.schema import (Signal, Redundancy, normalize_redundancy,
+                                Project, DeviceInstance, Port, Connection)
+from avcad.validate.checks import validate
 
 
 def _dev(cat, model="X", n=1, **kw):
@@ -295,7 +297,7 @@ def test_single_real_switch_is_cloned_when_level_requires_dual():
         assert bak.model == prim.model and bak.brand == prim.brand
         assert len(bak.ports) == len(prim.ports), "备交换机端口数应与主交换机一致"
         assert bak.is_backup and bak.pair == prim.uid
-        assert not any(i.code == "SPOF" for i in p.issues), \
+        assert not _spofs(p), \
             f"{lvl} 补齐双交换机后不该再有 SPOF 告警：{_spofs(p)}"
 
 
@@ -322,8 +324,232 @@ def test_cloned_backup_switch_actually_carries_traffic():
         "备交换机没接上任何连线，成了孤立节点"
 
 
+def _switch(uid, n_ports=2):
+    """构造一台 Dante 交换机（测试用最小桩）。"""
+    ports = [Port(id=f"s{i}", side="left", signal=Signal.DANTE, label=f"S{i}",
+                  role="in", air=False) for i in range(n_ports)]
+    return DeviceInstance(uid=uid, category="SWITCH", name=uid, model="SW",
+                          ports=ports)
+
+
+def _dante_dev(uid, backup, n_ports=1):
+    """构造一台带 Dante 的调音台（测试用最小桩）。"""
+    ports = [Port(id=f"d{i}", side="left", signal=Signal.DANTE, label=f"D{i}",
+                  role="out", air=False) for i in range(n_ports)]
+    return DeviceInstance(uid=uid, category="MIXER", name=uid, model="TF5",
+                          ports=ports, redundancy=Redundancy.DEVICE_BACKUP,
+                          is_backup=backup)
+
+
+def test_spoF_set_judgment_fires_on_shared_switch():
+    """★ C1 修复：2 台交换机却把主备都接到同一台 → 必须报 SPOF_NET_SHARED_SWITCH。
+    旧逻辑只看「交换机==1 台」会漏掉这种情形（阳哥实证缺陷）。"""
+    sw = _switch("SW1")
+    main = _dante_dev("M1", backup=False)
+    bak = _dante_dev("M2", backup=True)
+    conns = [
+        Connection("M1", "d0", "SW1", "s0", Signal.DANTE, "primary"),
+        Connection("M2", "d0", "SW1", "s1", Signal.DANTE, "backup"),
+    ]
+    proj = Project(instances=[main, bak], switches=[sw], connections=conns)
+    validate(proj)
+    assert any(i.code == "SPOF_NET_SHARED_SWITCH" for i in proj.issues), \
+        f"主备共用交换机未报 SPOF：{_spofs(proj)}"
+
+
+def test_spoF_set_judgment_no_false_positive_when_split():
+    """主备分别接不同交换机 → 不该报 SPOF（集合无交集）。"""
+    sw1, sw2 = _switch("SW1"), _switch("SW2")
+    main = _dante_dev("M1", backup=False)
+    bak = _dante_dev("M2", backup=True)
+    conns = [
+        Connection("M1", "d0", "SW1", "s0", Signal.DANTE, "primary"),
+        Connection("M2", "d0", "SW2", "s0", Signal.DANTE, "backup"),
+    ]
+    proj = Project(instances=[main, bak], switches=[sw1, sw2], connections=conns)
+    validate(proj)
+    assert not any(i.code == "SPOF_NET_SHARED_SWITCH" for i in proj.issues), \
+        f"主备分接不同交换机却误报 SPOF：{_spofs(proj)}"
+
+
 def _spofs(p):
-    return [i.msg for i in p.issues if i.code == "SPOF"]
+    return [i.msg for i in p.issues
+            if i.code in ("SPOF_NET_SHARED_SWITCH", "SPOF_NET_NO_DUAL_SWITCH")]
+
+
+def _audio_dev(uid, cat, out_signals=(), in_signals=(),
+               redundancy=Redundancy.NONE, is_backup=False, pair=None):
+    """构造一台普通音频设备（测试用最小桩，可直接喂给 validate）。"""
+    ports = (
+        [Port(id=f"o{i}", side="right", signal=s, label=f"O{i}", role="out")
+         for i, s in enumerate(out_signals)]
+        + [Port(id=f"i{i}", side="left", signal=s, label=f"I{i}", role="in")
+           for i, s in enumerate(in_signals)]
+    )
+    return DeviceInstance(uid=uid, category=cat, name=uid, model=uid,
+                          ports=ports, redundancy=redundancy,
+                          is_backup=is_backup, pair=pair)
+
+
+def test_spoF_dsp_single_fires_on_chain_processor():
+    """★ 信号链路单点处理器（SOURCE→PROCESSOR→SPEAKER）应报 SPOF_DSP_SINGLE。"""
+    src = _audio_dev("S1", "SOURCE", out_signals=(Signal.XLR,))
+    proc = _audio_dev("P1", "PROCESSOR", out_signals=(Signal.XLR,),
+                      in_signals=(Signal.XLR,))
+    spk = _audio_dev("SP1", "SPEAKER", in_signals=(Signal.XLR,))
+    conns = [
+        Connection("S1", "o0", "P1", "i0", Signal.XLR, "primary"),
+        Connection("P1", "o0", "SP1", "i0", Signal.XLR, "primary"),
+    ]
+    proj = Project(instances=[src, proc, spk], connections=conns)
+    validate(proj)
+    assert any(i.code == "SPOF_DSP_SINGLE" for i in proj.issues), \
+        f"单点处理器未报 SPOF_DSP_SINGLE：{[i.code for i in proj.issues]}"
+
+
+def test_spoF_dsp_single_no_false_positive_when_redundant():
+    """已配 PROCESSOR_BACKUP 的处理器不得报 SPOF_DSP_SINGLE（有备机、且非割点）。"""
+    src = _audio_dev("S1", "SOURCE", out_signals=(Signal.XLR,))
+    p_main = _audio_dev("P1", "PROCESSOR", out_signals=(Signal.XLR,),
+                        in_signals=(Signal.XLR,),
+                        redundancy=Redundancy.PROCESSOR_BACKUP, pair="P2")
+    p_bak = _audio_dev("P2", "PROCESSOR", out_signals=(Signal.XLR,),
+                       in_signals=(Signal.XLR,),
+                       redundancy=Redundancy.PROCESSOR_BACKUP, is_backup=True,
+                       pair="P1")
+    spk = _audio_dev("SP1", "SPEAKER", in_signals=(Signal.XLR,))
+    conns = [
+        Connection("S1", "o0", "P1", "i0", Signal.XLR, "primary"),
+        Connection("S1", "o0", "P2", "i0", Signal.XLR, "primary"),
+        Connection("P1", "o0", "SP1", "i0", Signal.XLR, "primary"),
+        Connection("P2", "o0", "SP1", "i0", Signal.XLR, "primary"),
+    ]
+    proj = Project(instances=[src, p_main, p_bak, spk], connections=conns)
+    validate(proj)
+    assert not any(i.code == "SPOF_DSP_SINGLE" for i in proj.issues), \
+        f"已冗余的处理器误报 SPOF_DSP_SINGLE：{[i.code for i in proj.issues]}"
+
+
+def test_spoF_dsp_single_no_false_positive_on_leaf_processor():
+    """叶子处理器（只出不进，度数<2）不构成割点，不应报 SPOF_DSP_SINGLE。"""
+    proc = _audio_dev("P1", "PROCESSOR", out_signals=(Signal.XLR,))  # 仅输出
+    spk = _audio_dev("SP1", "SPEAKER", in_signals=(Signal.XLR,))
+    conns = [Connection("P1", "o0", "SP1", "i0", Signal.XLR, "primary")]
+    proj = Project(instances=[proc, spk], connections=conns)
+    validate(proj)
+    assert not any(i.code == "SPOF_DSP_SINGLE" for i in proj.issues), \
+        f"叶子处理器误报 SPOF_DSP_SINGLE：{[i.code for i in proj.issues]}"
+
+
+def _dante_checks(proj):
+    validate(proj)
+    return [i for i in proj.issues if i.code == "DANTE_NO_SWITCH_HOP"]
+
+
+def test_dante_no_switch_hop_fires_on_device_to_device():
+    """★ 落线即挡第一刀：两台非交换机设备直接 DANTE 直连 → 必须报
+    DANTE_NO_SWITCH_HOP。"""
+    d1 = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    d2 = _audio_dev("D2", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    conns = [Connection("D1", "o0", "D2", "i0", Signal.DANTE, "primary")]
+    proj = Project(instances=[d1, d2], connections=conns)
+    hits = _dante_checks(proj)
+    assert hits, f"设备间 DANTE 直连未报 DANTE_NO_SWITCH_HOP：{[i.code for i in proj.issues]}"
+
+
+def test_dante_no_switch_hop_silent_on_device_to_switch():
+    """正常流程 device↔switch 的 DANTE 连接不应误报（拓扑约定『Dante 一律经交换机』）。"""
+    d = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.DANTE,),
+                   in_signals=(Signal.DANTE,))
+    sw = _audio_dev("SW1", "SWITCH", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    conns = [Connection("D1", "o0", "SW1", "i0", Signal.DANTE, "primary")]
+    proj = Project(instances=[d, sw], connections=conns)
+    assert not _dante_checks(proj), \
+        f"device↔switch 误报 DANTE_NO_SWITCH_HOP：{[i.code for i in proj.issues]}"
+
+
+def test_dante_no_switch_hop_ignores_other_signals():
+    """非 DANTE 信号（如 XLR 直连）不触发该检查，避免与『Dante 一律经交换机』约定混淆。"""
+    d1 = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.XLR,))
+    d2 = _audio_dev("D2", "PROCESSOR", in_signals=(Signal.XLR,))
+    conns = [Connection("D1", "o0", "D2", "i0", Signal.XLR, "primary")]
+    proj = Project(instances=[d1, d2], connections=conns)
+    assert not _dante_checks(proj), \
+        f"非 DANTE 直连误报 DANTE_NO_SWITCH_HOP：{[i.code for i in proj.issues]}"
+
+
+def _dante_network_checks(proj):
+    validate(proj)
+    return [i for i in proj.issues if i.code == "DANTE_NO_NETWORK"]
+
+
+def test_dante_no_network_fires_on_switchless_cluster():
+    """★ 落线即挡第二刀：多台 Dante 设备互相直连、整图无交换机 → 必须报
+    DANTE_NO_NETWORK（网络根本没搭起来）。"""
+    d1 = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    d2 = _audio_dev("D2", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    conns = [Connection("D1", "o0", "D2", "i0", Signal.DANTE, "primary")]
+    proj = Project(instances=[d1, d2], connections=conns)
+    hits = _dante_network_checks(proj)
+    assert len(hits) == 2, \
+        f"无交换机 Dante 簇未报全 DANTE_NO_NETWORK：{[i.code for i in proj.issues]}"
+
+
+def test_dante_no_network_silent_when_switch_present():
+    """含交换机的 Dante 分量不误报：设备经交换机组网即合规。"""
+    d = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.DANTE,),
+                   in_signals=(Signal.DANTE,))
+    sw = _audio_dev("SW1", "SWITCH", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    conns = [Connection("D1", "o0", "SW1", "i0", Signal.DANTE, "primary")]
+    proj = Project(instances=[d, sw], connections=conns)
+    assert not _dante_network_checks(proj), \
+        f"含交换机分量误报 DANTE_NO_NETWORK：{[i.code for i in proj.issues]}"
+
+
+def test_dante_no_network_silent_when_device_reaches_switch_via_peer():
+    """设备经另一台设备中转最终连到交换机：连通分量含交换机，不误报。"""
+    d1 = _audio_dev("D1", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    d2 = _audio_dev("D2", "PROCESSOR", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    sw = _audio_dev("SW1", "SWITCH", out_signals=(Signal.DANTE,),
+                    in_signals=(Signal.DANTE,))
+    conns = [
+        Connection("D1", "o0", "D2", "i0", Signal.DANTE, "primary"),
+        Connection("D2", "o0", "SW1", "i0", Signal.DANTE, "primary"),
+    ]
+    proj = Project(instances=[d1, d2, sw], connections=conns)
+    assert not _dante_network_checks(proj), \
+        f"经 peer 中转连到交换机的分量误报 DANTE_NO_NETWORK：" \
+        f"{[i.code for i in proj.issues]}"
+
+
+def test_apply_redundancy_unique_uids_same_category():
+    """★ 同类多行不应撞 uid：2 台 MIXER 都标主备时 uid 必须唯一（带序号）。
+
+    回归：此前 _apply_redundancy 把主/备 uid 写死为 {cat}_MAIN / {cat}_BAK，
+    BOM 里两条同类（如 2 台 MIXER）会拿到完全相同的 uid，expand_instance 直接
+    覆盖前一台 → 主备分组与连线全指错设备且零报错。修复按类别序号后缀。
+    """
+    from avcad.core.build import _apply_redundancy
+    from avcad.model.schema import Redundancy
+    entries = [
+        {"category": "MIXER", "name": "调音台A", "model": "X1"},
+        {"category": "MIXER", "name": "调音台B", "model": "X2"},
+    ]
+    out = _apply_redundancy(entries, Redundancy.FULL_CHAIN)
+    uids = [e["uid"] for e in out]
+    assert len(uids) == len(set(uids)), f"uid 撞车：{uids}"
+    by_uid = {e["uid"]: e for e in out}
+    for e in out:
+        if e["uid"].endswith("_MAIN"):
+            assert by_uid[e["pair"]]["pair"] == e["uid"], "主备 pair 互指断开"
 
 
 def test_no_orphan_left_when_capacity_is_enough():

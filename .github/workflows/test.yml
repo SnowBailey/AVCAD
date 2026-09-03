@@ -1,0 +1,47 @@
+name: 回归测试
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run regression tests
+        run: python -m pytest avcad/tests -q
+
+  # 术语一致性 linter（规划 §7.2 交付物 34）：扫描 docs/ 等 markdown，对照 avcad
+  # 权威常量做术语一致性检查。当前为 advisory（exit 0），仅把审计结果打印进 CI 日志；
+  # 待文档里遗留的 18 处旧码 SPOF / 8 处品牌大小写统一后，可去掉下行末尾的
+  # `|| true` 并改跑 `--strict`，使其成为阻断式门禁。
+  lint-terms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Terminology consistency lint
+        run: python scripts/lint_terminology.py || true

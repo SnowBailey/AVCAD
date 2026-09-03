@@ -1,0 +1,246 @@
+{
+  "version": "2026-09-03",
+  "title": "AVCAD 音频知识库 · 图例校正参考",
+  "categories": [
+    {"id": "signal", "name": "信号类型"},
+    {"id": "concept", "name": "核心音频概念"},
+    {"id": "pitfall", "name": "图例校正常见坑"},
+    {"id": "code", "name": "校验码速查"}
+  ],
+  "entries": [
+    {"id": "sig_xlr", "cat": "signal", "title": "XLR 卡侬（模拟平衡）",
+     "tags": ["XLR", "卡侬", "平衡", "话筒", "mic", "线路", "line", "模拟"],
+     "summary": "三芯平衡模拟音频接口，传声器与线路电平都用它。",
+     "detail": "XLR 是音频系统里最常见的模拟接口，三线平衡传输（热/冷/地），抗共模干扰强。常见用途：电容/动圈话筒（麦克风电平）、调音台/处理器线路输入输出。图例里选 XLR 时要确认 role（in/out）与 upstream 是否提供对应能力（如电容麦需上游带 phantom）。"},
+
+    {"id": "sig_aes", "cat": "signal", "title": "AES 数字音频（AES3）",
+     "tags": ["AES", "AES3", "数字", "数字音频", "同轴", "卡侬数字"],
+     "summary": "基于 XLR 外形传输的数字音频（AES3 / AES/EBU），双通道。",
+     "detail": "AES 与 XLR 同外形但传的是数字信号（AES3，两通道），常用于调音台到处理器、处理器到功放的数字链路。注意它和 DANTE（网络音频）不同：AES 是点对点数字线，DANTE 走 IP 网络。若设备只有 AES 数字口、没有模拟口，图例里不要误标成 XLR 模拟。"},
+
+    {"id": "sig_dante", "cat": "signal", "title": "DANTE 网络音频",
+     "tags": ["DANTE", "网络音频", "IP", "音频网络", "AES67"],
+     "summary": "基于 IP 网络的低延迟多通道音频传输，需交换机承载。",
+     "detail": "DANTE 把多路音频打包走标准以太网，所有 DANTE 设备接到同一台（或冗余双）千兆交换机即可互传。属网络信号，图例里端口标 DANTE / IP。系统含 DANTE 设备就必须有交换机（NO_SWITCH 会报错），且建议指定 PTP 时钟主（见 PTP_GM_NONE）。DANTE 与 AES67 可互通，但需设备支持并开启。"},
+
+    {"id": "sig_trs", "cat": "signal", "title": "TRS 6.35mm（大三芯/大二芯）",
+     "tags": ["TRS", "6.35", "大三芯", "平衡", "线路", "插入"],
+     "summary": "6.35mm 模拟接口，可平衡线路也可做插入/监听。",
+     "detail": "TRS（Tip-Ring-Sleeve）常见于模拟线路输入输出、插入点（insert）、耳机/返听分配。平衡接法抗干扰，单声道线路常用。与 XLR 同属模拟域，电平需匹配。"},
+
+    {"id": "sig_optical", "cat": "signal", "title": "OPTICAL 光纤音频",
+     "tags": ["OPTICAL", "光纤", "ADAT", "TOSLINK", "数字"],
+     "summary": "光信号传输数字音频（ADAT / TOSLINK 等）。",
+     "detail": "光纤音频用于数字链路的电气隔离与长距离，常见 ADAT（多通道）或 TOSLINK（消费级）。图例里标 OPTICAL 表示数字光口，与 AES（电口）是同层不同介质。"},
+
+    {"id": "sig_usb", "cat": "signal", "title": "USB 音频/控制",
+     "tags": ["USB", "声卡", "音频接口", "数字"],
+     "summary": "USB 接声卡/音频接口，常作录音或播放端点。",
+     "detail": "USB 用于设备与电脑/声卡之间的音频或控制，图例标 USB。属数字/控制混合用途，不计入模拟电平域判据。"},
+
+    {"id": "sig_conf", "cat": "signal", "title": "CONF 会议总线",
+     "tags": ["CONF", "会议总线", "手拉手", "会议系统", "CF63", "DAISY"],
+     "summary": "会议系统专用总线（手拉手），单元间串联而非星型。",
+     "detail": "CONF 是会议讨论/表决系统的专用数字总线，各单元（主席机、代表机、翻译单元）用 CONF 口串链（手拉手），再到会议主机。关键规则：CONF 只做级联，绝不可画成 XLR 串联或不当作普通音频线连到调音台（否则拓扑校验会出问题）。无线单元则走 RF（air）到天线盒再转 CONF 进主机。"},
+
+    {"id": "sig_speaker", "cat": "signal", "title": "SPEAKER 扬声器线",
+     "tags": ["SPEAKER", "扬声器", "喇叭线", "功放输出", "音箱"],
+     "summary": "功放/音响管理器到音箱的扬声器电平线缆（非线路电平）。",
+     "detail": "SPEAKER 信号是功率电平（扬声器电平），只能从 AMP / SPEAKER_MGR 接到无源音箱。把线路电平设备误接进 SPEAKER 缆会烧毁前端（见 LEVEL_DOMAIN）；有源音箱接 SPEAKER 缆输出也会烧毁（见 ACTIVE_ON_AMP_OUT）。定压音箱还要区分 70V/100V（见 CV_MIXED）。"},
+
+    {"id": "sig_rf", "cat": "signal", "title": "RF 射频（无线）",
+     "tags": ["RF", "射频", "无线", "天线", "UM2000", "接收机"],
+     "summary": "无线话筒/天线系统的射频信号，图中标 air 表示空中链路。",
+     "detail": "RF 是无线系统射频段：发射单元 → 天线（air 链路）→ 接收机/天线分配器/合路器。图例里 RF 口标 air=true 表示不计入主库物理端口数（无线链路不参与端口聚合反推）。只有当设备确实有 RF 口才画 RF，找不到就跳过——宁可孤立，不可画错。"},
+
+    {"id": "sig_wclk", "cat": "signal", "title": "WCLK 字时钟",
+     "tags": ["WCLK", "字时钟", "clock", "同步", "采样率"],
+     "summary": "数字系统的采样时钟同步信号（Word Clock）。",
+     "detail": "WCLK 用于多台数字设备（处理器、转换器、接口箱）之间锁定时钟，避免采样率漂移导致的爆音。属时钟类数字信号，不参与音频电平判据。"},
+
+    {"id": "sig_link", "cat": "signal", "title": "LINK 级联",
+     "tags": ["LINK", "级联", "cascade", "菊链", "扩展"],
+     "summary": "同类设备之间的级联/扩展口（如交换机堆叠、单元扩展）。",
+     "detail": "LINK 用于同型号设备级联组网或扩展（如交换机之间、处理器之间）。是设备级联专用，不等于音频信号。配置了链路冗余但系统无 DANTE 时，LINK_BACKUP_NO_DANTE 会提醒双交换机无从承载。"},
+
+    {"id": "sig_rs232", "cat": "signal", "title": "RS232 串口控制",
+     "tags": ["RS232", "串口", "控制", "中控", "协议"],
+     "summary": "串行控制接口，接中控/上位机下发指令。",
+     "detail": "RS232 是设备控制通道（接中控主机、PLC、上位机），传的是控制协议而非音频。图例里标 RS232 表示控制口；属于控制类信号，不参与音频电平判据。"},
+
+    {"id": "sig_ip_gpio_power", "cat": "signal", "title": "IP / GPIO / POWER 三类辅助",
+     "tags": ["IP", "GPIO", "POWER", "控制网络", "通用IO", "电源"],
+     "summary": "控制网络、通用 IO、电源三类非音频接口。",
+     "detail": "IP 是控制/管理网络（与 DANTE 音频网络可能同物理交换机但用途不同）；GPIO 是通用输入输出（触发、联动）；POWER 是供电口。三者都不参与音频电平判据，图例按实际标注即可。"},
+
+    {"id": "concept_level", "cat": "concept", "title": "信号电平：线路 / 麦克分 / 扬声器",
+     "tags": ["电平", "line", "mic", "speaker level", "线路电平", "麦克风电平", "扬声器电平", "LEVEL_DOMAIN"],
+     "summary": "三类电平不能跨档直连，跨档会烧设备或无声。",
+     "detail": "音频电平分档：麦克风电平（话筒，最低，约 -60~-40dBu）、线路电平（设备间传输，约 +4dBu）、扬声器电平（功放输出驱动音箱，最高，可达数十伏）。SPEAKER 线缆两端必须是 功放/音响管理器 ↔ 无源音箱。扬声器电平接到线路设备会烧毁前端；非功放设备驱动 SPEAKER 缆则无声或失真。校验码 LEVEL_DOMAIN 即抓这类跨档误接（数字/控制/电源信号不判）。"},
+
+    {"id": "concept_phantom", "cat": "concept", "title": "幻象电源 48V（Phantom Power）",
+     "tags": ["幻象", "phantom", "48V", "P48", "电容麦", "电容话筒", "PHANTOM_MISSING"],
+     "summary": "电容话筒需上游提供 48V 幻象供电才能工作。",
+     "detail": "电容话筒（如会议麦、录音麦）本身无信号放大，必须由上游（调音台、话放、带 phantom 的处理器）通过 XLR 的第 2/3 脚注入 48V 幻象电源。动圈麦不需要。若设备声明需 P48（needs_phantom）而上游 features 无 phantom，电容麦将完全无声——校验码 PHANTOM_MISSING 即抓此问题。标图例时：电容麦的 XLR 输入上游设备要在特性里带 phantom。"},
+
+    {"id": "concept_active", "cat": "concept", "title": "有源音箱 vs 无源音箱",
+     "tags": ["有源", "无源", "active", "passive", "内置功放", "ACTIVE_ON_AMP_OUT"],
+     "summary": "有源音箱自带功放，接线路电平；无源音箱靠外部功放。",
+     "detail": "有源音箱（active=true）内部已含功放，输入是线路电平（来自前级/处理器），绝不能再接功放的 SPEAKER 扬声器输出，否则会烧毁内置功放。无源音箱没有功放，才由外部 AMP/SPEAKER_MGR 的 SPEAKER 口驱动。校验码 ACTIVE_ON_AMP_OUT 专门抓有源音箱误接功放扬声器输出的致命错误。出图实例的 active 标志已精确区分两者。"},
+
+    {"id": "concept_cv", "cat": "concept", "title": "定压（CV 70V/100V）vs 定阻（low-Z）",
+     "tags": ["定压", "CV", "70V", "100V", "定阻", "低阻", "constant voltage", "CV_MIXED", "CV_VOLTAGE_MISMATCH"],
+     "summary": "定压音箱须配定压功放，且 70V/100V 不得混用。",
+     "detail": "定压系统（Constant Voltage，常见 70V 美标 / 100V 欧标）用于背景音乐、公共广播，功放输出固定高压、线损小、可并接多只音箱。定阻（low-Z，如 4/8Ω）用于演出主扩。两者不可混：定压音箱接低阻功放会不匹配甚至损坏；70V 与 100V 音箱也严禁混接同一功放。校验码 CV_MIXED（定压箱挂低阻功放）、CV_VOLTAGE_MISMATCH（电压不一致）抓这两类错误。判定仅在音箱声明 line_type（70v/100v/cv）时生效，未声明按低阻核算。"},
+
+    {"id": "concept_xover", "cat": "concept", "title": "分频点（Crossover）",
+     "tags": ["分频", "crossover", "f_x", "高低音", "二分频", "XOVER_GAP"],
+     "summary": "多单元音箱需 ≥2 个单调上升的分频频点覆盖全频。",
+     "detail": "分频器把全频信号按频点分给高音/中音/低音单元。若音箱声明分频点 f_x（列表），需至少 2 个且单调递增，才能无缝覆盖全频；否则出现分频空洞（某频段无人发声）。校验码 XOVER_GAP 在 f_x 显式声明却无效（<2 或非单调递增）时报错。未声明 f_x 不判。"},
+
+    {"id": "concept_zone", "cat": "concept", "title": "分区（Zone）",
+     "tags": ["分区", "zone", "背景音乐", "ZONE_SINGLE_AMP"],
+     "summary": "分区音箱宜由多台功放分担，避免单点全哑。",
+     "detail": "分区（zone）常见于背景音乐/消防广播，把空间按区域划分各自独立控制。同一分区的音箱若全部挂在一台功放上，功放一故障整区无声（分区单点）。校验码 ZONE_SINGLE_AMP 在分区内音箱只由 ≤1 台功放驱动时提醒。判定仅在音箱声明 zone 参数时生效。"},
+
+    {"id": "concept_aec", "cat": "concept", "title": "AEC 回声消除（会议）",
+     "tags": ["AEC", "回声消除", "会议", "远端", "参考输入", "AEC_MISSING", "AEC_REF_UNCONNECTED"],
+     "summary": "远端会议需 DSP 带 AEC，且参考输入要接远端终端。",
+     "detail": "AEC（Acoustic Echo Cancellation）消除本地话筒拾到扬声器播放的远端声音，避免远端听到回声。需要：①系统内至少有一台带 aec 能力的 DSP/处理器（否则 AEC_MISSING 警告）；②该 DSP 的参考输入口（XLR/CONF in）必须接到远端终端（VC/SIP/remote 设备）的输出，否则 AEC 取不到参考信号而失效（AEC_REF_UNCONNECTED 报错）。纯本地扩声不需要 AEC。"},
+
+    {"id": "concept_delay", "cat": "concept", "title": "延时对齐（Delay）",
+     "tags": ["延时", "delay", "补声", "声像", "DELAY_CAPABILITY_MISSING", "fill"],
+     "summary": "补声/延时音箱上游需有 delay 能力的处理器做时间对齐。",
+     "detail": "补声音箱（fill）或后场延时塔离主音箱远，声音到达听众有时间差，需上游处理器对补声信号做延时，使声像统一。若补声/延时音箱（声明 fill 或 delay_speaker）上游链路上的处理器均无 delay 能力，声像会混乱。校验码 DELAY_CAPABILITY_MISSING 抓此问题。判定仅在音箱声明 fill/delay_speaker 时生效。"},
+
+    {"id": "concept_ptp", "cat": "concept", "title": "PTP 时钟同步（Dante 时钟主）",
+     "tags": ["PTP", "时钟", "grandmaster", "gm", "Dante", "同步", "PTP_GM_NONE", "ptp_role"],
+     "summary": "Dante 网络需指定一台时钟主（GM）统一采样时钟。",
+     "detail": "Dante 用 PTP（IEEE 1588）同步所有设备的采样时钟，网络里应有一台设备显式承担时钟主（ptp_role=gm 或 boundary）。若无任何设备声明时钟主，时钟靠默认选举，结果不确定、可能漂移。校验码 PTP_GM_NONE 在系统含 Dante 且有人声明 ptp_role 却无人当 GM 时提醒。未声明 ptp_role 不判。"},
+
+    {"id": "concept_balance", "cat": "concept", "title": "平衡 vs 非平衡",
+     "tags": ["平衡", "非平衡", "balanced", "unbalanced", "抗干扰", "XLR", "TRS"],
+     "summary": "平衡传输（XLR/TRS）抗干扰强，长距离优先用平衡。",
+     "detail": "平衡接口用热/冷两路反相信号 + 地线传输，接收端取差值，可抵消共模噪声，适合舞台长距离。非平衡（TS 大二芯、RCA）只有信号+地，易受干扰，适合短距离。图例里模拟口多为平衡（XLR/TRS）；若设备只有非平衡口要如实标。"},
+
+    {"id": "concept_aes67", "cat": "concept", "title": "AES3 vs AES67 vs Dante",
+     "tags": ["AES3", "AES67", "Dante", "互通", "标准"],
+     "summary": "AES3 是点对点数字线；AES67/Dante 是网络音频标准。",
+     "detail": "AES3（即「AES 数字音频」信号）是点对点两通道数字线，走 XLR 外形。AES67 是基于 IP 的网络音频传输标准，Dante 是 Audinate 的网络音频方案，两者可通过支持的设备互通。简单记：AES3=数字线，Dante/AES67=网络里的多通道数字音频。图例不要把 AES3 数字口误当 XLR 模拟口。"},
+
+    {"id": "pitfall_active_amp", "cat": "pitfall", "title": "坑：有源音箱接到功放 SPEAKER 口",
+     "tags": ["有源", "功放", "SPEAKER", "烧毁", "ACTIVE_ON_AMP_OUT"],
+     "summary": "致命：有源音箱内部已带功放，再接功放输出会烧。",
+     "detail": "修正：有源音箱（active）的输入应接前级/处理器的线路输出（XLR/AES 等线路电平），而不是功放/音响管理器的 SPEAKER 扬声器输出。标图例时确认该型号 active 标志，避免把它当无源箱去配 SPEAKER 缆。校验码 ACTIVE_ON_AMP_OUT 会直接报错拦截。"},
+
+    {"id": "pitfall_cv", "cat": "pitfall", "title": "坑：定压音箱配错功放 / 70V 混 100V",
+     "tags": ["定压", "CV", "70V", "100V", "功放", "CV_MIXED", "CV_VOLTAGE_MISMATCH"],
+     "summary": "定压箱必须配定压功放，且电压档要一致。",
+     "detail": "修正：标了 line_type=70v/100v/cv 的音箱，其上游功放也必须是定压功放且同档位。低阻功放驱动定压箱会不匹配；70V 功放接 100V 箱会欠压/过压。标图例时音箱与功放都填上一致的 line_type。校验码 CV_MIXED / CV_VOLTAGE_MISMATCH 会拦截。"},
+
+    {"id": "pitfall_phantom", "cat": "pitfall", "title": "坑：电容麦上游没给幻象电源",
+     "tags": ["电容麦", "幻象", "phantom", "48V", "PHANTOM_MISSING"],
+     "summary": "电容话筒要工作，上游设备必须在特性里带 phantom。",
+     "detail": "修正：电容麦（会议麦、录音麦）的 XLR 输入上游（调音台/话放/处理器）要在 features 里标注 phantom。若上游无 phantom，麦无声。标图例时确认上游设备确实提供幻象供电。校验码 PHANTOM_MISSING 会报错。"},
+
+    {"id": "pitfall_conf", "cat": "pitfall", "title": "坑：CONF 会议总线画成 XLR 串联",
+     "tags": ["CONF", "会议总线", "串联", "手拉手", "拓扑"],
+     "summary": "CONF 只做单元级联到主机，别当模拟线乱连。",
+     "detail": "修正：会议单元之间、单元到主机用 CONF 口串链（手拉手）。无线单元走 RF（air）到天线盒再转 CONF。不要把 CONF 当普通 XLR 音频线接到调音台，也不要把多个单元用 XLR 星型并联。保持 CONF 级联拓扑，校验拓扑阶段才不会误判。"},
+
+    {"id": "pitfall_aec", "cat": "pitfall", "title": "坑：远端会议漏 AEC 或参考输入没接",
+     "tags": ["AEC", "远端", "参考输入", "AEC_MISSING", "AEC_REF_UNCONNECTED"],
+     "summary": "远端会议：DSP 要带 aec，且参考口接远端终端。",
+     "detail": "修正：系统有视频会议（VC/SIP/remote）时，确保有一台带 aec 能力的 DSP，并把它的参考输入口（XLR/CONF in）接到远端终端输出。两者缺一，远端就会听到回声。校验码 AEC_MISSING（缺 aec 能力）/ AEC_REF_UNCONNECTED（参考口没接）会提示。"},
+
+    {"id": "pitfall_delay", "cat": "pitfall", "title": "坑：补声音箱上游没有 delay",
+     "tags": ["补声", "delay", "延时", "声像", "DELAY_CAPABILITY_MISSING", "fill"],
+     "summary": "补声/延时塔的上游处理器要支持 delay 对齐。",
+     "detail": "修正：标了 fill/delay_speaker 的补声或后场延时音箱，其上游链路上的处理器必须带 delay 能力，否则声像混乱。标图例时给这类音箱上游的处理器在 features 里加 delay。校验码 DELAY_CAPABILITY_MISSING 会报错。"},
+
+    {"id": "pitfall_ptp", "cat": "pitfall", "title": "坑：Dante 网络没指定时钟主",
+     "tags": ["Dante", "PTP", "时钟主", "gm", "PTP_GM_NONE"],
+     "summary": "含 Dante 时指定一台设备当 PTP 时钟主更稳妥。",
+     "detail": "修正：系统含 Dante 且有人声明 ptp_role 时，至少一台设备要把 ptp_role 设成 gm（或 boundary）当时钟主，避免靠默认选举导致时钟不确定。校验码 PTP_GM_NONE 会提醒。未声明 ptp_role 不判。"},
+
+    {"id": "code_active_on_amp", "cat": "code", "title": "ACTIVE_ON_AMP_OUT（ERROR）",
+     "tags": ["ACTIVE_ON_AMP_OUT", "有源", "功放", "烧毁", "ERROR"],
+     "summary": "有源音箱接到了功放/音响管理器的扬声器输出。",
+     "detail": "触发：连接 signal=SPEAKER，且接收端是有源音箱（active=true），源是功放/音响管理器。修复：有源音箱改接前级/处理器的线路输出（XLR/AES 等），不要接 SPEAKER 扬声器输出。"},
+
+    {"id": "code_level_domain", "cat": "code", "title": "LEVEL_DOMAIN（ERROR）",
+     "tags": ["LEVEL_DOMAIN", "电平", "跨档", "扬声器电平", "ERROR"],
+     "summary": "扬声器电平线缆跨档接到了线路/麦克风电平设备。",
+     "detail": "触发：SPEAKER 线缆的接收端不是音箱（扬声器电平→线路设备会烧前端），或源端不是功放/音响管理器（扬声器电平应由其驱动）。修复：确认 SPEAKER 缆两端为 功放/音响管理器 ↔ 无源音箱；有源音箱误接由 ACTIVE_ON_AMP_OUT 单独报。"},
+
+    {"id": "code_phantom_missing", "cat": "code", "title": "PHANTOM_MISSING（ERROR）",
+     "tags": ["PHANTOM_MISSING", "幻象", "phantom", "电容麦", "ERROR"],
+     "summary": "设备需 P48 但其 XLR 上游未提供幻象供电。",
+     "detail": "触发：设备声明 needs_phantom（或 features 含 needs_phantom），其 XLR 输入上游设备 features 无 phantom。修复：把上游设备（话放/调音台/处理器）标上 phantom 能力，或换带 phantom 的上游。未声明 needs_phantom 不触发。"},
+
+    {"id": "code_aec_missing", "cat": "code", "title": "AEC_MISSING（WARN）",
+     "tags": ["AEC_MISSING", "AEC", "回声消除", "远端", "WARN"],
+     "summary": "设备需 AEC 但系统内无带 aec 能力的 DSP。",
+     "detail": "触发：有设备声明 needs_aec，但所有实例 features 都无 aec。修复：加入一台带 aec 能力的 DSP/处理器，或确认为纯本地扩声后去掉 needs_aec。远端会议 + 本地话筒会因此产生回声。"},
+
+    {"id": "code_aec_ref", "cat": "code", "title": "AEC_REF_UNCONNECTED（ERROR）",
+     "tags": ["AEC_REF_UNCONNECTED", "AEC", "参考输入", "ERROR"],
+     "summary": "DSP 有 aec 能力但参考输入口没接远端终端。",
+     "detail": "触发：实例 features 含 aec，系统存在远端终端（vc/sip/remote），但其 XLR/CONF 参考输入口未接到任何连接。修复：把该 DSP 的参考输入口接到远端终端（视频会议/网关）的输出，AEC 才能取到参考信号。"},
+
+    {"id": "code_delay_missing", "cat": "code", "title": "DELAY_CAPABILITY_MISSING（ERROR）",
+     "tags": ["DELAY_CAPABILITY_MISSING", "delay", "补声", "延时", "ERROR"],
+     "summary": "补声/延时音箱上游链路无 delay 能力。",
+     "detail": "触发：音箱声明 fill/delay_speaker，但其上游音频链路上的处理器都无 delay 特性。修复：给上游处理器加 delay 能力，或改用带 delay 的处理器，补声才能做时间对齐。"},
+
+    {"id": "code_ptp_gm", "cat": "code", "title": "PTP_GM_NONE（WARN）",
+     "tags": ["PTP_GM_NONE", "PTP", "时钟主", "gm", "WARN"],
+     "summary": "含 Dante 但无设备显式承担 PTP 时钟主。",
+     "detail": "触发：系统含 Dante 且至少一台设备声明 ptp_role，但无 gm/boundary/grandmaster。修复：指定一台设备 ptp_role=gm 当时钟主。未声明 ptp_role 不触发。"},
+
+    {"id": "code_cv_mixed", "cat": "code", "title": "CV_MIXED（ERROR）",
+     "tags": ["CV_MIXED", "定压", "功放", "ERROR"],
+     "summary": "定压音箱挂在了低阻功放上。",
+     "detail": "触发：音箱 line_type ∈ {70v,100v,cv}，但其上游功放 line_type 不在 CV 集合。修复：换成定压功放，或确认该音箱实际为低阻（去掉 line_type）。未声明 line_type 按低阻核算不判。"},
+
+    {"id": "code_cv_volt", "cat": "code", "title": "CV_VOLTAGE_MISMATCH（ERROR）",
+     "tags": ["CV_VOLTAGE_MISMATCH", "定压", "70V", "100V", "ERROR"],
+     "summary": "定压电压不一致：音箱与功放档位不同。",
+     "detail": "触发：音箱与上游功放都声明 CV 档位但二者不同（如 70V 箱接 100V 功放）。修复：统一 70V 或 100V 档位。70V 与 100V 严禁混用。"},
+
+    {"id": "code_xover_gap", "cat": "code", "title": "XOVER_GAP（ERROR）",
+     "tags": ["XOVER_GAP", "分频", "f_x", "ERROR"],
+     "summary": "音箱声明的分频点 f_x 无效（需 ≥2 且单调递增）。",
+     "detail": "触发：音箱 params 显式声明 f_x 但点数 <2 或非单调递增。修复：填 ≥2 个单调递增的频点（如 [1200, 2500]）。未声明 f_x 不判。"},
+
+    {"id": "code_zone_single", "cat": "code", "title": "ZONE_SINGLE_AMP（WARN）",
+     "tags": ["ZONE_SINGLE_AMP", "分区", "zone", "单点", "WARN"],
+     "summary": "某分区的音箱全部由 1 台功放驱动（分区单点）。",
+     "detail": "触发：音箱声明 zone，该分区内所有音箱上游只连到 ≤1 台功放。修复：分区音箱由多台功放分担，降低单点故障影响。未声明 zone 不判。"},
+
+    {"id": "code_unknown_type", "cat": "code", "title": "UNKNOWN_TYPE（ERROR）",
+     "tags": ["UNKNOWN_TYPE", "类别", "未知", "未识别", "ERROR"],
+     "summary": "清单项无法识别类别，出图会 0 端口 + 报错。",
+     "detail": "触发：清单项经过归一化后仍 category 为空，引擎无法推断端口。修复：在第②步模块确认里给该设备选类别，或在图例库手工添加该型号并指定类别（默认 IO）。这是图例校正页存在的主要动因之一。"},
+
+    {"id": "code_port_side", "cat": "code", "title": "PORT_SIDE / PORT_ROLE（ERROR）",
+     "tags": ["PORT_SIDE", "PORT_ROLE", "端口方向", "side", "role", "ERROR"],
+     "summary": "端口 side/role 不在合法枚举内，出图会飞线或静默失效。",
+     "detail": "触发：图例端口的 side 非 left/right/top/bottom，或 role 非 in/out/io。修复：在图例校正页把端口的 侧/方向 选回合法值。side 错→坐标飞出图纸；role 错→不参与配对，均静默失效。合法枚举由校验层单一权威维护（有守卫测试）。"},
+
+    {"id": "code_no_switch", "cat": "code", "title": "NO_SWITCH（ERROR）",
+     "tags": ["NO_SWITCH", "交换机", "Dante", "网络", "ERROR"],
+     "summary": "系统含 Dante 设备但未生成交换机。",
+     "detail": "触发：清单里有 DANTE 信号的设备，但拓扑没配交换机承载。修复：确保交换机进入系统（清单已配则自动纳入；只配 1 台而冗余要求双交换机时会克隆备机）。Dante 必须走交换机。"},
+
+    {"id": "code_spof", "cat": "code", "title": "SPOF_*（WARN）单点故障",
+     "tags": ["SPOF", "单点", "冗余", "双交换机", "WARN"],
+     "summary": "网络/关键设备单点，故障会整系统瘫。",
+     "detail": "触发：SPOF_NET_SHARED_SWITCH（核心网络共用单交换机）、SPOF_NET_NO_DUAL_SWITCH（要求双交换机却只有一台）、SPOF_DSP_SINGLE（关键 DSP 单台无备份）等。修复：按冗余档位补备份设备/双交换机。属高可用设计提醒，非连接错误。"},
+
+    {"id": "code_amp_under", "cat": "code", "title": "AMP_UNDERPOWERED（WARN）",
+     "tags": ["AMP_UNDERPOWERED", "功放", "功率", "欠推", "WARN"],
+     "summary": "功放功率可能不足以驱动所接音箱。",
+     "detail": "触发：功放额定功率低于所接音箱总需求（按量化数据估算）。修复：换更大功率功放或减负载。属功率匹配提醒。"}
+  ]
+}

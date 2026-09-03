@@ -28,7 +28,7 @@ def match_speakers_to_amp(amp, speakers: list) -> list:
     result = []
     for ci, grp in enumerate(groups):
         if not grp:
-            result.append((ci, [], "none", 0, True, "空通道"))
+            result.append((ci, [], "none", 0, True, "空通道", True))
             continue
 
         def _ohm(s):
@@ -78,8 +78,10 @@ def match_speakers_to_amp(amp, speakers: list) -> list:
                 note = f"阻抗越限：并联{round(r_par,2)}Ω / 串联{round(r_ser,2)}Ω 均不满足≥{min_load}Ω"
         # 功率裕量校验：功放功率 ≥ 扬声器总额定×1.2 为设计建议（advisory），
         # 仅作 WARN 提示，不阻断出图；阻抗越限（ok=False）才为 ERROR。
+        # ★ 功率裕量不足不再塞进 note（note 只描述阻抗），改为独立标志 power_ok，
+        #   由 router 单独发 AMP_POWER_MARGIN 告警，避免被阻抗 ERROR 文案吞掉、
+        #   或在阻抗正常（ok=True）时彻底无从报出（此前是静默漏报）。
         sp_power = sum(s.params.get("power_w", 200) for s in grp)
-        if amp_power < sp_power * 1.2:
-            note += f"；⚠功率裕量不足(功放{amp_power}W<扬声器{sp_power}W×1.2)"
-        result.append((ci, [s.uid for s in grp], mode, total, ok, note))
+        power_ok = amp_power >= sp_power * 1.2
+        result.append((ci, [s.uid for s in grp], mode, total, ok, note, power_ok))
     return result

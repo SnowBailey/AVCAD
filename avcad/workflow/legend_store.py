@@ -18,6 +18,7 @@ revision 递增并保留维护历史；下次遇到相同 (品牌, 型号, 类�
 from __future__ import annotations
 import json
 import os
+import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -42,6 +43,45 @@ _HISTORY_KEEP = 5          # 每条图例保留最近几次维护记录
 
 def _now() -> str:
     return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def _dir_writable(p: Path) -> bool:
+    """判断目录是否可写（建目录 + 试建临时文件双重校验）。"""
+    try:
+        p.mkdir(parents=True, exist_ok=True)
+        probe = p / ".avcad_write_probe"
+        probe.touch()
+        probe.unlink()
+        return True
+    except (OSError, PermissionError):
+        return False
+
+
+def _legend_user_path() -> Path:
+    """用户可写目录下的图例库路径（打包只读时回落点）。"""
+    if sys.platform == "darwin":
+        base = Path.home() / "Library" / "Application Support" / "AVCAD"
+    elif sys.platform.startswith("win"):
+        base = Path(os.environ.get("APPDATA", str(Path.home()))) / "AVCAD"
+    else:
+        base = Path.home() / ".avcad"
+    return base / "legend_library.json"
+
+
+def _resolve_legend_path(path: Optional[str] = None) -> Path:
+    """解析图例库路径（显式 > 模块默认(含 AVCAD_LEGEND_LIBRARY) > 只读则用户目录重定向）。
+
+    ★ S7 修复：打包成 .app / Program Files 后 avcad/data 为只读，原逻辑直接写该目录
+    会抛 PermissionError 使 /api/legend 保存 500。这里在默认库所在目录只读时自动重定向
+    到用户可写目录，保证「永久文档」仍能落盘且不崩。开发模式下 data 目录可写，本函数
+    等价于原 DEFAULT_CACHE，行为不变。
+    """
+    if path:
+        return Path(path).expanduser()
+    default = Path(DEFAULT_CACHE)    # 尊重测试对 DEFAULT_CACHE 的 monkeypatch（可能是 str）
+    if _dir_writable(default.parent):
+        return default
+    return _legend_user_path()
 
 
 @dataclass
@@ -76,6 +116,11 @@ class Legend:
     ports: List[LegendPort] = field(default_factory=list)
     slots: List[dict] = field(default_factory=list)   # 卡槽条可视化，如 [{type,count,label}]
     note: str = ""
+    # 电气量化参数（可选，用于 GB 55024-2022 强条 ERROR 级判定）：
+    #   ground_wire_mm2 接地/等电位联结导体截面积(mm²，强条≥4)；
+    #   emg_spl_db 应急广播设计声压级(dB)；bg_spl_db 背景噪声(dB)。
+    # 缺则退回 WARN 提醒；与 DeviceInstance.electrical 同构，图例库=真相覆盖之。
+    electrical: dict = field(default_factory=dict)
     # ---- 永久文档的维护元数据 ----
     source: str = "user"        # user=用户确认 / engine=引擎推断回填 / migrated=迁移
     revision: int = 1           # 第几次维护
@@ -89,6 +134,7 @@ class Legend:
             "key": LegendStore.key(self.brand, self.model, self.category),
             "ports": [p.to_dict() for p in self.ports],
             "slots": list(self.slots), "note": self.note,
+            "electrical": dict(self.electrical or {}),
             "source": self.source, "revision": self.revision,
             "created_at": self.created_at, "updated_at": self.updated_at,
             "history": list(self.history),
@@ -101,6 +147,7 @@ class Legend:
             category=d.get("category", ""),
             ports=[LegendPort.from_dict(x) for x in d.get("ports", [])],
             slots=list(d.get("slots", [])), note=d.get("note", ""),
+            electrical=dict(d.get("electrical") or {}),
             source=d.get("source", "user"),
             revision=int(d.get("revision", 1) or 1),
             created_at=d.get("created_at", ""), updated_at=d.get("updated_at", ""),
@@ -110,7 +157,11 @@ class Legend:
 
 class LegendStore:
     def __init__(self, path: Optional[str] = None):
-        self.path = Path(path or DEFAULT_CACHE)
+        self.path = _resolve_legend_path(path)
+        # 仅当「未显式指定 path」且「解析出的路径已偏离默认库」时才算打包只读重定向：
+        # 此时首次运行用户目录文件不存在，需从包内随附默认库播种。其余情况（显式 path、
+        # 测试 monkeypatch DEFAULT_CACHE、开发模式）一律不自动播种，保持空库语义。
+        self._redirected = (path is None and self.path != Path(DEFAULT_CACHE))
         self._mem: dict = {}
         self._load_file()
 
@@ -193,10 +244,20 @@ class LegendStore:
 
     # ---- 文件持久化（永久文档） ----
     def _load_file(self) -> None:
-        if not self.path.exists():
+        if self.path.exists():
+            src = self.path
+        elif self._redirected:
+            # 打包只读重定向：用户目录文件首次尚不存在，但包内随附默认图例库存在，
+            # 先读入内存（后续保存写入用户目录）；非重定向场景不自动播种，保持空库。
+            bundled = Path(__file__).resolve().parents[1] / "data" / "legend_library.json"
+            if bundled.exists():
+                src = bundled
+            else:
+                return
+        else:
             return
         try:
-            data = json.loads(self.path.read_text(encoding="utf-8"))
+            data = json.loads(src.read_text(encoding="utf-8"))
         except Exception:
             return
         dirty = False
@@ -221,8 +282,17 @@ class LegendStore:
                 pass
 
     def save(self) -> None:
-        """原子写：先写临时文件再 os.replace，避免半截文件。"""
-        self.path.parent.mkdir(parents=True, exist_ok=True)
+        """原子写：先写临时文件再 os.replace，避免半截文件。
+
+        ★ S7 修复：打包后 avcad/data 在只读 .app 包内，直接写会抛 PermissionError 使
+        /api/legend 保存 500。self.path 已由 _resolve_legend_path 重定向到用户可写目录；
+        此处再套 try/except：万一目标仍不可写（极端只读环境），安全跳过本次落盘
+        （内存记录仍在、会话内可用），绝不抛异常中断保存请求。
+        """
+        try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+        except (OSError, PermissionError):
+            return
         # 去重：同一个 key 只保留一条（防止历史数据里的重复记录）
         dedup: dict = {}
         for lg in self._mem.values():
@@ -238,9 +308,13 @@ class LegendStore:
             "count": len(dedup),
             "legends": [lg.to_dict() for lg in dedup.values()],
         }
-        tmp = self.path.with_suffix(self.path.suffix + ".tmp")
-        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-        os.replace(tmp, self.path)
+        try:
+            tmp = self.path.with_suffix(self.path.suffix + ".tmp")
+            tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+            os.replace(tmp, self.path)
+        except (OSError, PermissionError):
+            # 只读环境兜底：本次不落盘，不影响内存中的图例记录
+            return
 
     # ---- 回填到实例（图例库 > 引擎推断） ----
     def apply(self, inst, legend: Optional[Legend] = None,
@@ -257,6 +331,9 @@ class LegendStore:
             inst.category = lg.category
         if lg.slots:
             inst.slots = list(lg.slots)
+        # 电气量化参数：图例库=真相，覆盖引擎/BOM 推断值（用于 GB 55024 强条 ERROR 判定）
+        if lg.electrical:
+            inst.electrical = {**getattr(inst, "electrical", {}), **dict(lg.electrical)}
         ports = []
         for t in lg.ports:
             sig = Signal(t.signal)
@@ -289,7 +366,7 @@ def migrate_legacy_library() -> bool:
             return False
         data = json.loads(LEGACY_CACHE.read_text(encoding="utf-8"))
         st = LegendStore.__new__(LegendStore)      # 绕过 __init__，避免递归
-        st.path = DEFAULT_CACHE
+        st.path = _resolve_legend_path()           # 落到可写位置（打包只读时重定向）
         st._mem = {}
         for rec in data.get("legends", []):
             try:

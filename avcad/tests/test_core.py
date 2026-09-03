@@ -8,7 +8,8 @@ from avcad.render.draw import draw_devices, draw_wires
 from avcad.render.primitives import Canvas
 from avcad.render.dxf_render import render_dxf
 from avcad.wires.amp_match import match_speakers_to_amp
-from avcad.model.schema import DeviceInstance, Signal, Redundancy
+from avcad.model.schema import DeviceInstance, Signal, Redundancy, Project
+from avcad.validate.checks import validate
 
 SAMPLE = os.path.join(os.path.dirname(__file__), "..", "samples", "sample_bom.csv")
 
@@ -167,6 +168,51 @@ def test_amp_match_series_fallback():
                            params={"impedance_ohm": 4, "power_w": 200}) for i in range(2)]
     res2 = match_speakers_to_amp(amp, spk4)
     assert res2[0][2] == "series"
+
+
+def test_amp_match_power_flag():
+    # 功率裕量标志：功放功率 ≥ 扬声器总额定×1.2 才 power_ok=True，
+    # 否则 False（阻抗仍可能正常）。返回元组第 7 位即 power_ok。
+    spk = [DeviceInstance(uid="s1", category="SPEAKER", name="箱",
+                          params={"impedance_ohm": 8, "power_w": 200})]
+    # 充足：1000W ≥ 200×1.2=240 → 阻抗与功率均 ok
+    amp_ok = DeviceInstance(uid="a", category="AMP", name="功放",
+                            features={"analog"}, params={"channels": 1},
+                            electrical={"min_load_ohm": 4, "power_w_per_ch": 1000})
+    r1 = match_speakers_to_amp(amp_ok, spk)
+    assert r1[0][4] is True and r1[0][6] is True
+    # 不足：100W < 200×1.2=240 → 功率不足（阻抗仍正常）
+    amp_lo = DeviceInstance(uid="b", category="AMP", name="小功放",
+                            features={"analog"}, params={"channels": 1},
+                            electrical={"min_load_ohm": 4, "power_w_per_ch": 100})
+    r2 = match_speakers_to_amp(amp_lo, spk)
+    assert r2[0][4] is True and r2[0][6] is False
+
+
+def test_amp_power_margin_validate():
+    # 连线层写入 meta.amp_warnings 的 AMP_UNDERPOWERED 应被 validate 透传成 Issue。
+    proj = Project(name="t", meta={"amp_warnings": [
+        ("WARN", "AMP_UNDERPOWERED",
+         "功放x通道1: 功率裕量不足(功放100W < 扬声器总额定200W×1.2)")]})
+    issues = validate(proj)
+    assert any(i.level == "WARN" and i.code == "AMP_UNDERPOWERED" for i in issues)
+
+
+def test_amp_power_margin_e2e():
+    # 端到端：真实 build_project 中功放功率不足，应经 router→meta→validate 报出
+    # AMP_UNDERPOWERED（此前该 warn 只塞进 note 字符串、随阻抗 ERROR 一起被吞掉，
+    # 阻抗正常时彻底无从报出 —— 静默漏报）。
+    entries = [
+        {"category": "SOURCE", "name": "话筒", "quantity": 1},
+        {"category": "MIXER", "name": "调音台", "quantity": 1},
+        {"category": "AMP", "name": "小功放", "quantity": 1,
+         "params": {"channels": 1},
+         "electrical": {"min_load_ohm": 4, "power_w_per_ch": 100}},
+        {"category": "SPEAKER", "name": "箱", "quantity": 1,
+         "params": {"impedance_ohm": 8, "power_w": 200}},
+    ]
+    p = build_project(entries, name="t")
+    assert any(i.code == "AMP_UNDERPOWERED" for i in validate(p))
 
 
 def test_dxf_roundtrip():

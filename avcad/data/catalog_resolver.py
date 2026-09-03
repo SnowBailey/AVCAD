@@ -12,9 +12,11 @@
   3) 子串：同品牌下，查询串包含或被包含于型号（应对 "ULXD4D-Q" 这类带后缀写法）
 """
 from __future__ import annotations
+import glob
 import json
 import os
 import re
+import shutil
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_JSON = os.path.join(_HERE, "eko_catalog.json")
@@ -42,10 +44,63 @@ def _tight(s):
     return re.sub(r"[\s\-_/\\]", "", str(s or "")).upper()
 
 
+def _latest_valid_backup(path):
+    """主库损坏时的兜底：在 ``path`` 同目录找最近一份**合法**的 ``.bak.*`` 备份。
+
+    - 只读介质（打包版随包内置基线 / 无写权限）无法回写，直接返回 ``None``。
+    - 备份本身也须是合法 JSON，跳过损坏的备份，避免「用坏备份覆盖坏主库」。
+    返回可回退的备份路径；找不到则返回 ``None``。
+    """
+    if not os.access(path, os.W_OK):
+        return None
+    cands = sorted(glob.glob(str(path) + ".bak.*"),
+                   key=os.path.getmtime, reverse=True)
+    for bak in cands:
+        try:
+            with open(bak, encoding="utf-8") as f:
+                json.load(f)
+        except (ValueError, OSError):
+            # 备份本身损坏或读不了 → 试更早的
+            continue
+        return bak
+    return None
+
+
+def safe_load_json(path):
+    """加载主库 JSON，带「损坏自动回退 `.bak`」保险。
+
+    ★ 2026-09-03 加：此前 ``eko_catalog.json`` 一旦被写坏（字符串内裸换行 /
+      缺闭合引号等），``json.load`` 直接抛 ``JSONDecodeError``，UI 启动即 500、
+      跑测试全红，且坏文件没有 .bak 时无处回退。现在：
+
+        1) 先正常 ``json.load``；
+        2) 抛 ``JSONDecodeError`` / ``UnicodeDecodeError`` → 透明回退到最近
+           合法 ``.bak`` 并覆盖回主文件，再成功加载；
+        3) 连备份都坏 / 无备份 → 才把异常抛上去（真正不可恢复）。
+
+    回退会打印一行告警，方便在日志里一眼看到「主库曾被自动修复」。
+    """
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        restored = _latest_valid_backup(path)
+        if restored:
+            print(f"[catalog] 主库损坏，已自动从备份恢复: {os.path.basename(restored)}")
+            # 用备份字节直接覆盖回主文件（比 shutil.copy2 更直接，
+            # 也更稳：不依赖 copy2 的元数据操作）
+            with open(restored, "rb") as f:
+                data = f.read()
+            with open(path, "wb") as f:
+                f.write(data)
+            with open(path, encoding="utf-8") as f:
+                return json.load(f)
+        raise
+
+
 class Catalog:
     def __init__(self, path: str = DEFAULT_JSON):
-        with open(path, encoding="utf-8") as f:
-            self.data = json.load(f)
+        self.data = safe_load_json(path)
         self.products = self.data.get("products", [])
         self.by_bm = {}
         self.by_code = {}

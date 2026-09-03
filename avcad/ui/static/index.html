@@ -570,7 +570,8 @@
         <label data-page-node-id="R3giH4zlsCiR2bOs8Yu904">清单内容（CSV 文本，可直接编辑）</label>
         <textarea id="bom" placeholder="设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源"></textarea>
         <div class="muted" style="margin-top:8px" data-page-node-id="qLVdZxzADJ1S7AU7LZ8K9J">
-          表头支持：设备类型 / 品牌 / 型号 / 名称 / 数量 / 特性 / 参数 / 冗余。
+          表头支持：设备类型 / 品牌 / 型号 / 名称 / 数量 / 特性 / 参数 / 冗余 / 电气。<br/>
+          电气列可填 <code>ground_wire_mm2=4;emg_spl_db=60;bg_spl_db=45</code>（接地截面积 mm² / 应急广播声压级 dB / 背景噪声 dB），用于 GB 55024-2022 强条 ERROR 级判定；也可在「③ 图例校正」页逐台填写。
         </div>
       </div>
       <div id="step1Summary" class="hidden" data-page-node-id="gLVZzBhHTAidCnfJs7NfrQ">
@@ -678,6 +679,13 @@
         <div class="muted" id="exportPhase" style="margin-top:6px" data-page-node-id="NsikCDF6Vb9Pv8UEiyP2cV">准备中…</div>
       </div>
       <div id="exportResult" class="hidden summary" style="margin-top:14px" data-page-node-id="ug10GiJj90ZERcgGglhDNr"></div>
+      <div class="divider" style="margin-top:16px;border-top:1px solid rgba(255,255,255,.1);padding-top:14px" data-page-node-id="EASE01"></div>
+      <label style="margin-top:14px" data-page-node-id="EASE02">EASE / MAPP 对接包（扬声器坐标 + 指向角 → EASE 可导入）</label>
+      <div class="row" style="margin-top:8px" data-page-node-id="EASE03">
+        <label class="chk" data-page-node-id="EASE04"><input type="checkbox" id="easeWithDxf" checked data-page-node-id="EASE05"/> 含 geometry.dxf</label>
+        <button id="btnExportEase" class="primary" disabled data-page-node-id="EASE06">⤓ 导出 EASE/MAPP 包</button>
+      </div>
+      <div id="easeResult" class="hidden summary" style="margin-top:10px" data-page-node-id="EASE07"></div>
     </div>
     <div class="modal-foot" data-page-node-id="I1KBSJm7isQkDpx5uvD98O">
       <button id="btnExportStart" class="primary" disabled data-page-node-id="hFgO6mWhoo6zdG3UXlpDfc">开始导出</button>
@@ -1079,6 +1087,9 @@ async function initLegends(){
       /* ★ 卡槽必须随图例一起带上：此前保存时前端固定传 slots: []，
          一旦编辑过图例，CS-R10 / RPio622 的 HY/MY 卡槽就被静默抹掉。 */
       slots: sv ? (sv.slots || []) : [],
+      /* ★ 电气量化参数随图例一起带：接地截面积/应急广播声压级/背景噪声，
+         用于 GB 55024 强条 ERROR 级判定；缺则退回 WARN 提醒。 */
+      electrical: sv ? (sv.electrical || {}) : {},
       saved: !!sv, revision: sv ? (sv.revision || 1) : 0,
       hist: sv ? ((sv.history || []).length) : 0, source: sv ? (sv.source || "user") : "",
       note: sv ? (sv.note || "") : "",
@@ -1289,6 +1300,9 @@ async function saveLegend(i){
     brand: it.brand, model: it.model, category: it.category,
     /* ★ 回传原 slots，不再固定清空（见 initLegends 里 slots 的取值） */
     ports: ports, slots: it.slots || [], note: it.note || "",
+    /* ★ 电气量化参数随图例落盘（接地截面积/应急广播声压级/背景噪声），
+       图例库=真相，apply 时覆盖实例 electrical，驱动 GB 55024 强条 ERROR 判定 */
+    electrical: it.electrical || {},
   });
   if(res.error){ setLgStatus(i, "保存失败：" + res.error, "err"); return false; }
   it.ports = ports;
@@ -1475,6 +1489,7 @@ function openExportModal(){
   $("btnExportOpenFolder").classList.add("hidden");
   setExportProgress(0, "准备中…");
   $("btnExportStart").disabled = !EXPORT_STATE.dir;
+  $("btnExportEase").disabled = !EXPORT_STATE.dir;
   $("btnExportStart").textContent = "开始导出";
   $("exportModal").classList.remove("hidden");
 }
@@ -1495,6 +1510,7 @@ $("btnPickDir").addEventListener("click", async ()=>{
   EXPORT_STATE.dir = res.path;
   $("exportDir").value = res.path;
   $("btnExportStart").disabled = false;
+  $("btnExportEase").disabled = false;
 });
 $("btnExportOpenFolder").addEventListener("click", async ()=>{
   await api("/api/open-folder", {path: EXPORT_STATE.path || EXPORT_STATE.dir});
@@ -1527,6 +1543,37 @@ $("btnExportStart").addEventListener("click", async ()=>{
   EXPORT_STATE.path = res.path;
   showExportResult("已保存\n" + res.path + "\n大小：" + res.bytes + " 字节", true);
   $("btnExportOpenFolder").classList.remove("hidden");
+});
+/* 导出 EASE/MAPP 对接包（speakers.csv / audience.csv / project.json / 可选 geometry.dxf） */
+$("btnExportEase").addEventListener("click", async ()=>{
+  if(EXPORT_STATE.running) return;
+  const dir = ($("exportDir").value || "").trim();
+  if(!dir){ showExportResult("请先选择保存文件夹", false); return; }
+  EXPORT_STATE.running = true;
+  $("btnExportEase").disabled = true;
+  try {
+    const res = await api("/api/export-ease", {
+      dir: dir, bom: STATE.csv, decisions: STATE.decisions,
+      redundancy: STATE.redundancy, anon: STATE.anon, name: STATE.name,
+      with_dxf: $("easeWithDxf").checked,
+    });
+    if(res.error){
+      $("easeResult").className = "summary errbox";
+      $("easeResult").textContent = "EASE 导出失败\n" + res.error;
+      $("easeResult").classList.remove("hidden");
+      return;
+    }
+    EXPORT_STATE.path = res.dir;
+    const files = Object.keys(res.files || {}).join("  ");
+    $("easeResult").className = "summary okbox";
+    $("easeResult").textContent =
+      `已导出 ${res.speaker_count} 台扬声器 / ${res.audience_count} 个聆听点\n${files}`;
+    $("easeResult").classList.remove("hidden");
+    $("btnExportOpenFolder").classList.remove("hidden");
+  } finally {
+    EXPORT_STATE.running = false;
+    $("btnExportEase").disabled = false;
+  }
 });
 /* 快速下载 DXF（浏览器直接下载） */
 $("btnExport").addEventListener("click", async ()=>{

@@ -264,6 +264,10 @@ class DeviceInstance:
     quantity: int = 1
     features: set = field(default_factory=set)
     params: dict = field(default_factory=dict)
+    # 电气属性（可选量化键，用于 GB 55024-2022 强条 ERROR 级判定）：
+    #   ground_wire_mm2 接地/等电位联结导体截面积(mm²)，强条要求 ≥4；
+    #   emg_spl_db 应急广播设计声压级(dB)；bg_spl_db 背景噪声声压级(dB)。
+    # 缺这些键则对应强条退回 WARN 提醒，不阻断。
     electrical: dict = field(default_factory=dict)
     ports: list = field(default_factory=list)   # List[ConcretePort]
     redundancy: Redundancy = Redundancy.NONE
@@ -280,6 +284,12 @@ class DeviceInstance:
     h: float = 60.0
     stage: str = ""
     redundant_group: Optional[str] = None
+    # EASE/MAPP 对接：扬声器空间姿态（单位：度，高度/长度单位：米）。
+    # 默认 0.0 = 地面层、正对前方水平、无旋转。仅在出 EASE 包时读取。
+    z: float = 0.0           # 安装高度（米），默认 0（地面层）
+    aim_az: float = 0.0     # 水平指向角 azimuth（度）
+    aim_el: float = 0.0     # 俯仰指向角 elevation（度）
+    rot_z: float = 0.0      # 绕 Z 轴安装旋转（度）
 
 
 @dataclass

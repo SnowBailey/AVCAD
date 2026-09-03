@@ -19,6 +19,7 @@
 """
 from __future__ import annotations
 import base64
+import copy
 import hashlib
 import json
 import os
@@ -56,6 +57,7 @@ from avcad.workflow.importers import (  # CSV 路径也要走同一套归一化�
     build_entries, to_bom_csv, apply_category_fallback)
 from avcad.parse.product_resolver import enrich as resolve_products
 from avcad.model.category_kb import usage_hint  # 设备类别知识库：第②步识别建议
+from avcad.deliverables.ease_mapp import export_ease_package  # ② EASE/MAPP 对接导出
 from scripts.check_overlap import check_svg
 
 STATIC = os.path.join(os.path.dirname(__file__), "static")
@@ -68,8 +70,12 @@ _ENTRY_CACHE: dict = {}
 # 与 catalog_resolver 共用同一份路径定义，避免出现第二个「主库副本」
 from avcad.data.catalog_resolver import (  # noqa: E402
     DEFAULT_JSON as _CATALOG_PATH, CAT_SPEC, DRAW_EXCLUDE_BRANDS,
+    safe_load_json,
 )
 _CATALOG = {"data": None, "mtime": 0}
+
+# 音频知识库（static/audio_kb.json）进程内缓存，只读、不参与校验写盘
+_KB_CACHE = {"data": None}
 
 # 可编辑字段与取值提示（前端据此渲染控件）
 CATEGORY_CHOICES = [
@@ -91,8 +97,7 @@ def _load_catalog():
         return {"products": []}
     if _CATALOG["data"] is not None and _CATALOG["mtime"] == mt:
         return _CATALOG["data"]
-    with open(_CATALOG_PATH, encoding="utf-8") as f:
-        data = json.load(f)
+    data = safe_load_json(_CATALOG_PATH)   # 损坏时透明回退 .bak（见 catalog_resolver）
     _CATALOG["data"] = data
     _CATALOG["mtime"] = mt
     return data
@@ -139,7 +144,10 @@ def _entries_from_bom(bom: str) -> list:
     """
     h = hashlib.sha1(bom.encode("utf-8")).hexdigest()
     if h in _ENTRY_CACHE:
-        return _ENTRY_CACHE[h]
+        # ★ 缓存命中返回深拷贝：下游（run.py / _build_dxf_bytes）会原地改条目
+        # （redundancy="NONE"、pop("pair")），直接返回共享列表会让下一次同 BOM
+        # 请求拿到被污染的脏状态。深拷贝隔离，缓存原值保持干净。
+        return copy.deepcopy(_ENTRY_CACHE[h])
     with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False, encoding="utf-8") as f:
         f.write(bom)
         tmp = f.name
@@ -150,7 +158,7 @@ def _entries_from_bom(bom: str) -> list:
     resolve_products(entries)
     entries, _dropped = apply_category_fallback(entries)
     if len(_ENTRY_CACHE) < 128:
-        _ENTRY_CACHE[h] = entries
+        _ENTRY_CACHE[h] = copy.deepcopy(entries)
     return entries
 
 
@@ -244,8 +252,8 @@ def _safe_filename(name: str) -> str:
     return n
 
 
-def _build_dxf_bytes(data: dict):
-    """按与页面预览完全一致的参数构建 DXF，返回 (bytes, 工程名)。"""
+def _build_project(data: dict):
+    """按与页面预览完全一致的参数构建工程，返回 (proj, 工程名)。供 DXF 与 EASE 导出复用。"""
     bom = data.get("bom", "")
     anon = bool(data.get("anon", False))
     entries = _entries_from_bom(bom) if bom else []
@@ -261,6 +269,12 @@ def _build_dxf_bytes(data: dict):
     # 与预览一致：同样应用第③步确认的图例
     proj = build_project(entries, name=data.get("name", "工作流系统"),
                          legend_store=LegendStore(), redundancy=lvl)
+    return proj, anon
+
+
+def _build_dxf_bytes(data: dict):
+    """按与页面预览完全一致的参数构建 DXF，返回 (bytes, 工程名)。"""
+    proj, anon = _build_project(data)
     c = Canvas()
     draw_devices(c, proj, anon=anon)
     draw_wires(c, proj, label_all=True)
@@ -277,6 +291,43 @@ def _build_dxf_bytes(data: dict):
             os.unlink(out.name)
         except OSError:
             pass
+
+
+def _api_export_ease(data: dict):
+    """导出 EASE/MAPP 对接包（speakers.csv / audience.csv / project.json / 可选 geometry.dxf）。
+
+    坐标按 doc 35 Phase A 归一化（舞台中心 mm + scale）。geometry.dxf 由标准 DXF 导出复用，
+    仅当 data["with_dxf"] 为真时附带。
+    """
+    dest = (data.get("dir") or "").strip()
+    if not dest:
+        return {"error": "未指定保存目录"}
+    dest = os.path.abspath(os.path.expanduser(dest))
+    if not os.path.isdir(dest):
+        return {"error": f"目录不存在：{dest}"}
+    if not os.access(dest, os.W_OK | os.X_OK):
+        return {"error": f"没有写入权限：{dest}"}
+    try:
+        proj, _ = _build_project(data)
+    except Exception as ex:
+        return {"error": f"工程构建失败：{ex}"}
+    dxf = None
+    if data.get("with_dxf"):
+        try:
+            dxf, _ = _build_dxf_bytes(data)
+        except Exception as ex:
+            dxf = None  # DXF 失败不阻断 CSV/JSON 导出
+    try:
+        result = export_ease_package(proj, dest, dxf_bytes=dxf)
+    except Exception as ex:
+        return {"error": f"EASE 包导出失败：{ex}"}
+    return {
+        "dir": dest,
+        "name": proj.name,
+        "files": result["files"],
+        "speaker_count": result["speaker_count"],
+        "audience_count": result["audience_count"],
+    }
 
 
 def _pick_folder_native(prompt: str):
@@ -430,6 +481,28 @@ def _module_item(m) -> dict:
             "features": list(m.features), "params": dict(m.params)}
 
 
+def _load_audio_kb():
+    """读取 static/audio_kb.json 汇总的音频知识库（图例校正页右侧「资料查询」用）。
+
+    纯只读，不触碰 eko_catalog.json / legend_library.json。文件缺失或解析失败
+    时兜底返回空结构，前端不会崩。进程内缓存一次，避免每次打开抽屉都读盘。"""
+    if _KB_CACHE["data"] is not None:
+        return _KB_CACHE["data"]
+    path = os.path.join(STATIC, "audio_kb.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict) or "entries" not in data:
+            data = {"entries": [], "categories": [], "title": "音频知识库",
+                    "version": ""}
+    except Exception as ex:
+        print(f"[AVCAD] 读取音频知识库失败: {ex}", file=sys.stderr)
+        data = {"entries": [], "categories": [], "title": "音频知识库",
+                "version": "", "error": str(ex)}
+    _KB_CACHE["data"] = data
+    return data
+
+
 def _dispatch(path, body):
     if path == "/api/load-sample-xlsx":
         """载入桌面测试文件作为样例清单，前端「载入样例清单」按钮专用。"""
@@ -467,6 +540,12 @@ def _dispatch(path, body):
         data = json.loads(body or "{}")
         return usage_hint(data.get("brand", "") or "", data.get("model", "") or "",
                           data.get("name", "") or "")
+
+    if path == "/api/kb":
+        """图例校正页右侧「资料查询」抽屉：返回汇总好的音频知识库
+        （信号词汇 / 核心概念 / 校正常见坑 / 校验码速查），前端做模糊搜索。
+        内容来自 static/audio_kb.json，纯只读、不参与校验写盘，安全。"""
+        return _load_audio_kb()
 
     if path == "/api/legend-infer":
         """图例页端口初值：由**引擎规格模板**展开，取代前端硬编码模板。
@@ -508,6 +587,7 @@ def _dispatch(path, body):
             category=data.get("category", ""),
             ports=[LegendPort(**p) for p in data.get("ports", [])],
             slots=data.get("slots", []), note=data.get("note", ""),
+            electrical=data.get("electrical", {}) or {},
         )
         # 永久文档：确认即落盘（revision 递增 + 保留维护历史）
         st.put(lg, source="user")
@@ -590,6 +670,7 @@ def _dispatch(path, body):
                 "revision": lg.revision, "updated_at": lg.updated_at,
                 "ports": [p.to_dict() for p in lg.ports],
                 "slots": list(lg.slots), "note": lg.note or "",
+                "electrical": dict(lg.electrical or {}),
                 "inferred": False,
             })
         # ② 主库里图例库尚未覆盖的
@@ -622,6 +703,7 @@ def _dispatch(path, body):
                 "revision": 0, "updated_at": "",
                 "ports": [q.to_dict() for q in lg.ports] if lg else [],
                 "slots": list(lg.slots) if lg else [], "note": "",
+                "electrical": dict(lg.electrical or {}) if lg else {},
                 "inferred": lg is not None,
                 "catalog": _catalog_item(i, p),
             })
@@ -687,7 +769,9 @@ def _dispatch(path, body):
         for e in entries:
             if not isinstance(e, dict):
                 # 防御：跳过非字典条目，避免 'str' object has no attribute 'get'
-                import sys
+                # 注：sys 已在模块顶层 import，这里不再 import —— 否则会把 _dispatch
+                # 内的模块级 sys 遮蔽成局部变量，导致下方 614 行 except 日志触发
+                # UnboundLocalError（既有潜伏 bug，2026-09-03 随写盘拦截暴露）
                 print(f"[AVCAD] legend-check 跳过非字典条目: type={type(e).__name__} value={str(e)[:80]!r}",
                       file=sys.stderr)
                 continue
@@ -829,6 +913,9 @@ def _dispatch(path, body):
 
     if path == "/api/export-save":
         return _api_export_save(json.loads(body or "{}"))
+
+    if path == "/api/export-ease":
+        return _api_export_ease(json.loads(body or "{}"))
 
     if path == "/api/pick-folder":
         return _api_pick_folder(json.loads(body or "{}"))

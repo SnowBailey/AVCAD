@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 
 from avcad.workflow.importers import (
-    classify_category, is_rigging, is_placeholder,
+    classify_category, is_rigging, is_placeholder, is_header_row,
     extract_params, extract_features,
     build_entries, to_bom_csv,
 )
@@ -23,6 +23,25 @@ def test_is_placeholder_needs_empty_brand_and_model():
     assert not is_placeholder("自配", {"品牌": "", "型号": "XX-1"})
     # 非占位词
     assert not is_placeholder("数字调音台", {"品牌": "", "型号": ""})
+
+
+def test_is_header_row_detects_placeholder_brand_model():
+    """表头残留行（品牌/型号列正好是表头别名）应识别为表头行。
+
+    菏泽曹州古城清单实测：一行 brand='品牌' model='型号\\nmodel number' 被误当
+    设备，挤占下游端口导致第二台真实 QU-16 孤立。本判定用来拦掉这种幽灵行。
+    """
+    # 品牌列命中表头别名
+    assert is_header_row({"品牌": "品牌", "型号": "QU-16", "设备名称": "数字调音台"})
+    # 型号列命中表头别名（含换行）
+    assert is_header_row({"品牌": "IPS", "型号": "型号\nmodel number", "设备名称": "x"})
+    # 设备名称列命中表头别名
+    assert is_header_row({"品牌": "IPS", "型号": "FIRM4×8", "设备名称": "设备名称"})
+    # 真实设备：品牌型号都是真值 -> 不是表头行
+    assert not is_header_row({"品牌": "Allen&Heath", "型号": "QU-16",
+                              "设备名称": "数字调音台"})
+    assert not is_header_row({"品牌": "IPS", "型号": "FIRM4×8",
+                              "设备名称": "音箱管理器"})
 
 
 def test_classify_category_basic():
