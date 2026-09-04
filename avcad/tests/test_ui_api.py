@@ -100,6 +100,124 @@ def test_parse_xlsx_real(tmp_path):
     assert any("吊架" in d for d in r["dropped"])
 
 
+def test_parse_xlsx_multipage(tmp_path):
+    # 多页（多工作表）xlsx：每个工作表应解析为独立的一页
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws1 = wb.active
+    ws1.title = "主扩系统"
+    ws1.append(["设备名称", "品牌", "型号", "数量", "指标参数"])
+    ws1.append(["数字调音台", "Yamaha", "TF5", 1, "dante;control"])
+    ws2 = wb.create_sheet("会议室B")
+    ws2.append(["设备名称", "品牌", "型号", "数量", "指标参数"])
+    ws2.append(["音柱音箱", "L-Acoustics", "KARA", 2, ""])
+    path = tmp_path / "multi.xlsx"
+    wb.save(path)
+    b64 = base64.b64encode(path.read_bytes()).decode()
+    r = _call("/api/parse", {"filename": "multi.xlsx", "b64": b64})
+    pages = r["pages"]
+    assert len(pages) == 2, pages
+    names = {p["name"] for p in pages}
+    assert "主扩系统" in names and "会议室B" in names
+    # 每页自带独立 CSV
+    assert all(p["csv"] for p in pages)
+
+
+def test_run_multipage_renders_each_sheet(tmp_path):
+    # /api/run 接收 pages（各工作表 CSV）后逐页出图，返回 multi + pages
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws1 = wb.active
+    ws1.title = "主扩系统"
+    ws1.append(["设备名称", "品牌", "型号", "数量", "指标参数"])
+    ws1.append(["数字调音台", "Yamaha", "TF5", 1, "dante;control"])
+    ws2 = wb.create_sheet("会议室B")
+    ws2.append(["设备名称", "品牌", "型号", "数量", "指标参数"])
+    ws2.append(["音柱音箱", "L-Acoustics", "KARA", 2, ""])
+    path = tmp_path / "multi.xlsx"
+    wb.save(path)
+    b64 = base64.b64encode(path.read_bytes()).decode()
+    pr = _call("/api/parse", {"filename": "multi.xlsx", "b64": b64})
+    pages = pr["pages"]
+    page_names = {str(i): p["name"] for i, p in enumerate(pages)}
+    r = _call("/api/run", {
+        "pages": [p["csv"] for p in pages],
+        "page_names": page_names,
+        "require_legend": True,
+    })
+    assert r["multi"] is True
+    assert len(r["pages"]) == 2
+    assert r["pages"][0]["name"] == "主扩系统"
+    assert r["pages"][1]["name"] == "会议室B"
+    # 每页都有独立 SVG 与可导出 CSV
+    for pg in r["pages"]:
+        assert pg["svg"]
+        assert pg["csv"]
+    # 两页设备集合不同（TF5 仅在第 0 页，KARA 仅在第 1 页）
+    models0 = {d["model"] for d in r["pages"][0]["devices"]}
+    models1 = {d["model"] for d in r["pages"][1]["devices"]}
+    assert "TF5" in models0 and "TF5" not in models1
+    assert "KARA" in models1 and "KARA" not in models0
+
+
+def test_parse_xlsx_mixed_header_aliases(tmp_path):
+    """守卫：同一文件里各表**列名写法不同**时，每表仍须各成一页。
+
+    ★ 2026-09-04 真实文件「大数据指挥中心音频系统改造.xlsx」踩坑：
+      「高配」表表头写 **货物名称**，「中配」表写 **设备名称**。
+      「货物名称」当时不在 ``HEADER_ALIASES["设备名称"]`` 白名单内，
+      ``_find_header_row`` 返回 -1 → 整表被判「无表头」丢弃 →
+      两页清单只解析出 1 页（multi=False）。
+
+    这是**硬编码名单**的固有风险（新增列名变体要同步 N 处），
+    故把真实文件名列固化在此，防止别名被误删后静默丢表。
+    """
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws1 = wb.active
+    ws1.title = "高配"
+    ws1.append(["大数据指挥中心音频系统改造"])      # 标题行（真实清单常见干扰）
+    ws1.append(["序号", "货物名称", "品牌", "型号", "技术要求", "数量", "单位", "单价"])
+    ws1.append([1, "主扩扬声器", "IPS", "BF12", "", 6, "只", ""])
+    ws2 = wb.create_sheet("中配")
+    ws2.append(["大数据指挥中心音频系统改造"])
+    ws2.append(["序号", "设备名称", "品牌", "型号", "技术要求", "数量", "单位", "单价"])
+    ws2.append([1, "主扩扬声器", "IPS", "BF12", "", 4, "只", ""])
+    path = tmp_path / "mixed_header.xlsx"
+    wb.save(path)
+    b64 = base64.b64encode(path.read_bytes()).decode()
+    r = _call("/api/parse", {"filename": "mixed_header.xlsx", "b64": b64})
+    names = [p["name"] for p in r["pages"]]
+    assert names == ["高配", "中配"], f"列名写法不同的两张表应各成一页，实际：{names}"
+
+
+def test_parse_xlsx_without_name_column(tmp_path):
+    """守卫：**没有名称列**、只有「品牌 / 型号 / 数量」的清单也必须能出图。
+
+    ★ 阳哥 2026-09-04 明确：真实清单常常就没有名称列。
+      此前 ``_find_header_row`` 要求「设备名称」+「型号」同时命中、
+      ``_sheet_rows`` 也硬性要求存在「设备名称」列，缺名称列的表会被
+      整表判为「无表头」丢弃（多页清单静默少页，且不报错）。
+
+      现规则：以「型号」列为锚 + 至少还有名称/品牌/数量之一即为表头；
+      无名称列时用「品牌 型号」合成设备名。本用例钉住该行为。
+    """
+    import openpyxl
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "无名称列"
+    ws.append(["品牌", "型号", "数量"])
+    ws.append(["Yamaha", "TF5", 1])
+    ws.append(["L-Acoustics", "KARA", 4])
+    path = tmp_path / "no_name_col.xlsx"
+    wb.save(path)
+    b64 = base64.b64encode(path.read_bytes()).decode()
+    r = _call("/api/parse", {"filename": "no_name_col.xlsx", "b64": b64})
+    assert [p["name"] for p in r["pages"]] == ["无名称列"], r["pages"]
+    models = sorted({m["model"] for m in r["modules"]})
+    assert models == ["KARA", "TF5"], f"两台设备都应解析出来，实际：{models}"
+
+
 def test_legend_put_get(monkeypatch, tmp_path):
     # 用临时缓存文件，避免测试污染真实的 avcad/data/legend_cache.json
     import avcad.workflow.legend_store as ls
@@ -414,7 +532,12 @@ def test_wire_legend_block_rendered():
 
 
 def test_wire_legend_only_lists_used_signals():
-    """只列本图实际出现的信号类型，不出现图中没有的线型。"""
+    """只列本图实际出现的信号类型，不出现图中没有的线型。
+
+    ★ TF5 调音台规格自带 DANTE io 端口，按「Dante 一律进交换机」规则会被正确
+    连到自动生成的交换机，故本图**有** Dante 连接、线型说明应列出 Dante。
+    （此前 io 端口被 ``_dante_pass`` 静默丢弃、不列出——那是 bug，已修复。）
+    """
     bom = ("设备类型,品牌,型号,名称,数量,特性,参数,冗余,处理器功能,有源\n"
            "SOURCE,,,,会议话筒,2,,,,\n"
            "MIXER,Yamaha,TF5,数字调音台,1,,inputs=32;outputs=16,,,\n"
@@ -423,7 +546,7 @@ def test_wire_legend_only_lists_used_signals():
     texts = _legend_texts(_call("/api/run", {"bom": bom})["svg"])
     assert "模拟音频（XLR）" in texts
     assert "扬声器功率线" in texts
-    assert "Dante 网络音频" not in texts, "本图无 Dante 连接，不应列出"
+    assert "Dante 网络音频" in texts, "TF5 自带 DANTE io 端口，应被连到交换机并列出"
 
 
 def test_wire_legend_backup_row_when_redundant():

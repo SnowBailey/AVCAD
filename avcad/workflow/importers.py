@@ -147,7 +147,7 @@ def _qty(v) -> int:
 
 # 表头别名 -> 标准列名（真实清单千差万别，大小写/换行/中英混用都要兜住）
 HEADER_ALIASES = {
-    "设备名称": ["设备名称", "产品名称", "名称", "设备名",
+    "设备名称": ["设备名称", "产品名称", "名称", "设备名", "货物名称", "品名", "货物",
                 "设备名称\nname of equipment", "name of equipment", "name"],
     "品牌": ["品牌", "品牌/国别", "品牌/产地", "厂商", "brand", "manufacturer",
             "品牌/国别\nbrand/country", "brand/country"],
@@ -166,12 +166,25 @@ PRICELIST_ZERO_RATIO = 0.6   # 数量列空/零占比超过此值 -> 价目表
 
 
 def _find_header_row(rows) -> int:
-    """在前 12 行内找表头行：必须同时含「设备名称类」与「型号类」列。"""
+    """在前 12 行内找表头行：**以「型号类」列为锚**。
+
+    ★ 2026-09-04 放宽：此前要求「设备名称类」与「型号类」**同时**命中，
+      导致只有「品牌 / 型号 / 数量」三列、**没有名称列**的清单被判为
+      「无表头」→ 整表丢弃（多页清单会静默少一页，且无任何报错）。
+
+      现规则：必须有「型号类」列（设备清单最强特征），
+      且**至少还有**「设备名称 / 品牌 / 数量」三者之一，
+      既覆盖无名称列的清单，又避免误命中只有「型号」的纯参数表。
+    """
     name_keys = set(HEADER_ALIASES["设备名称"])
+    brand_keys = set(HEADER_ALIASES["品牌"])
+    qty_keys = set(HEADER_ALIASES["数量"])
     model_keys = set(HEADER_ALIASES["型号"])
     for i, r in enumerate(rows[:12]):
         cells = {str(c).strip().lower() for c in r if c is not None}
-        if cells & name_keys and cells & model_keys:
+        if not (cells & model_keys):
+            continue
+        if cells & (name_keys | brand_keys | qty_keys):
             return i
     return -1
 
@@ -258,16 +271,21 @@ def _sheet_rows(rows):
     hmap = _normalize_header(rows[hi])
     # ★ hmap 是 {列下标: 标准名}，判存在要查 values() 而不是 key
     stds = set(hmap.values())
-    if "设备名称" not in stds or "型号" not in stds:
+    if "型号" not in stds:
         return None
-    cn = next(i for i, k in hmap.items() if k == "设备名称")
+    # ★ 无「设备名称」列的清单（只有品牌/型号/数量）同样可出图：
+    #   此时以「型号」列作为判定有效行的锚列（见下方设备名合成）。
+    cn = next((i for i, k in hmap.items() if k == "设备名称"), None)
+    cm = next((i for i, k in hmap.items() if k == "型号"), None)
     cq = next((i for i, k in hmap.items() if k == "数量"), None)
+    key_col = cn if cn is not None else cm
     # 价目表识别：列数爆炸，或数量列几乎全空/零
     max_col = max((len(r) for r in rows), default=0)
     if max_col > PRICELIST_MAX_COLS:
         return None
     named = [r for r in rows[hi + 1:]
-             if cn < len(r) and r[cn] is not None and str(r[cn]).strip()]
+             if key_col is not None and key_col < len(r)
+             and r[key_col] is not None and str(r[key_col]).strip()]
     if len(named) >= PRICELIST_MIN_ROWS and cq is not None:
         zero = 0
         for r in named:
@@ -293,7 +311,21 @@ def _sheet_rows(rows):
         for std in HEADER_ALIASES:
             row.setdefault(std, None)
         if not str(row.get("设备名称") or "").strip():
-            continue
+            if cn is None:
+                # ★ 整表都没有「名称」列（只有品牌/型号/数量）：用「品牌 型号」合成设备名。
+                #   否则这种清单会因整表为空而被丢弃（多页清单静默少一页）。
+                synth = " ".join(
+                    str(row.get(k) or "").strip()
+                    for k in ("品牌", "型号")
+                    if str(row.get(k) or "").strip())
+                if not synth:
+                    continue
+                row["设备名称"] = synth
+            else:
+                # ★ 表里有名称列、但**本行**名称为空 = 续行 / 小计 / 分组标题，
+                #   必须按原逻辑丢弃。若在这里也合成，会把 L-ACOUSTICS 等真实
+                #   清单里的续行合成成孤岛设备（实测多出 6 台孤立 IO，2026-09-04）。
+                continue
         out.append(row)
     return out
 

@@ -22304,7 +22304,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 500
+        "power_w": 500,
+        "legend_rev": 11,
+        "synced_at": "2026-09-04T23:28:30+08:00"
       },
       "country": "中国",
       "unit": "只",
@@ -22670,7 +22672,9 @@
       "active": false,
       "params": {
         "impedance_ohm": 8,
-        "power_w": 600
+        "power_w": 600,
+        "legend_rev": 11,
+        "synced_at": "2026-09-04T23:28:29+08:00"
       },
       "country": "中国",
       "unit": "个",
@@ -23695,7 +23699,9 @@
       "params": {
         "impedance_ohm": 8,
         "channels_hint": 2,
-        "channels": 2
+        "channels": 2,
+        "legend_rev": 11,
+        "synced_at": "2026-09-04T23:28:30+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -25704,8 +25710,8 @@
       "params": {
         "impedance_ohm": 600,
         "channels_hint": 1,
-        "legend_rev": 6,
-        "synced_at": "2026-09-01T09:47:11+08:00"
+        "legend_rev": 26,
+        "synced_at": "2026-09-04T23:28:30+08:00"
       },
       "country": "中国",
       "unit": "台",
@@ -26041,8 +26047,8 @@
           "rx": 1,
           "tx": 2
         },
-        "legend_rev": 11,
-        "synced_at": "2026-09-01T18:20:58+08:00"
+        "legend_rev": 17,
+        "synced_at": "2026-09-04T23:28:30+08:00"
       },
       "country": "中国",
       "unit": "套",
@@ -26133,8 +26139,8 @@
       "params": {
         "impedance_ohm": 50,
         "cascade_outs": 2,
-        "legend_rev": 9,
-        "synced_at": "2026-09-01T18:20:58+08:00",
+        "legend_rev": 16,
+        "synced_at": "2026-09-04T23:28:31+08:00",
         "inputs": 2,
         "outputs": 10
       },
@@ -26952,8 +26958,8 @@
       ],
       "active": false,
       "params": {
-        "legend_rev": 9,
-        "synced_at": "2026-09-01T18:20:58+08:00",
+        "legend_rev": 27,
+        "synced_at": "2026-09-04T23:28:29+08:00",
         "inputs": 12,
         "outputs": 10
       },
@@ -28276,7 +28282,9 @@
       ],
       "active": true,
       "params": {
-        "power_w": 600
+        "power_w": 600,
+        "legend_rev": 19,
+        "synced_at": "2026-09-04T23:28:29+08:00"
       },
       "country": "中国",
       "unit": "只",

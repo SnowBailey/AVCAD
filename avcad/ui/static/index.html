@@ -3,6 +3,8 @@
 <head data-page-node-id="hU3Mr3vSpcqYnj5yZJ2aIl">
 <meta charset="utf-8" data-page-node-id="CRulVLWmwT13vu2RcDu6p3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="5mrgANTDR4UDOFqy8MAXE6"/>
+<!-- 抑制浏览器自动请求 favicon.ico 导致的 404（dev server 没这个路由）-->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='14' font-size='14'%3E🔊%3C/text%3E%3C/svg%3E"/>
 <title>AVCAD@Bailey@EZPRO · 音视频系统图自动生成</title>
 <style>
   /* ============ 设计令牌（NEXAVERSE 风格：深空 / 霓虹 / 影院感） ============ */
@@ -434,6 +436,39 @@
   #genReport{display:none}
   /* 第5步底部操作行 */
   #genDone > .row{flex-wrap:wrap;gap:10px}
+  /* 多页标签栏（按多页 BOM 分页，可一页一页查看 / 导出） */
+  .pagetabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .pagetabs.hidden{display:none!important}
+  .pagetab{
+    appearance:none;cursor:pointer;font:inherit;font-size:13px;font-weight:600;
+    letter-spacing:.02em;color:var(--mut);
+    background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:8px 16px;transition:all .18s ease;
+  }
+  .pagetab:hover{color:var(--txt);border-color:var(--line-strong);background:rgba(255,255,255,.07)}
+  .pagetab.active{
+    color:#03050b;border-color:transparent;
+    background:linear-gradient(135deg,var(--acc),var(--acc2));
+    box-shadow:var(--glow-acc);
+  }
+  /* ① 表导入说明（可折叠） */
+  .importspec{margin-top:14px;border:1px solid var(--line);border-radius:12px;
+              background:var(--panel2);overflow:hidden}
+  .importspec > summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:13px;
+                        color:var(--txt);list-style:none;user-select:none}
+  .importspec > summary::-webkit-details-marker{display:none}
+  .importspec > summary::before{content:"▸ ";color:var(--acc)}
+  .importspec[open] > summary::before{content:"▾ ";color:var(--acc)}
+  .importspec .is-body{padding:0 14px 14px;font-size:12.5px;color:var(--mut);line-height:1.7}
+  .importspec table{width:100%;border-collapse:collapse;margin:8px 0}
+  .importspec th,.importspec td{border:1px solid var(--line);padding:5px 8px;
+                                text-align:left;vertical-align:top}
+  .importspec th{color:var(--txt);background:rgba(255,255,255,.04);
+                 font-weight:600;white-space:nowrap}
+  .importspec code{background:rgba(255,255,255,.07);padding:1px 5px;border-radius:4px;font-size:12px}
+  .importspec .is-tpl{background:rgba(4,7,14,.7);border:1px solid var(--line);border-radius:8px;
+                      padding:8px 10px;white-space:pre;overflow-x:auto;
+                      font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--txt)}
   /* 图例预览小图 */
   .lg-preview{
     background:rgba(4,7,14,.7);border:1px solid var(--line);border-radius:12px;
@@ -574,6 +609,47 @@
           电气列可填 <code>ground_wire_mm2=4;emg_spl_db=60;bg_spl_db=45</code>（接地截面积 mm² / 应急广播声压级 dB / 背景噪声 dB），用于 GB 55024-2022 强条 ERROR 级判定；也可在「③ 图例校正」页逐台填写。
         </div>
       </div>
+      <details class="importspec" id="importSpec" data-page-node-id="importSpecBox">
+        <summary data-page-node-id="importSpecSum">📋 表导入说明（列名要求 · 模板 · 会自动跳过的内容）</summary>
+        <div class="is-body" data-page-node-id="importSpecBody">
+          <div><b style="color:var(--txt)">最少要求</b>：必须有 <code>型号</code> 列（程序以它认表头），
+            且至少还有 <code>设备名称</code> / <code>品牌</code> / <code>数量</code> 三者之一。
+            <b>没有名称列也能出图</b>——设备名会自动用「品牌 + 型号」合成。</div>
+
+          <table>
+            <tr><th>标准列</th><th>程序识别的写法（任选其一）</th><th>作用</th></tr>
+            <tr><td>型号 <b style="color:var(--acc3)">（必需）</b></td><td>型号 / 规格型号 / 产品型号 / model</td><td>查主库、定类别与端口</td></tr>
+            <tr><td>设备名称</td><td>设备名称 / 货物名称 / 产品名称 / 名称 / 品名 / 货物 / name</td><td>图上显示名（可省）</td></tr>
+            <tr><td>品牌</td><td>品牌 / 品牌(国别) / 厂商 / brand / manufacturer</td><td>「IPS/深圳」自动归一为「IPS」</td></tr>
+            <tr><td>数量</td><td>数量 / 台数 / qty / quantity</td><td>展开台数（26 支话筒 → 26 台）</td></tr>
+            <tr><td>指标参数</td><td>指标参数 / 技术参数 / 规格 / 参数 / spec</td><td>提取功率、阻抗、通道数</td></tr>
+            <tr><td>单位</td><td>单位 / 计量单位 / unit</td><td>仅作显示</td></tr>
+          </table>
+
+          <div><b style="color:var(--txt)">程序会自动跳过的内容</b>（你不用手动删）：</div>
+          <div>· 非信号设备：电源时序器、线材辅料、机柜、支架、安装架等；</div>
+          <div>· 名称列为空的行：按「续行 / 小计 / 分组标题」丢弃；</div>
+          <div>· 疑似价目表的工作表（列数 &gt; 30，或 ≥20 行且数量列超 6 成为空或零）；</div>
+          <div>· 没有有效设备行的工作表（多页时不会出现空白页）。</div>
+
+          <div style="margin-top:8px"><b style="color:var(--txt)">多工作表 = 多页</b>：一个 xlsx 有几张配置表就出几个标签页，
+            可逐页查看、逐页导出单页 DXF（例如「高配 / 中配」两套方案）。</div>
+
+          <div style="margin-top:8px"><b style="color:var(--txt)">最小模板</b>（只有三列也能出图）：</div>
+          <div class="is-tpl">品牌,型号,数量
+IPS,BF12,6
+IPS,GMN1208D,3</div>
+
+          <div style="margin-top:8px"><b style="color:var(--txt)">推荐模板</b>（信息越全，归类与端口越准）：</div>
+          <div class="is-tpl">设备名称,品牌,型号,数量,指标参数
+主扩柱体扬声器,IPS,BF12,6,power_w=600;impedance_ohm=8
+数字音频处理器,IPS,GMN1208D,3,inputs=12;outputs=10
+会议话筒,IPS,CF2123,26,phantom</div>
+
+          <div style="margin-top:8px">表头前允许有标题行（程序会在前 12 行内自动找表头）。
+            支持 .xlsx / .xls / .csv / .txt，也可以直接把上表粘进上面的文本框。</div>
+        </div>
+      </details>
       <div id="step1Summary" class="hidden" data-page-node-id="gLVZzBhHTAidCnfJs7NfrQ">
         <div class="summary okbox" id="step1SummaryText" data-page-node-id="KozMV15JbLxn2ccbenAMw3"></div>
         <div class="row" data-page-node-id="0Mm9wBOKBiI24rXT6qNXpt"><button id="btnReimport" class="ghost" data-page-node-id="cXkgxU4oKTprmRuBTGscyp">重新导入</button></div>
@@ -634,6 +710,7 @@
       </div>
 
       <div id="genDone" class="hidden" data-page-node-id="aLAvVBFX0fjrjp8oCx0EX4">
+        <div id="pageTabs" class="pagetabs hidden" data-page-node-id="pgTabs"></div>
         <div id="svg" data-page-node-id="CfcXwvNOysHZVNHj0P7btT"></div>
         <div class="summary" id="genReport" data-page-node-id="i9rvWDsE9xzTG296zwhlmj"></div>
         <div class="row" data-page-node-id="5MxxSEpBoHj3pDgbwlkHt6">
@@ -737,6 +814,7 @@ let STATE = {
   legendItems: [], library: null,
   redundancy: "NONE", architectures: [], arch: null,
   anon: false, generated: false, svg: "", report: "", genData: null,
+  activePage: 0, parsePages: [],
 };
 
 /* ==================== 步骤导航 ==================== */
@@ -824,6 +902,8 @@ function parseRes(res){
   STATE.dropped = res.dropped || [];
   STATE.decisions = {};
   STATE.reimport = false;
+  STATE.parsePages = res.pages || [];
+  STATE.activePage = 0;
   STATE.generated = false; STATE.svg = ""; STATE.genData = null;
   $("genDone").classList.add("hidden");
   $("genGate").classList.remove("hidden");
@@ -1423,10 +1503,20 @@ $("btnBack4").addEventListener("click", ()=>goto(4));
 async function doGenerate(){
   if(!STATE.csv){ toast("请先导入清单"); return; }
   $("btnGenGo").disabled = true;
-  const res = await api("/api/run", {
+  // 多页 BOM（按导入的多页 xlsx 分页）：把每个工作表作为一页送出图
+  const pages = STATE.parsePages || [];
+  const multi = pages.length > 1;
+  const runBody = {
     bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
     name: STATE.name, anon: STATE.anon, require_legend: true,
-  });
+  };
+  if(multi){
+    runBody.pages = pages.map(p => p.csv);
+    const names = {};
+    pages.forEach((p, i) => { names[String(i)] = p.name; });
+    runBody.page_names = names;
+  }
+  const res = await api("/api/run", runBody);
   $("btnGenGo").disabled = false;
   if(res.error){
     toast(res.error);
@@ -1436,16 +1526,80 @@ async function doGenerate(){
     $("btnFixLegend").classList.remove("hidden");
     return;
   }
+  const isRerun = !!(STATE.generated && STATE.genData);  // ★ setAnon/匿名切换重跑时保留当前页
   STATE.generated = true;
-  STATE.svg = res.svg || "";
   STATE.genData = res;
-  STATE.report = renderGenReport(res);
-  $("svg").innerHTML = STATE.svg;
-  $("genReport").textContent = STATE.report;
+  if(!isRerun) STATE.activePage = 0;
+  renderActivePage(res);
+  renderPageTabs(res);
   $("genGate").classList.add("hidden");
   $("genDone").classList.remove("hidden");
   updateRightPanel(5);
   scrollToEl($("genDone"));
+}
+/* 渲染当前激活页（多页标签切换时复用） */
+function renderActivePage(res){
+  const pages = (res && res.pages) || [res];
+  const i = STATE.activePage || 0;
+  const pg = pages[i] || pages[0];
+  if(!pg) return;
+  STATE.svg = pg.svg || "";
+  STATE.report = renderGenReport(pg);
+  // e2e / 数据容器（隐藏，仅供脚本读取，与可见图保持一致）
+  const svgEl = $("svg");
+  if(svgEl) svgEl.innerHTML = STATE.svg;
+  // ★ 真可见大图容器是 #preview（.preview 有 overflow:auto），切页必须刷这里的内容 + 滚回顶
+  const prev = $("preview");
+  if(prev){
+    prev.innerHTML = STATE.svg;
+    prev.scrollTop = 0;   // 否则 .preview 继承上一页 scrollTop，视觉上看不出切换
+  }
+  $("genReport").textContent = STATE.report;
+  // ★ 切页提示，确保变化"看得见"（阳哥实测：只高亮不切换 → 实际是 #preview 没被换内容 + 滚在中段看不出来）
+  toast("已切换到「" + (pg.name || ("第" + (i + 1) + "页")) + "」");
+}
+/* 多页标签栏：仅当 multi 时显示，点击切换到对应页。
+   ★ 事件委托：监听器只挂在容器 #pageTabs 一次，renderPageTabs 重建按钮时
+     不再反复 add/remove listener，避免「real click 在重建窗口内漏触发」导致
+     阳哥报的「点高配不切图」。 */
+function renderPageTabs(res){
+  const tabs = $("pageTabs");
+  const pages = (res && res.pages) || [];
+  if(!res || !res.multi || pages.length <= 1){
+    tabs.classList.add("hidden");
+    tabs.innerHTML = "";
+    return;
+  }
+  tabs.classList.remove("hidden");
+  tabs.innerHTML = "";
+  pages.forEach((pg, i) => {
+    const b = document.createElement("button");
+    b.className = "pagetab" + (i === (STATE.activePage || 0) ? " active" : "");
+    b.dataset.i = String(i);      // 委托依据：data-i
+    b.textContent = pg.name || ("第" + (i + 1) + "页");
+    tabs.appendChild(b);
+  });
+}
+/* 标签页事件委托：挂在容器上，按钮重建不影响 */
+$("pageTabs").addEventListener("click", (e) => {
+  const btn = e.target.closest(".pagetab");
+  if(!btn) return;
+  const i = parseInt(btn.dataset.i, 10);
+  if(Number.isNaN(i)) return;
+  const res = STATE.genData;
+  if(!res || !res.pages || i < 0 || i >= res.pages.length) return;
+  STATE.activePage = i;
+  renderActivePage(res);
+  renderPageTabs(res);
+});
+/* 当前激活页的清单 CSV（用于「一页一页导出」DXF） */
+function activePageCsv(){
+  const res = STATE.genData;
+  if(res && res.pages && res.pages.length){
+    const pg = res.pages[STATE.activePage || 0] || res.pages[0];
+    if(pg && pg.csv) return pg.csv;
+  }
+  return STATE.csv;
 }
 function renderGenReport(res){
   const lines = [];
@@ -1466,11 +1620,12 @@ function renderGenReport(res){
 
 /* ==================== 导出 CAD ==================== */
 let EXPORT_STATE = {dir: "", path: "", running: false};
-function defaultExportName(){
+function defaultExportBase(){
   const d = new Date();
   const p = n => String(n).padStart(2, "0");
-  return "AVCAD_" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + ".dxf";
+  return "AVCAD_" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate());
 }
+function defaultExportName(){ return defaultExportBase() + ".dxf"; }
 function setExportProgress(pct, phase){
   $("exportBar").style.width = pct + "%";
   if(phase) $("exportPhase").textContent = phase;
@@ -1482,7 +1637,13 @@ function showExportResult(text, ok){
   el.classList.remove("hidden");
 }
 function openExportModal(){
-  $("exportName").value = defaultExportName();
+  let nm = defaultExportName();
+  const res = STATE.genData;
+  if(res && res.multi && res.pages && res.pages[STATE.activePage || 0]){
+    const pn = res.pages[STATE.activePage || 0].name || "";
+    if(pn) nm = defaultExportBase() + "_" + pn + ".dxf";
+  }
+  $("exportName").value = nm;
   $("exportDir").value = EXPORT_STATE.dir || "";
   $("exportResult").classList.add("hidden");
   $("exportProgressWrap").classList.add("hidden");
@@ -1528,7 +1689,7 @@ $("btnExportStart").addEventListener("click", async ()=>{
   setExportProgress(45, "正在写入 DXF（R2010，含线型说明）…");
   const res = await api("/api/export-save", {
     dir: dir, filename: $("exportName").value,
-    bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
+    bom: activePageCsv(), decisions: STATE.decisions, redundancy: STATE.redundancy,
     anon: STATE.anon, name: STATE.name,
   });
   EXPORT_STATE.running = false;
@@ -1575,10 +1736,35 @@ $("btnExportEase").addEventListener("click", async ()=>{
     $("btnExportEase").disabled = false;
   }
 });
-/* 快速下载 DXF（浏览器直接下载） */
+/* 快速下载 DXF（单页：当前激活页 1 张 dxf；多页：一次性打包成 zip 全下，2026-09-04 R_fix） */
 $("btnExport").addEventListener("click", async ()=>{
+  const pages = (STATE.genData && STATE.genData.pages) || [];
+  if(pages.length > 1){
+    // 多页：每页转 dict（CSV + 名）→ 后端在内存里 zip 全部 → 浏览器下 1 个 zip
+    const res = await api("/api/export-all", {
+      name: STATE.name,
+      pages: pages.map((pg, i) => ({
+        csv: pg.csv || "",
+        name: pg.name || ("第" + (i + 1) + "页"),
+      })),
+      decisions: STATE.decisions, redundancy: STATE.redundancy, anon: STATE.anon,
+    });
+    if(res.error){ toast("导出失败：" + res.error); return; }
+    const bin = atob(res.zip_b64);
+    const bytes = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
+    const url = URL.createObjectURL(new Blob([bytes], {type:"application/zip"}));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = (res.name || "AVCAD") + "_" + (res.count || pages.length) + "页.zip";
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    toast("已下载 " + (res.count || pages.length) + " 张 DXF（zip 包）");
+    return;
+  }
+  // 单页：行为不变
   const res = await api("/api/export", {
-    bom: STATE.csv, decisions: STATE.decisions, redundancy: STATE.redundancy,
+    bom: activePageCsv(), decisions: STATE.decisions, redundancy: STATE.redundancy,
     anon: STATE.anon, name: STATE.name,
   });
   if(res.error){ toast("导出失败：" + res.error); return; }

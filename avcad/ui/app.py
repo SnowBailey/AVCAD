@@ -21,6 +21,7 @@ from __future__ import annotations
 import base64
 import copy
 import hashlib
+import io
 import json
 import os
 import platform
@@ -31,6 +32,7 @@ import sys
 import tempfile
 import time
 import webbrowser
+import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
 
@@ -54,7 +56,7 @@ from avcad.workflow.legend_sync import (  # R10 反向同步：图例库 -> 主�
 )
 from avcad.workflow.architecture import select
 from avcad.workflow.importers import (  # CSV 路径也要走同一套归一化（R12）
-    build_entries, to_bom_csv, apply_category_fallback)
+    build_entries, to_bom_csv, apply_category_fallback, read_xlsx_sheets)
 from avcad.parse.product_resolver import enrich as resolve_products
 from avcad.model.category_kb import usage_hint  # 设备类别知识库：第②步识别建议
 from avcad.deliverables.ease_mapp import export_ease_package  # ② EASE/MAPP 对接导出
@@ -163,7 +165,13 @@ def _entries_from_bom(bom: str) -> list:
 
 
 def _decode_upload(body: dict):
-    """解析上传：xlsx(base64) 或 csv 文本 -> (entries, csv, dropped_names, notes)。"""
+    """解析上传：xlsx(base64) 或 csv 文本 -> (entries, csv, dropped_names, notes, pages)。
+
+    pages = [{name, csv, count}]：多工作表 xlsx 时每个工作表拆成一页（第⑤步按页出图、
+    可一页一页导出）；单工作表 / csv / 文本清单则为单页。``csv`` 仍是全表聚合，供
+    第②/③步模块与图例确认（型号级，跨页去重）使用。
+    """
+    pages = []
     if body.get("b64") and body.get("filename"):
         raw = base64.b64decode(body["b64"])
         ext = os.path.splitext(body["filename"])[1].lower()
@@ -172,24 +180,45 @@ def _decode_upload(body: dict):
             tmp = f.name
         try:
             if ext in (".xlsx", ".xls"):
-                entries, dropped = build_entries(tmp)
-                csv = to_bom_csv(entries)
+                sheets = read_xlsx_sheets(tmp)
+                if len(sheets) > 1:
+                    # ★ 多页清单：每个工作表 = 一页（空表跳过，避免出幽灵页）
+                    for name, _rows in sheets.items():
+                        p_entries, _p_dropped = build_entries(tmp, sheet=name)
+                        if not p_entries:
+                            continue
+                        pages.append({"name": name or "未命名页",
+                                      "csv": to_bom_csv(p_entries),
+                                      "count": len(p_entries)})
+                    # 聚合全表供第②/③步（型号级跨页去重）
+                    entries, dropped = build_entries(tmp)
+                    csv = to_bom_csv(entries)
+                else:
+                    entries, dropped = build_entries(tmp)
+                    csv = to_bom_csv(entries)
+                    first = next(iter(sheets), "第1页")
+                    pages.append({"name": first or "第1页", "csv": csv, "count": len(entries)})
             else:
                 csv = open(tmp, encoding="utf-8-sig").read()
                 entries = _entries_from_bom(csv)
                 dropped = []
+                pages.append({"name": "第1页", "csv": csv, "count": len(entries)})
         finally:
             os.unlink(tmp)
-        notes = [f"已从 {body['filename']} 解析 {len(entries)} 个设备条目"]
+        note = f"已从 {body['filename']} 解析 {len(entries)} 个设备条目"
+        if len(pages) > 1:
+            note += f"（共 {len(pages)} 个工作表，已按页拆分）"
+        notes = [note]
     else:
         csv = body.get("bom", "")
         entries = _entries_from_bom(csv)
         dropped = []
+        pages.append({"name": "第1页", "csv": csv, "count": len(entries)})
         notes = [f"已从文本解析 {len(entries)} 个设备条目"]
     dropped_names = [d.get("设备名称") or d.get("名称") or "(未命名)" for d in dropped]
     if dropped_names:
         notes.append(f"已排除非信号设备 {len(dropped_names)} 项：{', '.join(dropped_names)}")
-    return entries, csv, dropped_names, notes
+    return entries, csv, dropped_names, notes, pages
 
 
 def _build_payload(entries, name="Web"):
@@ -419,6 +448,74 @@ def _api_export_save(data: dict):
             "bytes": len(dxf), "name": proj_name}
 
 
+def _api_export_all(data: dict):
+    """一次性导出多页 DXF，打包成单 zip 流（内存 zipfile，不写盘）。
+
+    入口契约（2026-09-04 阳哥报「快速下载只下一张」R_fix）：
+      - 多页清单时，前端把每页 csv+name 放到 ``data["pages"]`` 列表
+      - 缺省 / 单页退化为 ``data["bom"]``+``data["name"]``（与 ``/api/export`` 一致）
+      - 每页用 ``_build_dxf_bytes`` 独立构建（保证与页面预览一致），
+        文件名 ``<工程名>_<页名>.dxf``；页名空时退化为 ``page_<1-based>``
+    返回：
+      ``{"zip_b64": ..., "name": ..., "count": N, "bytes": total}``
+    """
+    pages = data.get("pages")
+    name_base = data.get("name") or "AVCAD"
+    if not pages:
+        # 退化：单页 BOM，与 /api/export 同语义
+        try:
+            dxf, proj_name = _build_dxf_bytes(data)
+        except Exception as ex:
+            return {"error": f"图纸生成失败：{ex}"}
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr(_safe_filename(proj_name or name_base) + ".dxf", dxf)
+        raw = buf.getvalue()
+        return {"zip_b64": base64.b64encode(raw).decode("ascii"),
+                "name": proj_name or name_base, "count": 1, "bytes": len(raw)}
+    if not isinstance(pages, list):
+        return {"error": "pages 必须是列表"}
+    zbuf = io.BytesIO()
+    used_names = set()
+    try:
+        with zipfile.ZipFile(zbuf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for i, pg in enumerate(pages):
+                if not isinstance(pg, dict):
+                    return {"error": f"第 {i + 1} 页条目格式错（不是 dict）"}
+                csv = pg.get("csv") or ""
+                if not csv.strip():
+                    return {"error": f"第 {i + 1} 页 CSV 为空"}
+                pname = (pg.get("name") or "").strip() or f"page_{i + 1}"
+                one = dict(data)            # 不污染调用方 data
+                one["bom"] = csv
+                one["name"] = pname
+                try:
+                    dxf, _ = _build_dxf_bytes(one)
+                except Exception as ex:
+                    return {"error": f"第 {i + 1} 页（{pname}）生成失败：{ex}"}
+                base = _safe_filename(f"{name_base}_{pname}") or "AVCAD"
+                if not base.lower().endswith(".dxf"):
+                    dxf_name = base + ".dxf"
+                else:
+                    dxf_name = base
+                # 防重名：同 base 加 _2 / _3 ...
+                candidate = dxf_name
+                k = 2
+                while candidate in used_names:
+                    stem, dot, ext = dxf_name.rpartition(".")
+                    candidate = f"{stem}_{k}{dot}{ext}" if dot else f"{dxf_name}_{k}"
+                    k += 1
+                used_names.add(candidate)
+                zf.writestr(candidate, dxf)
+    except zipfile.BadZipFile as ex:
+        return {"error": f"zip 写入失败：{ex}"}
+    raw = zbuf.getvalue()
+    if not raw:
+        return {"error": "zip 为空"}
+    return {"zip_b64": base64.b64encode(raw).decode("ascii"),
+            "name": name_base, "count": len(pages), "bytes": len(raw)}
+
+
 def _api_open_folder(data: dict):
     target = (data.get("path") or "").strip()
     if not target:
@@ -503,6 +600,54 @@ def _load_audio_kb():
     return data
 
 
+def _run_and_render(bom: str, anon: bool, decisions, redundancy, name: str):
+    """跑一遍工作流并渲染单页 -> (page_dict, legend_dict)。
+
+    单页与多页复用同一套绘制逻辑；多页时由 ``/api/run`` 逐页调用本函数。
+    """
+    result = run_workflow(
+        entries=_entries_from_bom(bom) if bom else None,
+        decisions=decisions, redundancy=redundancy, name=name)
+    proj = result["project"]
+    c = Canvas()
+    draw_devices(c, proj, anon=anon)
+    draw_wires(c, proj, label_all=True)
+    draw_ports(c, proj)           # 端口在最上层，避免被连线覆盖
+    draw_wire_legend(c, proj)     # 图幅底部线型说明
+    arch = result["architecture"]
+    legend = _legend_usage(proj)
+    overlap, diagonal, ok = check_svg(render_svg(c))
+    devices = [{
+        "uid": i.uid, "name": i.name, "category": i.category,
+        "brand": i.brand, "model": i.model,
+        "features": sorted(i.features), "params": i.params, "active": i.active,
+        "redundancy": i.redundancy.value,
+        "ports": [{"label": p.label, "signal": p.signal.value, "side": p.side,
+                   "role": p.role, "air": p.air} for p in i.ports],
+    } for i in proj.instances]
+    page = {
+        "name": name,
+        "csv": bom,        # 本页清单 CSV（单页 DXF 导出用）
+        "svg": render_svg(c),
+        "architecture": {"id": arch[0].id, "title": arch[0].title,
+                         "score": round(arch[1], 1), "notes": arch[2]},
+        "excluded": [{"brand": m.brand, "model": m.model, "name": m.name}
+                     for m in result["excluded"]],
+        "cache_miss": result["cache_miss"],
+        "devices": devices,
+        "legend": legend,
+        "wireless": proj.meta.get("wireless_plan"),
+        "wireless_warnings": proj.meta.get("wireless_warnings", []),
+        "anon": anon,
+        "summary": summarize(result),
+        "issues": [{"level": i.level, "code": i.code, "msg": i.msg}
+                   for i in proj.issues],
+        "validation": {"overlap": overlap, "diagonal": diagonal, "ok": ok},
+        "elapsed_ms": result.get("elapsed_ms"),
+    }
+    return page, legend
+
+
 def _dispatch(path, body):
     if path == "/api/load-sample-xlsx":
         """载入桌面测试文件作为样例清单，前端「载入样例清单」按钮专用。"""
@@ -519,10 +664,10 @@ def _dispatch(path, body):
 
     if path == "/api/parse":
         data = json.loads(body or "{}")
-        entries, csv, dropped, notes = _decode_upload(data)
+        entries, csv, dropped, notes, pages = _decode_upload(data)
         modules = build_module_list(entries)
         return {"csv": csv, "modules": [_module_item(m) for m in modules],
-                "dropped": dropped, "notes": notes,
+                "dropped": dropped, "notes": notes, "pages": pages,
                 "unknown": [f"{m.brand} {m.model}".strip()
                             for m in modules if m.source == "unknown"]}
 
@@ -855,52 +1000,43 @@ def _dispatch(path, body):
 
     if path == "/api/run":
         data = json.loads(body or "{}")
-        bom = data.get("bom", "")
         anon = bool(data.get("anon", False))
+        decisions = data.get("decisions") or None
+        redundancy = data.get("redundancy")
+        name = data.get("name", "工作流系统")
+        # 多页清单：pages 为各工作表的 bom CSV 列表；缺省退化为单页（兼容旧前端）
+        pages_in = data.get("pages") or [data.get("bom", "")]
+        page_names = data.get("page_names") or {}
         t0 = time.perf_counter()
-        result = run_workflow(
-            bom_text=bom, entries=_entries_from_bom(bom) if bom else None,
-            decisions=data.get("decisions") or None,
-            redundancy=data.get("redundancy"), name=data.get("name", "工作流系统"),
-        )
-        proj = result["project"]
-        c = Canvas()
-        draw_devices(c, proj, anon=anon)
-        draw_wires(c, proj, label_all=True)
-        draw_ports(c, proj)   # 端口在最上层，避免被连线覆盖
-        draw_wire_legend(c, proj)   # 图幅底部线型说明
-        arch = result["architecture"]
-        legend = _legend_usage(proj)
-        if data.get("require_legend") and legend["missing"]:
-            return {"error": "图例未全部确认，已停止出图", "legend": legend}
-        overlap, diagonal, ok = check_svg(render_svg(c))
-        devices = [{
-            "uid": i.uid, "name": i.name, "category": i.category,
-            "brand": i.brand, "model": i.model,
-            "features": sorted(i.features), "params": i.params, "active": i.active,
-            "redundancy": i.redundancy.value,
-            "ports": [{"label": p.label, "signal": p.signal.value, "side": p.side,
-                       "role": p.role, "air": p.air} for p in i.ports],
-        } for i in proj.instances]
-        return {
-            "svg": render_svg(c),
-            "architecture": {"id": arch[0].id, "title": arch[0].title,
-                              "score": round(arch[1], 1), "notes": arch[2]},
-            "excluded": [{"brand": m.brand, "model": m.model, "name": m.name}
-                         for m in result["excluded"]],
-            "cache_miss": result["cache_miss"],
-            "devices": devices,
-            "legend": legend,
-            "wireless": proj.meta.get("wireless_plan"),
-            "wireless_warnings": proj.meta.get("wireless_warnings", []),
-            "anon": anon,
-            "summary": summarize(result),
-            "issues": [{"level": i.level, "code": i.code, "msg": i.msg}
-                       for i in proj.issues],
-            "validation": {"overlap": overlap, "diagonal": diagonal, "ok": ok},
-            "elapsed_ms": result.get("elapsed_ms"),
-            "build_ms": round((time.perf_counter() - t0) * 1000, 1),
-        }
+        # 图例闸门：聚合所有页统一校验一次（型号级，跨页去重），避免重复弹错
+        if data.get("require_legend"):
+            from avcad.core.build import build_project as _bp
+            agg_entries = []
+            for b in pages_in:
+                if b:
+                    agg_entries.extend(_entries_from_bom(b))
+            agg_proj = _bp(agg_entries, name=name, legend_store=LegendStore(),
+                           redundancy=redundancy)
+            agg_legend = _legend_usage(agg_proj)
+            if agg_legend["missing"]:
+                return {"error": "图例未全部确认，已停止出图", "legend": agg_legend}
+        pages_out = []
+        for i, bom in enumerate(pages_in):
+            pname = page_names.get(str(i)) or (
+                f"第{i + 1}页" if len(pages_in) > 1 else name)
+            page, _lg = _run_and_render(bom, anon, decisions, redundancy, pname)
+            pages_out.append(page)
+        # 顶层兼容旧前端：单页时把第 0 页字段平铺到顶层；多页时前端读 pages
+        top = dict(pages_out[0]) if pages_out else {}
+        top["pages"] = pages_out
+        top["multi"] = len(pages_out) > 1
+        if len(pages_out) > 1:
+            top["summary"] = "\n".join(
+                f"· {p['name']}：{p['summary'].splitlines()[0] if p.get('summary') else ''}"
+                for p in pages_out)
+            top["issues"] = [x for p in pages_out for x in p.get("issues", [])]
+        top["build_ms"] = round((time.perf_counter() - t0) * 1000, 1)
+        return top
 
     if path == "/api/validate":
         data = json.loads(body or "{}")
@@ -910,6 +1046,9 @@ def _dispatch(path, body):
     if path == "/api/export":
         dxf, name = _build_dxf_bytes(json.loads(body or "{}"))
         return {"dxf_b64": base64.b64encode(dxf).decode(), "name": name}
+
+    if path == "/api/export-all":
+        return _api_export_all(json.loads(body or "{}"))
 
     if path == "/api/export-save":
         return _api_export_save(json.loads(body or "{}"))

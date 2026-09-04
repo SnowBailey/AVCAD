@@ -877,7 +877,16 @@ def _dante_pass(project):
                 continue
             if tgt is not prim:
                 _cascade_to(tgt, backup)
-            if p.role == "out":
+            # ★ role == "io" = 双向 Dante 端口（如有源音箱的 Dante 网口，既能收
+            #   也能发）。Dante 是网络链路，单条物理网线即双向，故只画一条
+            #   「设备 → 交换机」连接即可（此前这里既没处理 out 也没处理 in 之外的
+            #   io，导致 BF12 这类双向 Dante 口整条连线被静默丢弃）。
+            #   role == "out" / "in" 维持原语义：设备→交换机 / 交换机→设备。
+            if p.role == "io":
+                project.connections.append(Connection(
+                    d.uid, p.id, tgt.uid, sp.id, Signal.DANTE,
+                    "backup" if backup else "primary", note="Dante↔交换机"))
+            elif p.role == "out":
                 project.connections.append(Connection(
                     d.uid, p.id, tgt.uid, sp.id, Signal.DANTE,
                     "backup" if backup else "primary", note="Dante→交换机"))
